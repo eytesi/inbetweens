@@ -122,6 +122,60 @@ const N = {
   "travel:Parque":["Los Prados es el barrio más tranquilo de Veloria. El parque central tiene árboles que deben tener cien años."],
   "travel:Consultorio de Bren":["Hay siempre uno o dos Twins esperando con esa paciencia de la gente sana que igual viene a ver a Bren."],
   default:["El tiempo avanza en Veloria."],
+
+  // ── INTERACCIONES CON NPCS ──
+  "int:saludar":["Le decís *Velin* a [NPC] y él/ella lo devuelve con esa facilidad de la gente que se alegra genuinamente de verte. Breve pero real.","[NPC] te ve llegar y asiente con una sonrisa corta. El saludo de Veloria — simple, sin vueltas — dice más de lo que parece."],
+  "int:charlar":["Charlan sin agenda fija. [NPC] tiene una manera de hablar que hace que el tiempo pase diferente — más despacio, o más lleno. No estás seguro/a cuál de los dos.","La conversación va y viene. [NPC] dice algo que te hace pensar y después cambia de tema antes de que llegues a una conclusión. Eso también está bien."],
+  "int:chiste_ok":["El chiste aterriza exactamente bien. [NPC] se ríe de verdad — de esa manera que no se puede fingir — y por un momento Veloria parece un poco más liviana."],
+  "int:chiste_fail":["El chiste no funcionó. [NPC] sonríe por compromiso y cambia de tema con una delicadeza que casi duele más que si se hubiera reído. Te prometés no volver a hacer ese chiste."],
+  "int:cumplido":["Le decís algo genuino sobre [NPC] y él/ella lo recibe con una gracia que dice que lo escuchó de verdad. Esas cosas se notan.","[NPC] escucha el cumplido y por un segundo no sabe qué responder. Después dice *sora* en voz baja. Eso significa más que cualquier respuesta elaborada."],
+  "int:queja":["[NPC] escucha tu queja con la paciencia de alguien que sabe que a veces lo que se necesita es que alguien escuche. No da consejos. No hace falta.","Te desahogás y [NPC] asiente en los momentos correctos. Al final dice: 'Yo también lo pensé alguna vez.' Eso ayuda."],
+  "int:secreto_npc":["Le contás algo que no le dijiste a nadie más. [NPC] no interrumpe, no da opiniones. Solo escucha. Después dice: '*Sora*.' Eso es suficiente.","[NPC] recibe el secreto con la seriedad que merece. 'Queda acá', dice. Y vos le creés."],
+  "int:pregunta_prof":["La pregunta era más profunda de lo que parecía cuando la formulaste. [NPC] se toma su tiempo antes de responder. La respuesta vale la espera.","[NPC] mira hacia otro lado un momento. 'No sé si tengo la respuesta', dice al final. 'Pero me alegra que me lo hayas preguntado a mí.'"],
+  "int:invitar":["Proponen tomar algo juntos. Hay una espontaneidad en el plan que lo hace mejor que si hubiera sido calculado. La tarde se estira un poco más.","'Yo invito', dice [NPC] antes de que puedas decir nada. Hay algo en ese gesto pequeño que habla de cómo es la gente de verdad."],
+  "int:ofrecer_ayuda":["Ofrecés ayuda antes de que [NPC] la pida. Hay un momento en su expresión — breve, casi invisible — que dice que eso importó.","'No hace falta', dice [NPC]. Pero lo acepta. Y eso, descubrís, era todo lo que necesitaba."],
+  "int:dar_regalo":["Le das algo pequeño que sabés que le va a gustar. [NPC] lo recibe con esa sorpresa real de cuando alguien te presta atención de verdad. '*Sora*', dice. Y se nota que lo dice en serio."],
+  "int:hacer_plan":["Planean algo juntos. El plan en sí no importa tanto como el hecho de que los dos quisieron hacerlo. 'La semana que viene entonces', dice [NPC].","Terminan de planear algo que quizás no van a hacer exactamente como lo describieron. Pero el proceso de planearlo fue bueno de todas formas."],
+  "int:broma_ok":["La broma funcionó y los dos terminan riendo de algo que no tiene explicación fuera de este momento. [NPC] dice: 'Eso no se lo cuento a nadie.'"],
+  "int:broma_fail":["La broma no era tan graciosa en voz alta. [NPC] sonríe con amabilidad. 'Seguí intentando', dice. Hay cariño en el sarcasmo."],
+  "int:competir_win":["Ganaste. [NPC] lo acepta con más gracia de la que esperabas. 'La próxima te gano yo', dice. Ya hay una próxima vez."],
+  "int:competir_lose":["Perdiste. [NPC] lo celebra con moderación — lo suficiente para que cuente, no tanto para que duela. Hay algo agradable en eso."],
+  "int:confrontar":["La conversación era necesaria aunque difícil. Dijeron lo que tenían que decirse. No todo se resolvió, pero algo se movió en la dirección correcta.","Fue una conversación incómoda que ninguno de los dos quería tener. Pero a veces así son las cosas que importan."],
+  "int:disculpas":["Pedís disculpas con la misma honestidad con que se piden las cosas que importan. [NPC] escucha y después asiente. '*Sorvei* aceptado', dice. Eso es más de lo que merecías esperar.","'Ya fue', dice [NPC]. Hay algo en esas dos palabras que cierran una puerta y abren otra al mismo tiempo."],
+  "int:ignorar":["Pasás al lado de [NPC] sin decir nada. Lo notó. Los dos saben que lo notó. Algunas cosas se comunican mejor en silencio, aunque no siempre de la manera que uno quiere."],
+  "int:coquetear_ok":["[NPC] recibe el coqueteo con una sonrisa que dice que no es indiferente. El aire cambia de temperatura, apenas. Hay algo ahí que todavía no tiene nombre."],
+  "int:coquetear_fail":["[NPC] responde con amabilidad pero con una claridad tranquila que no deja lugar a malentendidos. No es el momento o no es lo que busca. Ambos siguen como si nada, que es lo correcto."],
+  "int:cumplido_rom":["El cumplido era más personal de los habituales. [NPC] lo recibe en silencio y hay algo en sus ojos que no tiene nombre todavía pero que está ahí.","[NPC] baja la vista un segundo. Cuando la levanta hay algo diferente. '*Sora*', dice en voz muy baja."],
+  "int:tomar_mano":["Le tomás la mano a [NPC] y él/ella la aprieta suavemente. Veloria sigue igual afuera. Adentro algo se ordenó.","Los dedos se encuentran sin que ninguno de los dos lo planee del todo. [NPC] no dice nada. No hace falta."],
+  "int:abrazo_rom":["El abrazo dura un poco más de lo necesario. Eso es exactamente lo que tenía que durar.","[NPC] apoya la cabeza levemente. Afuera el Veloer empieza a caer. Hay momentos que Veloria guarda en algún lugar que no es el lago."],
+  "int:beso":["Veloria a esa hora, esa luz, ese momento. El beso es exactamente correcto.","No lo planearon. Las mejores cosas nunca se planean del todo en Veloria."],
+  "int:kalei":["Le decís *Kalei* — en Twinés, que suena distinto, que pesa más. [NPC] sonríe despacio. '*Kalei*', dice. Y todo Veloria se asienta un poco más."],
+
+  // ── INTERACCIONES CON HIJOS ──
+  "child:cargar":["Levantás a [CHILD] con los dos brazos y su peso es exactamente el que debería ser. Te mira con esos ojos que todavía no saben qué es el mundo. Vos tampoco estás muy seguro/a, pero los dos están bien."],
+  "child:mecer":["Lo/La mecés despacio hasta que los ojos se van cerrando. El apartamento en silencio, la noche afuera, y este pequeño/a humano/a que se queda dormido/a en tus brazos. Estos momentos no duran mucho. Eso los hace mejores."],
+  "child:alimentar":["Es una tarea que requiere paciencia y [CHILD] no siempre coopera. Pero cuando termina de comer y te mira con esa satisfacción total de los recién nacidos, se entiende para qué existe la palabra *sora*."],
+  "child:cantar":["Cantás algo en Twinés, una canción que inventaste en el camino. [CHILD] escucha con la concentración total de alguien para quien todo es nuevo. Los ojos brillan. Siempre los ojos."],
+  "child:banar_b":["El bañito de [CHILD] siempre termina con agua por todas partes. Él/Ella lo pasa bien. Vos también, aunque no te animás a admitirlo del todo."],
+  "child:jugar_inf":["[CHILD] tiene una imaginación que no respeta ninguna lógica conocida. Juegan durante una hora y cuando terminás, estás un poco agotado/a y bastante más feliz.","El juego de hoy involucraba reglas que cambiaban cada cinco minutos. [CHILD] ganó de todas formas. No sabés muy bien cómo."],
+  "child:cuento":["El cuento de esta noche es sobre un Mirenpez que quería volar. [CHILD] escucha con los ojos abiertos hasta la última página y después pregunta si de verdad los peces pueden volar. Decidís que en Otherwhen, sí."],
+  "child:consolar":["[CHILD] llora y no puede explicar por qué — a esta edad todavía no siempre se puede. Lo/La abrazás y esperás. A veces eso es suficiente. A veces es todo lo que hay."],
+  "child:ensenyar":["Hoy aprendió algo nuevo. Fue despacio, con paciencia, varias veces. Al final lo/la viste hacer la cosa solo/a y algo en tu pecho se movió de esa manera que no tiene nombre."],
+  "child:abrazo_inf":["[CHILD] corre hacia vos con los brazos abiertos y ese impulso que tiene la gente cuando todavía no aprendió a guardarse. Lo/La recibís con los brazos igual de abiertos."],
+  "child:tarea":["La tarea de hoy era matemática y [CHILD] no quería saber nada. Pero con paciencia y un par de Velorcitos como recompensa negociada, llegaron al final. 'Mañana me ayudás de nuevo', dice [CHILD]."],
+  "child:jugar_nino":["Juegan a algo que [CHILD] inventó con reglas que cambian cada dos minutos. Hacés trampa una vez para que gane. No te vas a arrepentir.","La partida terminó en empate técnico que ninguno de los dos declaró. Así suelen terminar los mejores juegos."],
+  "child:charlar_nino":["[CHILD] te cuenta su día con el detalle y la urgencia de alguien para quien todo importa mucho. Escuchás con atención. Eso importa más de lo que parece.","'¿Y vos cómo estás?' pregunta [CHILD] al final. Tiene esa costumbre, de preguntar. No sé de quién la habrá sacado."],
+  "child:consejo_nino":["Le das un consejo que esperás que sirva. [CHILD] lo escucha con cara de quien todavía no sabe si va a aplicarlo. A veces se aplica igual, sin decirlo."],
+  "child:reganar":["Hubo que hablar de algo que estuvo mal. No fue fácil ni para vos ni para [CHILD]. Pero fue necesario, y lo dijiste con más cuidado de lo que creías que ibas a tener. Al final [CHILD] asiente. Eso alcanza."],
+  "child:charlar_adol":["[CHILD] está en esa edad donde a veces habla y a veces no hay manera. Hoy es un día de hablar. Se sientan, y resulta que tiene cosas interesantes que decir sobre Veloria, sobre la vida, sobre cosas que vos también te preguntaste."],
+  "child:consejo_adol":["Pedís ser honesto/a y no sonar como un sermón. No siempre funciona. Pero hoy sí. [CHILD] escucha y dice: 'Ya sé que tenés razón. Eso no significa que sea fácil.' Y tiene razón."],
+  "child:discutir":["La discusión empieza por algo pequeño y crece más de lo que debería. Los dos dicen algo de más. Los dos lo saben. A veces así son las cosas con la gente que querés.","[CHILD] cierra la puerta — no de un golpe, pero sí con intención. Mañana va a estar mejor. Pero hoy duele igual."],
+  "child:apoyar":["[CHILD] está pasando por algo. No cuenta todo, pero cuenta algo. Estás ahí. No resolvés nada, no das respuestas. Eso, descubrís, es lo que más importa."],
+  "child:espacio":["Hay días en que lo mejor que podés hacer por [CHILD] es no hacer nada. Darle el espacio que necesita y confiar en que sabe cómo usarlo. Es más difícil de lo que suena."],
+  "child:cafe_hijo":["[CHILD] y vos tomando café como dos adultos. Es extraño y también exactamente correcto. Hablan de Veloria, de la vida, de cosas que antes no habrían hablado.","'No me acordaba que te gustaba el café solo', dice [CHILD]. Hay algo en esa frase que dice que te está mirando."],
+  "child:pedir_consejo":["Ahora te pide consejo a vos. Es un giro que no esperabas del todo. Le das lo mejor que tenés y [CHILD] escucha con esa atención que reconocés de cuando eras vos el/la que escuchaba."],
+  "child:charlar_adulto":["La conversación va y viene sin destino fijo. Hay un momento en que te das cuenta de que esta persona, que una vez fue tan chica, ahora es alguien de verdad. Con su propio mundo. Su propia Veloria."],
+  "child:celebrar_hijo":["[CHILD] logró algo. Hay que celebrarlo. En Veloria eso siempre incluye Lumaven y demasiados Velorcitos y decir '*Kalei*' más veces de las necesarias. Nadie se queja."],
 };
 
 // ═══════════════════ DATA ═══════════════════
@@ -141,6 +195,63 @@ const NPC_HOOD_COLOR={"Aria Ven":"#7BB8B9","Lior Veloer":"#7BB8B9","Elia Orlen":
 const NPC_DESC={"Aria Ven":"Dueña del café · La Vega","Lior Veloer":"Estudiante rebelde · La Vega","Oren Mirende":"Pescador y guía del lago · Ribera","Nela Mirende":"Restaurante del muelle · Ribera","Tomas Mirende":"Pescador mayor · Ribera","Riven Lumaren":"Gerente del banco · Ribera","Ciro Orlen":"Archivista · Veleta","Elowen Sorvei":"Escritora anciana · Veleta","Cael Sorvei":"Director del teatro · Veleta","Niven Sorvei":"Pintora y tatuadora · Veleta","Luma Sorvei":"Músico callejero · Veleta","Vael Lumaren":"Diseñadora · Veleta","Leva Sorin":"Profesora de historia · Veleta","Aldric Veloer":"Figura moral de Veloria · El Casco","Soren Lume":"Librero · El Casco","Dora Velin":"La Twin más anciana · El Casco","Dael Miru":"Chef · El Casco","Mira Belven":"Organizadora de eventos · El Casco","Bren Orlen":"Médico · Los Prados","Cela Miren":"Enfermera · Los Prados","Rael Nora":"Veterinario · Los Prados"};
 const NPC_AT_PLACE={"Café de Aria":["Aria Ven"],"Plaza del Veloer":["Aldric Veloer","Dora Velin"],"Librería de Soren":["Soren Lume"],"Muelle":["Oren Mirende","Tomas Mirende"],"Restaurante de Nela":["Nela Mirende"],"Lago Miren":["Oren Mirende"],"Biblioteca":["Ciro Orlen","Elowen Sorvei","Leva Sorin"],"Teatro de Cael":["Cael Sorvei","Niven Sorvei"],"Parque":[],"Consultorio de Bren":["Bren Orlen"],"Tu apartamento":[]};
 const PROMO_SHIFTS=[5,10,15,20];
+
+const INTERACTION_CATS=[
+  {id:"hablar",label:"Hablar",emoji:"💬"},
+  {id:"amistad",label:"Amistad",emoji:"🤝"},
+  {id:"romantico",label:"Romance",emoji:"💕"},
+  {id:"hostil",label:"Hostil",emoji:"😠"},
+];
+
+const INTERACTIONS=[
+  {id:"saludar",label:"Saludar",emoji:"👋",cat:"hablar",req:0,effects:{social:3,diversion:2},delta:3},
+  {id:"charlar",label:"Charlar un rato",emoji:"💬",cat:"hablar",req:0,effects:{social:8,diversion:5},delta:5},
+  {id:"chiste",label:"Contar un chiste",emoji:"😄",cat:"hablar",req:0,effects:{diversion:10},delta:null},
+  {id:"cumplido",label:"Dar un cumplido",emoji:"✨",cat:"hablar",req:0,effects:{social:6},delta:7},
+  {id:"queja",label:"Desahogarse",emoji:"😤",cat:"hablar",req:25,effects:{diversion:5,social:5},delta:3},
+  {id:"secreto_npc",label:"Contarle un secreto",emoji:"🤫",cat:"hablar",req:50,effects:{social:12},delta:10},
+  {id:"pregunta_prof",label:"Pregunta profunda",emoji:"🤔",cat:"hablar",req:40,effects:{diversion:8,social:6},delta:8},
+  {id:"invitar",label:"Invitar a tomar algo",emoji:"🥂",cat:"amistad",req:20,effects:{social:12,diversion:8},delta:8},
+  {id:"ofrecer_ayuda",label:"Ofrecer ayuda",emoji:"🫂",cat:"amistad",req:0,effects:{social:8},delta:6},
+  {id:"dar_regalo",label:"Darle un regalo",emoji:"🎁",cat:"amistad",req:20,effects:{social:10,diversion:5},delta:10},
+  {id:"hacer_plan",label:"Proponer un plan",emoji:"📋",cat:"amistad",req:35,effects:{social:10,diversion:10},delta:8},
+  {id:"broma",label:"Hacer una broma",emoji:"😜",cat:"amistad",req:15,effects:{diversion:12},delta:null},
+  {id:"competir",label:"Competir en algo",emoji:"🏆",cat:"amistad",req:20,effects:{diversion:15},delta:null},
+  {id:"coquetear",label:"Coquetear",emoji:"😏",cat:"romantico",req:30,effects:{social:8},delta:null,needsRom:true},
+  {id:"cumplido_rom",label:"Cumplido especial",emoji:"💫",cat:"romantico",req:35,effects:{social:10},delta:5,needsRom:true},
+  {id:"tomar_mano",label:"Tomar de la mano",emoji:"🫶",cat:"romantico",req:"dating",effects:{social:14},delta:6},
+  {id:"abrazo_rom",label:"Dar un abrazo",emoji:"🫂",cat:"romantico",req:"dating",effects:{social:16,diversion:5},delta:7},
+  {id:"beso",label:"Dar un beso",emoji:"💋",cat:"romantico",req:"dating",effects:{social:20},delta:8},
+  {id:"kalei",label:"Decir 'Kalei'",emoji:"💕",cat:"romantico",req:"married",effects:{social:22,diversion:8},delta:10},
+  {id:"confrontar",label:"Confrontar",emoji:"😠",cat:"hostil",req:0,effects:{},delta:null},
+  {id:"disculpas",label:"Pedir disculpas",emoji:"🙏",cat:"hostil",req:0,effects:{social:5},delta:15},
+  {id:"ignorar",label:"Ignorar deliberadamente",emoji:"😶",cat:"hostil",req:0,effects:{},delta:-8},
+];
+
+const CHILD_STAGES={
+  bebe:{label:"Bebé",emoji:"👶",maxAge:2,color:"#E87B9E",
+    interactions:[{id:"cargar",label:"Cargar al bebé",emoji:"🤱"},{id:"mecer",label:"Mecer para dormir",emoji:"🌙"},{id:"alimentar",label:"Dar de comer",emoji:"🍼"},{id:"cantar",label:"Cantar una canción",emoji:"🎵"},{id:"banar_b",label:"Dar el baño",emoji:"🛁"}]},
+  infante:{label:"Infante",emoji:"🧒",maxAge:6,color:"#A67BD6",
+    interactions:[{id:"jugar_inf",label:"Jugar juntos",emoji:"🎪"},{id:"cuento",label:"Leer un cuento",emoji:"📖"},{id:"consolar",label:"Consolar",emoji:"🫂"},{id:"ensenyar",label:"Enseñar algo nuevo",emoji:"🌱"},{id:"abrazo_inf",label:"Dar un abrazo",emoji:"💛"}]},
+  nino:{label:"Niño/a",emoji:"🧑",maxAge:12,color:"#7BB8B9",
+    interactions:[{id:"tarea",label:"Hacer la tarea juntos",emoji:"✏️"},{id:"jugar_nino",label:"Jugar a algo",emoji:"🎲"},{id:"charlar_nino",label:"Charlar del día",emoji:"☀️"},{id:"consejo_nino",label:"Dar un consejo",emoji:"💡"},{id:"reganar",label:"Hablar de algo que estuvo mal",emoji:"⚠️"}]},
+  adolescente:{label:"Adolescente",emoji:"👦",maxAge:18,color:"#D4A853",
+    interactions:[{id:"charlar_adol",label:"Charlar sobre la vida",emoji:"🌊"},{id:"consejo_adol",label:"Dar un consejo",emoji:"💡"},{id:"discutir",label:"Tener una discusión",emoji:"⚡"},{id:"apoyar",label:"Apoyar en algo difícil",emoji:"🫂"},{id:"espacio",label:"Darle espacio",emoji:"🌿"}]},
+  adulto:{label:"Adulto/a",emoji:"🧑‍🦱",maxAge:999,color:"#6B9E5E",
+    interactions:[{id:"cafe_hijo",label:"Tomar un café juntos",emoji:"☕"},{id:"pedir_consejo",label:"Pedir su consejo",emoji:"🤔"},{id:"charlar_adulto",label:"Charlar como adultos",emoji:"💬"},{id:"celebrar_hijo",label:"Celebrar un logro",emoji:"🎉"}]},
+};
+
+const CHILD_FX={
+  cargar:{hap:5,rel:3},mecer:{hap:8,rel:4},alimentar:{hap:4,rel:3},cantar:{hap:10,rel:5},banar_b:{hap:3,rel:4},
+  jugar_inf:{hap:12,rel:6},cuento:{hap:10,rel:7},consolar:{hap:8,rel:8},ensenyar:{hap:6,rel:5},abrazo_inf:{hap:8,rel:5},
+  tarea:{hap:5,rel:5},jugar_nino:{hap:10,rel:5},charlar_nino:{hap:6,rel:5},consejo_nino:{hap:4,rel:4},reganar:{hap:-5,rel:-3},
+  charlar_adol:{hap:7,rel:6},consejo_adol:{hap:5,rel:5},discutir:{hap:-8,rel:-6},apoyar:{hap:10,rel:9},espacio:{hap:5,rel:4},
+  cafe_hijo:{hap:8,rel:7},pedir_consejo:{hap:10,rel:8},charlar_adulto:{hap:7,rel:6},celebrar_hijo:{hap:12,rel:8},
+};
+
+function getChildStage(age){
+  if(age<2)return"bebe";if(age<6)return"infante";if(age<12)return"nino";if(age<18)return"adolescente";return"adulto";
+}
 const INV_CATS=[{id:"all",label:"Todos",emoji:"📦"},{id:"food",label:"Comida",emoji:"🍽"},{id:"book",label:"Libros",emoji:"📚"},{id:"fish",label:"Pesca",emoji:"🐟"},{id:"gift",label:"Regalos",emoji:"🎁"},{id:"plant",label:"Plantas",emoji:"🌿"},{id:"other",label:"Otros",emoji:"✨"}];
 
 // ═══════════════════ HELPERS ═══════════════════
@@ -235,96 +346,243 @@ function AccionesTab({loc,career,NEIGHBORHOODS,PLACE_ACTIONS,loading,dark,onGoTo
   );
 }
 
-function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction}){
+function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onInteract,onChildInteract}){
+  const [mode,setMode]=useState("twins");
   const [sel,setSel]=useState(null);
+  const [cat,setCat]=useState("hablar");
   const sorted=Object.entries(rels).sort(([,a],[,b])=>(b.friendship||0)-(a.friendship||0));
-  function getRomActs(npcName){
-    const fr=rels[npcName]?.friendship||0,isP=family.partner===npcName,acts=[];
-    if(!isP&&!family.partner&&ROMANCEABLE.has(npcName)&&fr>40)acts.push({id:"ask_out",label:"Invitar a salir",color:"#E87B9E"});
-    if(isP&&family.romanticStatus==="dating"&&fr>65)acts.push({id:"propose",label:"Proponer matrimonio",color:"#D4A853"});
-    if(isP&&family.romanticStatus==="engaged")acts.push({id:"marry",label:"Casarse",color:"#D4A853"});
-    if(isP&&family.romanticStatus==="married")acts.push({id:"have_child",label:"Tener un hijo",color:"#7BB8B9"});
-    if(isP&&(family.romanticStatus==="dating"||family.romanticStatus==="engaged"))acts.push({id:"breakup",label:"Terminar",color:"#E05555"});
-    if(isP&&family.romanticStatus==="married")acts.push({id:"divorce",label:"Separarse",color:"#E05555"});
+  const selRel=sel?rels[sel]:null;
+  const fr=selRel?.friendship||0;
+  const isPartner=family.partner===sel;
+  const romStatus=family.romanticStatus;
+
+  function isUnlocked(req){
+    if(req==="dating")return isPartner&&(romStatus==="dating"||romStatus==="engaged"||romStatus==="married");
+    if(req==="engaged")return isPartner&&(romStatus==="engaged"||romStatus==="married");
+    if(req==="married")return isPartner&&romStatus==="married";
+    return fr>=req;
+  }
+
+  const catInteractions=INTERACTIONS.filter(i=>{
+    if(i.cat!==cat)return false;
+    if(cat==="romantico"){
+      if(!sel||!ROMANCEABLE.has(sel))return false;
+      if(i.needsRom&&fr<i.req)return false;
+      if(typeof i.req==="string")return isUnlocked(i.req);
+      return fr>=(i.req||0);
+    }
+    return isUnlocked(i.req||0);
+  });
+
+  const sLabel={dating:"💕 En pareja",engaged:"💍 Comprometido/a",married:"💒 Casado/a"};
+
+  // Romance/family quick actions still shown at bottom
+  function getRomActs(){
+    if(!sel||!selRel)return[];
+    const acts=[];
+    if(!isPartner&&!family.partner&&ROMANCEABLE.has(sel)&&fr>40)acts.push({id:"ask_out",label:"💕 Invitar a salir",color:"#E87B9E"});
+    if(isPartner&&romStatus==="dating"&&fr>65)acts.push({id:"propose",label:"💍 Proponer matrimonio",color:"#D4A853"});
+    if(isPartner&&romStatus==="engaged")acts.push({id:"marry",label:"💒 Casarse",color:"#D4A853"});
+    if(isPartner&&romStatus==="married")acts.push({id:"have_child",label:"👶 Tener un hijo",color:"#7BB8B9"});
+    if(isPartner&&(romStatus==="dating"||romStatus==="engaged"))acts.push({id:"breakup",label:"💔 Terminar",color:"#E05555"});
+    if(isPartner&&romStatus==="married")acts.push({id:"divorce",label:"💔 Separarse",color:"#E05555"});
     return acts;
   }
-  const sLabel={dating:"💕 En pareja",engaged:"💍 Comprometido/a",married:"💒 Casado/a"};
-  const selRel=sel?rels[sel]:null;
+
   return(
-    <div style={{display:"flex",height:"100%",overflow:"hidden"}}>
-      {/* NPC List */}
-      <div style={{width:"160px",borderRight:"1px solid #2C1F14",overflowY:"auto",padding:"8px"}}>
-        {family.partner&&(
-          <div style={{fontSize:"9px",color:"#E87B9E",textTransform:"uppercase",letterSpacing:"0.08em",padding:"4px 6px",marginBottom:"4px"}}>{sLabel[family.romanticStatus]||"💕"}</div>
-        )}
-        {family.children.length>0&&(
-          <div style={{marginBottom:"8px",padding:"4px 6px",background:"rgba(212,168,83,0.05)",borderRadius:"6px"}}>
-            {family.children.map((c,i)=>(
-              <div key={i} style={{fontSize:"10px",color:"#8B7355",marginBottom:"2px"}}>👶 {c.name} · {Math.floor((currentDay-c.birthDay)/30)}a</div>
+    <div style={{display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
+      {/* Mode toggle */}
+      <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0}}>
+        <button onClick={()=>{setMode("twins");setSel(null);}} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="twins"?"2px solid #7BB8B9":"2px solid transparent",background:"transparent",color:mode==="twins"?"#7BB8B9":"#3D2B1F",cursor:"pointer"}}>
+          👥 Twins ({sorted.length})
+        </button>
+        <button onClick={()=>setMode("familia")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="familia"?"2px solid #E87B9E":"2px solid transparent",background:"transparent",color:mode==="familia"?"#E87B9E":"#3D2B1F",cursor:"pointer"}}>
+          👨‍👩‍👧 Familia ({family.children.length}{family.partner?"+pareja":""})
+        </button>
+      </div>
+
+      {/* TWINS MODE */}
+      {mode==="twins"&&(
+        <div style={{display:"flex",flex:1,overflow:"hidden"}}>
+          {/* NPC list */}
+          <div style={{width:"150px",borderRight:"1px solid #1A1208",overflowY:"auto",padding:"6px"}}>
+            {sorted.length===0&&<div style={{fontSize:"9px",color:"#2C1F14",fontStyle:"italic",padding:"6px",lineHeight:"1.4"}}>Todavía no conocés a nadie. Salí a charlar con los Twins de Veloria.</div>}
+            {sorted.map(([name,rel])=>(
+              <button key={name} onClick={()=>{setSel(sel===name?null:name);setCat("hablar");}}
+                style={{width:"100%",display:"flex",alignItems:"center",gap:"6px",padding:"5px",borderRadius:"7px",border:sel===name?"1px solid #2C1F14":"1px solid transparent",background:sel===name?"#0F0A06":"transparent",cursor:"pointer",marginBottom:"2px",textAlign:"left"}}>
+                <NPCAvatar name={name} size={22}/>
+                <div style={{flex:1,overflow:"hidden"}}>
+                  <div style={{fontSize:"10px",color:sel===name?"#D4A853":"#8B7355",fontWeight:500,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{family.partner===name?"💕 ":""}{name.split(" ")[0]}</div>
+                  <div style={{height:"2px",background:"#1A1208",borderRadius:"1px",overflow:"hidden",marginTop:"2px"}}>
+                    <div style={{height:"100%",width:`${rel.friendship||0}%`,background:NPC_HOOD_COLOR[name]||"#7BB8B9"}}/>
+                  </div>
+                </div>
+              </button>
             ))}
           </div>
-        )}
-        {sorted.length===0&&<div style={{fontSize:"10px",color:"#5C4030",fontStyle:"italic",padding:"6px",lineHeight:"1.4"}}>Todavía no conocés a nadie. Salí y hablá con los Twins.</div>}
-        {sorted.map(([name,rel])=>(
-          <button key={name} onClick={()=>setSel(sel===name?null:name)}
-            style={{width:"100%",display:"flex",alignItems:"center",gap:"7px",padding:"6px",borderRadius:"8px",border:sel===name?"1px solid #3D2B1F":"1px solid transparent",background:sel===name?"#1F1308":"transparent",cursor:"pointer",marginBottom:"3px",textAlign:"left"}}>
-            <NPCAvatar name={name} size={24}/>
-            <div style={{flex:1,overflow:"hidden"}}>
-              <div style={{fontSize:"10px",color:sel===name?"#D4A853":"#A08060",fontWeight:500,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{family.partner===name?"💕 ":""}{name.split(" ")[0]}</div>
-              <div style={{fontSize:"9px",color:"#5C4030"}}>{relStatus(rel.friendship||0)}</div>
-            </div>
-          </button>
-        ))}
-      </div>
-      {/* NPC Detail */}
-      <div style={{flex:1,overflowY:"auto",padding:"12px"}}>
-        {!sel&&<div style={{color:"#5C4030",fontSize:"11px",fontStyle:"italic",marginTop:"16px",textAlign:"center"}}>Seleccioná un Twin para ver su perfil</div>}
-        {sel&&selRel&&(
-          <div>
-            <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"12px"}}>
-              <NPCAvatar name={sel} size={40}/>
-              <div>
-                <div style={{fontSize:"13px",color:"#EDE0CC",fontWeight:600}}>{sel}</div>
-                <div style={{fontSize:"10px",color:"#8B7355"}}>{NPC_DESC[sel]||""}</div>
-              </div>
-            </div>
-            <div style={{marginBottom:"10px"}}>
-              <div style={{fontSize:"9px",color:"#5C4030",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>Relación</div>
-              <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
-                <div style={{flex:1,height:"4px",background:"#2C1F14",borderRadius:"2px",overflow:"hidden"}}>
-                  <div style={{height:"100%",width:`${selRel.friendship||0}%`,background:NPC_HOOD_COLOR[sel]||"#7BB8B9",transition:"width 0.5s"}}/>
-                </div>
-                <span style={{fontSize:"10px",color:"#8B7355",flexShrink:0}}>{relStatus(selRel.friendship||0)}</span>
-              </div>
-            </div>
-            {selRel.history?.length>0&&(
-              <div style={{marginBottom:"10px"}}>
-                <div style={{fontSize:"9px",color:"#5C4030",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Recuerda</div>
-                {selRel.history.slice(-3).map((h,i)=>(
-                  <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"6px",marginBottom:"4px"}}>
-                    <span style={{color:"#4A3525",fontSize:"10px",flexShrink:0}}>✦</span>
-                    <span style={{fontSize:"10px",color:"#8B7355",lineHeight:"1.4"}}>{h}</span>
+
+          {/* Interaction panel */}
+          <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+            {!sel&&<div style={{color:"#2C1F14",fontSize:"10px",fontStyle:"italic",textAlign:"center",marginTop:"20px",padding:"0 12px"}}>Seleccioná un Twin para interactuar</div>}
+            {sel&&selRel&&(
+              <>
+                {/* NPC header */}
+                <div style={{padding:"8px 10px",borderBottom:"1px solid #1A1208",display:"flex",alignItems:"center",gap:"8px",flexShrink:0}}>
+                  <NPCAvatar name={sel} size={32}/>
+                  <div style={{flex:1,overflow:"hidden"}}>
+                    <div style={{fontSize:"11px",color:"#A08060",fontWeight:600,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{isPartner?sLabel[romStatus]+" · ":""}{sel}</div>
+                    <div style={{fontSize:"9px",color:"#3D2B1F",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{NPC_DESC[sel]||""}</div>
                   </div>
-                ))}
-              </div>
-            )}
-            {getRomActs(sel).length>0&&(
-              <div style={{borderTop:"1px solid #2C1F14",paddingTop:"10px",display:"flex",flexWrap:"wrap",gap:"5px"}}>
-                {getRomActs(sel).map(ra=>(
-                  <button key={ra.id} disabled={loading} onClick={()=>{setSel(null);onRomanceAction(ra.id,sel);}}
-                    style={{padding:"5px 10px",fontSize:"10px",borderRadius:"14px",border:`1px solid ${ra.color}`,background:"transparent",color:ra.color,cursor:loading?"not-allowed":"pointer"}}>
-                    {ra.label}
-                  </button>
-                ))}
-              </div>
+                  <div style={{textAlign:"right",flexShrink:0}}>
+                    <div style={{fontSize:"9px",color:NPC_HOOD_COLOR[sel]||"#7BB8B9"}}>{relStatus(fr)}</div>
+                    <div style={{fontSize:"8px",color:"#2C1F14"}}>{fr}/100</div>
+                  </div>
+                </div>
+
+                {/* Category tabs */}
+                <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0}}>
+                  {INTERACTION_CATS.map(c=>(
+                    <button key={c.id} onClick={()=>setCat(c.id)}
+                      style={{flex:1,padding:"5px 2px",fontSize:"8px",border:"none",borderBottom:cat===c.id?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:cat===c.id?"#D4A853":"#3D2B1F",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:"1px"}}>
+                      <span style={{fontSize:"11px"}}>{c.emoji}</span>
+                      <span style={{letterSpacing:"0.04em",textTransform:"uppercase"}}>{c.label}</span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Interactions grid */}
+                <div style={{flex:1,overflowY:"auto",padding:"7px"}}>
+                  {catInteractions.length===0&&(
+                    <div style={{fontSize:"9px",color:"#2C1F14",fontStyle:"italic",textAlign:"center",marginTop:"10px"}}>
+                      {cat==="romantico"&&!ROMANCEABLE.has(sel)?"Este Twin no está disponible para romance.":
+                       cat==="romantico"&&fr<30?"Necesitás más amistad para opciones románticas.":
+                       "No hay opciones disponibles todavía."}
+                    </div>
+                  )}
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"4px"}}>
+                    {catInteractions.map(intr=>(
+                      <button key={intr.id} onClick={()=>onInteract(intr.id,sel)} disabled={loading}
+                        style={{display:"flex",alignItems:"center",gap:"5px",padding:"5px 7px",borderRadius:"7px",border:"1px solid #1A1208",background:"transparent",color:"#5C4030",cursor:loading?"not-allowed":"pointer",textAlign:"left",fontSize:"9px",transition:"all 0.12s"}}
+                        onMouseEnter={e=>{if(!loading){e.currentTarget.style.borderColor="#3D2B1F";e.currentTarget.style.color="#A08060";e.currentTarget.style.background="#0F0A06";}}}
+                        onMouseLeave={e=>{e.currentTarget.style.borderColor="#1A1208";e.currentTarget.style.color="#5C4030";e.currentTarget.style.background="transparent";}}>
+                        <span style={{fontSize:"14px",flexShrink:0}}>{intr.emoji}</span>
+                        <span style={{lineHeight:"1.2"}}>{intr.label}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Relationship milestones */}
+                  {getRomActs().length>0&&(
+                    <div style={{borderTop:"1px solid #1A1208",paddingTop:"7px",marginTop:"7px",display:"flex",flexWrap:"wrap",gap:"4px"}}>
+                      {getRomActs().map(ra=>(
+                        <button key={ra.id} disabled={loading} onClick={()=>{setSel(null);onRomanceAction(ra.id,sel);}}
+                          style={{padding:"4px 9px",fontSize:"9px",borderRadius:"12px",border:`1px solid ${ra.color}`,background:"transparent",color:ra.color,cursor:loading?"not-allowed":"pointer"}}>
+                          {ra.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Interaction history */}
+                  {selRel.history?.length>0&&(
+                    <div style={{borderTop:"1px solid #1A1208",paddingTop:"7px",marginTop:"7px"}}>
+                      <div style={{fontSize:"8px",color:"#2C1F14",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>Historial reciente</div>
+                      {selRel.history.slice(-3).map((h,i)=>(
+                        <div key={i} style={{fontSize:"9px",color:"#3D2B1F",marginBottom:"2px",paddingLeft:"6px",borderLeft:"1px solid #1A1208"}}>✦ {h}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* FAMILIA MODE */}
+      {mode==="familia"&&(
+        <div style={{flex:1,overflowY:"auto",padding:"8px 10px"}}>
+          {/* Partner info */}
+          {family.partner&&(
+            <div style={{background:"rgba(232,123,158,0.05)",border:"1px solid #2C1F14",borderRadius:"9px",padding:"9px",marginBottom:"8px",display:"flex",alignItems:"center",gap:"8px"}}>
+              <NPCAvatar name={family.partner} size={30}/>
+              <div>
+                <div style={{fontSize:"10px",color:"#E87B9E",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"1px"}}>{sLabel[family.romanticStatus]||"💕"}</div>
+                <div style={{fontSize:"12px",color:"#A08060",fontWeight:600}}>{family.partner}</div>
+              </div>
+            </div>
+          )}
+
+          {/* No family yet */}
+          {!family.partner&&family.children.length===0&&(
+            <div style={{fontSize:"10px",color:"#2C1F14",fontStyle:"italic",textAlign:"center",marginTop:"16px",lineHeight:"1.5"}}>
+              Tu historia familiar en Veloria todavía está por escribirse.<br/>Conocé Twins, construí relaciones.
+            </div>
+          )}
+
+          {/* Children */}
+          {family.children.map((child,idx)=>{
+            const age=Math.floor((currentDay-(child.birthDay||0))/30);
+            const stageName=getChildStage(age);
+            const stage=CHILD_STAGES[stageName];
+            const hap=child.happiness??70;
+            const rel=child.relationship??50;
+            const hapDots=Math.round(hap/20);
+            const relDots=Math.round(rel/20);
+            return(
+              <div key={idx} style={{background:"#080503",border:`1px solid ${stage.color}33`,borderRadius:"10px",padding:"10px",marginBottom:"8px"}}>
+                <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"8px"}}>
+                  <div style={{width:"36px",height:"36px",borderRadius:"50%",background:`${stage.color}15`,border:`2px solid ${stage.color}44`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"18px",flexShrink:0}}>{stage.emoji}</div>
+                  <div style={{flex:1}}>
+                    <div style={{fontSize:"12px",color:"#A08060",fontWeight:600}}>{child.name}</div>
+                    <div style={{display:"flex",alignItems:"center",gap:"6px"}}>
+                      <span style={{fontSize:"9px",color:stage.color,background:`${stage.color}18`,padding:"1px 6px",borderRadius:"8px",border:`1px solid ${stage.color}44`}}>{stage.label}</span>
+                      <span style={{fontSize:"9px",color:"#3D2B1F"}}>{age} {age===1?"año":"años"}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Stats */}
+                <div style={{display:"flex",gap:"12px",marginBottom:"8px"}}>
+                  <div style={{flex:1}}>
+                    <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"2px"}}>Felicidad</div>
+                    <div style={{display:"flex",gap:"2px"}}>
+                      {[0,1,2,3,4].map(i=><div key={i} style={{width:"7px",height:"7px",borderRadius:"50%",background:i<hapDots?"#E87B9E":"transparent",border:`1px solid ${i<hapDots?"#E87B9E":"#2C1F14"}`}}/>)}
+                    </div>
+                  </div>
+                  <div style={{flex:1}}>
+                    <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"2px"}}>Relación</div>
+                    <div style={{display:"flex",gap:"2px"}}>
+                      {[0,1,2,3,4].map(i=><div key={i} style={{width:"7px",height:"7px",borderRadius:"50%",background:i<relDots?stage.color:"transparent",border:`1px solid ${i<relDots?stage.color:"#2C1F14"}`}}/>)}
+                    </div>
+                  </div>
+                  {child.traits?.length>0&&(
+                    <div style={{flex:2}}>
+                      <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"2px"}}>Rasgos</div>
+                      <div style={{fontSize:"8px",color:"#5C4030"}}>{child.traits.slice(0,2).join(", ")}</div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Interactions */}
+                <div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>
+                  {stage.interactions.map(intr=>(
+                    <button key={intr.id} onClick={()=>onChildInteract(idx,intr.id)} disabled={loading}
+                      style={{display:"flex",alignItems:"center",gap:"4px",padding:"4px 8px",borderRadius:"14px",fontSize:"9px",border:`1px solid ${stage.color}44`,background:"transparent",color:"#5C4030",cursor:loading?"not-allowed":"pointer",transition:"all 0.12s"}}
+                      onMouseEnter={e=>{if(!loading){e.currentTarget.style.background=`${stage.color}12`;e.currentTarget.style.color=stage.color;e.currentTarget.style.borderColor=`${stage.color}88`;}}}
+                      onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="#5C4030";e.currentTarget.style.borderColor=`${stage.color}44`;}}>
+                      <span>{intr.emoji}</span>{intr.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
-
 function TrabajoTabContent({career,loc,dark,loading,onApply,onWork}){
   if(!career){
     return(
@@ -905,6 +1163,39 @@ export default function InbetweensGame(){
     addEntry({text:getNarrative(`event:${gt.monthIdx}`),type:"event",place:loc.place,time:toTimeStr(gt.hour+3)});
     setLoading(false);
   }
+
+  async function handleInteraction(interactionId,npcName){
+    if(loading)return;
+    const intr=INTERACTIONS.find(i=>i.id===interactionId);if(!intr)return;
+    setLoading(true);await sleep(300+Math.random()*200);
+    let key=`int:${interactionId}`,delta=intr.delta;
+    const fr=rels[npcName]?.friendship||0;
+    if(interactionId==="chiste"){const ok=Math.random()>0.35;key=ok?"int:chiste_ok":"int:chiste_fail";delta=ok?8:-2;}
+    else if(interactionId==="broma"){const ok=Math.random()>0.3;key=ok?"int:broma_ok":"int:broma_fail";delta=ok?6:-3;}
+    else if(interactionId==="competir"){const win=Math.random()>0.5;key=win?"int:competir_win":"int:competir_lose";delta=3;}
+    else if(interactionId==="confrontar"){const pos=fr>30&&Math.random()>0.4;delta=pos?8:-12;}
+    else if(interactionId==="coquetear"){const ok=fr>40&&Math.random()>0.4;key=ok?"int:coquetear_ok":"int:coquetear_fail";delta=ok?6:0;}
+    const text=getNarrative(N[key]?key:"int:charlar",{NPC:npcName.split(" ")[0]});
+    if(delta!==null){
+      setRels(prev=>({...prev,[npcName]:{...prev[npcName],friendship:clamp((prev[npcName]?.friendship||0)+delta),history:[...(prev[npcName]?.history||[]).slice(-4),`${intr.label} · ${loc.place}`]}}));
+    }
+    tick(0.5,intr.effects||{});
+    addEntry({text,type:"story",place:loc.place,time:toTimeStr(gt.hour+0.5)});
+    setLoading(false);
+  }
+
+  async function handleChildInteract(childIdx,interactionId){
+    if(loading)return;
+    const child=family.children[childIdx];if(!child)return;
+    setLoading(true);await sleep(350);
+    const fx=CHILD_FX[interactionId]||{hap:5,rel:3};
+    const text=getNarrative(`child:${interactionId}`,{CHILD:child.name})||getNarrative("default");
+    setFamily(f=>({...f,children:f.children.map((c,i)=>i===childIdx?{...c,happiness:clamp((c.happiness??70)+fx.hap),relationship:clamp((c.relationship??50)+fx.rel)}:c)}));
+    tick(0.5,{social:8,diversion:6});
+    addEntry({text,type:"story",place:loc.place,time:toTimeStr(gt.hour+0.5)});
+    setLoading(false);
+  }
+
   async function handleRomanceAction(type,npcName){
     if(loading)return;
     if(type==="have_child"){setNamingChild(true);setChildNameInput("");return;}
@@ -923,7 +1214,7 @@ export default function InbetweensGame(){
     setNamingChild(false);setLoading(true);await sleep(500);
     const pT=NPC_TRAITS_MAP[family.partner]||["curioso","alegre","cálido"];
     const pool=[...new Set([...(twin?.traits||[]),...pT])].sort(()=>0.5-Math.random());
-    setFamily(f=>({...f,children:[...f.children,{name,birthDay:gt.day,traits:pool.slice(0,3),otherParent:family.partner}]}));
+    setFamily(f=>({...f,children:[...f.children,{name,birthDay:gt.day,traits:pool.slice(0,3),otherParent:family.partner,happiness:70,relationship:60}]}));
     tick(0,{social:30,diversion:20});
     addEntry({text:getNarrative("birth",{CHILD:name,PARTNER:family.partner||"tu pareja"}),type:"intro",place:"Tu apartamento",time:toTimeStr(gt.hour)});
     setLoading(false);
@@ -1018,7 +1309,7 @@ export default function InbetweensGame(){
         {/* Tab content */}
         <div style={{flex:1,overflow:"hidden"}}>
           {activeTab==="acciones"&&<AccionesTab loc={loc} career={career} NEIGHBORHOODS={NEIGHBORHOODS} PLACE_ACTIONS={PLACE_ACTIONS} loading={loading} dark={true} onGoTo={handleGoTo} onAction={handleAction} onWork={handleWork}/>}
-          {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={true} loading={loading} onRomanceAction={handleRomanceAction}/>}
+          {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={true} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract}/>}
           {activeTab==="trabajo"&&<TrabajoTabContent career={career} loc={loc} dark={true} loading={loading} onApply={handleApplyJob} onWork={handleWork}/>}
           {activeTab==="inventario"&&<InventarioTab inventory={inventory} onUseItem={handleUseItem}/>}
           {activeTab==="calendario"&&<CalendarioTab gt={gt}/>}
