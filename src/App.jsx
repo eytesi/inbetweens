@@ -544,34 +544,150 @@ function CharacterCard({twin,needs,money,gt,rels,family}){
 }
 
 // ═══════════════════ PAUSA MODAL ═══════════════════
-function PausaModal({onClose,log,gt,twin}){
-  const lastEntries=[...log].reverse().slice(0,3);
+// ═══════════════════ SAVE / LOAD ═══════════════════
+const SAVE_KEY="inbetweens_s_";
+const AUTO_KEY="inbetweens_auto";
+function buildSave(twin,needs,money,gt,loc,rels,career,family,inventory,log){
+  return{v:1,savedAt:Date.now(),twin,needs,money,gt,loc,rels,career,family,inventory,log:log.slice(-50)};
+}
+function readSlot(slot){
+  try{const r=localStorage.getItem(SAVE_KEY+slot);return r?JSON.parse(r):null;}catch{return null;}
+}
+function slotMeta(slot){
+  const d=readSlot(slot);if(!d)return null;
+  return{twinName:d.twin?.name||"?",day:d.gt?.day||1,money:d.money||0,monthIdx:d.gt?.monthIdx||0,savedAt:d.savedAt};
+}
+function fmtDate(ts){
+  if(!ts)return"";
+  const d=new Date(ts);
+  return`${d.getDate()}/${d.getMonth()+1} ${d.getHours().toString().padStart(2,"0")}:${d.getMinutes().toString().padStart(2,"0")}`;
+}
+function anySaveExists(){
+  return[0,1,2].some(s=>readSlot(s))||!!localStorage.getItem(AUTO_KEY);
+}
+
+function MenuBtn({label,onClick,accent=false,danger=false}){
+  const [h,setH]=useState(false);
+  const col=accent?"#D4A853":danger?"#E87B9E":"#5C4030";
+  const hCol=accent?"#F0C97A":danger?"#F09090":"#8B7355";
   return(
-    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.85)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:200}}>
-      <div style={{background:"#120D07",border:"1px solid #3D2B1F",borderRadius:"16px",width:"560px",maxWidth:"95vw",overflow:"hidden",display:"flex"}}>
-        <div style={{width:"200px",background:"#0F0A06",borderRight:"1px solid #2C1F14",padding:"28px 20px",display:"flex",flexDirection:"column"}}>
-          <div style={{fontFamily:"'Lora',serif",fontSize:"22px",color:"#D4A853",letterSpacing:"0.15em",marginBottom:"4px"}}>inbetweens</div>
-          <div style={{fontSize:"9px",color:"#5C4030",letterSpacing:"0.2em",marginBottom:"24px"}}>VELORIA · OTHERWHEN</div>
-          {["Continuar","Guardar","Nueva partida","Salir"].map((label,i)=>(
-            <button key={i} onClick={label==="Continuar"?onClose:undefined}
-              style={{padding:"9px 12px",marginBottom:"5px",borderRadius:"8px",border:"1px solid #2C1F14",background:"transparent",color:label==="Continuar"?"#D4A853":"#5C4030",cursor:"pointer",textAlign:"left",fontSize:"12px",transition:"all 0.12s"}}
-              onMouseEnter={e=>{e.currentTarget.style.borderColor="#3D2B1F";e.currentTarget.style.color="#A08060";}}
-              onMouseLeave={e=>{e.currentTarget.style.borderColor="#2C1F14";e.currentTarget.style.color=label==="Continuar"?"#D4A853":"#5C4030";}}>
-              {label}
-            </button>
-          ))}
-          <div style={{flex:1}}/>
-          <div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {gt.day} · {twin?.name}</div>
-        </div>
-        <div style={{flex:1,padding:"24px",overflowY:"auto"}}>
-          <div style={{fontSize:"9px",color:"#5C4030",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"12px"}}>Memoria del día</div>
-          {lastEntries.length===0&&<div style={{color:"#3D2B1F",fontSize:"11px",fontStyle:"italic"}}>El diario empieza a llenarse mientras jugás.</div>}
-          {lastEntries.map(e=>(
-            <div key={e.id} style={{marginBottom:"14px",paddingLeft:"10px",borderLeft:"2px solid #2C1F14"}}>
-              {e.place&&<div style={{fontSize:"9px",color:"#5C4030",marginBottom:"4px"}}>{e.place}{e.time?` · ${e.time}`:""}</div>}
-              <div style={{fontSize:"12px",color:"#8B7355",fontStyle:"italic",fontFamily:"'Lora',serif",lineHeight:"1.6"}}>{(e.text||"").slice(0,200)}{(e.text||"").length>200?"…":""}</div>
+    <button onClick={onClick} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
+      style={{width:"100%",padding:"8px 10px",marginBottom:"4px",borderRadius:"7px",border:`1px solid ${h?"#2C1F14":"#1A1208"}`,background:h?"rgba(255,255,255,0.02)":"transparent",color:h?hCol:col,cursor:"pointer",textAlign:"left",fontSize:"11px",transition:"all 0.12s"}}>
+      {label}
+    </button>
+  );
+}
+
+function SaveSlot({slot,view,onSave,onLoad,savedFlash}){
+  const meta=slotMeta(slot);
+  return(
+    <div style={{background:"#080503",border:"1px solid #1A1208",borderRadius:"10px",padding:"11px 13px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
+      <div style={{width:"28px",height:"28px",borderRadius:"7px",background:"rgba(212,168,83,0.05)",border:"1px solid #1A1208",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",color:"#2C1F14",fontWeight:700,flexShrink:0}}>{slot+1}</div>
+      <div style={{flex:1,overflow:"hidden"}}>
+        {meta?(
+          <>
+            <div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>{meta.twinName}</div>
+            <div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {meta.day} · L {meta.money} · {MONTHS[meta.monthIdx]}</div>
+            <div style={{fontSize:"8px",color:"#2C1F14"}}>{fmtDate(meta.savedAt)}</div>
+          </>
+        ):(
+          <div style={{fontSize:"10px",color:"#2C1F14",fontStyle:"italic"}}>Ranura vacía</div>
+        )}
+      </div>
+      <div style={{display:"flex",gap:"5px",flexShrink:0}}>
+        {view==="save"&&(
+          <button onClick={()=>onSave(slot)} style={{padding:"4px 9px",borderRadius:"6px",border:`1px solid ${savedFlash===slot?"#6B9E5E":"#2C1F14"}`,background:savedFlash===slot?"rgba(107,158,94,0.1)":"transparent",color:savedFlash===slot?"#6B9E5E":"#5C4030",fontSize:"9px",cursor:"pointer",transition:"all 0.2s"}}>
+            {savedFlash===slot?"✓":"Guardar"}
+          </button>
+        )}
+        {view==="load"&&meta&&(
+          <button onClick={()=>onLoad(slot)} style={{padding:"4px 9px",borderRadius:"6px",border:"1px solid #2C1F14",background:"transparent",color:"#D4A853",fontSize:"9px",cursor:"pointer"}}>Cargar</button>
+        )}
+        {view==="load"&&!meta&&<div style={{fontSize:"9px",color:"#1A1208"}}>—</div>}
+      </div>
+    </div>
+  );
+}
+
+function PausaModal({onClose,onSave,onLoad,onReset,log,gt,twin}){
+  const [view,setView]=useState("menu");
+  const [savedFlash,setSavedFlash]=useState(null);
+  const [confirmReset,setConfirmReset]=useState(false);
+  const lastEntries=[...log].reverse().slice(0,4);
+  const auto=(() => { try{ const r=localStorage.getItem(AUTO_KEY); return r?JSON.parse(r):null; } catch{ return null; }})();
+
+  function doSave(slot){
+    onSave(slot);
+    setSavedFlash(slot);
+    setTimeout(()=>setSavedFlash(null),2000);
+  }
+  function doLoad(slot){ onLoad(slot); onClose(); }
+  function doLoadAuto(){ onLoad("auto"); onClose(); }
+
+  return(
+    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.92)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:200}} onClick={e=>e.target===e.currentTarget&&onClose()}>
+      <div style={{background:"#0A0603",border:"1px solid #2C1F14",borderRadius:"16px",width:"600px",maxWidth:"96vw",overflow:"hidden",display:"flex",maxHeight:"88vh"}}>
+
+        {/* Left menu */}
+        <div style={{width:"205px",background:"#060402",borderRight:"1px solid #1A1208",padding:"22px 16px",display:"flex",flexDirection:"column",flexShrink:0}}>
+          <div style={{fontFamily:"'Lora',serif",fontSize:"19px",color:"#D4A853",letterSpacing:"0.15em",marginBottom:"2px"}}>inbetweens</div>
+          <div style={{fontSize:"7px",color:"#1A1208",letterSpacing:"0.25em",textTransform:"uppercase",marginBottom:"20px"}}>VELORIA · OTHERWHEN</div>
+
+          <MenuBtn label="Continuar" accent onClick={onClose}/>
+          <MenuBtn label={view==="save"?"↩ Volver":"💾 Guardar partida"} onClick={()=>setView(v=>v==="save"?"menu":"save")}/>
+          <MenuBtn label={view==="load"?"↩ Volver":"📂 Cargar partida"} onClick={()=>setView(v=>v==="load"?"menu":"load")}/>
+
+          <div style={{height:"1px",background:"#1A1208",margin:"8px 0"}}/>
+
+          {confirmReset?(
+            <div>
+              <div style={{fontSize:"9px",color:"#E87B9E",marginBottom:"7px",lineHeight:"1.4"}}>¿Seguro? La partida actual se pierde si no guardaste.</div>
+              <MenuBtn label="Sí, nueva partida" danger onClick={()=>{setConfirmReset(false);onReset();}}/>
+              <MenuBtn label="Cancelar" onClick={()=>setConfirmReset(false)}/>
             </div>
-          ))}
+          ):(
+            <MenuBtn label="Nueva partida" onClick={()=>setConfirmReset(true)}/>
+          )}
+
+          <div style={{flex:1}}/>
+
+          {auto&&(
+            <div style={{padding:"7px",background:"rgba(212,168,83,0.03)",border:"1px solid #1A1208",borderRadius:"7px",marginBottom:"6px"}}>
+              <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"3px"}}>Autoguardado</div>
+              <div style={{fontSize:"9px",color:"#5C4030"}}>{auto.twin?.name} · Día {auto.gt?.day}</div>
+              <div style={{fontSize:"7px",color:"#2C1F14",marginBottom:"5px"}}>{fmtDate(auto.savedAt)}</div>
+              <button onClick={doLoadAuto} style={{fontSize:"8px",color:"#8B7355",background:"transparent",border:"1px solid #2C1F14",borderRadius:"5px",padding:"2px 6px",cursor:"pointer",width:"100%"}}>Cargar autoguardado</button>
+            </div>
+          )}
+          <div style={{fontSize:"7px",color:"#1A1208"}}>{twin?.name} · Día {gt?.day}</div>
+        </div>
+
+        {/* Right panel */}
+        <div style={{flex:1,overflowY:"auto"}}>
+          {(view==="save"||view==="load")&&(
+            <div style={{padding:"20px"}}>
+              <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"12px"}}>
+                {view==="save"?"Elegí una ranura para guardar":"Elegí una partida para cargar"}
+              </div>
+              {[0,1,2].map(s=>(
+                <SaveSlot key={s} slot={s} view={view} onSave={doSave} onLoad={doLoad} savedFlash={savedFlash}/>
+              ))}
+              {view==="save"&&<div style={{fontSize:"8px",color:"#2C1F14",marginTop:"6px",fontStyle:"italic"}}>El autoguardado ocurre automáticamente cada 5 acciones.</div>}
+            </div>
+          )}
+
+          {view==="menu"&&(
+            <div style={{padding:"20px"}}>
+              <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"12px"}}>Memoria del día</div>
+              {lastEntries.length===0&&<div style={{color:"#2C1F14",fontSize:"11px",fontStyle:"italic"}}>El diario empieza a llenarse mientras jugás.</div>}
+              {lastEntries.map(e=>(
+                <div key={e.id} style={{marginBottom:"14px",paddingLeft:"10px",borderLeft:"2px solid #1A1208"}}>
+                  {e.place&&<div style={{fontSize:"8px",color:"#2C1F14",marginBottom:"3px"}}>{e.place}{e.time?` · ${e.time}`:""}</div>}
+                  <div style={{fontSize:"12px",color:"#5C4030",fontStyle:"italic",fontFamily:"'Lora',serif",lineHeight:"1.6"}}>{(e.text||"").slice(0,240)}{(e.text||"").length>240?"…":""}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -579,11 +695,46 @@ function PausaModal({onClose,log,gt,twin}){
 }
 
 // ═══════════════════ CREATION SCREEN ═══════════════════
-function CreationScreen({onStart}){
+function CreationScreen({onStart,onLoad}){
   const [step,setStep]=useState(0),[name,setName]=useState(""),[traits,setTraits]=useState([]),[aspiration,setAspiration]=useState("");
+  const [showLoad,setShowLoad]=useState(false),[loadFlash,setLoadFlash]=useState(null);
+  const hasSaves=anySaveExists();
   const toggle=id=>{if(traits.includes(id))setTraits(traits.filter(t=>t!==id));else if(traits.length<3)setTraits([...traits,id]);};
   const canNext=[name.trim().length>1,traits.length===3,aspiration!==""][step];
   const next=()=>{if(!canNext)return;if(step<2)setStep(step+1);else onStart({name:name.trim(),traits,aspiration});};
+
+  if(showLoad){
+    const auto=(()=>{try{const r=localStorage.getItem(AUTO_KEY);return r?JSON.parse(r):null;}catch{return null;}})();
+    return(
+      <div style={{minHeight:"100vh",background:"linear-gradient(155deg,#080503 0%,#1A1008 50%,#0F0A06 100%)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"32px 16px",fontFamily:"'DM Sans',sans-serif"}}>
+        <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}`}</style>
+        <div style={{fontFamily:"'Lora',serif",fontSize:"42px",color:"#D4A853",letterSpacing:"0.2em",marginBottom:"32px"}}>inbetweens</div>
+        <div style={{width:"100%",maxWidth:"380px"}}>
+          <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.2em",marginBottom:"12px"}}>Partidas guardadas</div>
+          {[0,1,2].map(s=>{
+            const m=slotMeta(s);
+            return(
+              <div key={s} style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
+                <div style={{width:"26px",height:"26px",borderRadius:"6px",background:"transparent",border:"1px solid #2C1F14",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",color:"#2C1F14",flexShrink:0}}>{s+1}</div>
+                <div style={{flex:1}}>
+                  {m?<><div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>{m.twinName}</div><div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {m.day} · L {m.money} · {fmtDate(m.savedAt)}</div></>:<div style={{fontSize:"10px",color:"#2C1F14",fontStyle:"italic"}}>Vacío</div>}
+                </div>
+                {m&&<button onClick={()=>onLoad(s)} style={{padding:"4px 10px",borderRadius:"6px",border:"1px solid #3D2B1F",background:"transparent",color:"#D4A853",fontSize:"10px",cursor:"pointer"}}>Cargar</button>}
+              </div>
+            );
+          })}
+          {auto&&(
+            <div style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
+              <div style={{fontSize:"14px",flexShrink:0}}>⚡</div>
+              <div style={{flex:1}}><div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>Autoguardado · {auto.twin?.name}</div><div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {auto.gt?.day} · {fmtDate(auto.savedAt)}</div></div>
+              <button onClick={()=>onLoad("auto")} style={{padding:"4px 10px",borderRadius:"6px",border:"1px solid #3D2B1F",background:"transparent",color:"#D4A853",fontSize:"10px",cursor:"pointer"}}>Cargar</button>
+            </div>
+          )}
+          <button onClick={()=>setShowLoad(false)} style={{marginTop:"12px",width:"100%",padding:"9px",borderRadius:"8px",border:"1px solid #2C1F14",background:"transparent",color:"#5C4030",cursor:"pointer",fontSize:"11px"}}>← Nueva partida</button>
+        </div>
+      </div>
+    );
+  }
   return(
     <div style={{minHeight:"100vh",background:"linear-gradient(155deg,#080503 0%,#1A1008 50%,#0F0A06 100%)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"32px 16px",fontFamily:"'DM Sans',sans-serif"}}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}`}</style>
@@ -631,6 +782,11 @@ function CreationScreen({onStart}){
       <button onClick={next} disabled={!canNext} style={{marginTop:"20px",padding:"10px 36px",borderRadius:"24px",border:"none",background:canNext?"#D4A853":"#1A1008",color:canNext?"#0F0A06":"#3D2B1F",fontSize:"11px",fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",cursor:canNext?"pointer":"not-allowed",transition:"all 0.2s"}}>
         {step===2?"✨ Llegar a Veloria":"Continuar →"}
       </button>
+      {hasSaves&&step===0&&(
+        <button onClick={()=>setShowLoad(true)} style={{marginTop:"10px",padding:"8px 28px",borderRadius:"24px",border:"1px solid #2C1F14",background:"transparent",color:"#5C4030",fontSize:"10px",cursor:"pointer",letterSpacing:"0.1em",textTransform:"uppercase"}}>
+          📂 Cargar partida guardada
+        </button>
+      )}
     </div>
   );
 }
@@ -652,6 +808,41 @@ export default function InbetweensGame(){
   const [namingChild,setNamingChild]=useState(false),[childNameInput,setChildNameInput]=useState("");
   const logEnd=useRef(null);
   useEffect(()=>{logEnd.current?.scrollIntoView({behavior:"smooth"});},[log]);
+  useEffect(()=>{
+    if(phase==="playing"&&log.length>0&&log.length%5===0){
+      const data=buildSave(twin,needs,money,gt,loc,rels,career,family,inventory,log);
+      try{localStorage.setItem(AUTO_KEY,JSON.stringify(data));}catch{}
+    }
+  },[log.length]);
+
+  function saveToSlot(slot){
+    try{localStorage.setItem(SAVE_KEY+slot,JSON.stringify(buildSave(twin,needs,money,gt,loc,rels,career,family,inventory,log)));}catch{}
+  }
+  function loadFromSlot(slot){
+    const data=slot==="auto"?(()=>{try{const r=localStorage.getItem(AUTO_KEY);return r?JSON.parse(r):null;}catch{return null;}})():readSlot(slot);
+    if(!data)return;
+    if(data.twin)setTwin(data.twin);
+    if(data.needs)setNeeds(data.needs);
+    if(data.money!=null)setMoney(data.money);
+    if(data.gt)setGt(data.gt);
+    if(data.loc)setLoc(data.loc);
+    if(data.rels)setRels(data.rels);
+    setCareer(data.career||null);
+    if(data.family)setFamily(data.family);
+    if(data.inventory)setInventory(data.inventory);
+    if(data.log)setLog(data.log);
+    setPhase("playing");setShowPausa(false);
+  }
+  function resetGame(){
+    setPhase("creation");setTwin(null);
+    setNeeds({hambre:75,sueno:80,higiene:80,social:50,diversion:55,vejiga:70});
+    setMoney(250);setGt({hour:8,day:1,monthIdx:0});
+    setLoc({hood:"La Vega",place:"Tu apartamento"});
+    setRels({});setCareer(null);
+    setFamily({partner:null,romanticStatus:null,children:[]});
+    setInventory([{id:1,name:"Té Miren",type:"food",emoji:"🍵",qty:2,desc:"Una taza.",useable:true},{id:2,name:"Pan Velin",type:"food",emoji:"🥐",qty:1,desc:"Pan de Veloria.",useable:true}]);
+    setLog([]);setShowPausa(false);
+  }
 
   const addEntry=e=>setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,...e}]);
   const tick=(hours,changes={})=>{
@@ -748,7 +939,7 @@ export default function InbetweensGame(){
     if(item.type==="food"){tick(0,{hambre:40});setInventory(prev=>prev.map(i=>i.id===item.id?{...i,qty:i.qty-1}:i).filter(i=>i.qty>0));addEntry({text:`Comés ${item.name.toLowerCase()}. El hambre cede un poco.`,type:"story",place:loc.place});}
   }
 
-  if(phase==="creation")return<CreationScreen onStart={handleStart}/>;
+  if(phase==="creation")return<CreationScreen onStart={handleStart} onLoad={loadFromSlot}/>;
 
   const hoodColor=(NEIGHBORHOODS[loc.hood]||{}).color||"#D4A853";
   const TABS=[{id:"acciones",label:"Acciones",emoji:"🎮"},{id:"social",label:"Social",emoji:"💬"},{id:"trabajo",label:"Trabajo",emoji:"💼"},{id:"inventario",label:"Inventario",emoji:"📦"},{id:"calendario",label:"Calendario",emoji:"📅"},{id:"diario",label:"Diario",emoji:"📖"}];
@@ -759,7 +950,7 @@ export default function InbetweensGame(){
     <div style={{display:"flex",flexDirection:"column",height:"100vh",background:"#0F0A06",fontFamily:"'DM Sans',sans-serif",color:"#EDE0CC",overflow:"hidden"}}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:#2C1F14;border-radius:2px}button{font-family:inherit}@keyframes fadeSlideIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
-      {showPausa&&<PausaModal onClose={()=>setShowPausa(false)} log={log} gt={gt} twin={twin}/>}
+      {showPausa&&<PausaModal onClose={()=>setShowPausa(false)} onSave={saveToSlot} onLoad={loadFromSlot} onReset={resetGame} log={log} gt={gt} twin={twin}/>}
       {namingChild&&(
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.8)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100}}>
           <div style={{background:"#1A1208",border:"1px solid #3D2B1F",borderRadius:"16px",padding:"28px",width:"300px",textAlign:"center"}}>
