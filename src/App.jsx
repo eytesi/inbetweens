@@ -193,7 +193,46 @@ const CALENDAR_EVENTS={0:{name:"Día del Primer Brote",emoji:"🌱",desc:"Planta
 const NPC_TRAITS_MAP={"Aria Ven":["pragmática","acogedora","observadora"],"Lior Veloer":["rebelde","curioso","libre"],"Oren Mirende":["aventurero","romántico","libre"],"Nela Mirende":["cálido","fuerte","protector"],"Riven Lumaren":["encantador","generoso","soñador"],"Vael Lumaren":["creativo","impulsivo","apasionado"],"Cael Sorvei":["dramático","apasionado","perfeccionista"],"Niven Sorvei":["intenso","directo","artístico"],"Luma Sorvei":["libre","alegre","magnético"],"Soren Lume":["introvertido","brillante","leal"],"Ciro Orlen":["meticuloso","callado","curioso"],"Elia Orlen":["sociable","optimista","generosa"],"Iva Norven":["observadora","artístico","sensible"],"Cela Miren":["empático","trabajador","sensible"],"Tev Solan":["alegre","talentoso","impulsivo"],"Dael Miru":["perfeccionista","apasionado","orgulloso"],"Mira Belven":["energético","social","creativo"],"Rael Nora":["gentil","divertido","compasivo"],"Leva Sorin":["apasionado","exigente","curioso"]};
 const NPC_HOOD_COLOR={"Aria Ven":"#7BB8B9","Lior Veloer":"#7BB8B9","Elia Orlen":"#7BB8B9","Tev Solan":"#7BB8B9","Oren Mirende":"#4A8B8C","Nela Mirende":"#4A8B8C","Tomas Mirende":"#4A8B8C","Riven Lumaren":"#4A8B8C","Iva Norven":"#4A8B8C","Ciro Orlen":"#A08060","Elowen Sorvei":"#A08060","Cael Sorvei":"#A08060","Niven Sorvei":"#A08060","Luma Sorvei":"#A08060","Vael Lumaren":"#A08060","Leva Sorin":"#A08060","Aldric Veloer":"#D4A853","Soren Lume":"#D4A853","Dora Velin":"#D4A853","Dael Miru":"#D4A853","Mira Belven":"#D4A853","Bren Orlen":"#6B9E5E","Cela Miren":"#6B9E5E","Rael Nora":"#6B9E5E"};
 const NPC_DESC={"Aria Ven":"Dueña del café · La Vega","Lior Veloer":"Estudiante rebelde · La Vega","Oren Mirende":"Pescador y guía del lago · Ribera","Nela Mirende":"Restaurante del muelle · Ribera","Tomas Mirende":"Pescador mayor · Ribera","Riven Lumaren":"Gerente del banco · Ribera","Ciro Orlen":"Archivista · Veleta","Elowen Sorvei":"Escritora anciana · Veleta","Cael Sorvei":"Director del teatro · Veleta","Niven Sorvei":"Pintora y tatuadora · Veleta","Luma Sorvei":"Músico callejero · Veleta","Vael Lumaren":"Diseñadora · Veleta","Leva Sorin":"Profesora de historia · Veleta","Aldric Veloer":"Figura moral de Veloria · El Casco","Soren Lume":"Librero · El Casco","Dora Velin":"La Twin más anciana · El Casco","Dael Miru":"Chef · El Casco","Mira Belven":"Organizadora de eventos · El Casco","Bren Orlen":"Médico · Los Prados","Cela Miren":"Enfermera · Los Prados","Rael Nora":"Veterinario · Los Prados"};
-const NPC_AT_PLACE={"Café de Aria":["Aria Ven"],"Plaza del Veloer":["Aldric Veloer","Dora Velin"],"Librería de Soren":["Soren Lume"],"Muelle":["Oren Mirende","Tomas Mirende"],"Restaurante de Nela":["Nela Mirende"],"Lago Miren":["Oren Mirende"],"Biblioteca":["Ciro Orlen","Elowen Sorvei","Leva Sorin"],"Teatro de Cael":["Cael Sorvei","Niven Sorvei"],"Parque":[],"Consultorio de Bren":["Bren Orlen"],"Tu apartamento":[]};
+const NPC_SCHEDULES={
+  "Aria Ven":      [{from:0,to:7,place:"La Vega (casa)",hood:"La Vega"},{from:7,to:20,place:"Café de Aria",hood:"La Vega"},{from:20,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"La Vega (casa)",hood:"La Vega"}],
+  "Lior Veloer":   [{from:0,to:10,place:"La Vega (casa)",hood:"La Vega"},{from:10,to:15,place:"Biblioteca",hood:"Veleta"},{from:15,to:19,place:"Café de Aria",hood:"La Vega"},{from:19,to:23,place:"Plaza del Veloer",hood:"El Casco"},{from:23,to:24,place:"La Vega (casa)",hood:"La Vega"}],
+  "Elia Orlen":    [{from:0,to:9,place:"La Vega (casa)",hood:"La Vega"},{from:9,to:14,place:"Biblioteca",hood:"Veleta"},{from:14,to:18,place:"Café de Aria",hood:"La Vega"},{from:18,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"La Vega (casa)",hood:"La Vega"}],
+  "Oren Mirende":  [{from:0,to:5,place:"Ribera (casa)",hood:"Ribera"},{from:5,to:14,place:"Muelle",hood:"Ribera"},{from:14,to:17,place:"Lago Miren",hood:"Ribera"},{from:17,to:21,place:"Restaurante de Nela",hood:"Ribera"},{from:21,to:24,place:"Ribera (casa)",hood:"Ribera"}],
+  "Nela Mirende":  [{from:0,to:8,place:"Ribera (casa)",hood:"Ribera"},{from:8,to:22,place:"Restaurante de Nela",hood:"Ribera"},{from:22,to:24,place:"Ribera (casa)",hood:"Ribera"}],
+  "Tomas Mirende": [{from:0,to:4,place:"Ribera (casa)",hood:"Ribera"},{from:4,to:13,place:"Muelle",hood:"Ribera"},{from:13,to:16,place:"Restaurante de Nela",hood:"Ribera"},{from:16,to:24,place:"Ribera (casa)",hood:"Ribera"}],
+  "Riven Lumaren": [{from:0,to:8,place:"Ribera (casa)",hood:"Ribera"},{from:8,to:18,place:"El Casco (banco)",hood:"El Casco"},{from:18,to:22,place:"Restaurante de Nela",hood:"Ribera"},{from:22,to:24,place:"Ribera (casa)",hood:"Ribera"}],
+  "Iva Norven":    [{from:0,to:10,place:"Ribera (casa)",hood:"Ribera"},{from:10,to:18,place:"Lago Miren",hood:"Ribera"},{from:18,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"Ribera (casa)",hood:"Ribera"}],
+  "Ciro Orlen":    [{from:0,to:8,place:"Veleta (casa)",hood:"Veleta"},{from:8,to:22,place:"Biblioteca",hood:"Veleta"},{from:22,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Elowen Sorvei": [{from:0,to:7,place:"Veleta (casa)",hood:"Veleta"},{from:7,to:10,place:"Parque",hood:"Los Prados"},{from:10,to:17,place:"Biblioteca",hood:"Veleta"},{from:17,to:20,place:"Teatro de Cael",hood:"Veleta"},{from:20,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Cael Sorvei":   [{from:0,to:10,place:"Veleta (casa)",hood:"Veleta"},{from:10,to:23,place:"Teatro de Cael",hood:"Veleta"},{from:23,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Niven Sorvei":  [{from:0,to:11,place:"Veleta (casa)",hood:"Veleta"},{from:11,to:20,place:"Teatro de Cael",hood:"Veleta"},{from:20,to:23,place:"Lago Miren",hood:"Ribera"},{from:23,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Luma Sorvei":   [{from:0,to:12,place:"Veleta (casa)",hood:"Veleta"},{from:12,to:15,place:"Plaza del Veloer",hood:"El Casco"},{from:15,to:19,place:"Café de Aria",hood:"La Vega"},{from:19,to:23,place:"Teatro de Cael",hood:"Veleta"},{from:23,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Vael Lumaren":  [{from:0,to:10,place:"Veleta (casa)",hood:"Veleta"},{from:10,to:19,place:"Teatro de Cael",hood:"Veleta"},{from:19,to:22,place:"Café de Aria",hood:"La Vega"},{from:22,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Leva Sorin":    [{from:0,to:8,place:"Veleta (casa)",hood:"Veleta"},{from:8,to:14,place:"Biblioteca",hood:"Veleta"},{from:14,to:18,place:"Teatro de Cael",hood:"Veleta"},{from:18,to:22,place:"Café de Aria",hood:"La Vega"},{from:22,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Soren Lume":    [{from:0,to:8,place:"El Casco (casa)",hood:"El Casco"},{from:8,to:20,place:"Librería de Soren",hood:"El Casco"},{from:20,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"El Casco (casa)",hood:"El Casco"}],
+  "Aldric Veloer": [{from:0,to:7,place:"El Casco (casa)",hood:"El Casco"},{from:7,to:12,place:"Plaza del Veloer",hood:"El Casco"},{from:12,to:14,place:"Librería de Soren",hood:"El Casco"},{from:14,to:19,place:"Plaza del Veloer",hood:"El Casco"},{from:19,to:24,place:"El Casco (casa)",hood:"El Casco"}],
+  "Dora Velin":    [{from:0,to:7,place:"El Casco (casa)",hood:"El Casco"},{from:7,to:11,place:"Plaza del Veloer",hood:"El Casco"},{from:11,to:16,place:"El Casco (casa)",hood:"El Casco"},{from:16,to:18,place:"Plaza del Veloer",hood:"El Casco"},{from:18,to:24,place:"El Casco (casa)",hood:"El Casco"}],
+  "Dael Miru":     [{from:0,to:9,place:"El Casco (casa)",hood:"El Casco"},{from:9,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"El Casco (casa)",hood:"El Casco"}],
+  "Mira Belven":   [{from:0,to:8,place:"El Casco (casa)",hood:"El Casco"},{from:8,to:16,place:"Plaza del Veloer",hood:"El Casco"},{from:16,to:20,place:"Café de Aria",hood:"La Vega"},{from:20,to:24,place:"El Casco (casa)",hood:"El Casco"}],
+  "Bren Orlen":    [{from:0,to:7,place:"Los Prados (casa)",hood:"Los Prados"},{from:7,to:18,place:"Consultorio de Bren",hood:"Los Prados"},{from:18,to:21,place:"Parque",hood:"Los Prados"},{from:21,to:24,place:"Los Prados (casa)",hood:"Los Prados"}],
+  "Cela Miren":    [{from:0,to:7,place:"Los Prados (casa)",hood:"Los Prados"},{from:7,to:16,place:"Consultorio de Bren",hood:"Los Prados"},{from:16,to:20,place:"Parque",hood:"Los Prados"},{from:20,to:24,place:"Los Prados (casa)",hood:"Los Prados"}],
+  "Rael Nora":     [{from:0,to:8,place:"Los Prados (casa)",hood:"Los Prados"},{from:8,to:17,place:"Parque",hood:"Los Prados"},{from:17,to:21,place:"Plaza del Veloer",hood:"El Casco"},{from:21,to:24,place:"Los Prados (casa)",hood:"Los Prados"}],
+};
+
+function getNPCSlot(name,hour){
+  const s=NPC_SCHEDULES[name];if(!s)return null;
+  const h=((hour%24)+24)%24;
+  return s.find(x=>h>=x.from&&h<x.to)||s[s.length-1];
+}
+function getNPCsAtPlace(place,hour){
+  return Object.entries(NPC_SCHEDULES)
+    .filter(([,s])=>{const h=((hour%24)+24)%24;const x=s.find(x=>h>=x.from&&h<x.to)||s[s.length-1];return x&&x.place===place;})
+    .map(([n])=>n);
+}
+function resolveNavPlace(place,hood){
+  if(PLACE_ACTIONS[place])return{hood,place};
+  const nh=NEIGHBORHOODS[hood];return nh?{hood,place:nh.places[0]}:null;
+}
 const PROMO_SHIFTS=[5,10,15,20];
 
 const INTERACTION_CATS=[
@@ -303,7 +342,7 @@ function ActionBtn({action,onClick,disabled,accentColor}){
   return(
     <button onClick={onClick} disabled={disabled}
       onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}
-      style={{display:"flex",alignItems:"center",gap:"6px",padding:"7px 12px",borderRadius:"20px",fontSize:"12px",border:`1px solid ${hov?accentColor:"#3D2B1F"}`,background:hov?`${accentColor}18`:"transparent",color:hov?accentColor:"#8B7355",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.4:1,transition:"all 0.15s",whiteSpace:"nowrap"}}>
+      style={{display:"flex",alignItems:"center",gap:"6px",padding:"7px 13px",borderRadius:"20px",fontSize:"12px",border:`1px solid ${hov?accentColor:"#3D2B1F"}`,background:hov?`${accentColor}18`:"transparent",color:hov?accentColor:"#8B7355",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.4:1,transition:"all 0.15s",whiteSpace:"nowrap"}}>
       <span>{action.emoji}</span>{action.label}{action.cost&&<span style={{fontSize:"9px",color:"#5C4030"}}>L{action.cost}</span>}
     </button>
   );
@@ -316,25 +355,25 @@ function AccionesTab({loc,career,NEIGHBORHOODS,PLACE_ACTIONS,loading,dark,onGoTo
   const actions=PLACE_ACTIONS[loc.place]||[];
   return(
     <div style={{display:"flex",flexDirection:"column",gap:"10px",padding:"10px 14px",overflowY:"auto",height:"100%"}}>
-      <div style={{overflowX:"auto",display:"flex",gap:"8px",paddingBottom:"4px",flexShrink:0}}>
+      <div style={{overflowX:"auto",display:"flex",gap:"10px",paddingBottom:"4px",flexShrink:0}}>
         {Object.entries(NEIGHBORHOODS).map(([hood,d])=>(
           <div key={hood} style={{flexShrink:0}}>
-            <div style={{fontSize:"9px",color:loc.hood===hood?d.color:"#5C4030",textAlign:"center",marginBottom:"3px",letterSpacing:"0.05em"}}>{d.emoji} {hood}</div>
-            <div style={{display:"flex",gap:"3px"}}>
+            <div style={{fontSize:"11px",color:loc.hood===hood?d.color:"#5C4030",textAlign:"center",marginBottom:"4px",letterSpacing:"0.04em"}}>{d.emoji} {hood}</div>
+            <div style={{display:"flex",gap:"4px"}}>
               {d.places.map(p=>(
                 <button key={p} onClick={()=>onGoTo(hood,p)} disabled={loading}
-                  style={{padding:"3px 8px",fontSize:"9px",borderRadius:"12px",border:`1px solid ${loc.place===p?d.color:"#3D2B1F"}`,background:loc.place===p?`${d.color}22`:"transparent",color:loc.place===p?d.color:"#8B7355",cursor:loading?"not-allowed":"pointer",whiteSpace:"nowrap",transition:"all 0.12s"}}>
-                  {p.length>12?p.slice(0,11)+"…":p}
+                  style={{padding:"4px 10px",fontSize:"11px",borderRadius:"12px",border:`1px solid ${loc.place===p?d.color:"#3D2B1F"}`,background:loc.place===p?`${d.color}22`:"transparent",color:loc.place===p?d.color:"#8B7355",cursor:loading?"not-allowed":"pointer",whiteSpace:"nowrap",transition:"all 0.12s"}}>
+                  {p.length>14?p.slice(0,13)+"…":p}
                 </button>
               ))}
             </div>
           </div>
         ))}
       </div>
-      <div style={{display:"flex",flexWrap:"wrap",gap:"6px",flexShrink:0}}>
+      <div style={{display:"flex",flexWrap:"wrap",gap:"7px",flexShrink:0}}>
         {isAtWorkplace&&(
           <button onClick={onWork} disabled={loading}
-            style={{display:"flex",alignItems:"center",gap:"6px",padding:"7px 14px",borderRadius:"20px",fontSize:"12px",border:"1px solid #6B9E5E",background:"rgba(107,158,94,0.12)",color:"#6B9E5E",cursor:loading?"not-allowed":"pointer",fontWeight:600}}>
+            style={{display:"flex",alignItems:"center",gap:"6px",padding:"8px 16px",borderRadius:"20px",fontSize:"13px",border:"1px solid #6B9E5E",background:"rgba(107,158,94,0.12)",color:"#6B9E5E",cursor:loading?"not-allowed":"pointer",fontWeight:600}}>
             💼 Trabajar ({CAREERS[career.track].shiftH}h) → +L{CAREERS[career.track].wages[career.level]}
           </button>
         )}
@@ -802,7 +841,146 @@ function CharacterCard({twin,needs,money,gt,rels,family}){
 }
 
 // ═══════════════════ PAUSA MODAL ═══════════════════
-// ═══════════════════ SAVE / LOAD ═══════════════════
+// ═══════════════════ MAPA ═══════════════════
+const HOOD_MAP={
+  "La Vega":    {x:0, y:0, w:44,h:48},
+  "El Casco":   {x:46,y:0, w:54,h:48},
+  "Ribera":     {x:0, y:51,w:35,h:49},
+  "Veleta":     {x:37,y:51,w:40,h:49},
+  "Los Prados": {x:79,y:51,w:21,h:49},
+};
+
+function MapaTab({gt,rels,loc,loading,onGoTo}){
+  const [selNPC,setSelNPC]=useState(null);
+  const hour=((gt.hour%24)+24)%24;
+
+  // Group all NPCs by current hood
+  const byHood={};
+  Object.keys(NPC_SCHEDULES).forEach(name=>{
+    const slot=getNPCSlot(name,hour);
+    if(!slot)return;
+    if(!byHood[slot.hood])byHood[slot.hood]=[];
+    byHood[slot.hood].push({name,place:slot.place});
+  });
+
+  const selSlot=selNPC?getNPCSlot(selNPC,hour):null;
+  const selSched=selNPC?NPC_SCHEDULES[selNPC]:null;
+  const isKnown=name=>!!rels[name];
+
+  function timeLabel(h){return`${h.toString().padStart(2,"0")}:00`;}
+
+  return(
+    <div style={{display:"flex",height:"100%",overflow:"hidden"}}>
+      {/* MAP */}
+      <div style={{flex:1,padding:"8px",position:"relative",overflow:"hidden"}}>
+        <div style={{fontSize:"9px",color:"#2C1F14",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"6px"}}>
+          {toTimeStr(gt.hour)} · Día {gt.day} · {MONTHS[gt.monthIdx]}
+        </div>
+        <div style={{position:"relative",width:"100%",height:"calc(100% - 22px)"}}>
+          {Object.entries(HOOD_MAP).map(([hood,pos])=>{
+            const color=(NEIGHBORHOODS[hood]||{}).color||"#3D2B1F";
+            const npcsHere=byHood[hood]||[];
+            const isHere=loc.hood===hood;
+            return(
+              <div key={hood} style={{
+                position:"absolute",left:`${pos.x}%`,top:`${pos.y}%`,
+                width:`${pos.w-2}%`,height:`${pos.h-4}%`,
+                background:`${color}0E`,
+                border:`1px solid ${color}${isHere?"77":"22"}`,
+                borderRadius:"8px",padding:"5px 6px",overflow:"hidden",
+                boxShadow:isHere?`inset 0 0 12px ${color}18`:"none",
+                transition:"border-color 0.3s",
+              }}>
+                <div style={{fontSize:"9px",color:`${color}88`,fontWeight:600,letterSpacing:"0.04em",marginBottom:"4px",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>
+                  {NEIGHBORHOODS[hood]?.emoji} {hood}
+                </div>
+                <div style={{display:"flex",flexWrap:"wrap",gap:"3px"}}>
+                  {npcsHere.map(({name})=>{
+                    const known=isKnown(name);
+                    const c=NPC_HOOD_COLOR[name]||color;
+                    const isSel=selNPC===name;
+                    return(
+                      <button key={name} onClick={()=>setSelNPC(isSel?null:name)} title={name}
+                        style={{width:"20px",height:"20px",borderRadius:"50%",padding:0,flexShrink:0,
+                          background:known?`${c}25`:"#0F0A06",
+                          border:`2px solid ${isSel?"#D4A853":known?c:"#2C1F14"}`,
+                          color:known?c:"#2C1F14",fontSize:"9px",fontWeight:700,
+                          cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",
+                          boxShadow:isSel?`0 0 6px ${c}60`:"none",
+                          transition:"all 0.15s",
+                        }}>
+                        {name.charAt(0)}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* DETAIL */}
+      <div style={{width:"168px",borderLeft:"1px solid #1A1208",display:"flex",flexDirection:"column",overflow:"hidden"}}>
+        {!selNPC&&(
+          <div style={{padding:"12px",color:"#2C1F14",fontSize:"10px",fontStyle:"italic",textAlign:"center",marginTop:"12px",lineHeight:"1.5"}}>
+            Tocá un punto en el mapa para ver el horario de ese Twin
+          </div>
+        )}
+        {selNPC&&selSlot&&(
+          <>
+            <div style={{padding:"10px",borderBottom:"1px solid #1A1208",display:"flex",alignItems:"center",gap:"8px",flexShrink:0}}>
+              <NPCAvatar name={selNPC} size={30}/>
+              <div style={{flex:1,overflow:"hidden"}}>
+                <div style={{fontSize:"11px",color:"#A08060",fontWeight:600,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{selNPC}</div>
+                <div style={{fontSize:"9px",color:"#3D2B1F",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{NPC_DESC[selNPC]||""}</div>
+              </div>
+            </div>
+
+            <div style={{padding:"8px 10px",borderBottom:"1px solid #1A1208",flexShrink:0}}>
+              <div style={{fontSize:"8px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>Ahora</div>
+              <div style={{fontSize:"11px",color:"#D4A853",fontWeight:600}}>{selSlot.place}</div>
+              <div style={{fontSize:"9px",color:"#5C4030"}}>{selSlot.hood}</div>
+            </div>
+
+            <div style={{flex:1,overflowY:"auto",padding:"8px 10px"}}>
+              <div style={{fontSize:"8px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Horario de hoy</div>
+              {selSched?.map((slot,i)=>{
+                const isCur=hour>=slot.from&&hour<slot.to;
+                const color=(NEIGHBORHOODS[slot.hood]||{}).color||"#3D2B1F";
+                return(
+                  <div key={i} style={{
+                    display:"flex",alignItems:"flex-start",gap:"6px",
+                    padding:"4px 6px",borderRadius:"5px",marginBottom:"2px",
+                    background:isCur?"rgba(212,168,83,0.07)":"transparent",
+                    border:`1px solid ${isCur?"rgba(212,168,83,0.2)":"transparent"}`,
+                  }}>
+                    <div style={{width:"3px",height:"100%",minHeight:"28px",borderRadius:"2px",background:isCur?"#D4A853":color+"44",flexShrink:0,marginTop:"2px"}}/>
+                    <div style={{flex:1}}>
+                      <div style={{fontSize:"8px",color:isCur?"#D4A853":"#3D2B1F"}}>{timeLabel(slot.from)} — {timeLabel(slot.to===24?0:slot.to)}</div>
+                      <div style={{fontSize:"10px",color:isCur?"#A08060":"#5C4030",fontWeight:isCur?600:400,lineHeight:"1.2"}}>{slot.place}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {(()=>{const nav=resolveNavPlace(selSlot.place,selSlot.hood);return nav&&(
+              <div style={{padding:"8px 10px",borderTop:"1px solid #1A1208",flexShrink:0}}>
+                <button onClick={()=>{if(!loading){onGoTo(nav.hood,nav.place);setSelNPC(null);}}} disabled={loading}
+                  style={{width:"100%",padding:"7px",borderRadius:"7px",border:"1px solid #3D2B1F",background:"transparent",color:"#D4A853",fontSize:"11px",cursor:loading?"not-allowed":"pointer",fontWeight:600}}>
+                  Ir a encontrarlo/a →
+                </button>
+              </div>
+            );})()}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
 const SAVE_KEY="inbetweens_s_";
 const AUTO_KEY="inbetweens_auto";
 function buildSave(twin,needs,money,gt,loc,rels,career,family,inventory,log){
@@ -1233,9 +1411,9 @@ export default function InbetweensGame(){
   if(phase==="creation")return<CreationScreen onStart={handleStart} onLoad={loadFromSlot}/>;
 
   const hoodColor=(NEIGHBORHOODS[loc.hood]||{}).color||"#D4A853";
-  const TABS=[{id:"acciones",label:"Acciones",emoji:"🎮"},{id:"social",label:"Social",emoji:"💬"},{id:"trabajo",label:"Trabajo",emoji:"💼"},{id:"inventario",label:"Inventario",emoji:"📦"},{id:"calendario",label:"Calendario",emoji:"📅"},{id:"diario",label:"Diario",emoji:"📖"}];
+  const TABS=[{id:"acciones",label:"Acciones",emoji:"🎮"},{id:"social",label:"Social",emoji:"💬"},{id:"trabajo",label:"Trabajo",emoji:"💼"},{id:"inventario",label:"Inventario",emoji:"📦"},{id:"mapa",label:"Mapa",emoji:"🗺"},{id:"diario",label:"Diario",emoji:"📖"}];
   const currentEvent=CALENDAR_EVENTS[gt.monthIdx];
-  const npcsHere=(NPC_AT_PLACE[loc.place]||[]).filter(n=>rels[n]);
+  const npcsHere=(getNPCsAtPlace(loc.place,gt.hour)||[]).filter(n=>rels[n]);
 
   return(
     <div style={{display:"flex",flexDirection:"column",height:"100vh",background:"#0F0A06",fontFamily:"'DM Sans',sans-serif",color:"#EDE0CC",overflow:"hidden"}}>
@@ -1296,13 +1474,13 @@ export default function InbetweensGame(){
       </div>
 
       {/* BOTTOM: tabs + content */}
-      <div style={{borderTop:"1px solid #1A1208",background:"#0D0905",flexShrink:0,height:"240px",display:"flex",flexDirection:"column"}}>
+      <div style={{borderTop:"1px solid #1A1208",background:"#0D0905",flexShrink:0,height:"320px",display:"flex",flexDirection:"column"}}>
         {/* Tab bar */}
-        <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0,height:"42px"}}>
+        <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0,height:"52px"}}>
           {TABS.map(t=>(
-            <button key={t.id} onClick={()=>setActiveTab(t.id)} style={{flex:1,border:"none",borderBottom:activeTab===t.id?`2px solid ${hoodColor}`:"2px solid transparent",background:"transparent",color:activeTab===t.id?hoodColor:"#3D2B1F",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"1px",padding:"4px 2px",transition:"color 0.15s"}}>
-              <span style={{fontSize:"12px"}}>{t.emoji}</span>
-              <span style={{fontSize:"8px",letterSpacing:"0.05em",textTransform:"uppercase"}}>{t.label}</span>
+            <button key={t.id} onClick={()=>setActiveTab(t.id)} style={{flex:1,border:"none",borderBottom:activeTab===t.id?`2px solid ${hoodColor}`:"2px solid transparent",background:"transparent",color:activeTab===t.id?hoodColor:"#3D2B1F",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"2px",padding:"4px 2px",transition:"color 0.15s"}}>
+              <span style={{fontSize:"16px"}}>{t.emoji}</span>
+              <span style={{fontSize:"10px",letterSpacing:"0.04em",textTransform:"uppercase"}}>{t.label}</span>
             </button>
           ))}
         </div>
@@ -1312,7 +1490,7 @@ export default function InbetweensGame(){
           {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={true} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract}/>}
           {activeTab==="trabajo"&&<TrabajoTabContent career={career} loc={loc} dark={true} loading={loading} onApply={handleApplyJob} onWork={handleWork}/>}
           {activeTab==="inventario"&&<InventarioTab inventory={inventory} onUseItem={handleUseItem}/>}
-          {activeTab==="calendario"&&<CalendarioTab gt={gt}/>}
+          {activeTab==="mapa"&&<MapaTab gt={gt} rels={rels} loc={loc} loading={loading} onGoTo={handleGoTo}/>}
           {activeTab==="diario"&&<DiarioTab log={log} gt={gt}/>}
         </div>
       </div>
