@@ -199,17 +199,249 @@ const N = {
   "age:50": ["Cincuenta años. Las estaciones ya no te sorprenden. Ese conocimiento tiene su propio peso."],
   "age:60": ["Sesenta años. La ciudad te vio crecer y vos la viste cambiar. Los Twins jóvenes a veces te preguntan cosas como si supieras las respuestas. A veces las sabés."],
   "age:70": ["Setenta años en Veloria. Hay muy poca gente que te conoció cuando llegaste. Eso tiene algo de soledad y algo de libertad."],
+
+  // ── Transiciones de etapa (nuevo sistema) ──
+  "stage:adulto":  ["Algo cambió en cómo Veloria te mira. No de golpe — fue pasando. Sos Adulto/a ya. El barrio te conoce. Vos lo conocés. Hay algo que pesa y algo que libera en eso al mismo tiempo."],
+  "stage:anciano": ["Los últimos días tienen una luz diferente. Más lenta. Más clara. Anciano/a en Veloria — y eso, descubrís, también es algo que se lleva con dignidad."],
   "death":  ["El Lago Miren está quieto esta mañana, más de lo habitual. Veloria se ve desde acá exactamente como la primera vez.\n\nHay una palabra en Twinés que no tiene traducción exacta: *mirenal*. Lo que el lago recuerda. Eso es lo que queda de cada Twin que vivió en esta ciudad."],
   "housing:upgrade":   ["El nuevo espacio tiene esa sensación de las cosas que te costaron algo: más real, más tuyo."],
   "housing:furniture": ["El objeto nuevo ocupa su lugar como si siempre hubiera estado ahí. Eso es señal de que elegiste bien."],
+
+  // ── LA VEGA NUEVA ──
+  "terr:amanecer":  ["La terraza del edificio antes del Veloer. Veloria desde acá es solo tejados y el Lago Miren al fondo con esa luz particular que viene antes de que el día arranque. Un buen lugar para empezar sin que nadie te vea todavía."],
+  "terr:escribir":  ["Escribís o dibujás o hacés lo que sea que necesitás hacer cuando querés espacio y silencio. La terraza lo da sin pedirte nada a cambio.","Dos horas en la terraza con lo que estabas haciendo. El resultado no es perfecto. Es tuyo, que es más que perfecto."],
+  "terr:estrellas": ["El cielo de Veloria tiene algo que la mayoría de los cielos no tienen: se puede leer. Las constelaciones que conocés y las que no. Buscás las que ya sabés y te quedás mirando las otras."],
+  "terr:huerto":    ["El pequeño huerto de la terraza creció más de lo que esperabas. Le agregás algo, lo regás, te quedás mirando cómo está. Hay una satisfacción muy específica en esto que no sabés nombrar del todo bien."],
+  "tienda:basicos": ["Comprás lo necesario en la tienda de La Vega. El dueño recuerda lo que compraste la última vez. En Veloria eso es normal: es una ciudad que presta atención."],
+  "tienda:ropa":    ["Mirás la ropa sin comprar nada. Hay algo en los tejidos de Veloria — más gruesos, más reales — que los diferencia de lo que conocías antes de llegar."],
+  "tienda:charlar": ["El dueño de la tienda tiene esa sabiduría práctica de quien lleva años atendiendo a las mismas personas: sabe cuándo hablar y cuándo no. Hoy habla. Vale la pena escuchar."],
+  "jardin:plantar": ["Metés las manos en la tierra del Jardín Comunitario. Hay algo físico y honesto en eso: poner algo en el suelo y esperar que crezca. Veloria entiende esa paciencia mejor que la mayoría de los lugares."],
+  "jardin:cosechar":["Lo que plantaste creció. Lo cosechás con más satisfacción de la que esperabas. Funciona así: uno pone algo sin calcular bien cuánto va a valer, y lo que vale es más de lo que calculó."],
+  "jardin:pasear":  ["El Jardín Comunitario a media mañana. Plantas de todos los vecinos mezcladas sin orden aparente. El resultado es más bonito que cualquier jardín planeado.","Un rato entre las plantas sin hacer mucho. Los Mirenos tienen ese efecto: están quietos y te contagian."],
+  "pan:comprar":    ["El Pan Velin recién horneado todavía está tibio cuando lo ponés en la mochila. Hay pocas cosas mejores que esta, específicamente, en Veloria."],
+  "pan:desayuno":   ["Desayuno en la Panadería Velin. El pan, algo untado, una bebida caliente. Los vecinos de La Vega pasan y algunos se quedan. Veloria en la mañana."],
+  "pan:ver_hacer":  ["Te quedás un rato mirando cómo amasan. La panadera trabaja con la concentración de quien hace lo mismo hace veinte años y todavía le importa hacerlo bien."],
+  "estudio:pintar": ["El Estudio de Arte de La Vega tiene esa luz norteña que los pintores buscan. Trabajás un par de horas y cuando parás hay algo en la tela que no tenía nombre cuando empezaste."],
+  "estudio:ver":    ["Recorrés lo que hicieron los otros. Hay un cuadro que te molesta un poco — no porque sea malo. Porque es muy bueno y no sabés bien cómo lo hicieron."],
+  "estudio:conocer":["Conocés a alguien en el Estudio. El tipo de conversación que ocurre solo entre gente que hace cosas: directa, sin presentaciones formales.", "Dos artistas mirando el trabajo del otro sin decirse demasiado. Eso también es una conversación."],
+  "estudio:tecnica":["Tres horas practicando algo específico. No sale perfecto. Sale mejor. Eso es suficiente para hoy."],
+  "bar:lumaven":    ["El Lumaven joven del Bar tiene ese sabor que solo tiene cuando lo tomás en el lugar indicado. La tarde se estira un poco hacia algo que no tenía nombre antes."],
+  "bar:musica":     ["Hay música en vivo. No es el tipo que se escucha — es el tipo que se siente en el pecho antes de que la cabeza lo procese. Veloria tiene eso a ciertas horas."],
+  "bar:conocer":    ["El Bar Lumaven de noche es el mejor lugar de La Vega para conocer gente. No porque sea el más concurrido: sino porque la gente que va tiene algo que contar."],
+  "bar:mirone":     ["El Mirone es el juego de cartas de Veloria. Las reglas son simples; la estrategia, no tanto. Jugás dos partidas. Perdés las dos. Aprendés algo de todas formas."],
+  "merc:unico":     ["El Mercadillo de La Vega vende cosas que no encontrás en otro lado. Algunas tienen historia, otras son curiosidades. Te llevás algo pequeño que no sabías que necesitabas."],
+  "merc:frescos":   ["Los productos frescos del Mercadillo vienen directos de Los Prados y Los Prados sabe lo que hace. Comprás más de lo que planeabas."],
+  "merc:charlar":   ["Los vendedores del Mercadillo saben cosas de Veloria que no están escritas en ningún lado. Conversación de quince minutos que vale por horas."],
+  "gym:entrenar":   ["Entrenás. Es incómodo mientras pasa y hay algo que se asienta cuando termina. El tipo de cansancio que no pesa, que en realidad alivia."],
+  "gym:natacion":   ["La pileta del Gimnasio Miren tiene agua que dicen que viene del lago — o mezclada con él. Quizás es un cuento. Pero nadar acá tiene algo del Miren que no es fácil de explicar."],
+
+  // ── RESPUESTAS A AUTONOMÍA DE NPCS ──
+  "aut:aria_in":      ["Aria entra y se sienta como si hubiera estado antes — con esa facilidad de la gente que no necesita permiso. Hablan del barrio, del café, de nada en particular. Cuando se va, el apartamento queda con algo que no tenía antes."],
+  "aut:aria_door":    ["Toman el café en la puerta. Es raro y también perfecto. Aria dice algo sobre La Vega que no habías pensado antes."],
+  "aut:aria_busy":    ["Le agradecés el gesto. Aria asiente como quien entiende perfectamente. '*Sora*', dice, y sube las escaleras."],
+  "aut:ciro_go":      ["Llegás y Ciro te espera en el fondo de los archivos. Tiene algo en la mano: un folio doblado. 'Nadie sabe que lo encontré', dice. La lista tiene trece nombres. El último, tachado con tinta roja. Abajo, en lápiz suave: *preguntale a Dora.*"],
+  "aut:ciro_tmr":     ["Le respondés que vas mañana. Ciro contesta con una sola palabra: *Bien.* Ese bien tiene un peso que no sabés cómo medir todavía."],
+  "aut:oren_go":      ["Llegás al Muelle cuando el Veloer recién empieza. Oren está parado mirando el lago. 'Esta tarde hay algo en el agua', dice. 'No siempre se puede ver. Hoy sí.' Te quedás mirando. No ves nada al principio. Después sí."],
+  "aut:oren_tmr":     ["Le decís que mañana. Oren asiente. 'Va a estar igual mañana', dice. Quizás."],
+  "aut:luma_bajar":   ["Bajás y Luma sigue tocando sin mirarte. Terminás sentado/a en el cordón de la vereda escuchando hasta que la canción se acaba. 'Era para vos', dice. No explica más."],
+  "aut:luma_ventana": ["Abrís la ventana. Luma levanta la vista y sonríe. Sigue tocando. Una canción que no reconocés pero que suena como si ya la hubieras escuchado antes."],
+  "aut:elowen_leer":  ["Abrís el libro. Las primeras páginas hablan de Veloria como si fuera un lugar que existió antes de que nadie lo fundara. En el capítulo tres hay un nombre: *Vélan Orlen*. Al lado, una nota al margen con letra de Elowen: *Preguntá quién era antes de preguntar qué pasó.*"],
+  "aut:elowen_ir":    ["Elowen te abre la puerta antes de que golpées. 'Sabía que ibas a venir', dice. La casa huele a papel viejo y especias Mireno. Tiene el libro abierto en la mesa, en una página que no querés leer de pie: hay una carta del decimotercero fundador dirigida al lago."],
+  "aut:soren_ir":     ["Soren saca el libro de detrás del mostrador sin que le preguntes. La tapa no tiene título. 'Es el único ejemplar que queda en Veloria', dice. 'Lo tenía guardado para alguien que supiera qué hacer con él.' Te lo da sin precio."],
+  "aut:nela_ir":      ["El restaurante cerrado, solo Nela y vos y lo que cocinó. No está en el menú porque es algo que su madre hacía y que ella hace solo cuando quiere. Comés en silencio el plato más bueno que probaste en Veloria."],
+  "aut:bren_ir":      ["Bren hace el control con esa calma de médico que tiene. Todo bien, dice. Pero hay algo en cómo lo dice que hace que te preguntes si 'todo bien' tiene un límite que todavía no encontraste."],
+  "aut:aldric_ir":    ["Aldric te espera en el banco de la Plaza con dos tazas de Té Miren. 'Hay algo que creo que ya estás listo para saber', dice. Y te lo cuenta. No todo — todavía no. Pero suficiente para que el mundo de Veloria cambie de forma, levemente, en algo que no podés deshacer."],
+
+  // ── Taller Cerámica ──
+  "cerc:moldear":  ["Trabajás con la arcilla como si el material supiera adónde tiene que ir. No siempre. Pero hoy sí. Senia pasa y mira sin decir nada. Eso, en el taller, es el mejor elogio posible."],
+  "cerc:ver":      ["Los trabajos de los otros en el taller son una clase sin palabras. Hay una pieza en el rincón que no termina de parecerse a nada conocido — eso le da algo a la tuya."],
+  "cerc:torno":    ["El torno tiene su propia lógica. Le encontrás el ritmo a los veinte minutos. Cuando la pieza sale centrada, Senia asiente desde el otro lado del taller. Eso es suficiente."],
+  "cerc:senia":    ["Senia habla poco. Cuando habla, dice cosas que tardás en entender. Hoy dijo que la cerámica no es hacer objetos — es aprender a escuchar lo que el material ya es."],
+
+  // ── Cine Veloria ──
+  "cine:ver":      ["La película dura dos horas en las que Veloria desaparece. La sala tiene esa oscuridad particular que hace que todo lo que se siente adentro se sienta más. Salís diferente. No sabés si es el film o el haber estado quieto/a tanto tiempo."],
+  "cine:charlar":  ["Después de la película, alguien empieza a hablar en el hall. Terminás en esa conversación rara que solo ocurre cuando dos personas que no se conocen vieron la misma cosa al mismo tiempo."],
+  "cine:dormido":  ["Te quedás dormido/a a los cuarenta minutos. La película sigue. Te despertás en el crédito final. Alguien te dejó una nota en el asiento: *'Igual era buena.'*"],
+
+  // ── Taller de Música ──
+  "musica:tocar":  ["El taller de música tiene esa acústica que hace que todo suene mejor de lo que es. Tocás algo que no tenía nombre y le encontrás uno. Tres Twins más están en la sala. Nadie habla. No hace falta."],
+  "musica:clase":  ["La clase no es lo que esperabas. No enseñan técnica — enseñan a escuchar. Que es más difícil y más útil. Salís con el oído diferente."],
+  "musica:impro":  ["Improvisás. Hay momentos en que no sabés de dónde viene lo que sale. Después de la sesión, el tipo del rincón dice: 'La segunda parte era buena.' Solo la segunda parte. Es un cumplido honesto."],
+
+  // ── La Bodega ──
+  "bodega:probar": ["El Miren Seco tiene ese amarillo que se ve solo en las bodegas de La Vega. Tomás despacio. Alguien en la barra empieza a contar algo. La noche se estira sola."],
+  "bodega:historia":["El hombre que atiende lleva veinte años en La Vega. Dice que la ciudad cambió tres veces en ese tiempo. La primera fue cuando llegaron los de Ribera. La segunda cuando abrió el Teatro. La tercera no la nombra — solo levanta el vaso."],
+  "bodega:contar": ["Contás algo. No todo — pero algo verdadero. La persona que escucha no te conoce. Por eso es más fácil. La Bodega tiene esa cualidad: hace que las cosas parezcan confesables."],
+
+  // ── Micro Parque ──
+  "parque2:pasto": ["El parque micro de La Vega tiene ese pasto que no parece real — demasiado verde para estar entre edificios. Te tirás un rato. El ruido de la calle sigue ahí pero más lejos de lo que debería."],
+  "parque2:leer":  ["Leés al sol en el parque de La Vega. No terminás el capítulo. Te distraés viendo pasar los Twins. Veloria desde un banco de parque tiene una escala que desde ningún otro lugar."],
+  "parque2:pajaros":["Los Mirelos del parque micro son más confiados que los del lago. Uno se acerca a menos de un metro. Te quedás quieto/a más tiempo del necesario para no espantarlo."],
+
+  // ── Azotea Norte ──
+  "azotea2:lago":  ["Desde la Azotea Norte se ve el Lago Miren completo. No está en ningún folleto de Veloria. Solo los que viven en el edificio saben que existe esta vista. Esta tarde, el lago tiene ese color que no tiene nombre."],
+  "azotea2:dibujar":["Dibujás el horizonte. No te sale bien a la primera. A la tercera tiene algo. Guardás el papel doblado en el bolsillo. No sabés para qué, pero lo guardás."],
+  "azotea2:estrellas":["De noche, desde la Azotea Norte, Veloria se ve en miniatura. El Lago Miren brilla con la luna. Hay algo en el centro del agua que no es reflejo. Lo mirás un rato. Cuando parás de mirar, ya no está."],
+
+  // ── Feria Nocturna ──
+  "feria:unico":   ["Los feriantes de La Vega venden cosas que no tienen nombre claro. Encontrás algo que no sabés para qué es pero que querés igual. El feriante sonríe: 'Eso pasa con los mejores objetos.'"],
+  "feria:comida":  ["La comida de la Feria Nocturna viene de todos los barrios de Veloria. La preparación Ribera tiene especias que no encontrás en ningún otro lado. Dos porciones. No te arrepentís."],
+  "feria:feriantes":["El feriante que atiende el último puesto lleva años en la Feria pero nunca tiene el mismo puesto dos veces. Hoy está en el rincón. 'Me muevo cuando la ciudad me mueve', dice. No es una explicación. Es suficiente."],
+
+  // ── Centro Cívico ──
+  "civico:taller": ["El taller del Centro dura dos horas y toca un tema que no buscabas pero necesitabas. La persona que lo coordina dice algo sobre la memoria de los barrios que te queda dando vueltas el resto del día."],
+  "civico:ayuda":  ["Ofrecés dos horas de ayuda en el Centro. No es glamoroso. Es buscar sillas, acomodar cosas, escuchar. Pero cuando terminás hay algo que se siente como haber estado en el lugar correcto."],
+  "civico:tablon": ["El tablón del Centro Cívico es un mapa de lo que La Vega necesita y ofrece al mismo tiempo. Entre los avisos hay uno que lleva semanas: *'Se busca alguien que sepa escuchar. Pagan en Velorcitos.'* No tiene número de contacto."],
+  "civico:vecinos":["En el Centro conocés a alguien que vive en el mismo edificio hace tres años. Nunca cruzaron más de dos palabras. En veinte minutos de conversación cambia algo de eso."],
+
+  // ── Nuevas autonomías ──
+  "aut:lior_help":  ["Lior resolvió el problema solo/a. Pero queda el rastro de que preguntaste. Eso importa más de lo que parece."],
+  "aut:lior_ir":    ["Lior tiene el libro abierto y el problema subrayado en rojo. Mirás juntos durante media hora. No resolvés todo, pero desbloquean algo. Al final Lior dice: 'Gracias. No sé cómo devolver esto.' Vos decís: 'Tampoco hace falta.'"],
+  "aut:elia_ir":    ["La cosecha en el jardín. Elia coordina con esa eficiencia callada que tienen las personas que aprendieron a trabajar la tierra. Te enseña algo sobre cuándo las plantas están listas que no viene en ningún libro."],
+  "aut:elia_tmr":   ["Le decís que vas mañana. Elia asiente. 'Las plantas no apuran', dice."],
+  "aut:vael_ir":    ["El proyecto de Vael es exactamente lo que parece y también algo más. Trabajás juntos/as una tarde en el Estudio. Al final hay algo en la pared que no estaba antes y que los dos miraron un rato en silencio."],
+  "aut:vael_no":    ["Le decís que no podés ahora. Vael entiende. 'Cuando puedas', dice, y eso no cierra una puerta — la deja entornada."],
+  "aut:senia_taller":["Senia abre el taller solo para vos y otras dos personas. Dice que el horno tiene que estar caliente para una técnica que no enseña en los talleres normales. Tres horas. Cuando terminás, la pieza que salió no se parece a ninguna anterior. Senia la mira largo. 'Eso', dice. Nada más."],
+  "aut:feria_sobre":["El sobre no tiene remitente. Adentro hay un papel con una sola frase en Twinés: *Otreven mirenal kalei.* Lo que el lago recuerda, puede verse. No sabés quién lo dejó. El feriante que atiende el puesto no estaba ayer."],
 };
 
 // ═══════════════════ DATA ═══════════════════
-const TRAITS=[{id:"creativo",label:"Creativo",emoji:"🎨",desc:"Bonus en hobbies artísticos"},{id:"sociable",label:"Sociable",emoji:"💬",desc:"Relaciones crecen más rápido"},{id:"introvertido",label:"Introvertido",emoji:"📚",desc:"Se recarga solo, bonus en casa"},{id:"ambicioso",label:"Ambicioso",emoji:"⭐",desc:"Ascensos y carrera más rápidos"},{id:"empatico",label:"Empático",emoji:"💛",desc:"Relaciones más profundas"},{id:"hogareno",label:"Hogareño",emoji:"🏠",desc:"Bonus en cocina y decoración"},{id:"romantico",label:"Romántico",emoji:"🌸",desc:"El amor lo afecta profundamente"},{id:"aventurero",label:"Aventurero",emoji:"🌿",desc:"Bonus en exploración y naturaleza"}];
-const ASPIRATIONS=[{id:"familia",label:"Fundador de familia",emoji:"👨‍👩‍👧",desc:"Crear un hogar y un legado en Veloria"},{id:"artista",label:"Artista",emoji:"🎭",desc:"Dejar tu huella creativa en la ciudad"},{id:"empresario",label:"Empresario",emoji:"💼",desc:"Construir riqueza y reputación"},{id:"alma",label:"Alma del pueblo",emoji:"🌟",desc:"Conocer a cada Twin de Veloria"}];
-const NEIGHBORHOODS={"La Vega":{emoji:"🏙",color:"#7BB8B9",places:["Tu apartamento","Café de Aria"]},"El Casco":{emoji:"🏛",color:"#D4A853",places:["Plaza del Veloer","Librería de Soren"]},"Ribera":{emoji:"⛵",color:"#4A8B8C",places:["Muelle","Restaurante de Nela","Lago Miren"]},"Veleta":{emoji:"🎭",color:"#A08060",places:["Biblioteca","Teatro de Cael"]},"Los Prados":{emoji:"🌳",color:"#6B9E5E",places:["Parque","Consultorio de Bren"]}};
-const PLACE_ACTIONS={"Tu apartamento":[{id:"sleep",label:"Dormir",emoji:"🌙",time:8},{id:"cook",label:"Cocinar",emoji:"🍳",time:1},{id:"shower",label:"Ducharse",emoji:"🚿",time:0.5},{id:"bathroom",label:"Baño",emoji:"🚽",time:0.1},{id:"hobby",label:"Practicar hobbie",emoji:"🎨",time:2},{id:"rest",label:"Descansar",emoji:"🛋",time:1}],"Café de Aria":[{id:"coffee",label:"Tomar café",emoji:"☕",time:1,cost:3},{id:"chat_npc",label:"Charlar con Aria",emoji:"💬",time:1,npc:"Aria Ven"},{id:"read_cafe",label:"Leer",emoji:"📖",time:2},{id:"observe",label:"Observar el barrio",emoji:"👁",time:1}],"Plaza del Veloer":[{id:"walk_plaza",label:"Pasear",emoji:"🚶",time:1},{id:"market",label:"Explorar el mercado",emoji:"🛒",time:1},{id:"chat_npc",label:"Hablar con Aldric",emoji:"💬",time:1,npc:"Aldric Veloer"}],"Librería de Soren":[{id:"browse_books",label:"Explorar libros",emoji:"📚",time:1},{id:"chat_npc",label:"Hablar con Soren",emoji:"💬",time:1,npc:"Soren Lume"},{id:"buy_book",label:"Comprar un libro",emoji:"📘",time:0.5,cost:15}],"Muelle":[{id:"fish",label:"Pescar",emoji:"🎣",time:3},{id:"chat_npc",label:"Hablar con Oren",emoji:"⛵",time:1,npc:"Oren Mirende"},{id:"sit_lake",label:"Contemplar el lago",emoji:"🌊",time:1}],"Restaurante de Nela":[{id:"eat_dish",label:"Mirenpez al Veloer",emoji:"🐟",time:1.5,cost:35},{id:"chat_npc",label:"Charlar con Nela",emoji:"💬",time:1,npc:"Nela Mirende"},{id:"cena",label:"Cena completa",emoji:"🍷",time:2,cost:55}],"Lago Miren":[{id:"swim",label:"Nadar",emoji:"🏊",time:2},{id:"secret_lake",label:"Contarle un secreto al lago",emoji:"🌊",time:0.5},{id:"walk_shore",label:"Caminar por la orilla",emoji:"🌅",time:1}],"Biblioteca":[{id:"research",label:"Investigar historia de Veloria",emoji:"📜",time:2},{id:"chat_npc",label:"Hablar con Ciro",emoji:"📖",time:1,npc:"Ciro Orlen"},{id:"read_lib",label:"Leer en silencio",emoji:"📚",time:2}],"Teatro de Cael":[{id:"watch_show",label:"Ver una obra",emoji:"🎭",time:2.5,cost:25},{id:"chat_npc",label:"Hablar con Cael",emoji:"🎬",time:1,npc:"Cael Sorvei"}],"Parque":[{id:"walk_park",label:"Caminar entre los árboles",emoji:"🌳",time:1},{id:"picnic",label:"Picnic al sol",emoji:"🧺",time:2}],"Consultorio de Bren":[{id:"checkup",label:"Consulta médica",emoji:"⚕️",time:1,cost:40},{id:"chat_npc",label:"Conversar con Bren",emoji:"💊",time:1,npc:"Bren Orlen"}]};
-const BASE_EFFECTS={sleep:{sueno:70,hambre:-15,vejiga:-20},cook:{hambre:45,diversion:10},shower:{higiene:55},bathroom:{vejiga:90},rest:{sueno:15,diversion:8},hobby:{diversion:35},coffee:{hambre:8,diversion:12},read_cafe:{diversion:20},read_lib:{diversion:20},observe:{diversion:10,social:5},walk_plaza:{diversion:15,social:8},market:{diversion:10},browse_books:{diversion:15},buy_book:{diversion:10},fish:{diversion:25},sit_lake:{diversion:22},swim:{higiene:-10,diversion:35},secret_lake:{diversion:18,social:5},walk_shore:{diversion:18},eat_dish:{hambre:60,diversion:25,social:8},cena:{hambre:80,diversion:30,social:12},research:{diversion:15},watch_show:{diversion:40,social:15},walk_park:{diversion:15},picnic:{hambre:30,diversion:25},checkup:{},work_shift:{sueno:-20,social:-10,diversion:-15,higiene:-10},event_attend:{diversion:40,social:30,hambre:-10}};
+const TRAITS=[
+  // ── Mente ──
+  {id:"creativo",    cat:"Mente",    emoji:"🎨",label:"Creativo/a",   desc:"Ves el arte donde otros no lo ven.",           effectLabel:"+25% Arte",              bonus:{skillMult:{arte:1.25}}},
+  {id:"melancolico", cat:"Mente",    emoji:"🌑",label:"Melancólico/a",desc:"La profundidad de lo que sentís es tu fuerza.", effectLabel:"+15% Arte y Conocimiento",bonus:{skillMult:{arte:1.15,conocimiento:1.15},needDecayMult:{social:1.15}}},
+  {id:"curioso",     cat:"Mente",    emoji:"🔍",label:"Curioso/a",    desc:"Cada pregunta lleva a tres más.",               effectLabel:"+20% Conocimiento",       bonus:{skillMult:{conocimiento:1.2}}},
+  {id:"artesano",    cat:"Mente",    emoji:"🏺",label:"Artesano/a",   desc:"Las cosas hechas con las manos duran.",         effectLabel:"+15% Arte, +10% Naturaleza",bonus:{skillMult:{arte:1.15,naturaleza:1.1}}},
+  // ── Social ──
+  {id:"sociable",    cat:"Social",   emoji:"💬",label:"Sociable",     desc:"Los Twins de Veloria te recuerdan.",            effectLabel:"+20% Carisma",            bonus:{skillMult:{carisma:1.2},needDecayMult:{social:0.8}}},
+  {id:"empatico",    cat:"Social",   emoji:"💛",label:"Empático/a",   desc:"Sentís lo que sienten los demás.",              effectLabel:"Amistades +30%",          bonus:{friendshipMult:1.3}},
+  {id:"generoso",    cat:"Social",   emoji:"🤝",label:"Generoso/a",   desc:"Dar no te cuesta nada. Te viene solo.",         effectLabel:"+10% Carisma, amistades +15%",bonus:{skillMult:{carisma:1.1},friendshipMult:1.15}},
+  {id:"romantico",   cat:"Social",   emoji:"🌸",label:"Romántico/a",  desc:"El amor lo afecta todo, para bien o mal.",     effectLabel:"Romance más rápido y profundo",bonus:{romanceMult:1.4}},
+  // ── Espíritu ──
+  {id:"introvertido",cat:"Espíritu", emoji:"📚",label:"Introvertido/a",desc:"Cargás mejor cuando estás solo/a.",           effectLabel:"+20% Conocimiento, +10% Arte",bonus:{skillMult:{conocimiento:1.2,arte:1.1},needDecayMult:{social:1.2}}},
+  {id:"contemplativo",cat:"Espíritu",emoji:"🌊",label:"Contemplativo/a",desc:"Podés quedarte quieto/a más que nadie.",     effectLabel:"+15% Conocimiento",       bonus:{skillMult:{conocimiento:1.15},needDecayMult:{social:0.9,sueno:0.9}}},
+  {id:"sensible",    cat:"Espíritu", emoji:"🫧",label:"Sensible",     desc:"Lo que te llega, te llega de verdad.",          effectLabel:"Amistades más rápidas y frágiles",bonus:{friendshipMult:1.25,friendshipLossMult:1.25}},
+  {id:"noctambulo",  cat:"Espíritu", emoji:"🌙",label:"Noctámbulo/a", desc:"De noche Veloria te pertenece.",               effectLabel:"+20% XP nocturno",        bonus:{nightXPMult:1.2,needDecayMult:{sueno:0.85}}},
+  // ── Carácter ──
+  {id:"ambicioso",   cat:"Carácter", emoji:"⭐",label:"Ambicioso/a",  desc:"Sabés lo que querés y cómo llegar.",           effectLabel:"Carrera +25%",            bonus:{careerMult:1.25,skillMult:{carisma:1.1}}},
+  {id:"tenaz",       cat:"Carácter", emoji:"💪",label:"Tenaz",        desc:"Lo que empezás, lo terminás.",                 effectLabel:"Carrera +15%, necesidades más lentas",bonus:{careerMult:1.15,needDecayMult:{sueno:0.9,hambre:0.9}}},
+  {id:"hogareno",    cat:"Carácter", emoji:"🏠",label:"Hogareño/a",   desc:"Tu espacio es tu templo.",                     effectLabel:"+20% Cocina, hogar +20%", bonus:{skillMult:{cocina:1.2},homeMult:1.2}},
+  {id:"aventurero",  cat:"Carácter", emoji:"🌿",label:"Aventurero/a", desc:"El exterior siempre llama.",                   effectLabel:"+25% Naturaleza, +10% Pesca",bonus:{skillMult:{naturaleza:1.25,pesca:1.1}}},
+  // ── Naturaleza ──
+  {id:"cocinero_nato",cat:"Naturaleza",emoji:"🍳",label:"Cocinero/a nato",desc:"Tu cocina alimenta más que el cuerpo.",   effectLabel:"+40% Cocina, hambre más lento",bonus:{skillMult:{cocina:1.4},needDecayMult:{hambre:0.8}}},
+  {id:"pescador_alma",cat:"Naturaleza",emoji:"🎣",label:"Pescador/a de alma",desc:"El lago te entiende mejor que la gente.",effectLabel:"+40% Pesca",             bonus:{skillMult:{pesca:1.4,naturaleza:1.15}}},
+];
+
+const ASPIRATIONS=[
+  {id:"familia",   emoji:"👨‍👩‍👧",label:"Fundador de familia",  startAge:24,
+   desc:"Crear un hogar y un legado que dure más que vos en Veloria.",
+   milestones:[
+     {id:"m_conocer",  label:"Conocer a alguien",       check:(s)=>Object.values(s.rels).some(r=>r.friendship>=50)},
+     {id:"m_enamorar", label:"Enamorarse",               check:(s)=>["dating","engaged","married"].includes(s.family.romanticStatus)},
+     {id:"m_casar",    label:"Casarse en Veloria",       check:(s)=>s.family.romanticStatus==="married"},
+     {id:"m_hijo",     label:"Tener un hijo/a",          check:(s)=>s.family.children.length>0},
+     {id:"m_legado",   label:"Ver crecer a tu hijo/a",   check:(s)=>s.family.children.some(c=>["adolescente","adulto"].includes(getChildStage(s.day-c.birthDay||0)))},
+   ]},
+  {id:"artista",   emoji:"🎭",label:"Artista de Veloria",    startAge:20,
+   desc:"Dejar tu huella creativa en la ciudad para siempre.",
+   milestones:[
+     {id:"m_arte2",    label:"Arte nivel Aprendiz",       check:(s)=>getSkillLevel(s.skills.arte)>=1},
+     {id:"m_vender",   label:"Vender tu primera creación",check:(s)=>s.usedOnce.has("sell_art")},
+     {id:"m_exhibir",  label:"Exhibir en la Galería",     check:(s)=>s.usedOnce.has("exhibit")},
+     {id:"m_arte5",    label:"Arte nivel Maestro",        check:(s)=>getSkillLevel(s.skills.arte)>=4},
+     {id:"m_cael",     label:"Ser reconocido por Cael",   check:(s)=>(s.rels["Cael Sorvei"]?.friendship||0)>=60},
+   ]},
+  {id:"empresario",emoji:"💼",label:"Empresario/a",           startAge:28,
+   desc:"Construir riqueza y reputación en Veloria.",
+   milestones:[
+     {id:"m_trabajo",  label:"Conseguir un trabajo",      check:(s)=>!!s.career},
+     {id:"m_ascenso",  label:"Primer ascenso",            check:(s)=>s.career&&s.career.level>=1},
+     {id:"m_ahorro",   label:"Ahorrar 5000 Luces",        check:(s)=>s.money>=5000},
+     {id:"m_casa",     label:"Comprar casa propia",       check:(s)=>["casa_pequena","casa_grande"].includes(s.housing)},
+     {id:"m_cumbre",   label:"Llegar al tope de carrera", check:(s)=>s.career&&s.career.level>=3},
+   ]},
+  {id:"alma",      emoji:"🌟",label:"Alma del pueblo",        startAge:22,
+   desc:"Conocer a cada Twin de Veloria y ser conocido/a por todos.",
+   milestones:[
+     {id:"m_5twins",   label:"Conocer 5 Twins",           check:(s)=>Object.keys(s.rels).length>=5},
+     {id:"m_prof3",    label:"3 amistades de 40+",        check:(s)=>Object.values(s.rels).filter(r=>r.friendship>=40).length>=3},
+     {id:"m_12twins",  label:"Conocer 12 Twins",          check:(s)=>Object.keys(s.rels).length>=12},
+     {id:"m_carisma3", label:"Carisma nivel Competente",  check:(s)=>getSkillLevel(s.skills.carisma)>=2},
+     {id:"m_velista",  label:"Convertirse en Velista",    check:(s)=>s.usedOnce.has("velista")||getSkillLevel(s.skills.carisma)>=3},
+   ]},
+  {id:"sabio",     emoji:"📜",label:"Sabio/a de Otherwhen",   startAge:22,
+   desc:"Descubrir la verdad sobre Veloria y el decimotercer fundador.",
+   milestones:[
+     {id:"m_cono2",    label:"Conocimiento Aprendiz",     check:(s)=>getSkillLevel(s.skills.conocimiento)>=1},
+     {id:"m_13",       label:"Investigar el 13° fundador",check:(s)=>s.usedOnce.has("research_13")},
+     {id:"m_firma",    label:"Encontrar la firma de V.",  check:(s)=>s.usedOnce.has("research_13")&&(s.rels["Ciro Orlen"]?.friendship||0)>=30},
+     {id:"m_elowen",   label:"Visitar a Elowen",          check:(s)=>s.usedOnce.has("elowen_home")},
+     {id:"m_verdad",   label:"Descifrar el misterio",     check:(s)=>s.usedOnce.has("elowen_home")&&(s.rels["Elowen Sorvei"]?.friendship||0)>=60&&s.usedOnce.has("research_13")},
+   ]},
+  {id:"libre",     emoji:"🌊",label:"Alma libre",             startAge:21,
+   desc:"Sin un camino fijo. Veloria entera es tu mapa.",
+   milestones:[
+     {id:"m_10lug",    label:"Visitar 10 lugares",        check:(s)=>s.visitedPlaces&&s.visitedPlaces.size>=10},
+     {id:"m_3sk3",     label:"3 habilidades nivel III",   check:(s)=>Object.values(s.skills).filter(xp=>getSkillLevel(xp)>=2).length>=3},
+     {id:"m_6amig",    label:"6 amistades profundas",     check:(s)=>Object.values(s.rels).filter(r=>r.friendship>=40).length>=6},
+     {id:"m_5años",    label:"5 años en Veloria",         check:(s)=>s.day>=150},
+     {id:"m_libre",    label:"Encontrar tu lugar",        check:(s)=>["casa_pequena","casa_grande"].includes(s.housing)&&!!s.family.partner},
+   ]},
+];
+
+const ORIGINS=[
+  {id:"vega",   emoji:"🏙",label:"De La Vega",
+   lore:"Creciste en el barrio. Lo conocés de noche y de día. La Vega te formó con esa velocidad de los lugares que nunca terminan de inventarse a sí mismos.",
+   bonusLabel:"Carisma inicial · Ya conocés a Aria Ven",
+   bonus:{skills:{carisma:80},friendship:{"Aria Ven":25},
+   item:{name:"Llave vieja del edificio",emoji:"🗝",type:"key",desc:"La llave del apartamento familiar. Hay algo grabado en el metal que no podés leer bien.",qty:1}}},
+  {id:"ribera", emoji:"⛵",label:"De Ribera",
+   lore:"Creciste cerca del lago. El agua siempre estuvo ahí — como fondo de todo. Ribera forma gente que sabe esperar, y que lee el clima antes de que cambie.",
+   bonusLabel:"Pesca y Naturaleza inicial · Ya conocés a Oren Mirende",
+   bonus:{skills:{pesca:80,naturaleza:50},friendship:{"Oren Mirende":25},
+   item:{name:"Anzuelo antiguo",emoji:"🪝",type:"tool",desc:"El anzuelo que usó tu familia en el Lago Miren. Todavía funciona.",qty:1}}},
+  {id:"veleta", emoji:"🎭",label:"De Veleta",
+   lore:"El teatro, la biblioteca, los archivos. Creciste entre ideas y preguntas que nadie terminaba de responder del todo. Veleta te enseñó que eso también es una forma de aprender.",
+   bonusLabel:"Conocimiento y Arte inicial · Ya conocés a Soren Lume",
+   bonus:{skills:{conocimiento:80,arte:50},friendship:{"Soren Lume":25},
+   item:{name:"Cuaderno sin terminar",emoji:"📓",type:"book",desc:"Lleno de notas a mitad. Ideas que no terminaron. O sí, pero de otra forma.",qty:1}}},
+  {id:"prados", emoji:"🌳",label:"De Los Prados",
+   lore:"Espacio, árboles, gente que cuida. Un comienzo tranquilo, de los que no se olvidan. Los Prados es el barrio más silencioso de Veloria — y el silencio también es una forma de ser.",
+   bonusLabel:"Naturaleza inicial · Ya conocés a Bren Orlen",
+   bonus:{skills:{naturaleza:80},friendship:{"Bren Orlen":25},
+   item:{name:"Paquete de Té Miren",emoji:"🍵",type:"food",desc:"El té que tomaba tu familia. Hay quien dice que el Miren recuerda a quién lo toma.",useable:true,qty:3}}},
+];
+const NEIGHBORHOODS={"La Vega":{emoji:"🏙",color:"#7BB8B9",places:["Tu apartamento","Café de Aria","Terraza","Tienda de La Vega","Jardín Comunitario","Panadería Velin","Estudio de Arte","Bar Lumaven","Mercadillo","Gimnasio Miren","Taller Cerámica","Cine Veloria","Taller de Música","La Bodega","Micro Parque","Azotea Norte","Feria Nocturna","Centro Cívico"]},"El Casco":{emoji:"🏛",color:"#D4A853",places:["Plaza del Veloer","Librería de Soren"]},"Ribera":{emoji:"⛵",color:"#4A8B8C",places:["Muelle","Restaurante de Nela","Lago Miren"]},"Veleta":{emoji:"🎭",color:"#A08060",places:["Biblioteca","Teatro de Cael"]},"Los Prados":{emoji:"🌳",color:"#6B9E5E",places:["Parque","Consultorio de Bren"]}};
+const PLACE_ACTIONS={"Tu apartamento":[{id:"sleep",label:"Dormir",emoji:"🌙",time:8},{id:"cook",label:"Cocinar",emoji:"🍳",time:1},{id:"shower",label:"Ducharse",emoji:"🚿",time:0.5},{id:"bathroom",label:"Baño",emoji:"🚽",time:0.1},{id:"hobby",label:"Practicar hobbie",emoji:"🎨",time:2},{id:"rest",label:"Descansar",emoji:"🛋",time:1}],"Café de Aria":[{id:"coffee",label:"Tomar café",emoji:"☕",time:1,cost:3},{id:"chat_npc",label:"Charlar con Aria",emoji:"💬",time:1,npc:"Aria Ven"},{id:"read_cafe",label:"Leer",emoji:"📖",time:2},{id:"observe",label:"Observar el barrio",emoji:"👁",time:1}],"Terraza":[{id:"terr_amanecer",label:"Ver el amanecer",emoji:"🌅",time:1},{id:"terr_escribir",label:"Escribir o dibujar",emoji:"✍️",time:2},{id:"terr_estrellas",label:"Mirar las estrellas",emoji:"⭐",time:1},{id:"terr_huerto",label:"Cuidar el huerto",emoji:"🌿",time:0.5}],"Tienda de La Vega":[{id:"tienda_basicos",label:"Comprar básicos",emoji:"🛒",time:0.5,cost:15},{id:"tienda_ropa",label:"Mirar ropa",emoji:"👗",time:1},{id:"tienda_charlar",label:"Charlar con el dueño",emoji:"💬",time:1}],"Jardín Comunitario":[{id:"jardin_plantar",label:"Plantar algo",emoji:"🌱",time:2},{id:"jardin_cosechar",label:"Cosechar",emoji:"🥬",time:1},{id:"jardin_pasear",label:"Pasear entre las plantas",emoji:"🌸",time:1},{id:"chat_npc",label:"Hablar con Elia",emoji:"💬",time:1,npc:"Elia Orlen"}],"Panadería Velin":[{id:"pan_comprar",label:"Comprar Pan Velin",emoji:"🥐",time:0.3,cost:5},{id:"pan_desayuno",label:"Desayunar acá",emoji:"☕",time:1,cost:8},{id:"pan_ver_hacer",label:"Ver cómo hacen el pan",emoji:"👀",time:1}],"Estudio de Arte":[{id:"estudio_pintar",label:"Pintar",emoji:"🎨",time:2,cost:5},{id:"estudio_ver",label:"Ver el trabajo de otros",emoji:"🖼",time:1},{id:"estudio_conocer",label:"Conocer artistas",emoji:"💬",time:1},{id:"estudio_tecnica",label:"Practicar técnica",emoji:"✏️",time:3},{id:"chat_npc",label:"Hablar con Vael",emoji:"🎨",time:1,npc:"Vael Lumaren"}],"Bar Lumaven":[{id:"bar_lumaven",label:"Tomar un Lumaven",emoji:"🥂",time:1,cost:8},{id:"bar_musica",label:"Escuchar música en vivo",emoji:"🎵",time:2},{id:"bar_conocer",label:"Conocer gente",emoji:"💬",time:1},{id:"bar_mirone",label:"Jugar al Mirone",emoji:"🃏",time:1.5},{id:"chat_npc",label:"Hablar con Luma",emoji:"🎸",time:1,npc:"Luma Sorvei"}],"Mercadillo":[{id:"merc_unico",label:"Buscar objetos únicos",emoji:"🛍",time:1},{id:"merc_frescos",label:"Comprar frescos",emoji:"🥬",time:0.5,cost:12},{id:"merc_charlar",label:"Charlar con vendedores",emoji:"💬",time:1}],"Gimnasio Miren":[{id:"gym_entrenar",label:"Entrenar",emoji:"💪",time:1.5},{id:"gym_natacion",label:"Clases de natación",emoji:"🏊",time:2,cost:10}],
+"Taller Cerámica":[{id:"cerc_moldear",label:"Moldear arcilla",emoji:"🏺",time:2},{id:"cerc_ver",label:"Ver el trabajo de otros",emoji:"👁",time:1},{id:"cerc_torno",label:"Intentar el torno",emoji:"⭕",time:1.5},{id:"chat_npc",label:"Hablar con Senia",emoji:"🤝",time:1,npc:"Senia Vel"}],
+"Cine Veloria":[{id:"cine_ver",label:"Ver una película",emoji:"🎬",time:2.5,cost:20},{id:"cine_charlar",label:"Charlar en el hall",emoji:"💬",time:1},{id:"cine_dormido",label:"Quedarse dormido/a",emoji:"😴",time:2}],
+"Taller de Música":[{id:"musica_tocar",label:"Tocar junto a otros",emoji:"🎸",time:2},{id:"musica_clase",label:"Escuchar una clase",emoji:"🎵",time:1},{id:"musica_impro",label:"Improvisar",emoji:"🎶",time:1.5},{id:"chat_npc",label:"Hablar con Vael",emoji:"🎨",time:1,npc:"Vael Lumaren"}],
+"La Bodega":[{id:"bodega_probar",label:"Probar Miren Seco",emoji:"🍷",time:1,cost:15},{id:"bodega_historia",label:"Escuchar una historia",emoji:"👂",time:1},{id:"bodega_contar",label:"Contar tu historia",emoji:"💬",time:1},{id:"chat_npc",label:"Charlar con Lior",emoji:"🗣",time:1,npc:"Lior Veloer"}],
+"Micro Parque":[{id:"parque2_pasto",label:"Tirarse en el pasto",emoji:"🌱",time:1},{id:"parque2_leer",label:"Leer al sol",emoji:"📖",time:1.5},{id:"parque2_pajaros",label:"Observar los Mirelos",emoji:"🐦",time:0.5}],
+"Azotea Norte":[{id:"azotea2_lago",label:"Contemplar el lago",emoji:"🏔",time:1},{id:"azotea2_dibujar",label:"Dibujar el horizonte",emoji:"✏️",time:2},{id:"azotea2_estrellas",label:"Ver las estrellas",emoji:"🌟",time:1}],
+"Feria Nocturna":[{id:"feria_unico",label:"Buscar objetos únicos",emoji:"🛍",time:1},{id:"feria_comida",label:"Probar comida de feria",emoji:"🍢",time:0.5,cost:12},{id:"feria_feriantes",label:"Charlar con feriantes",emoji:"💬",time:1},{id:"chat_npc",label:"Encontrar a Luma",emoji:"🎸",time:1,npc:"Luma Sorvei"}],
+"Centro Cívico":[{id:"civico_taller",label:"Ir a un taller",emoji:"🧠",time:2},{id:"civico_ayuda",label:"Ofrecer ayuda",emoji:"🤲",time:2},{id:"civico_tablon",label:"Ver el tablón",emoji:"📋",time:0.5},{id:"civico_vecinos",label:"Conocer vecinos",emoji:"💬",time:1}],"Plaza del Veloer":[{id:"walk_plaza",label:"Pasear",emoji:"🚶",time:1},{id:"market",label:"Explorar el mercado",emoji:"🛒",time:1},{id:"chat_npc",label:"Hablar con Aldric",emoji:"💬",time:1,npc:"Aldric Veloer"}],"Librería de Soren":[{id:"browse_books",label:"Explorar libros",emoji:"📚",time:1},{id:"chat_npc",label:"Hablar con Soren",emoji:"💬",time:1,npc:"Soren Lume"},{id:"buy_book",label:"Comprar un libro",emoji:"📘",time:0.5,cost:15}],"Muelle":[{id:"fish",label:"Pescar",emoji:"🎣",time:3},{id:"chat_npc",label:"Hablar con Oren",emoji:"⛵",time:1,npc:"Oren Mirende"},{id:"sit_lake",label:"Contemplar el lago",emoji:"🌊",time:1}],"Restaurante de Nela":[{id:"eat_dish",label:"Mirenpez al Veloer",emoji:"🐟",time:1.5,cost:35},{id:"chat_npc",label:"Charlar con Nela",emoji:"💬",time:1,npc:"Nela Mirende"},{id:"cena",label:"Cena completa",emoji:"🍷",time:2,cost:55}],"Lago Miren":[{id:"swim",label:"Nadar",emoji:"🏊",time:2},{id:"secret_lake",label:"Contarle un secreto al lago",emoji:"🌊",time:0.5},{id:"walk_shore",label:"Caminar por la orilla",emoji:"🌅",time:1}],"Biblioteca":[{id:"research",label:"Investigar historia de Veloria",emoji:"📜",time:2},{id:"chat_npc",label:"Hablar con Ciro",emoji:"📖",time:1,npc:"Ciro Orlen"},{id:"read_lib",label:"Leer en silencio",emoji:"📚",time:2}],"Teatro de Cael":[{id:"watch_show",label:"Ver una obra",emoji:"🎭",time:2.5,cost:25},{id:"chat_npc",label:"Hablar con Cael",emoji:"🎬",time:1,npc:"Cael Sorvei"}],"Parque":[{id:"walk_park",label:"Caminar entre los árboles",emoji:"🌳",time:1},{id:"picnic",label:"Picnic al sol",emoji:"🧺",time:2}],"Consultorio de Bren":[{id:"checkup",label:"Consulta médica",emoji:"⚕️",time:1,cost:40},{id:"chat_npc",label:"Conversar con Bren",emoji:"💊",time:1,npc:"Bren Orlen"}]};
+const BASE_EFFECTS={sleep:{sueno:70,hambre:-15,vejiga:-20},cook:{hambre:45,diversion:10},shower:{higiene:55},bathroom:{vejiga:90},rest:{sueno:15,diversion:8},hobby:{diversion:35},coffee:{hambre:8,diversion:12},read_cafe:{diversion:20},read_lib:{diversion:20},observe:{diversion:10,social:5},walk_plaza:{diversion:15,social:8},market:{diversion:10},browse_books:{diversion:15},buy_book:{diversion:10},fish:{diversion:25},sit_lake:{diversion:22},swim:{higiene:-10,diversion:35},secret_lake:{diversion:18,social:5},walk_shore:{diversion:18},eat_dish:{hambre:60,diversion:25,social:8},cena:{hambre:80,diversion:30,social:12},research:{diversion:15},watch_show:{diversion:40,social:15},walk_park:{diversion:15},picnic:{hambre:30,diversion:25},checkup:{},work_shift:{sueno:-20,social:-10,diversion:-15,higiene:-10},event_attend:{diversion:40,social:30,hambre:-10},
+// ── Nuevos ──
+cerc_moldear:{diversion:30},cerc_ver:{diversion:15},cerc_torno:{diversion:25},
+cine_ver:{diversion:40,social:5},cine_charlar:{social:18,diversion:8},cine_dormido:{sueno:20,diversion:15},
+musica_tocar:{diversion:30,social:10},musica_clase:{diversion:20},musica_impro:{diversion:35},
+bodega_probar:{social:12,diversion:15},bodega_historia:{social:18,diversion:10},bodega_contar:{social:22,diversion:12},
+parque2_pasto:{sueno:8,diversion:20},parque2_leer:{diversion:18},parque2_pajaros:{diversion:15},
+azotea2_lago:{diversion:22},azotea2_dibujar:{diversion:28},azotea2_estrellas:{diversion:20},
+feria_unico:{diversion:18},feria_comida:{hambre:25,diversion:15},feria_feriantes:{social:15,diversion:10},
+civico_taller:{diversion:15,social:10},civico_ayuda:{social:20,diversion:10},civico_tablon:{diversion:8},civico_vecinos:{social:22,diversion:8},
+// ── Gym ──
+gym_entrenar:{higiene:-15,diversion:20,sueno:-5},gym_natacion:{higiene:-10,diversion:30},
+// ── La Vega existentes ──
+terr_amanecer:{diversion:20},terr_escribir:{diversion:25},terr_estrellas:{diversion:20},terr_huerto:{diversion:12,naturaleza_boost:true},
+tienda_basicos:{hambre:10},tienda_ropa:{diversion:12},tienda_charlar:{social:12,diversion:8},
+jardin_plantar:{diversion:20},jardin_cosechar:{hambre:15,diversion:18},jardin_pasear:{diversion:15},
+pan_comprar:{hambre:20},pan_desayuno:{hambre:35,diversion:18,social:8},pan_ver_hacer:{diversion:12},
+estudio_pintar:{diversion:30},estudio_ver:{diversion:18},estudio_conocer:{social:15,diversion:8},estudio_tecnica:{diversion:25},
+bar_lumaven:{social:18,diversion:25},bar_musica:{diversion:30,social:10},bar_conocer:{social:22,diversion:12},bar_mirone:{social:20,diversion:20},
+merc_unico:{diversion:15},merc_frescos:{hambre:15},merc_charlar:{social:12},
+};
 const NEED_CFG={hambre:{label:"Hambre",emoji:"🍽",color:"#E8943A"},sueno:{label:"Sueño",emoji:"😴",color:"#7B8CDE"},higiene:{label:"Higiene",emoji:"🧼",color:"#4AB8C1"},social:{label:"Social",emoji:"💬",color:"#E87B9E"},diversion:{label:"Diversión",emoji:"🎮",color:"#A67BD6"},vejiga:{label:"Vejiga",emoji:"💧",color:"#6BC47E"}};
 const MONTHS=["Nevelin","Mirenal","Nomeven","Mirenable","Velorfesta","Solein","Velcora","Memoveli","Clubven","Noctuvel","Mireneis","Nevelin II"];
 const SEASONS=["🌸 Primavera","🌸 Primavera","🌸 Primavera","☀️ Verano","☀️ Verano","☀️ Verano","🍂 Otoño","🍂 Otoño","🍂 Otoño","❄️ Invierno","❄️ Invierno","❄️ Invierno"];
@@ -217,12 +449,12 @@ const CAREERS={arte:{label:"Arte",emoji:"🎨",places:["Teatro de Cael","Bibliot
 const ROMANCEABLE=new Set(["Aria Ven","Lior Veloer","Oren Mirende","Nela Mirende","Riven Lumaren","Vael Lumaren","Cael Sorvei","Niven Sorvei","Luma Sorvei","Soren Lume","Ciro Orlen","Elia Orlen","Iva Norven","Cela Miren","Tev Solan","Dael Miru","Mira Belven","Rael Nora","Leva Sorin"]);
 const CALENDAR_EVENTS={0:{name:"Día del Primer Brote",emoji:"🌱",desc:"Plantar algo hoy. La tradición lo dice."},1:{name:"El Mercado Miren",emoji:"⛵",desc:"El mercado flotante abre sobre el lago."},2:{name:"La Noche de los Nombres",emoji:"💌",desc:"Se revelan apodos cariñosos a personas queridas."},3:{name:"Las Aguas Abiertas",emoji:"🏊",desc:"Gran celebración en Ribera. Primer día de natación."},4:{name:"Velorfesta",emoji:"✨",desc:"La celebración más importante. Tres días de música."},5:{name:"La Noche Larga",emoji:"⭐",desc:"Los Twins hacen promesas bajo las estrellas."},6:{name:"La Cosecha",emoji:"🌾",desc:"Festival en Las Llanuras Doradas."},7:{name:"El Día del Recuerdo",emoji:"🌊",desc:"Flores en el lago para los Twins que ya no están."},8:{name:"La Feria de los Clubs",emoji:"🎪",desc:"Todos los clubs de Veloria abren sus puertas."},9:{name:"Los Nocturnos",emoji:"🕯",desc:"Reuniones íntimas en casa. El frío une."},10:{name:"El Hielo del Miren",emoji:"⛸",desc:"El lago se congela. Los Twins patinen."},11:{name:"La Víspera del Brote",emoji:"🔥",desc:"Quemar lo viejo, guardar lo nuevo."}};
 const NPC_TRAITS_MAP={"Aria Ven":["pragmática","acogedora","observadora"],"Lior Veloer":["rebelde","curioso","libre"],"Oren Mirende":["aventurero","romántico","libre"],"Nela Mirende":["cálido","fuerte","protector"],"Riven Lumaren":["encantador","generoso","soñador"],"Vael Lumaren":["creativo","impulsivo","apasionado"],"Cael Sorvei":["dramático","apasionado","perfeccionista"],"Niven Sorvei":["intenso","directo","artístico"],"Luma Sorvei":["libre","alegre","magnético"],"Soren Lume":["introvertido","brillante","leal"],"Ciro Orlen":["meticuloso","callado","curioso"],"Elia Orlen":["sociable","optimista","generosa"],"Iva Norven":["observadora","artístico","sensible"],"Cela Miren":["empático","trabajador","sensible"],"Tev Solan":["alegre","talentoso","impulsivo"],"Dael Miru":["perfeccionista","apasionado","orgulloso"],"Mira Belven":["energético","social","creativo"],"Rael Nora":["gentil","divertido","compasivo"],"Leva Sorin":["apasionado","exigente","curioso"]};
-const NPC_HOOD_COLOR={"Aria Ven":"#7BB8B9","Lior Veloer":"#7BB8B9","Elia Orlen":"#7BB8B9","Tev Solan":"#7BB8B9","Oren Mirende":"#4A8B8C","Nela Mirende":"#4A8B8C","Tomas Mirende":"#4A8B8C","Riven Lumaren":"#4A8B8C","Iva Norven":"#4A8B8C","Ciro Orlen":"#A08060","Elowen Sorvei":"#A08060","Cael Sorvei":"#A08060","Niven Sorvei":"#A08060","Luma Sorvei":"#A08060","Vael Lumaren":"#A08060","Leva Sorin":"#A08060","Aldric Veloer":"#D4A853","Soren Lume":"#D4A853","Dora Velin":"#D4A853","Dael Miru":"#D4A853","Mira Belven":"#D4A853","Bren Orlen":"#6B9E5E","Cela Miren":"#6B9E5E","Rael Nora":"#6B9E5E"};
-const NPC_DESC={"Aria Ven":"Dueña del café · La Vega","Lior Veloer":"Estudiante rebelde · La Vega","Oren Mirende":"Pescador y guía del lago · Ribera","Nela Mirende":"Restaurante del muelle · Ribera","Tomas Mirende":"Pescador mayor · Ribera","Riven Lumaren":"Gerente del banco · Ribera","Ciro Orlen":"Archivista · Veleta","Elowen Sorvei":"Escritora anciana · Veleta","Cael Sorvei":"Director del teatro · Veleta","Niven Sorvei":"Pintora y tatuadora · Veleta","Luma Sorvei":"Músico callejero · Veleta","Vael Lumaren":"Diseñadora · Veleta","Leva Sorin":"Profesora de historia · Veleta","Aldric Veloer":"Figura moral de Veloria · El Casco","Soren Lume":"Librero · El Casco","Dora Velin":"La Twin más anciana · El Casco","Dael Miru":"Chef · El Casco","Mira Belven":"Organizadora de eventos · El Casco","Bren Orlen":"Médico · Los Prados","Cela Miren":"Enfermera · Los Prados","Rael Nora":"Veterinario · Los Prados"};
+const NPC_HOOD_COLOR={"Aria Ven":"#7BB8B9","Lior Veloer":"#7BB8B9","Elia Orlen":"#7BB8B9","Senia Vel":"#7BB8B9","Tev Solan":"#7BB8B9","Oren Mirende":"#4A8B8C","Nela Mirende":"#4A8B8C","Tomas Mirende":"#4A8B8C","Riven Lumaren":"#4A8B8C","Iva Norven":"#4A8B8C","Ciro Orlen":"#A08060","Elowen Sorvei":"#A08060","Cael Sorvei":"#A08060","Niven Sorvei":"#A08060","Luma Sorvei":"#A08060","Vael Lumaren":"#A08060","Leva Sorin":"#A08060","Aldric Veloer":"#D4A853","Soren Lume":"#D4A853","Dora Velin":"#D4A853","Dael Miru":"#D4A853","Mira Belven":"#D4A853","Bren Orlen":"#6B9E5E","Cela Miren":"#6B9E5E","Rael Nora":"#6B9E5E"};
+const NPC_DESC={"Aria Ven":"Dueña del café · La Vega","Lior Veloer":"Estudiante rebelde · La Vega","Oren Mirende":"Pescador y guía del lago · Ribera","Nela Mirende":"Restaurante del muelle · Ribera","Tomas Mirende":"Pescador mayor · Ribera","Riven Lumaren":"Gerente del banco · Ribera","Ciro Orlen":"Archivista · Veleta","Elowen Sorvei":"Escritora anciana · Veleta","Cael Sorvei":"Director del teatro · Veleta","Niven Sorvei":"Pintora y tatuadora · Veleta","Luma Sorvei":"Músico callejero · Veleta","Vael Lumaren":"Diseñadora · Veleta","Leva Sorin":"Profesora de historia · Veleta","Aldric Veloer":"Figura moral de Veloria · El Casco","Soren Lume":"Librero · El Casco","Dora Velin":"La Twin más anciana · El Casco","Dael Miru":"Chef · El Casco","Mira Belven":"Organizadora de eventos · El Casco","Bren Orlen":"Médico · Los Prados","Cela Miren":"Enfermera · Los Prados","Rael Nora":"Veterinario · Los Prados","Senia Vel":"Ceramicista veterana · La Vega","Elia Orlen":"Vecina del jardín · La Vega"};
 const NPC_SCHEDULES={
   "Aria Ven":      [{from:0,to:7,place:"La Vega (casa)",hood:"La Vega"},{from:7,to:20,place:"Café de Aria",hood:"La Vega"},{from:20,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"La Vega (casa)",hood:"La Vega"}],
-  "Lior Veloer":   [{from:0,to:10,place:"La Vega (casa)",hood:"La Vega"},{from:10,to:15,place:"Biblioteca",hood:"Veleta"},{from:15,to:19,place:"Café de Aria",hood:"La Vega"},{from:19,to:23,place:"Plaza del Veloer",hood:"El Casco"},{from:23,to:24,place:"La Vega (casa)",hood:"La Vega"}],
-  "Elia Orlen":    [{from:0,to:9,place:"La Vega (casa)",hood:"La Vega"},{from:9,to:14,place:"Biblioteca",hood:"Veleta"},{from:14,to:18,place:"Café de Aria",hood:"La Vega"},{from:18,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"La Vega (casa)",hood:"La Vega"}],
+  "Lior Veloer":   [{from:0,to:9,place:"La Vega (casa)",hood:"La Vega"},{from:9,to:12,place:"Terraza",hood:"La Vega"},{from:12,to:16,place:"Biblioteca",hood:"Veleta"},{from:16,to:19,place:"Café de Aria",hood:"La Vega"},{from:19,to:22,place:"La Bodega",hood:"La Vega"},{from:22,to:24,place:"La Vega (casa)",hood:"La Vega"}],
+  "Elia Orlen":    [{from:0,to:8,place:"La Vega (casa)",hood:"La Vega"},{from:8,to:11,place:"Panadería Velin",hood:"La Vega"},{from:11,to:15,place:"Jardín Comunitario",hood:"La Vega"},{from:15,to:19,place:"Café de Aria",hood:"La Vega"},{from:19,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"La Vega (casa)",hood:"La Vega"}],
   "Oren Mirende":  [{from:0,to:5,place:"Ribera (casa)",hood:"Ribera"},{from:5,to:14,place:"Muelle",hood:"Ribera"},{from:14,to:17,place:"Lago Miren",hood:"Ribera"},{from:17,to:21,place:"Restaurante de Nela",hood:"Ribera"},{from:21,to:24,place:"Ribera (casa)",hood:"Ribera"}],
   "Nela Mirende":  [{from:0,to:8,place:"Ribera (casa)",hood:"Ribera"},{from:8,to:22,place:"Restaurante de Nela",hood:"Ribera"},{from:22,to:24,place:"Ribera (casa)",hood:"Ribera"}],
   "Tomas Mirende": [{from:0,to:4,place:"Ribera (casa)",hood:"Ribera"},{from:4,to:13,place:"Muelle",hood:"Ribera"},{from:13,to:16,place:"Restaurante de Nela",hood:"Ribera"},{from:16,to:24,place:"Ribera (casa)",hood:"Ribera"}],
@@ -232,14 +464,15 @@ const NPC_SCHEDULES={
   "Elowen Sorvei": [{from:0,to:7,place:"Veleta (casa)",hood:"Veleta"},{from:7,to:10,place:"Parque",hood:"Los Prados"},{from:10,to:17,place:"Biblioteca",hood:"Veleta"},{from:17,to:20,place:"Teatro de Cael",hood:"Veleta"},{from:20,to:24,place:"Veleta (casa)",hood:"Veleta"}],
   "Cael Sorvei":   [{from:0,to:10,place:"Veleta (casa)",hood:"Veleta"},{from:10,to:23,place:"Teatro de Cael",hood:"Veleta"},{from:23,to:24,place:"Veleta (casa)",hood:"Veleta"}],
   "Niven Sorvei":  [{from:0,to:11,place:"Veleta (casa)",hood:"Veleta"},{from:11,to:20,place:"Teatro de Cael",hood:"Veleta"},{from:20,to:23,place:"Lago Miren",hood:"Ribera"},{from:23,to:24,place:"Veleta (casa)",hood:"Veleta"}],
-  "Luma Sorvei":   [{from:0,to:12,place:"Veleta (casa)",hood:"Veleta"},{from:12,to:15,place:"Plaza del Veloer",hood:"El Casco"},{from:15,to:19,place:"Café de Aria",hood:"La Vega"},{from:19,to:23,place:"Teatro de Cael",hood:"Veleta"},{from:23,to:24,place:"Veleta (casa)",hood:"Veleta"}],
-  "Vael Lumaren":  [{from:0,to:10,place:"Veleta (casa)",hood:"Veleta"},{from:10,to:19,place:"Teatro de Cael",hood:"Veleta"},{from:19,to:22,place:"Café de Aria",hood:"La Vega"},{from:22,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Luma Sorvei":   [{from:0,to:12,place:"Veleta (casa)",hood:"Veleta"},{from:12,to:15,place:"Plaza del Veloer",hood:"El Casco"},{from:15,to:18,place:"Taller de Música",hood:"La Vega"},{from:18,to:22,place:"Feria Nocturna",hood:"La Vega"},{from:22,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Vael Lumaren":  [{from:0,to:10,place:"Veleta (casa)",hood:"Veleta"},{from:10,to:14,place:"Taller Cerámica",hood:"La Vega"},{from:14,to:17,place:"Estudio de Arte",hood:"La Vega"},{from:17,to:21,place:"Taller de Música",hood:"La Vega"},{from:21,to:24,place:"Veleta (casa)",hood:"Veleta"}],
+  "Senia Vel":     [{from:0,to:7,place:"La Vega (casa)",hood:"La Vega"},{from:7,to:8,place:"Panadería Velin",hood:"La Vega"},{from:8,to:19,place:"Taller Cerámica",hood:"La Vega"},{from:19,to:21,place:"Micro Parque",hood:"La Vega"},{from:21,to:24,place:"La Vega (casa)",hood:"La Vega"}],
   "Leva Sorin":    [{from:0,to:8,place:"Veleta (casa)",hood:"Veleta"},{from:8,to:14,place:"Biblioteca",hood:"Veleta"},{from:14,to:18,place:"Teatro de Cael",hood:"Veleta"},{from:18,to:22,place:"Café de Aria",hood:"La Vega"},{from:22,to:24,place:"Veleta (casa)",hood:"Veleta"}],
   "Soren Lume":    [{from:0,to:8,place:"El Casco (casa)",hood:"El Casco"},{from:8,to:20,place:"Librería de Soren",hood:"El Casco"},{from:20,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"El Casco (casa)",hood:"El Casco"}],
   "Aldric Veloer": [{from:0,to:7,place:"El Casco (casa)",hood:"El Casco"},{from:7,to:12,place:"Plaza del Veloer",hood:"El Casco"},{from:12,to:14,place:"Librería de Soren",hood:"El Casco"},{from:14,to:19,place:"Plaza del Veloer",hood:"El Casco"},{from:19,to:24,place:"El Casco (casa)",hood:"El Casco"}],
   "Dora Velin":    [{from:0,to:7,place:"El Casco (casa)",hood:"El Casco"},{from:7,to:11,place:"Plaza del Veloer",hood:"El Casco"},{from:11,to:16,place:"El Casco (casa)",hood:"El Casco"},{from:16,to:18,place:"Plaza del Veloer",hood:"El Casco"},{from:18,to:24,place:"El Casco (casa)",hood:"El Casco"}],
   "Dael Miru":     [{from:0,to:9,place:"El Casco (casa)",hood:"El Casco"},{from:9,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"El Casco (casa)",hood:"El Casco"}],
-  "Mira Belven":   [{from:0,to:8,place:"El Casco (casa)",hood:"El Casco"},{from:8,to:16,place:"Plaza del Veloer",hood:"El Casco"},{from:16,to:20,place:"Café de Aria",hood:"La Vega"},{from:20,to:24,place:"El Casco (casa)",hood:"El Casco"}],
+  "Mira Belven":   [{from:0,to:8,place:"El Casco (casa)",hood:"El Casco"},{from:8,to:14,place:"Tienda de La Vega",hood:"La Vega"},{from:14,to:17,place:"Mercadillo",hood:"La Vega"},{from:17,to:21,place:"Bar Lumaven",hood:"La Vega"},{from:21,to:24,place:"El Casco (casa)",hood:"El Casco"}],
   "Bren Orlen":    [{from:0,to:7,place:"Los Prados (casa)",hood:"Los Prados"},{from:7,to:18,place:"Consultorio de Bren",hood:"Los Prados"},{from:18,to:21,place:"Parque",hood:"Los Prados"},{from:21,to:24,place:"Los Prados (casa)",hood:"Los Prados"}],
   "Cela Miren":    [{from:0,to:7,place:"Los Prados (casa)",hood:"Los Prados"},{from:7,to:16,place:"Consultorio de Bren",hood:"Los Prados"},{from:16,to:20,place:"Parque",hood:"Los Prados"},{from:20,to:24,place:"Los Prados (casa)",hood:"Los Prados"}],
   "Rael Nora":     [{from:0,to:8,place:"Los Prados (casa)",hood:"Los Prados"},{from:8,to:17,place:"Parque",hood:"Los Prados"},{from:17,to:21,place:"Plaza del Veloer",hood:"El Casco"},{from:21,to:24,place:"Los Prados (casa)",hood:"Los Prados"}],
@@ -314,8 +547,13 @@ const CHILD_FX={
   cafe_hijo:{hap:8,rel:7},pedir_consejo:{hap:10,rel:8},charlar_adulto:{hap:7,rel:6},celebrar_hijo:{hap:12,rel:8},
 };
 
-function getChildStage(age){
-  if(age<2)return"bebe";if(age<6)return"infante";if(age<12)return"nino";if(age<18)return"adolescente";return"adulto";
+function getChildStage(daysAlive){
+  const s=getLifeStage(daysAlive);
+  if(s.id==="recien_nacido"||s.id==="bebe")return"bebe";
+  if(s.id==="infante")return"infante";
+  if(s.id==="nino"||s.id==="preadolescente")return"nino";
+  if(s.id==="adolescente")return"adolescente";
+  return"adulto";
 }
 
 // ═══ SKILLS ═══
@@ -374,6 +612,14 @@ const ACTION_SKILL_XP={
   walk_plaza: {carisma:6},
   walk_shore: {naturaleza:12},
   checkup:    {conocimiento:6},
+  cerc_moldear:{arte:20,naturaleza:10},cerc_ver:{arte:8},cerc_torno:{arte:15,naturaleza:5},
+  cine_ver:   {arte:12,conocimiento:8},cine_charlar:{carisma:8},
+  musica_tocar:{arte:15,carisma:5},musica_clase:{arte:8},musica_impro:{arte:20},
+  bodega_probar:{carisma:5},bodega_historia:{carisma:8,conocimiento:5},bodega_contar:{carisma:12},
+  parque2_pasto:{naturaleza:10},parque2_leer:{conocimiento:8,naturaleza:3},parque2_pajaros:{naturaleza:12},
+  azotea2_lago:{naturaleza:12},azotea2_dibujar:{arte:15},azotea2_estrellas:{conocimiento:10,naturaleza:5},
+  feria_unico:{conocimiento:5},feria_feriantes:{carisma:8,conocimiento:5},
+  civico_taller:{carisma:8,conocimiento:8},civico_ayuda:{carisma:15},civico_vecinos:{carisma:8},
 };
 
 // ═══ RANDOM EVENTS ═══
@@ -415,23 +661,33 @@ const RANDOM_EVENTS=[
   {id:"e27",season:null,req:"child",    text:"[CHILD] hizo algo hoy que no esperabas. Algo pequeño. Esas son las cosas que uno recuerda mucho después, cuando ya no se pueden explicar por qué."},
 ];
 
-// ═══ LIFE STAGES ═══
-const LIFE_STAGES={
-  joven:  {label:"Joven",    emoji:"🌱",color:"#7BB8B9",skillMult:1.2,decayMult:0.9},
-  adulto: {label:"Adulto/a", emoji:"🌳",color:"#6B9E5E",skillMult:1.0,decayMult:1.0},
-  maduro: {label:"Maduro/a", emoji:"🍂",color:"#D4A853",skillMult:0.8,decayMult:1.1},
-  mayor:  {label:"Mayor",    emoji:"❄️",color:"#A08060",skillMult:0.6,decayMult:1.2},
-  anciano:{label:"Anciano/a",emoji:"✦", color:"#8B7355",skillMult:0.4,decayMult:1.3},
-};
-function getLifeStage(age){
-  if(age>=85)return LIFE_STAGES.anciano;
-  if(age>=70)return LIFE_STAGES.mayor;
-  if(age>=55)return LIFE_STAGES.maduro;
-  if(age>=35)return LIFE_STAGES.adulto;
-  return LIFE_STAGES.joven;
+// ═══ LIFE STAGE SYSTEM (day-based) ═══
+// Player always starts at "joven" (Joven Adulto). daysLived = PLAYER_START_DAYS + (gt.day - 1)
+const LIFE_STAGES=[
+  {id:"recien_nacido", label:"Recién Nacido/a",emoji:"🍼",color:"#F0E0C8",days:1, cumStart:0, skillMult:0,   decayMult:1.5},
+  {id:"bebe",          label:"Bebé",            emoji:"👶",color:"#F4B8C1",days:2, cumStart:1, skillMult:0.2, decayMult:1.4},
+  {id:"infante",       label:"Infante",         emoji:"🌼",color:"#F7E59E",days:3, cumStart:3, skillMult:0.4, decayMult:1.3},
+  {id:"nino",          label:"Niño/a",           emoji:"🌸",color:"#A8D5A2",days:4, cumStart:6, skillMult:0.6, decayMult:1.2},
+  {id:"preadolescente",label:"Preadolescente",  emoji:"🌿",color:"#7BB8B9",days:4, cumStart:10,skillMult:0.7, decayMult:1.1},
+  {id:"adolescente",   label:"Adolescente",     emoji:"🌊",color:"#5E97C7",days:7, cumStart:14,skillMult:0.9, decayMult:1.0},
+  {id:"joven",         label:"Joven Adulto/a",  emoji:"🌱",color:"#D4A853",days:14,cumStart:21,skillMult:1.2, decayMult:0.9},
+  {id:"adulto",        label:"Adulto/a",        emoji:"🌳",color:"#A08060",days:14,cumStart:35,skillMult:1.0, decayMult:1.0},
+  {id:"anciano",       label:"Anciano/a",       emoji:"✦", color:"#8B7355",days:10,cumStart:49,skillMult:0.4, decayMult:1.3},
+];
+const TOTAL_LIFESPAN=59;
+const PLAYER_START_DAYS=21; // player starts at Joven Adulto (cumStart=21)
+
+function getLifeStage(daysLived){
+  for(let i=LIFE_STAGES.length-1;i>=0;i--){
+    if(daysLived>=LIFE_STAGES[i].cumStart)return LIFE_STAGES[i];
+  }
+  return LIFE_STAGES[0];
 }
-const START_AGE={familia:24,artista:20,empresario:28,alma:22};
-const AGE_MILESTONES=[25,30,40,50,60,70];
+function getDaysInStage(daysLived){
+  const s=getLifeStage(daysLived);
+  return{stage:s,inStage:daysLived-s.cumStart,ofStage:s.days};
+}
+const AGE_MILESTONES=[25,30,40,50,60,70]; // kept for backward compat
 
 // ═══ HOUSING ═══
 const HOUSING_TIERS=[
@@ -480,6 +736,69 @@ const SKILL_UNLOCKS={
     4:[{id:"elowen_home", label:"Visitar a Elowen (lore)",    emoji:"📖",place:"Veleta",           time:2,  nKey:"sk:elowen_home",once:true}],
   },
 };
+
+// New La Vega XP in ACTION_SKILL_XP (added inline via Object.assign after existing object)
+const ACTION_SKILL_XP_EXTRA={
+  terr_amanecer:{naturaleza:12},terr_escribir:{arte:14,conocimiento:6},
+  terr_estrellas:{naturaleza:8,conocimiento:10},terr_huerto:{naturaleza:14},
+  tienda_charlar:{carisma:6},jardin_plantar:{naturaleza:18},
+  jardin_cosechar:{naturaleza:10},jardin_pasear:{naturaleza:12},
+  pan_ver_hacer:{cocina:8},estudio_pintar:{arte:20},
+  estudio_ver:{arte:8},estudio_conocer:{carisma:8},estudio_tecnica:{arte:16},
+  bar_conocer:{carisma:10},bar_mirone:{carisma:6},merc_charlar:{carisma:5},
+  gym_natacion:{pesca:5,naturaleza:8},
+};
+
+// ═══ NPC AUTONOMY ═══
+const NPC_AUTONOMY=[
+  {id:"aria_coffee",    npc:"Aria Ven",     reqFr:40,reqSkill:null,  chance:0.07,cooldown:18,once:false,
+   message:"Aria golpeó tu puerta esta mañana con dos tazas de café. 'Vivo dos pisos más arriba', dice, como si no lo supieras. 'Pensé que quizás querías compañía.'",
+   options:[{text:"Invitarla a pasar ☕",    fr:10,nKey:"aut:aria_in"},{text:"Charlar en la puerta", fr:6,nKey:"aut:aria_door"},{text:"Agradecer y excusarte",fr:1,nKey:"aut:aria_busy"}]},
+  {id:"ciro_note",      npc:"Ciro Orlen",   reqFr:50,reqSkill:"conocimiento:2",chance:0.05,cooldown:25,once:true,
+   message:"Encontraste una nota de Ciro debajo de tu puerta: *'Hay algo que tenés que ver. Vení a la Biblioteca cuando puedas. No le digas a nadie.'* La letra está apurada.",
+   options:[{text:"Ir a la Biblioteca ahora",fr:8,nKey:"aut:ciro_go",navigate:{hood:"Veleta",place:"Biblioteca"}},{text:"Responder que vas mañana",fr:3,nKey:"aut:ciro_tmr"},{text:"Guardarlo para después",fr:0,nKey:"default"}]},
+  {id:"oren_visit",     npc:"Oren Mirende", reqFr:45,reqSkill:null,  chance:0.06,cooldown:20,once:false,
+   message:"Oren apareció en La Vega — algo que casi nunca hace. Alguien le dijo que preguntó por vos en el café. Quiere mostrarte algo en el lago antes de que anochezca.",
+   options:[{text:"Ir al Muelle ahora",       fr:8,nKey:"aut:oren_go",navigate:{hood:"Ribera",place:"Muelle"}},{text:"Quedar para mañana",fr:4,nKey:"aut:oren_tmr"},{text:"No podés hoy",fr:0,nKey:"default"}]},
+  {id:"luma_serenade",  npc:"Luma Sorvei",  reqFr:35,reqSkill:null,  chance:0.05,cooldown:30,once:false,
+   message:"Son las once de la noche y desde tu ventana escuchás una guitarra. Abajo en la vereda de La Vega, Luma toca algo que no habías escuchado antes. No para.",
+   options:[{text:"Bajar a escuchar",         fr:8,nKey:"aut:luma_bajar"},{text:"Abrir la ventana y aplaudir",fr:5,nKey:"aut:luma_ventana"},{text:"Cerrar las persianas",fr:-2,nKey:"default"}]},
+  {id:"elowen_book",    npc:"Elowen Sorvei",reqFr:40,reqSkill:"conocimiento:3",chance:0.04,cooldown:40,once:true,
+   message:"Alguien dejó un libro en tu buzón. La cubierta no tiene título. La primera página dice en letra de Elowen: *'Porque creo que estás listo/a para esto.'*",
+   options:[{text:"Empezar a leerlo ahora",   fr:5,nKey:"aut:elowen_leer",xp:{conocimiento:30}},{text:"Ir a agradecerle",fr:8,nKey:"aut:elowen_ir",navigate:{hood:"Veleta",place:"Teatro de Cael"}},{text:"Guardarlo para esta noche",fr:0,nKey:"default"}]},
+  {id:"soren_rec",      npc:"Soren Lume",   reqFr:40,reqSkill:null,  chance:0.06,cooldown:20,once:false,
+   message:"Un mensaje de Soren, con esa letra pequeña y precisa: *'Tengo algo para vos en la librería. No lo guardo mucho tiempo.'*",
+   options:[{text:"Ir a la librería",         fr:6,nKey:"aut:soren_ir",navigate:{hood:"El Casco",place:"Librería de Soren"}},{text:"Responder que vas",fr:3,nKey:"default"},{text:"Ignorarlo por ahora",fr:0,nKey:"default"}]},
+  {id:"nela_dinner",    npc:"Nela Mirende", reqFr:50,reqSkill:null,  chance:0.04,cooldown:30,once:false,
+   message:"Nela te mandó un mensaje. El Restaurante cierra hoy temprano y va a cocinar algo que '*no está en el menú*'. Te invita. Hay espacio para dos.",
+   options:[{text:"Ir al restaurante",        fr:10,nKey:"aut:nela_ir",navigate:{hood:"Ribera",place:"Restaurante de Nela"}},{text:"Agradecer y excusarte",fr:2,nKey:"default"}]},
+  {id:"bren_checkup",   npc:"Bren Orlen",   reqFr:30,reqSkill:null,  chance:0.03,cooldown:60,once:false,reqAge:50,
+   message:"Bren pasó por La Vega. Dice que a partir de cierta edad conviene un control por año. No como obligación — como atención. Te dejó un turno agendado.",
+   options:[{text:"Confirmar el turno",       fr:5,nKey:"aut:bren_ir",navigate:{hood:"Los Prados",place:"Consultorio de Bren"}},{text:"Ya vas a ir",fr:2,nKey:"default"}]},
+  {id:"aldric_invite",  npc:"Aldric Veloer",reqFr:60,reqSkill:null,  chance:0.03,cooldown:40,once:true,
+   message:"Aldric Veloer te mandó un mensaje formal. Quiere que tomes un café con él en la Plaza. '*Hay cosas sobre Veloria que creo que ya estás listo para saber*', dice.",
+   options:[{text:"Ir a la Plaza ahora",      fr:10,nKey:"aut:aldric_ir",navigate:{hood:"El Casco",place:"Plaza del Veloer"},xp:{conocimiento:20}},{text:"Confirmar para mañana",fr:5,nKey:"default"},{text:"Pedir más detalles",fr:3,nKey:"default"}]},
+
+  {id:"lior_help",     npc:"Lior Veloer",   reqFr:30,reqSkill:null,  chance:0.06,cooldown:14,once:false,
+   message:"Lior te mandó un mensaje directo. 'Estoy trabado/a con algo. No sé a quién más preguntarle.' Hay algo en cómo lo escribe que hace que quieras responder.",
+   options:[{text:"Ir a ayudar",             fr:10,nKey:"aut:lior_ir",navigate:{hood:"Veleta",place:"Biblioteca"},xp:{conocimiento:10}},{text:"Decirle que lo resuelva solo/a",fr:-5,nKey:"aut:lior_help"},{text:"Responder más tarde",fr:2,nKey:"default"}]},
+
+  {id:"elia_harvest",  npc:"Elia Orlen",    reqFr:25,reqSkill:null,  chance:0.06,cooldown:18,once:false,
+   message:"Elia te dejó una nota pegada en tu puerta. 'Esta tarde cosechamos en el Jardín Comunitario. Si tenés ganas, hay lugar.' Así de simple.",
+   options:[{text:"Ir al jardín",            fr:8, nKey:"aut:elia_ir",navigate:{hood:"La Vega",place:"Jardín Comunitario"},xp:{naturaleza:20}},{text:"Ir mañana",fr:3,nKey:"aut:elia_tmr"},{text:"No podés",fr:0,nKey:"default"}]},
+
+  {id:"vael_collab",   npc:"Vael Lumaren",  reqFr:40,reqSkill:"arte:2",chance:0.05,cooldown:25,once:false,
+   message:"Vael te escribe desde el Estudio de Arte. 'Tengo un proyecto y hay algo que no sé cómo resolver. ¿Te interesan las colaboraciones?' La pregunta suena casual. No lo es.",
+   options:[{text:"Ir al Estudio",           fr:12,nKey:"aut:vael_ir",navigate:{hood:"La Vega",place:"Estudio de Arte"},xp:{arte:25}},{text:"Preguntar de qué se trata",fr:4,nKey:"default"},{text:"Excusarte",fr:-3,nKey:"aut:vael_no"}]},
+
+  {id:"senia_special", npc:"Senia Vel",     reqFr:35,reqSkill:null,  chance:0.04,cooldown:35,once:true,
+   message:"Senia te dejó una nota en el Taller. 'Martes a las 18: taller especial. Técnica de reducción de fuego. No lo enseño a cualquiera. Si venís, venís.' No pregunta si podés. Asume.",
+   options:[{text:"Estar ahí el martes",     fr:15,nKey:"aut:senia_taller",navigate:{hood:"La Vega",place:"Taller Cerámica"},xp:{arte:40,naturaleza:15}},{text:"Agradecerle y no poder",fr:2,nKey:"default"}]},
+
+  {id:"feria_sobre",   npc:"Aria Ven",      reqFr:20,reqSkill:null,  chance:0.03,cooldown:50,once:true,reqAge:null,
+   message:"Aria te dice que alguien en la Feria Nocturna preguntó por vos por nombre. Dejó un sobre en el puesto del fondo. Nadie sabe quién era.",
+   options:[{text:"Ir a buscar el sobre",    fr:5,nKey:"aut:feria_sobre",navigate:{hood:"La Vega",place:"Feria Nocturna"},xp:{conocimiento:15}},{text:"Ignorarlo",fr:0,nKey:"default"}]},
+];
 
 function getSkillUnlockActions(skills,loc,placedFurniture,usedOnce){
   const extra=[];
@@ -784,7 +1103,7 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
 
           {/* Children */}
           {family.children.map((child,idx)=>{
-            const age=Math.floor((currentDay-(child.birthDay||0))/30);
+            const age=currentDay-(child.birthDay||0);
             const stageName=getChildStage(age);
             const stage=CHILD_STAGES[stageName];
             const hap=child.happiness??70;
@@ -1010,9 +1329,11 @@ function DiarioTab({log,gt}){
 }
 
 // ═══════════════════ CHARACTER CARD ═══════════════════
-function CharacterCard({twin,needs,money,gt,rels,family,skills,currentAge,lifeStage}){
+function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,daysInStage,daysInStageTotal,lifeStage,aspirationProgress}){
   const [moodLabel,moodColor]=getMood(needs);
-  const ls=lifeStage||LIFE_STAGES.joven;
+  const ls=lifeStage||LIFE_STAGES[6]; // default Joven Adulto
+  const asp=twin?.aspiration?ASPIRATIONS.find(a=>a.id===twin.aspiration):null;
+  const nextMilestone=asp?.milestones[(aspirationProgress||[]).length];
   const topRels=Object.entries(rels).sort(([,a],[,b])=>(b.friendship||0)-(a.friendship||0)).slice(0,2);
   return(
     <div style={{width:"176px",borderRight:"1px solid #2C1F14",display:"flex",flexDirection:"column",padding:"12px",gap:"0",overflowY:"auto",flexShrink:0}}>
@@ -1022,9 +1343,20 @@ function CharacterCard({twin,needs,money,gt,rels,family,skills,currentAge,lifeSt
           {twin?.name?.charAt(0)||"?"}
         </div>
         <div style={{fontSize:"12px",color:"#EDE0CC",fontWeight:600,marginBottom:"2px"}}>{twin?.name}</div>
-        <div style={{display:"flex",gap:"4px",alignItems:"center",marginBottom:"3px"}}>
-          <span style={{fontSize:"9px",color:ls.color}}>{ls.emoji} {currentAge} años · {ls.label}</span>
+        <div style={{display:"flex",gap:"4px",alignItems:"center",marginBottom:"3px",flexWrap:"wrap",justifyContent:"center"}}>
+          <span style={{fontSize:"9px",color:ls.color}}>{ls.emoji} {ls.label}</span>
+          <span style={{fontSize:"8px",color:"#2C1F14"}}>día {(daysInStage||0)+1}/{daysInStageTotal||ls.days}</span>
         </div>
+        {asp&&(
+          <div style={{marginBottom:"4px"}}>
+            <div style={{display:"flex",gap:"2px",marginBottom:"2px"}}>
+              {asp.milestones.map((m,i)=>(
+                <div key={m.id} style={{flex:1,height:"2px",borderRadius:"1px",background:i<(aspirationProgress||[]).length?"#D4A853":"#1A1208"}}/>
+              ))}
+            </div>
+            {nextMilestone&&<div style={{fontSize:"8px",color:"#3D2B1F",fontStyle:"italic",lineHeight:"1.2"}}>◎ {nextMilestone.label}</div>}
+          </div>
+        )}
         <div style={{fontSize:"9px",color:moodColor,background:`${moodColor}18`,padding:"2px 8px",borderRadius:"10px",border:`1px solid ${moodColor}44`}}>{moodLabel}</div>
       </div>
       {/* Needs */}
@@ -1086,6 +1418,37 @@ function CharacterCard({twin,needs,money,gt,rels,family,skills,currentAge,lifeSt
 }
 
 // ═══════════════════ PAUSA MODAL ═══════════════════
+// ═══ DIALOGUE MODAL ═══
+function DialogueModal({event,onRespond}){
+  const c=NPC_HOOD_COLOR[event.npc]||"#D4A853";
+  return(
+    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.88)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:150,padding:"16px"}}>
+      <div style={{background:"#0A0603",border:`1px solid ${c}33`,borderRadius:"16px",width:"480px",maxWidth:"100%",padding:"24px"}}>
+        <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"16px"}}>
+          <NPCAvatar name={event.npc} size={44}/>
+          <div>
+            <div style={{fontSize:"13px",color:"#A08060",fontWeight:600}}>{event.npc}</div>
+            <div style={{fontSize:"9px",color:"#3D2B1F"}}>{NPC_DESC[event.npc]||""}</div>
+          </div>
+        </div>
+        <div style={{fontSize:"13px",color:"#8B7355",fontFamily:"'Lora',serif",lineHeight:"1.7",fontStyle:"italic",marginBottom:"20px",paddingLeft:"10px",borderLeft:`2px solid ${c}44`,whiteSpace:"pre-line"}}>
+          {event.message}
+        </div>
+        <div style={{display:"flex",flexDirection:"column",gap:"7px"}}>
+          {event.options.map((opt,i)=>(
+            <button key={i} onClick={()=>onRespond(opt)}
+              style={{padding:"10px 14px",borderRadius:"9px",border:"1px solid #2C1F14",background:"transparent",color:"#8B7355",cursor:"pointer",textAlign:"left",fontSize:"12px",transition:"all 0.15s",lineHeight:"1.4"}}
+              onMouseEnter={e=>{e.currentTarget.style.borderColor=c;e.currentTarget.style.color=c;e.currentTarget.style.background=`${c}10`;}}
+              onMouseLeave={e=>{e.currentTarget.style.borderColor="#2C1F14";e.currentTarget.style.color="#8B7355";e.currentTarget.style.background="transparent";}}>
+              {opt.text}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ═══ HOGAR TAB ═══
 function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture,dark,loading}){
   const [view,setView]=useState("prop"); // "prop" | "muebles"
@@ -1190,7 +1553,7 @@ function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture
 
 // ═══ LEGACY SCREEN ═══
 function LegacyScreen({twin,gt,skills,rels,family,children,onContinueAsChild,onNewGame}){
-  const age=(twin?.startAge||22)+Math.floor((gt.day-1)/30);
+  const daysLived=PLAYER_START_DAYS+(gt.day-1);
   const masteredSkills=Object.entries(skills).filter(([,xp])=>getSkillLevel(xp)>=4).map(([k])=>SKILLS_CFG[k]?.label||k);
   const knownNPCs=Object.keys(rels).length;
   const hasChild=children&&children.length>0;
@@ -1203,7 +1566,7 @@ function LegacyScreen({twin,gt,skills,rels,family,children,onContinueAsChild,onN
 
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginBottom:"28px"}}>
           {[
-            {label:"Años vividos",value:age,emoji:"🕰"},
+            {label:"Días vividos",value:daysLived,emoji:"🕰"},
             {label:"Días en Veloria",value:gt.day,emoji:"📅"},
             {label:"Twins conocidos",value:knownNPCs,emoji:"💬"},
           ].map(({label,value,emoji})=>(
@@ -1535,100 +1898,304 @@ function PausaModal({onClose,onSave,onLoad,onReset,log,gt,twin}){
 
 // ═══════════════════ CREATION SCREEN ═══════════════════
 function CreationScreen({onStart,onLoad}){
-  const [step,setStep]=useState(0),[name,setName]=useState(""),[traits,setTraits]=useState([]),[aspiration,setAspiration]=useState("");
-  const [showLoad,setShowLoad]=useState(false),[loadFlash,setLoadFlash]=useState(null);
+  const [step,setStep]=useState(0);
+  const [name,setName]=useState("");
+  const [pronouns,setPronouns]=useState("elle");
+  const [origin,setOrigin]=useState(null);
+  const [traits,setTraits]=useState([]);
+  const [aspiration,setAspiration]=useState(null);
+  const [connection,setConnection]=useState(null);
+  const [showLoad,setShowLoad]=useState(false);
   const hasSaves=anySaveExists();
-  const toggle=id=>{if(traits.includes(id))setTraits(traits.filter(t=>t!==id));else if(traits.length<3)setTraits([...traits,id]);};
-  const canNext=[name.trim().length>1,traits.length===3,aspiration!==""][step];
-  const next=()=>{if(!canNext)return;if(step<2)setStep(step+1);else onStart({name:name.trim(),traits,aspiration});};
 
-  if(showLoad){
-    const auto=(()=>{try{const r=localStorage.getItem(AUTO_KEY);return r?JSON.parse(r):null;}catch{return null;}})();
-    return(
-      <div style={{minHeight:"100vh",background:"linear-gradient(155deg,#080503 0%,#1A1008 50%,#0F0A06 100%)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"32px 16px",fontFamily:"'DM Sans',sans-serif"}}>
-        <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}`}</style>
-        <div style={{fontFamily:"'Lora',serif",fontSize:"42px",color:"#D4A853",letterSpacing:"0.2em",marginBottom:"32px"}}>inbetweens</div>
-        <div style={{width:"100%",maxWidth:"380px"}}>
-          <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.2em",marginBottom:"12px"}}>Partidas guardadas</div>
-          {[0,1,2].map(s=>{
-            const m=slotMeta(s);
-            return(
-              <div key={s} style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
-                <div style={{width:"26px",height:"26px",borderRadius:"6px",background:"transparent",border:"1px solid #2C1F14",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",color:"#2C1F14",flexShrink:0}}>{s+1}</div>
-                <div style={{flex:1}}>
-                  {m?<><div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>{m.twinName}</div><div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {m.day} · L {m.money} · {fmtDate(m.savedAt)}</div></>:<div style={{fontSize:"10px",color:"#2C1F14",fontStyle:"italic"}}>Vacío</div>}
-                </div>
-                {m&&<button onClick={()=>onLoad(s)} style={{padding:"4px 10px",borderRadius:"6px",border:"1px solid #3D2B1F",background:"transparent",color:"#D4A853",fontSize:"10px",cursor:"pointer"}}>Cargar</button>}
-              </div>
-            );
-          })}
-          {auto&&(
-            <div style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
-              <div style={{fontSize:"14px",flexShrink:0}}>⚡</div>
-              <div style={{flex:1}}><div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>Autoguardado · {auto.twin?.name}</div><div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {auto.gt?.day} · {fmtDate(auto.savedAt)}</div></div>
-              <button onClick={()=>onLoad("auto")} style={{padding:"4px 10px",borderRadius:"6px",border:"1px solid #3D2B1F",background:"transparent",color:"#D4A853",fontSize:"10px",cursor:"pointer"}}>Cargar</button>
-            </div>
-          )}
-          <button onClick={()=>setShowLoad(false)} style={{marginTop:"12px",width:"100%",padding:"9px",borderRadius:"8px",border:"1px solid #2C1F14",background:"transparent",color:"#5C4030",cursor:"pointer",fontSize:"11px"}}>← Nueva partida</button>
-        </div>
-      </div>
-    );
+  const STEPS=["Bienvenida","Identidad","Origen","Rasgos","Aspiración","Conexión","Resumen"];
+  const PRONOUN_OPTS=[{id:"el",label:"Él"},{id:"ella",label:"Ella"},{id:"elle",label:"Elle"}];
+  const CONNECTIONS=[
+    {npc:"Aria Ven",    emoji:"☕",desc:"La dueña del café de La Vega. Te conoce de vista, te guarda el lugar de siempre.",    fr:25},
+    {npc:"Oren Mirende",emoji:"⛵",desc:"El pescador de Ribera. Compartiste una tarde en el muelle sin decir mucho.",          fr:25},
+    {npc:"Soren Lume",  emoji:"📚",desc:"El librero de El Casco. Te recomendó un libro hace tiempo. Tenés una deuda pendiente.",fr:25},
+    {npc:"Bren Orlen",  emoji:"⚕️",desc:"El médico de Los Prados. Te cruzaste en el parque. Recordás su calma.",               fr:25},
+  ];
+
+  const canNext=[
+    true, // bienvenida
+    name.trim().length>1, // identidad
+    !!origin, // origen
+    traits.length===3, // rasgos
+    !!aspiration, // aspiracion
+    !!connection, // conexion
+    true, // resumen
+  ][step];
+
+  function toggleTrait(id){
+    if(traits.includes(id))setTraits(t=>t.filter(x=>x!==id));
+    else if(traits.length<3)setTraits(t=>[...t,id]);
   }
-  return(
-    <div style={{minHeight:"100vh",background:"linear-gradient(155deg,#080503 0%,#1A1008 50%,#0F0A06 100%)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"32px 16px",fontFamily:"'DM Sans',sans-serif"}}>
+
+  function handleFinish(){
+    const asp=ASPIRATIONS.find(a=>a.id===aspiration);
+    const orig=ORIGINS.find(o=>o.id===origin);
+    onStart({
+      name:name.trim(),pronouns,origin,traits,aspiration,
+      startAge:START_AGE[aspiration]||22,
+      _origin:orig,_connection:connection,
+    });
+  }
+
+  const S={
+    wrap:{minHeight:"100vh",background:"linear-gradient(155deg,#060402 0%,#120B06 60%,#0A0603 100%)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"24px 16px",fontFamily:"'DM Sans',sans-serif"},
+    card:{width:"100%",maxWidth:"420px",display:"flex",flexDirection:"column",gap:0},
+    title:{fontFamily:"'Lora',serif",fontSize:"24px",color:"#D4A853",marginBottom:"6px",letterSpacing:"0.02em"},
+    sub:{fontSize:"11px",color:"#5C4030",marginBottom:"20px",lineHeight:"1.5"},
+    label:{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.14em",marginBottom:"8px"},
+    btn:(active,color="#D4A853")=>({padding:"10px 24px",borderRadius:"24px",border:`1px solid ${active?color:"#2C1F14"}`,background:active?`${color}18`:"transparent",color:active?color:"#3D2B1F",cursor:"pointer",fontSize:"12px",fontWeight:active?600:400,transition:"all 0.15s"}),
+    nextBtn:{padding:"11px 32px",borderRadius:"24px",border:"1px solid #D4A853",background:"rgba(212,168,83,0.1)",color:"#D4A853",cursor:"pointer",fontSize:"13px",fontWeight:600,marginTop:"20px",width:"100%"},
+    backBtn:{padding:"8px",border:"none",background:"transparent",color:"#3D2B1F",cursor:"pointer",fontSize:"11px",marginBottom:"16px",alignSelf:"flex-start"},
+  };
+
+  if(showLoad)return(
+    <div style={S.wrap}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}`}</style>
-      <div style={{textAlign:"center",marginBottom:"36px"}}>
-        <div style={{fontSize:"48px",color:"#D4A853",fontFamily:"'Lora',serif",letterSpacing:"0.2em",marginBottom:"4px"}}>inbetweens</div>
-        <div style={{fontSize:"10px",color:"#3D2B1F",letterSpacing:"0.4em",textTransform:"uppercase"}}>Veloria · Otherwhen</div>
-      </div>
-      <div style={{display:"flex",gap:"5px",marginBottom:"28px"}}>
-        {["Nombre","Rasgos","Aspiración"].map((s,i)=>(
-          <div key={i} style={{padding:"3px 12px",borderRadius:"20px",fontSize:"9px",letterSpacing:"0.12em",textTransform:"uppercase",background:i===step?"#D4A853":i<step?"rgba(212,168,83,0.15)":"transparent",color:i===step?"#0F0A06":i<step?"#D4A853":"#3D2B1F",border:i>=step?"1px solid #2C1F14":"none"}}>{s}</div>
-        ))}
-      </div>
-      <div style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"16px",padding:"28px",width:"100%",maxWidth:"440px"}}>
-        {step===0&&(<div>
-          <div style={{color:"#D4A853",fontFamily:"'Lora',serif",fontSize:"20px",marginBottom:"6px"}}>¿Cuál es tu nombre, Twin?</div>
-          <div style={{color:"#3D2B1F",fontSize:"11px",marginBottom:"22px"}}>Este nombre te seguirá por toda Veloria.</div>
-          <input value={name} onChange={e=>setName(e.target.value)} onKeyDown={e=>e.key==="Enter"&&next()} placeholder="Tu nombre..." style={{width:"100%",padding:"12px 16px",background:"rgba(255,255,255,0.03)",border:"1px solid #2C1F14",borderRadius:"8px",color:"#EDE0CC",fontSize:"20px",fontFamily:"'Lora',serif",outline:"none"}}/>
-        </div>)}
-        {step===1&&(<div>
-          <div style={{color:"#D4A853",fontFamily:"'Lora',serif",fontSize:"20px",marginBottom:"6px"}}>Elegí 3 rasgos</div>
-          <div style={{color:"#3D2B1F",fontSize:"11px",marginBottom:"16px"}}>{traits.length}/3 seleccionados</div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"7px"}}>
-            {TRAITS.map(t=>{const sel=traits.includes(t.id),dis=!sel&&traits.length===3;return(
-              <button key={t.id} onClick={()=>!dis&&toggle(t.id)} style={{padding:"10px",borderRadius:"8px",textAlign:"left",cursor:dis?"not-allowed":"pointer",border:sel?"1px solid #D4A853":"1px solid #2C1F14",background:sel?"rgba(212,168,83,0.1)":"transparent",color:dis&&!sel?"#2C1F14":"#EDE0CC",opacity:dis&&!sel?0.3:1,transition:"all 0.12s"}}>
-                <div style={{fontSize:"18px",marginBottom:"2px"}}>{t.emoji}</div>
-                <div style={{fontSize:"11px",fontWeight:500}}>{t.label}</div>
-                <div style={{fontSize:"9px",color:"#5C4030"}}>{t.desc}</div>
-              </button>
-            );})}
+      <div style={{...S.card}}>
+        <div style={{fontFamily:"'Lora',serif",fontSize:"36px",color:"#D4A853",letterSpacing:"0.2em",marginBottom:"28px",textAlign:"center"}}>inbetweens</div>
+        <div style={S.label}>Partidas guardadas</div>
+        {[0,1,2].map(s=>{const m=slotMeta(s);return(
+          <div key={s} style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
+            <div style={{width:"24px",height:"24px",borderRadius:"5px",border:"1px solid #2C1F14",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",color:"#2C1F14",flexShrink:0}}>{s+1}</div>
+            <div style={{flex:1}}>{m?<><div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>{m.twinName}</div><div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {m.day} · L {m.money} · {fmtDate(m.savedAt)}</div></>:<div style={{fontSize:"10px",color:"#2C1F14",fontStyle:"italic"}}>Vacío</div>}</div>
+            {m&&<button onClick={()=>onLoad(s)} style={S.btn(true)}>Cargar</button>}
           </div>
-        </div>)}
-        {step===2&&(<div>
-          <div style={{color:"#D4A853",fontFamily:"'Lora',serif",fontSize:"20px",marginBottom:"6px"}}>¿Qué buscás en Veloria?</div>
-          <div style={{color:"#3D2B1F",fontSize:"11px",marginBottom:"16px"}}>Tu aspiración de vida.</div>
-          <div style={{display:"flex",flexDirection:"column",gap:"7px"}}>
-            {ASPIRATIONS.map(a=>(
-              <button key={a.id} onClick={()=>setAspiration(a.id)} style={{padding:"12px 14px",borderRadius:"8px",textAlign:"left",cursor:"pointer",border:aspiration===a.id?"1px solid #D4A853":"1px solid #2C1F14",background:aspiration===a.id?"rgba(212,168,83,0.1)":"transparent",color:"#EDE0CC",display:"flex",alignItems:"center",gap:"12px",transition:"all 0.12s"}}>
-                <span style={{fontSize:"22px"}}>{a.emoji}</span>
-                <div><div style={{fontSize:"12px",fontWeight:500}}>{a.label}</div><div style={{fontSize:"10px",color:"#5C4030"}}>{a.desc}</div></div>
-              </button>
+        );})}
+        {(()=>{try{const r=localStorage.getItem(AUTO_KEY);const auto=r?JSON.parse(r):null;if(!auto)return null;return(<div style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}><div style={{fontSize:"14px",flexShrink:0}}>⚡</div><div style={{flex:1}}><div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>Autosave · {auto.twin?.name}</div><div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {auto.gt?.day} · {fmtDate(auto.savedAt)}</div></div><button onClick={()=>onLoad("auto")} style={S.btn(true)}>Cargar</button></div>);}catch{return null;}})()}
+        <button onClick={()=>setShowLoad(false)} style={{...S.btn(false),marginTop:"8px"}}>← Nueva partida</button>
+      </div>
+    </div>
+  );
+
+  const TRAIT_CATS=["Mente","Social","Espíritu","Carácter","Naturaleza"];
+
+  return(
+    <div style={S.wrap}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}input{outline:none}`}</style>
+
+      <div style={S.card}>
+        {/* Logo */}
+        <div style={{fontFamily:"'Lora',serif",fontSize:"32px",color:"#D4A853",letterSpacing:"0.22em",marginBottom:"24px",textAlign:"center"}}>inbetweens</div>
+
+        {/* Progress */}
+        {step>0&&(
+          <div style={{display:"flex",gap:"4px",marginBottom:"20px",justifyContent:"center"}}>
+            {STEPS.slice(1).map((s,i)=>(
+              <div key={i} style={{height:"3px",flex:1,borderRadius:"2px",background:i<step-0?"rgba(212,168,83,0.8)":"#1A1208",transition:"background 0.3s"}}/>
             ))}
           </div>
-        </div>)}
-      </div>
-      <button onClick={next} disabled={!canNext} style={{marginTop:"20px",padding:"10px 36px",borderRadius:"24px",border:"none",background:canNext?"#D4A853":"#1A1008",color:canNext?"#0F0A06":"#3D2B1F",fontSize:"11px",fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",cursor:canNext?"pointer":"not-allowed",transition:"all 0.2s"}}>
-        {step===2?"✨ Llegar a Veloria":"Continuar →"}
-      </button>
-      {hasSaves&&step===0&&(
-        <button onClick={()=>setShowLoad(true)} style={{marginTop:"10px",padding:"8px 28px",borderRadius:"24px",border:"1px solid #2C1F14",background:"transparent",color:"#5C4030",fontSize:"10px",cursor:"pointer",letterSpacing:"0.1em",textTransform:"uppercase"}}>
-          📂 Cargar partida guardada
+        )}
+
+        {/* Back */}
+        {step>0&&<button style={S.backBtn} onClick={()=>setStep(s=>s-1)}>← {STEPS[step-1]||"Atrás"}</button>}
+
+        {/* ── STEP 0: BIENVENIDA ── */}
+        {step===0&&(
+          <div style={{textAlign:"center"}}>
+            <div style={{fontSize:"11px",color:"#3D2B1F",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"16px"}}>Otherwhen · Veloria</div>
+            <div style={{fontFamily:"'Lora',serif",fontSize:"18px",color:"#A08060",lineHeight:"1.7",marginBottom:"24px",fontStyle:"italic"}}>
+              "Hay lugares que existen porque alguien decidió que existieran.<br/>Veloria es uno de esos lugares."
+            </div>
+            <div style={{fontSize:"11px",color:"#5C4030",lineHeight:"1.7",marginBottom:"28px"}}>
+              Un mundo de simulación de vida en el mundo de Otherwhen.<br/>
+              Cada Twin que llega a Veloria trae su historia.<br/>
+              Esta es la tuya.
+            </div>
+            {hasSaves&&<button onClick={()=>setShowLoad(true)} style={{...S.btn(false),marginBottom:"10px",width:"100%"}}>📂 Cargar partida</button>}
+          </div>
+        )}
+
+        {/* ── STEP 1: IDENTIDAD ── */}
+        {step===1&&(
+          <div>
+            <div style={S.title}>Tu Twin</div>
+            <div style={S.sub}>¿Cómo se va a llamar tu Twin en Veloria?</div>
+            <input value={name} onChange={e=>setName(e.target.value)} placeholder="Nombre de tu Twin"
+              style={{width:"100%",background:"transparent",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px 16px",color:"#EDE0CC",fontSize:"14px",fontFamily:"'Lora',serif",marginBottom:"20px"}}/>
+            <div style={S.label}>Pronombres</div>
+            <div style={{display:"flex",gap:"8px",marginBottom:"8px"}}>
+              {PRONOUN_OPTS.map(p=>(
+                <button key={p.id} onClick={()=>setPronouns(p.id)} style={{...S.btn(pronouns===p.id),flex:1}}>{p.label}</button>
+              ))}
+            </div>
+            <div style={{fontSize:"9px",color:"#2C1F14",marginTop:"6px"}}>Esto afecta la narrativa del juego.</div>
+          </div>
+        )}
+
+        {/* ── STEP 2: ORIGEN ── */}
+        {step===2&&(
+          <div>
+            <div style={S.title}>Origen</div>
+            <div style={S.sub}>¿De dónde viene tu Twin? Esto afecta tus habilidades iniciales y a quién ya conocés.</div>
+            <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
+              {ORIGINS.map(o=>{
+                const sel=origin===o.id;
+                return(
+                  <button key={o.id} onClick={()=>setOrigin(o.id)}
+                    style={{textAlign:"left",padding:"14px",borderRadius:"12px",border:`1px solid ${sel?"#D4A853":"#1A1208"}`,background:sel?"rgba(212,168,83,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"6px"}}>
+                      <span style={{fontSize:"20px"}}>{o.emoji}</span>
+                      <div>
+                        <div style={{fontSize:"13px",color:sel?"#D4A853":"#8B7355",fontWeight:600}}>{o.label}</div>
+                        <div style={{fontSize:"9px",color:"#5C4030"}}>{o.bonusLabel}</div>
+                      </div>
+                    </div>
+                    <div style={{fontSize:"10px",color:sel?"#A08060":"#3D2B1F",lineHeight:"1.5",fontStyle:"italic"}}>"{o.lore}"</div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── STEP 3: RASGOS ── */}
+        {step===3&&(
+          <div>
+            <div style={S.title}>Rasgos</div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"16px"}}>
+              <div style={S.sub}>Elegí 3 rasgos que definen a tu Twin.</div>
+              <div style={{fontSize:"12px",color:traits.length===3?"#D4A853":"#5C4030",fontWeight:600,flexShrink:0}}>{traits.length}/3</div>
+            </div>
+            {TRAIT_CATS.map(cat=>{
+              const catTraits=TRAITS.filter(t=>t.cat===cat);
+              if(!catTraits.length)return null;
+              return(
+                <div key={cat} style={{marginBottom:"14px"}}>
+                  <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"7px"}}>{cat}</div>
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"5px"}}>
+                    {catTraits.map(t=>{
+                      const sel=traits.includes(t.id);
+                      const disabled=!sel&&traits.length>=3;
+                      return(
+                        <button key={t.id} onClick={()=>!disabled&&toggleTrait(t.id)}
+                          style={{textAlign:"left",padding:"9px 10px",borderRadius:"9px",border:`1px solid ${sel?"#D4A853":"#1A1208"}`,background:sel?"rgba(212,168,83,0.08)":"transparent",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.35:1,transition:"all 0.12s"}}>
+                          <div style={{display:"flex",gap:"6px",alignItems:"center",marginBottom:"2px"}}>
+                            <span style={{fontSize:"14px"}}>{t.emoji}</span>
+                            <span style={{fontSize:"11px",color:sel?"#D4A853":"#8B7355",fontWeight:600}}>{t.label}</span>
+                          </div>
+                          <div style={{fontSize:"8px",color:sel?"#A08060":"#3D2B1F",lineHeight:"1.3"}}>{t.effectLabel}</div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* ── STEP 4: ASPIRACIÓN ── */}
+        {step===4&&(
+          <div>
+            <div style={S.title}>Aspiración</div>
+            <div style={S.sub}>El objetivo de fondo de tu Twin en Veloria. Define los hitos de tu historia.</div>
+            <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
+              {ASPIRATIONS.map(a=>{
+                const sel=aspiration===a.id;
+                return(
+                  <button key={a.id} onClick={()=>setAspiration(a.id)}
+                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1px solid ${sel?"#D4A853":"#1A1208"}`,background:sel?"rgba(212,168,83,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s"}}>
+                    <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"4px"}}>
+                      <span style={{fontSize:"18px"}}>{a.emoji}</span>
+                      <div style={{fontSize:"13px",color:sel?"#D4A853":"#8B7355",fontWeight:600}}>{a.label}</div>
+                    </div>
+                    <div style={{fontSize:"10px",color:sel?"#A08060":"#3D2B1F",marginBottom:sel?"8px":"0",lineHeight:"1.4"}}>{a.desc}</div>
+                    {sel&&(
+                      <div style={{display:"flex",flexDirection:"column",gap:"3px"}}>
+                        {a.milestones.map((m,i)=>(
+                          <div key={m.id} style={{display:"flex",gap:"6px",alignItems:"center"}}>
+                            <span style={{fontSize:"8px",color:"#2C1F14"}}>○</span>
+                            <span style={{fontSize:"9px",color:"#5C4030"}}>{m.label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── STEP 5: CONEXIÓN ── */}
+        {step===5&&(
+          <div>
+            <div style={S.title}>Primera conexión</div>
+            <div style={S.sub}>¿A quién ya conocés cuando llegás a Veloria? Empieza con 25 de amistad.</div>
+            <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
+              {CONNECTIONS.map(c=>{
+                const sel=connection===c.npc;
+                return(
+                  <button key={c.npc} onClick={()=>setConnection(c.npc)}
+                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1px solid ${sel?"#D4A853":"#1A1208"}`,background:sel?"rgba(212,168,83,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s",display:"flex",gap:"12px",alignItems:"center"}}>
+                    <span style={{fontSize:"22px",flexShrink:0}}>{c.emoji}</span>
+                    <div>
+                      <div style={{fontSize:"12px",color:sel?"#D4A853":"#8B7355",fontWeight:600,marginBottom:"2px"}}>{c.npc}</div>
+                      <div style={{fontSize:"10px",color:sel?"#A08060":"#3D2B1F",lineHeight:"1.4"}}>{c.desc}</div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── STEP 6: RESUMEN ── */}
+        {step===6&&(()=>{
+          const asp=ASPIRATIONS.find(a=>a.id===aspiration);
+          const orig=ORIGINS.find(o=>o.id===origin);
+          const selTraits=TRAITS.filter(t=>traits.includes(t.id));
+          return(
+            <div>
+              <div style={S.title}>Tu Twin está listo/a</div>
+              <div style={S.sub}>Así llega {name} a Veloria.</div>
+              <div style={{background:"rgba(212,168,83,0.04)",border:"1px solid #2C1F14",borderRadius:"12px",padding:"16px",display:"flex",flexDirection:"column",gap:"10px"}}>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Nombre</span>
+                  <span style={{fontSize:"12px",color:"#A08060",fontWeight:600}}>{name} ({pronouns})</span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Origen</span>
+                  <span style={{fontSize:"12px",color:"#A08060"}}>{orig?.emoji} {orig?.label}</span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px"}}>
+                  <span style={{fontSize:"11px",color:"#3D2B1F",flexShrink:0}}>Rasgos</span>
+                  <div style={{display:"flex",gap:"5px",flexWrap:"wrap",justifyContent:"flex-end"}}>
+                    {selTraits.map(t=><span key={t.id} style={{fontSize:"10px",color:"#8B7355",background:"rgba(212,168,83,0.08)",border:"1px solid #2C1F14",borderRadius:"6px",padding:"2px 7px"}}>{t.emoji} {t.label}</span>)}
+                  </div>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Aspiración</span>
+                  <span style={{fontSize:"12px",color:"#A08060"}}>{asp?.emoji} {asp?.label}</span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Primera conexión</span>
+                  <span style={{fontSize:"12px",color:"#A08060"}}>{connection}</span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Empieza como</span>
+                  <span style={{fontSize:"12px",color:"#A08060"}}>🌱 Joven Adulto/a (día 1/14)</span>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* Next / Start button */}
+        <button onClick={step===6?handleFinish:()=>setStep(s=>s+1)} disabled={!canNext}
+          style={{...S.nextBtn,opacity:canNext?1:0.35,cursor:canNext?"pointer":"not-allowed"}}>
+          {step===0?"Crear mi Twin →":step===6?"✨ Llegar a Veloria":"Continuar →"}
         </button>
-      )}
+      </div>
     </div>
   );
 }
+
 
 // ═══════════════════ MAIN GAME ═══════════════════
 export default function InbetweensGame(){
@@ -1650,9 +2217,14 @@ export default function InbetweensGame(){
   const [placedFurniture,setPlacedFurniture]=useState([]);
   const [usedOnce,setUsedOnce]=useState(new Set());
   const [showLegacy,setShowLegacy]=useState(false);
+  const [pendingNPCDialogue,setPendingNPCDialogue]=useState(null);
+  const [aspirationProgress,setAspirationProgress]=useState([]);
+  const [visitedPlaces,setVisitedPlaces]=useState(new Set(["Tu apartamento"]));
   const logEnd=useRef(null);
   const lastEventDay=useRef(0);
   const lastAgeMilestone=useRef(0);
+  const lastNPCDay=useRef(0);
+  const npcCooldowns=useRef({});
   useEffect(()=>{logEnd.current?.scrollIntoView({behavior:"smooth"});},[log]);
 
   // ── Random world events ──
@@ -1675,31 +2247,103 @@ export default function InbetweensGame(){
     setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,text,type:"world_event",place:"Veloria · "+toTimeStr(gt.hour)}]);
   },[gt.day]);
 
-  // ── Age milestones + death ──
+  // ── Stage transitions + death ──
   useEffect(()=>{
     if(phase!=="playing"||!twin)return;
-    const age=(twin.startAge||22)+Math.floor((gt.day-1)/30);
-    const milestone=AGE_MILESTONES.find(m=>m>lastAgeMilestone.current&&m<=age);
-    if(milestone){
-      lastAgeMilestone.current=milestone;
-      const txt=getNarrative(`age:${milestone}`)||`Cumplís ${milestone} años en Veloria.`;
-      setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,text:txt,type:"intro",place:"Veloria"}]);
+    const daysLived=PLAYER_START_DAYS+(gt.day-1);
+    const prevDays=daysLived-1;
+    const cur=getLifeStage(daysLived);
+    const prev=getLifeStage(prevDays);
+    // Stage transition notification
+    if(cur.id!==prev.id&&gt.day>1){
+      const txt=getNarrative(`stage:${cur.id}`)||`Nueva etapa: ${cur.label}.`;
+      setLog(prev=>[ ...prev,{id:Date.now()+Math.random(),day:gt.day,text:txt,type:"intro",place:"Veloria"}]);
     }
-    // Death check (age 80+, 2% per day)
-    if(age>=80&&Math.random()<0.02){
-      setShowLegacy(true);
-    }
+    // Death during Anciano stage (10 days: 49-59)
+    if(daysLived>=TOTAL_LIFESPAN){setShowLegacy(true);return;}
+    const daysInAnciano=daysLived-49;
+    if(daysInAnciano>=8&&Math.random()<0.4)setShowLegacy(true);
+    else if(daysInAnciano>=5&&Math.random()<0.2)setShowLegacy(true);
+    else if(daysInAnciano>=2&&Math.random()<0.07)setShowLegacy(true);
   },[gt.day]);
 
-  // ── Skill XP helper (with life stage + housing multipliers) ──
+  // ── NPC autonomy ──
+  useEffect(()=>{
+    if(phase!=="playing"||gt.day<=lastNPCDay.current+2||pendingNPCDialogue)return;
+    if(Math.random()>0.28)return;
+    const daysLived=PLAYER_START_DAYS+(gt.day-1);
+    const eligible=NPC_AUTONOMY.filter(ev=>{
+      const fr=rels[ev.npc]?.friendship||0;
+      if(fr<(ev.reqFriendship||ev.reqFr||0))return false;
+      if(ev.reqAge&&daysLived<ev.reqAge)return false;
+      if(ev.reqSkill){const[sk,lv]=ev.reqSkill.split(":");if(getSkillLevel(skills[sk]||0)<parseInt(lv))return false;}
+      if(ev.once&&usedOnce.has(ev.id))return false;
+      const lastFired=npcCooldowns.current[ev.id]||0;
+      if(gt.day-lastFired<(ev.cooldown||15))return false;
+      return true;
+    });
+    if(!eligible.length)return;
+    const ev=pick(eligible);
+    lastNPCDay.current=gt.day;
+    npcCooldowns.current[ev.id]=gt.day;
+    if(ev.once)setUsedOnce(prev=>new Set([...prev,ev.id]));
+    setPendingNPCDialogue(ev);
+  },[gt.day]);
+
+  // ── Dialogue response ──
+  function handleDialogueResponse(opt){
+    const ev=pendingNPCDialogue;
+    setPendingNPCDialogue(null);
+    if(!ev)return;
+    // Apply friendship delta
+    if(opt.fr&&ev.npc){
+      setRels(prev=>({...prev,[ev.npc]:{...prev[ev.npc],
+        friendship:clamp((prev[ev.npc]?.friendship||0)+opt.fr),
+        history:[...(prev[ev.npc]?.history||[]).slice(-4),`Respondiste a su mensaje`]
+      }}));
+    }
+    // Apply skill XP if any
+    if(opt.xp)applySkillXP(opt.xp);
+    // Add narrative entry
+    const text=getNarrative(opt.nKey||"default",{NPC:ev.npc?.split(" ")[0]||""});
+    setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,text,type:"story",place:loc.place,time:toTimeStr(gt.hour+0.5)}]);
+    tick(0.5,{social:10,diversion:8});
+    // Navigate if option includes it
+    if(opt.navigate)handleGoTo(opt.navigate.hood,opt.navigate.place);
+  }
+
+  // ── Milestone checker ──
+  useEffect(()=>{
+    if(phase!=="playing"||!twin)return;
+    const asp=ASPIRATIONS.find(a=>a.id===twin.aspiration);
+    if(!asp)return;
+    const state={rels,family,skills,career,money,housing,day:gt.day,usedOnce,visitedPlaces};
+    const newCompleted=[...aspirationProgress];
+    for(let i=newCompleted.length;i<asp.milestones.length;i++){
+      if(asp.milestones[i].check(state)){
+        newCompleted.push(asp.milestones[i].id);
+        setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,
+          text:`✦ Objetivo cumplido: *${asp.milestones[i].label}*.${i===asp.milestones.length-1?" Completaste tu aspiración de "+asp.label+". Veloria te recordará.":""}`,
+          type:"intro"}]);
+      } else break;
+    }
+    if(newCompleted.length!==aspirationProgress.length)setAspirationProgress(newCompleted);
+  },[rels,family,skills,career,money,housing,gt.day,usedOnce,visitedPlaces]);
   function applySkillXP(gains){
-    const age=(twin?.startAge||22)+Math.floor((gt.day-1)/30);
-    const stage=getLifeStage(age);
+    const daysLived=PLAYER_START_DAYS+(gt.day-1);
+    const stage=getLifeStage(daysLived);
     const housingEff=getHousingEffects(housing,placedFurniture);
+    const hour=((gt.hour%24)+24)%24;
+    const isNight=hour>=21||hour<6;
     const adjusted={};
     for(const[skill,xp]of Object.entries(gains)){
       let mult=stage.skillMult;
       if(housingEff.skillBonus[skill])mult*=housingEff.skillBonus[skill];
+      for(const tid of(twin?.traits||[])){
+        const t=TRAITS.find(x=>x.id===tid);
+        if(t?.bonus?.skillMult?.[skill])mult*=t.bonus.skillMult[skill];
+        if(t?.bonus?.nightXPMult&&isNight)mult*=t.bonus.nightXPMult;
+      }
       adjusted[skill]=Math.max(1,Math.round(xp*mult));
     }
     const{next,levelUps}=computeSkillXP(skills,adjusted);
@@ -1753,8 +2397,8 @@ export default function InbetweensGame(){
 
   const addEntry=e=>setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,...e}]);
   const tick=(hours,changes={})=>{
-    const age=(twin?.startAge||22)+Math.floor((gt.day-1)/30);
-    const dm=getLifeStage(age).decayMult;
+    const daysLived=PLAYER_START_DAYS+(gt.day-1);
+    const dm=getLifeStage(daysLived).decayMult;
     const hb=getHousingEffects(housing,placedFurniture).needBonus;
     const b=(need,ch)=>clamp((ch||0)+(ch>0?hb[need]||0:0));
     setNeeds(prev=>({
@@ -1797,7 +2441,7 @@ export default function InbetweensGame(){
   function handleContinueAsChild(child){
     setShowLegacy(false);
     const childTraits=child.traits||["curioso","libre","empático"];
-    setTwin({name:child.name,traits:childTraits,aspiration:"familia",startAge:0});
+    setTwin({name:child.name,traits:childTraits,aspiration:"familia"});
     setNeeds({hambre:80,sueno:80,higiene:80,social:60,diversion:60,vejiga:80});
     setMoney(Math.floor(money*0.3));
     setGt({hour:8,day:1,monthIdx:0});
@@ -1809,9 +2453,28 @@ export default function InbetweensGame(){
   }
 
   async function handleStart(twinData){
-    setTwin({...twinData,startAge:START_AGE[twinData.aspiration]||22});setPhase("playing");setLoading(true);
+    const orig=twinData._origin;
+    const conn=twinData._connection;
+    // Apply origin skill bonuses
+    const initSkills={pesca:0,cocina:0,arte:0,carisma:0,naturaleza:0,conocimiento:0};
+    if(orig?.bonus?.skills){for(const[sk,xp]of Object.entries(orig.bonus.skills))initSkills[sk]=(initSkills[sk]||0)+xp;}
+    setSkills(initSkills);
+    // Apply origin + first connection friendship
+    const initRels={};
+    if(orig?.bonus?.friendship){for(const[npc,fr]of Object.entries(orig.bonus.friendship))initRels[npc]={friendship:fr,history:["Se conocen del barrio de origen"]};}
+    if(conn){const c=twinData._connectionData;initRels[conn]={...(initRels[conn]||{}),friendship:Math.max(initRels[conn]?.friendship||0,25),history:["Primera conexión en Veloria"]};}
+    setRels(initRels);
+    // Starting inventory
+    const startInv=[{id:1,name:"Té Miren",type:"food",emoji:"🍵",qty:2,desc:"Una taza.",useable:true},{id:2,name:"Pan Velin",type:"food",emoji:"🥐",qty:1,desc:"Pan de Veloria.",useable:true}];
+    if(orig?.bonus?.item){startInv.push({id:Date.now(),...orig.bonus.item});}
+    setInventory(startInv);
+    setTwin({...twinData});
+    setPhase("playing");setLoading(true);
     await sleep(500);
-    addEntry({text:getNarrative(`intro:${twinData.aspiration}`),type:"intro",place:"Tu apartamento",time:"08:00"});
+    const aspLabel=ASPIRATIONS.find(a=>a.id===twinData.aspiration)?.label||"";
+    const connLine=conn?`\n\nEn el café de abajo, ${conn.split(" ")[0]} ya sabe tu nombre.`:"";
+    const txt=getNarrative(`intro:${twinData.aspiration}`)||`El apartamento en La Vega es exactamente lo que esperabas y también algo más.`;
+    addEntry({text:txt+connLine,type:"intro",place:"Tu apartamento",time:"08:00"});
     setLoading(false);
   }
   async function handleAction(action){
@@ -1833,8 +2496,23 @@ export default function InbetweensGame(){
       if(action.id==="cook")addInvItem({name:"Comida casera",type:"food",emoji:"🍲",desc:"Cocinado en casa con especias de Veloria.",useable:true});
       if(action.id==="buy_book")addInvItem({name:"Libro de Veloria",type:"book",emoji:"📖",desc:"Una historia del mundo de Otherwhen.",useable:false});
       if(action.id==="fish")addInvItem({name:"Mirenpez fresco",type:"fish",emoji:"🐟",desc:"Pescado esta mañana en el Lago Miren.",useable:false});
+      if(action.id==="tienda_basicos")addInvItem({name:"Provisiones",type:"food",emoji:"🛒",desc:"Lo necesario de la tienda de La Vega.",useable:true});
+      if(action.id==="pan_comprar"||action.id==="pan_desayuno")addInvItem({name:"Pan Velin",type:"food",emoji:"🥐",desc:"Recién horneado en la Panadería Velin.",useable:true});
+      if(action.id==="merc_unico")addInvItem({name:"Objeto del Mercadillo",type:"other",emoji:"🛍",desc:"Algo único de La Vega. No sabés bien para qué sirve.",useable:false});
+      if(action.id==="jardin_cosechar")addInvItem({name:"Cosecha del jardín",type:"food",emoji:"🥬",desc:"Cultivado en el Jardín Comunitario de La Vega.",useable:true});
       if(ACTION_SKILL_XP[action.id])applySkillXP(ACTION_SKILL_XP[action.id]);
-      addEntry({text:getNarrative(action.id)||getNarrative("default"),type:"story",place:loc.place,time:toTimeStr(gt.hour+(action.time||0.5))});
+      else if(ACTION_SKILL_XP_EXTRA[action.id])applySkillXP(ACTION_SKILL_XP_EXTRA[action.id]);
+      // Narrative key map for new La Vega actions
+      const NK_MAP={terr_amanecer:"terr:amanecer",terr_escribir:"terr:escribir",terr_estrellas:"terr:estrellas",terr_huerto:"terr:huerto",
+        tienda_basicos:"tienda:basicos",tienda_ropa:"tienda:ropa",tienda_charlar:"tienda:charlar",
+        jardin_plantar:"jardin:plantar",jardin_cosechar:"jardin:cosechar",jardin_pasear:"jardin:pasear",
+        pan_comprar:"pan:comprar",pan_desayuno:"pan:desayuno",pan_ver_hacer:"pan:ver_hacer",
+        estudio_pintar:"estudio:pintar",estudio_ver:"estudio:ver",estudio_conocer:"estudio:conocer",estudio_tecnica:"estudio:tecnica",
+        bar_lumaven:"bar:lumaven",bar_musica:"bar:musica",bar_conocer:"bar:conocer",bar_mirone:"bar:mirone",
+        merc_unico:"merc:unico",merc_frescos:"merc:frescos",merc_charlar:"merc:charlar",
+        gym_entrenar:"gym:entrenar",gym_natacion:"gym:natacion"};
+      const nKey=NK_MAP[action.id]||action.id;
+      addEntry({text:getNarrative(nKey)||getNarrative("default"),type:"story",place:loc.place,time:toTimeStr(gt.hour+(action.time||0.5))});
     }
     setLoading(false);
   }
@@ -1923,7 +2601,9 @@ export default function InbetweensGame(){
   }
   async function handleGoTo(hood,place){
     if(loading||(loc.hood===hood&&loc.place===place))return;
-    setLoc({hood,place});setLoading(true);await sleep(300);
+    setLoc({hood,place});
+    setVisitedPlaces(prev=>new Set([...prev,place]));
+    setLoading(true);await sleep(300);
     tick(loc.hood!==hood?0.5:0.2,{});
     addEntry({text:getNarrative(`travel:${place}`)||`Llegás a ${place}.`,type:"travel",place,time:toTimeStr(gt.hour+(loc.hood!==hood?0.5:0.2))});
     setLoading(false);
@@ -1935,8 +2615,9 @@ export default function InbetweensGame(){
   if(phase==="creation")return<CreationScreen onStart={handleStart} onLoad={loadFromSlot}/>;
 
   const hoodColor=(NEIGHBORHOODS[loc.hood]||{}).color||"#D4A853";
-  const currentAge=(twin?.startAge||22)+Math.floor((gt.day-1)/30);
-  const lifeStage=getLifeStage(currentAge);
+  const currentDaysLived=PLAYER_START_DAYS+(gt.day-1);
+  const lifeStage=getLifeStage(currentDaysLived);
+  const {inStage:daysInCurrentStage,ofStage:daysInStageTotal}=getDaysInStage(currentDaysLived);
   const TABS=[{id:"acciones",label:"Acciones",emoji:"🎮"},{id:"social",label:"Social",emoji:"💬"},{id:"trabajo",label:"Trabajo",emoji:"💼"},{id:"hogar",label:"Hogar",emoji:"🏠"},{id:"mapa",label:"Mapa",emoji:"🗺"},{id:"diario",label:"Diario",emoji:"📖"}];
   const currentEvent=CALENDAR_EVENTS[gt.monthIdx];
   const npcsHere=(getNPCsAtPlace(loc.place,gt.hour)||[]).filter(n=>rels[n]);
@@ -1948,6 +2629,7 @@ export default function InbetweensGame(){
 
       {showPausa&&<PausaModal onClose={()=>setShowPausa(false)} onSave={saveToSlot} onLoad={loadFromSlot} onReset={resetGame} log={log} gt={gt} twin={twin}/>}
       {showLegacy&&<LegacyScreen twin={twin} gt={gt} skills={skills} rels={rels} family={family} children={family.children} onContinueAsChild={handleContinueAsChild} onNewGame={resetGame}/>}
+      {pendingNPCDialogue&&<DialogueModal event={pendingNPCDialogue} onRespond={handleDialogueResponse}/>}
       {namingChild&&(
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.8)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100}}>
           <div style={{background:"#1A1208",border:"1px solid #3D2B1F",borderRadius:"16px",padding:"28px",width:"300px",textAlign:"center"}}>
@@ -1978,7 +2660,7 @@ export default function InbetweensGame(){
 
       {/* MAIN: character card + narrative */}
       <div style={{display:"flex",flex:1,overflow:"hidden"}}>
-        <CharacterCard twin={twin} needs={needs} money={money} gt={gt} rels={rels} family={family} skills={skills} currentAge={currentAge} lifeStage={lifeStage}/>
+        <CharacterCard twin={twin} needs={needs} money={money} gt={gt} rels={rels} family={family} skills={skills} currentDaysLived={currentDaysLived} daysInStage={daysInCurrentStage} daysInStageTotal={daysInStageTotal} lifeStage={lifeStage} aspirationProgress={aspirationProgress}/>
         <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
           {/* NPCs present indicator */}
           {npcsHere.length>0&&(
