@@ -5,13 +5,40 @@ const bento=(bg=C.white,border=C.border)=>({borderRadius:"16px",background:bg,bo
 
 function SplashScreen({onEnter}){
   const [ready,setReady]=useState(false);
-  useEffect(()=>{const t=setTimeout(()=>setReady(true),600);return()=>clearTimeout(t);},[]);
+  const hasSaves=anySaveExists();
+  useEffect(()=>{const t=setTimeout(()=>setReady(true),400);return()=>clearTimeout(t);},[]);
   return(
-    <div onClick={onEnter} style={{position:"fixed",inset:0,cursor:"pointer",backgroundImage:"url('/splash.jpg')",backgroundSize:"cover",backgroundPosition:"center bottom",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"flex-end",padding:"0 24px 60px",userSelect:"none"}}>
+    <div style={{minHeight:"100vh",background:"#F5EDE0",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"40px 24px",fontFamily:"'Fredoka',sans-serif"}}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');*{box-sizing:border-box}`}</style>
-      <img src="/logo.png" alt="Inbetweens" style={{height:76,marginBottom:16,filter:"drop-shadow(0 4px 16px rgba(0,0,0,0.4))",opacity:ready?1:0,transform:ready?"translateY(0)":"translateY(10px)",transition:"opacity 0.7s,transform 0.7s",transitionDelay:"0.1s"}}/>
-      <div style={{fontSize:11,color:"rgba(255,255,255,0.75)",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:28,fontFamily:"'Nunito',sans-serif",opacity:ready?1:0,transition:"opacity 0.7s",transitionDelay:"0.3s"}}>Otherwhen Studios</div>
-      <div style={{padding:"12px 32px",borderRadius:28,background:"rgba(255,255,255,0.22)",backdropFilter:"blur(8px)",border:"1.5px solid rgba(255,255,255,0.5)",color:"white",fontSize:14,fontWeight:600,fontFamily:"'Fredoka',sans-serif",opacity:ready?1:0,transition:"opacity 0.7s",transitionDelay:"0.5s"}}>✦ Tocá para comenzar</div>
+      {/* Logo */}
+      <img src="/logo.png" alt="Inbetweens" style={{height:90,marginBottom:8,opacity:ready?1:0,transform:ready?"translateY(0)":"translateY(-10px)",transition:"opacity 0.6s,transform 0.6s"}}/>
+      {/* Tagline */}
+      <div style={{fontSize:11,color:"#B8907A",letterSpacing:"0.22em",textTransform:"uppercase",marginBottom:32,opacity:ready?1:0,transition:"opacity 0.6s",transitionDelay:"0.15s",fontFamily:"'Nunito',sans-serif"}}>Otherwhen · Veloria</div>
+      {/* Quote */}
+      <div style={{fontFamily:"'Lora',serif",fontSize:16,color:"#7A5840",fontStyle:"italic",textAlign:"center",lineHeight:1.7,maxWidth:320,marginBottom:40,opacity:ready?1:0,transition:"opacity 0.6s",transitionDelay:"0.25s"}}>
+        "Hay lugares que existen porque alguien decidió que existieran.<br/>Veloria es uno de esos lugares."
+      </div>
+      {/* Description */}
+      <div style={{fontSize:12,color:"#B8907A",textAlign:"center",lineHeight:1.6,marginBottom:40,opacity:ready?1:0,transition:"opacity 0.6s",transitionDelay:"0.35s",fontFamily:"'Nunito',sans-serif"}}>
+        Un mundo de simulación de vida en Otherwhen.<br/>
+        Cada Twin que llega a Veloria trae su historia.<br/>
+        Esta es la tuya.
+      </div>
+      {/* Buttons */}
+      <div style={{display:"flex",flexDirection:"column",gap:10,width:"100%",maxWidth:320,opacity:ready?1:0,transition:"opacity 0.6s",transitionDelay:"0.45s"}}>
+        {hasSaves&&(
+          <button onClick={()=>onEnter("load")}
+            style={{padding:"13px 24px",borderRadius:"14px",border:"1.5px solid #E0D4C8",background:"#FFFFFF",color:"#7A5840",fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>
+            📂 Cargar partida
+          </button>
+        )}
+        <button onClick={()=>onEnter("new")}
+          style={{padding:"13px 24px",borderRadius:"14px",border:"none",background:"#F5A623",color:"#FFFFFF",fontSize:"15px",fontWeight:700,cursor:"pointer",fontFamily:"'Fredoka',sans-serif",boxShadow:"0 4px 16px rgba(245,166,35,0.35)"}}>
+          Crear mi Twin →
+        </button>
+      </div>
+      {/* Studio */}
+      <div style={{position:"absolute",bottom:24,fontSize:10,color:"#D4C4B0",letterSpacing:"0.15em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif"}}>Otherwhen Studios</div>
     </div>
   );
 }
@@ -1926,7 +1953,7 @@ function PausaModal({onClose,onSave,onLoad,onReset,log,gt,twin}){
 }
 
 // ═══════════════════ CREATION SCREEN ═══════════════════
-function CreationScreen({onStart,onLoad}){
+function CreationScreen({onStart,onLoad,defaultShowLoad}){
   const [step,setStep]=useState(0);
   const [name,setName]=useState("");
   const [pronouns,setPronouns]=useState("elle");
@@ -1934,27 +1961,25 @@ function CreationScreen({onStart,onLoad}){
   const [traits,setTraits]=useState([]);
   const [aspiration,setAspiration]=useState(null);
   const [connection,setConnection]=useState(null);
-  const [showLoad,setShowLoad]=useState(false);
-  const hasSaves=anySaveExists();
+  const [showLoad,setShowLoad]=useState(!!defaultShowLoad);
 
-  const STEPS=["Bienvenida","Identidad","Origen","Rasgos","Aspiración","Conexión","Resumen"];
+  const STEPS=["Identidad","Origen","Rasgos","Aspiración","Conexión","Resumen"];
   const PRONOUN_OPTS=[{id:"el",label:"Él"},{id:"ella",label:"Ella"},{id:"elle",label:"Elle"}];
   const CONNECTIONS=[
-    {npc:"Aria Ven",    emoji:"☕",desc:"La dueña del café de La Vega. Te conoce de vista, te guarda el lugar de siempre.",    fr:25},
-    {npc:"Oren Mirende",emoji:"⛵",desc:"El pescador de Ribera. Compartiste una tarde en el muelle sin decir mucho.",          fr:25},
-    {npc:"Soren Lume",  emoji:"📚",desc:"El librero de El Casco. Te recomendó un libro hace tiempo. Tenés una deuda pendiente.",fr:25},
-    {npc:"Bren Orlen",  emoji:"⚕️",desc:"El médico de Los Prados. Te cruzaste en el parque. Recordás su calma.",               fr:25},
+    {npc:"Aria Ven",    emoji:"☕",desc:"La dueña del café de La Vega. Ya sabe tu nombre.",fr:25},
+    {npc:"Oren Mirende",emoji:"⛵",desc:"El pescador de Ribera. Una tarde en el muelle.",fr:25},
+    {npc:"Soren Lume",  emoji:"📚",desc:"El librero de El Casco. Una deuda de un libro.",fr:25},
+    {npc:"Bren Orlen",  emoji:"⚕️",desc:"El médico de Los Prados. Una calma que recordás.",fr:25},
   ];
 
   const canNext=[
-    true, // bienvenida
-    name.trim().length>1, // identidad
-    !!origin, // origen
-    traits.length===3, // rasgos
-    !!aspiration, // aspiracion
-    !!connection, // conexion
-    true, // resumen
-  ][step];
+    name.trim().length>1,
+    !!origin,
+    traits.length===3,
+    !!aspiration,
+    !!connection,
+    true,
+  ][step]??false;
 
   function toggleTrait(id){
     if(traits.includes(id))setTraits(t=>t.filter(x=>x!==id));
@@ -1963,38 +1988,41 @@ function CreationScreen({onStart,onLoad}){
 
   function handleFinish(){
     const orig=ORIGINS.find(o=>o.id===origin);
-    onStart({
-      name:name.trim(),pronouns,origin,traits,aspiration,
-      _origin:orig,_connection:connection,
-    });
+    onStart({name:name.trim(),pronouns,origin,traits,aspiration,_origin:orig,_connection:connection});
   }
 
-  const S={
-    wrap:{minHeight:"100vh",background:"linear-gradient(155deg,#060402 0%,#120B06 60%,#0A0603 100%)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"24px 16px",fontFamily:"'DM Sans',sans-serif"},
-    card:{width:"100%",maxWidth:"420px",display:"flex",flexDirection:"column",gap:0},
-    title:{fontFamily:"'Lora',serif",fontSize:"24px",color:"#F5A623",marginBottom:"6px",letterSpacing:"0.02em"},
-    sub:{fontSize:"11px",color:"#B8907A",marginBottom:"20px",lineHeight:"1.5"},
-    label:{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.14em",marginBottom:"8px"},
-    btn:(active,color="#F5A623")=>({padding:"10px 24px",borderRadius:"24px",border:`1px solid ${active?color:"#D4C4B0"}`,background:active?`${color}18`:"transparent",color:active?color:"#BBA090",cursor:"pointer",fontSize:"12px",fontWeight:active?600:400,transition:"all 0.15s"}),
-    nextBtn:{padding:"11px 32px",borderRadius:"24px",border:"1px solid #D4A853",background:"rgba(245,166,35,0.1)",color:"#F5A623",cursor:"pointer",fontSize:"13px",fontWeight:600,marginTop:"20px",width:"100%"},
-    backBtn:{padding:"8px",border:"none",background:"transparent",color:"#BBA090",cursor:"pointer",fontSize:"11px",marginBottom:"16px",alignSelf:"flex-start"},
-  };
+  // ── Light theme styles ──
+  const WRAP={minHeight:"100vh",background:"#F5EDE0",display:"flex",flexDirection:"column",alignItems:"center",padding:"0",fontFamily:"'Fredoka',sans-serif",overflowY:"auto"};
+  const INNER={width:"100%",maxWidth:"440px",padding:"24px 20px"};
+  const INPUT={width:"100%",background:"#FFFFFF",border:"1.5px solid #E0D4C8",borderRadius:"12px",padding:"12px 16px",color:"#2C1A0E",fontSize:"16px",fontFamily:"'Lora',serif",outline:"none",marginBottom:"16px"};
+  const btn=(active,color="#F5A623")=>({padding:"10px 18px",borderRadius:"12px",border:`1.5px solid ${active?color:"#E0D4C8"}`,background:active?color:"#FFFFFF",color:active?"#FFFFFF":"#B8907A",cursor:"pointer",fontSize:"13px",fontWeight:active?700:500,transition:"all 0.15s",fontFamily:"'Fredoka',sans-serif"});
+  const NEXT=(disabled)=>({padding:"13px",borderRadius:"14px",border:"none",background:disabled?"#E0D4C8":"#F5A623",color:disabled?"#B8907A":"#FFFFFF",cursor:disabled?"not-allowed":"pointer",fontSize:"15px",fontWeight:700,marginTop:"20px",width:"100%",fontFamily:"'Fredoka',sans-serif",boxShadow:disabled?"none":"0 4px 14px rgba(245,166,35,0.3)"});
+  const BACK={padding:"6px 0",border:"none",background:"transparent",color:"#B8907A",cursor:"pointer",fontSize:"13px",alignSelf:"flex-start",fontFamily:"'Fredoka',sans-serif"};
+  const TITLE={fontSize:"24px",fontWeight:700,color:"#2C1A0E",marginBottom:"5px"};
+  const SUB={fontSize:"12px",color:"#B8907A",marginBottom:"18px",lineHeight:1.5,fontFamily:"'Nunito',sans-serif"};
+  const LABEL={fontSize:"10px",color:"#B8907A",textTransform:"uppercase",letterSpacing:"0.14em",marginBottom:"8px",fontFamily:"'Nunito',sans-serif",display:"block"};
+
+  const slotCard={background:"#FFFFFF",border:"1px solid #E0D4C8",borderRadius:"12px",padding:"12px 14px",marginBottom:"8px",display:"flex",alignItems:"center",gap:"10px"};
 
   if(showLoad)return(
-    <div style={S.wrap}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}`}</style>
-      <div style={{...S.card}}>
-        <div style={{fontFamily:"'Lora',serif",fontSize:"36px",color:"#F5A623",letterSpacing:"0.2em",marginBottom:"28px",textAlign:"center"}}>inbetweens</div>
-        <div style={S.label}>Partidas guardadas</div>
+    <div style={WRAP}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');*{box-sizing:border-box}`}</style>
+      <div style={INNER}>
+        {/* Header */}
+        <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"28px",paddingTop:"8px"}}>
+          <img src="/logo.png" alt="Inbetweens" style={{height:36}}/>
+        </div>
+        <div style={TITLE}>Partidas guardadas</div>
+        <div style={{...SUB,marginBottom:"20px"}}>Continuá donde lo dejaste.</div>
         {[0,1,2].map(s=>{const m=slotMeta(s);return(
-          <div key={s} style={{background:"rgba(245,166,35,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
-            <div style={{width:"24px",height:"24px",borderRadius:"5px",border:"1px solid #2C1F14",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",color:"#D4C4B0",flexShrink:0}}>{s+1}</div>
-            <div style={{flex:1}}>{m?<><div style={{fontSize:"11px",color:"#7A5840",fontWeight:600}}>{m.twinName}</div><div style={{fontSize:"9px",color:"#BBA090"}}>Día {m.day} · L {m.money} · {fmtDate(m.savedAt)}</div></>:<div style={{fontSize:"10px",color:"#D4C4B0",fontStyle:"italic"}}>Vacío</div>}</div>
-            {m&&<button onClick={()=>onLoad(s)} style={S.btn(true)}>Cargar</button>}
+          <div key={s} style={slotCard}>
+            <div style={{width:"26px",height:"26px",borderRadius:"8px",background:"#F5EDE0",border:"1px solid #E0D4C8",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",color:"#B8907A",flexShrink:0,fontFamily:"'Fredoka',sans-serif"}}>{s+1}</div>
+            <div style={{flex:1}}>{m?<><div style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600,fontFamily:"'Fredoka',sans-serif"}}>{m.twinName}</div><div style={{fontSize:"10px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>Día {m.day} · L {m.money} · {fmtDate(m.savedAt)}</div></>:<div style={{fontSize:"11px",color:"#D4C4B0",fontStyle:"italic",fontFamily:"'Nunito',sans-serif"}}>Vacío</div>}</div>
+            {m&&<button onClick={()=>onLoad(s)} style={btn(true)}>Cargar</button>}
           </div>
         );})}
-        {(()=>{try{const r=localStorage.getItem(AUTO_KEY);const auto=r?JSON.parse(r):null;if(!auto)return null;return(<div style={{background:"rgba(245,166,35,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}><div style={{fontSize:"14px",flexShrink:0}}>⚡</div><div style={{flex:1}}><div style={{fontSize:"11px",color:"#7A5840",fontWeight:600}}>Autosave · {auto.twin?.name}</div><div style={{fontSize:"9px",color:"#BBA090"}}>Día {auto.gt?.day} · {fmtDate(auto.savedAt)}</div></div><button onClick={()=>onLoad("auto")} style={S.btn(true)}>Cargar</button></div>);}catch{return null;}})()}
-        <button onClick={()=>setShowLoad(false)} style={{...S.btn(false),marginTop:"8px"}}>← Nueva partida</button>
+        {(()=>{try{const r=localStorage.getItem(AUTO_KEY);const auto=r?JSON.parse(r):null;if(!auto)return null;return(<div style={slotCard}><div style={{fontSize:"14px",flexShrink:0}}>⚡</div><div style={{flex:1}}><div style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600,fontFamily:"'Fredoka',sans-serif"}}>Autosave · {auto.twin?.name}</div><div style={{fontSize:"10px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>Día {auto.gt?.day} · {fmtDate(auto.savedAt)}</div></div><button onClick={()=>onLoad("auto")} style={btn(true)}>Cargar</button></div>);}catch{return null;}})()}
+        <button onClick={()=>setShowLoad(false)} style={{...btn(false),marginTop:"4px"}}>← Nueva partida</button>
       </div>
     </div>
   );
@@ -2002,77 +2030,62 @@ function CreationScreen({onStart,onLoad}){
   const TRAIT_CATS=["Mente","Social","Espíritu","Carácter","Naturaleza"];
 
   return(
-    <div style={S.wrap}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}input{outline:none}`}</style>
+    <div style={WRAP}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');*{box-sizing:border-box}input{outline:none}`}</style>
 
-      <div style={S.card}>
-        {/* Logo */}
-        <div style={{fontFamily:"'Lora',serif",fontSize:"32px",color:"#F5A623",letterSpacing:"0.22em",marginBottom:"24px",textAlign:"center"}}>inbetweens</div>
+      {/* Header with logo */}
+      <div style={{background:"#FFFFFF",borderBottom:"1px solid #E0D4C8",padding:"12px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",width:"100%",position:"sticky",top:0,zIndex:10}}>
+        <img src="/logo.png" alt="Inbetweens" style={{height:32}}/>
+        <div style={{fontSize:"10px",color:"#B8907A",letterSpacing:"0.15em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif"}}>Otherwhen · Veloria</div>
+      </div>
 
-        {/* Progress */}
-        {step>0&&(
-          <div style={{display:"flex",gap:"4px",marginBottom:"20px",justifyContent:"center"}}>
-            {STEPS.slice(1).map((s,i)=>(
-              <div key={i} style={{height:"3px",flex:1,borderRadius:"2px",background:i<step-0?"rgba(245,166,35,0.8)":"#E0D4C8",transition:"background 0.3s"}}/>
-            ))}
-          </div>
-        )}
+      <div style={{width:"100%",maxWidth:"440px",padding:"20px 20px 40px",margin:"0 auto"}}>
+        {/* Progress bar */}
+        <div style={{display:"flex",gap:"4px",marginBottom:"20px"}}>
+          {STEPS.map((s,i)=>(
+            <div key={i} style={{height:"4px",flex:1,borderRadius:"2px",background:i<=step?"#F5A623":"#E0D4C8",transition:"background 0.3s"}}/>
+          ))}
+        </div>
 
         {/* Back */}
-        {step>0&&<button style={S.backBtn} onClick={()=>setStep(s=>s-1)}>← {STEPS[step-1]||"Atrás"}</button>}
+        {step>0&&<button style={BACK} onClick={()=>setStep(s=>s-1)}>← {STEPS[step-1]}</button>}
 
-        {/* ── STEP 0: BIENVENIDA ── */}
+        {/* ── STEP 0: IDENTIDAD ── */}
         {step===0&&(
-          <div style={{textAlign:"center"}}>
-            <div style={{fontSize:"11px",color:"#BBA090",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"16px"}}>Otherwhen · Veloria</div>
-            <div style={{fontFamily:"'Lora',serif",fontSize:"18px",color:"#7A5840",lineHeight:"1.7",marginBottom:"24px",fontStyle:"italic"}}>
-              "Hay lugares que existen porque alguien decidió que existieran.<br/>Veloria es uno de esos lugares."
-            </div>
-            <div style={{fontSize:"11px",color:"#B8907A",lineHeight:"1.7",marginBottom:"28px"}}>
-              Un mundo de simulación de vida en el mundo de Otherwhen.<br/>
-              Cada Twin que llega a Veloria trae su historia.<br/>
-              Esta es la tuya.
-            </div>
-            {hasSaves&&<button onClick={()=>setShowLoad(true)} style={{...S.btn(false),marginBottom:"10px",width:"100%"}}>📂 Cargar partida</button>}
-          </div>
-        )}
-
-        {/* ── STEP 1: IDENTIDAD ── */}
-        {step===1&&(
           <div>
-            <div style={S.title}>Tu Twin</div>
-            <div style={S.sub}>¿Cómo se va a llamar tu Twin en Veloria?</div>
+            <div style={TITLE}>Tu Twin</div>
+            <div style={SUB}>¿Cómo se va a llamar tu Twin en Veloria?</div>
             <input value={name} onChange={e=>setName(e.target.value)} placeholder="Nombre de tu Twin"
-              style={{width:"100%",background:"transparent",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px 16px",color:"#2C1A0E",fontSize:"14px",fontFamily:"'Lora',serif",marginBottom:"20px"}}/>
-            <div style={S.label}>Pronombres</div>
-            <div style={{display:"flex",gap:"8px",marginBottom:"8px"}}>
+              style={INPUT}/>
+            <span style={LABEL}>Pronombres</span>
+            <div style={{display:"flex",gap:"8px"}}>
               {PRONOUN_OPTS.map(p=>(
-                <button key={p.id} onClick={()=>setPronouns(p.id)} style={{...S.btn(pronouns===p.id),flex:1}}>{p.label}</button>
+                <button key={p.id} onClick={()=>setPronouns(p.id)} style={{...btn(pronouns===p.id),flex:1}}>{p.label}</button>
               ))}
             </div>
-            <div style={{fontSize:"9px",color:"#D4C4B0",marginTop:"6px"}}>Esto afecta la narrativa del juego.</div>
+            <div style={{fontSize:"10px",color:"#D4C4B0",marginTop:"8px",fontFamily:"'Nunito',sans-serif"}}>Esto afecta la narrativa del juego.</div>
           </div>
         )}
 
-        {/* ── STEP 2: ORIGEN ── */}
-        {step===2&&(
+        {/* ── STEP 1: ORIGEN ── */}
+        {step===1&&(
           <div>
-            <div style={S.title}>Origen</div>
-            <div style={S.sub}>¿De dónde viene tu Twin? Esto afecta tus habilidades iniciales y a quién ya conocés.</div>
+            <div style={TITLE}>Origen</div>
+            <div style={SUB}>¿De dónde viene tu Twin? Define tus habilidades iniciales y primera conexión.</div>
             <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
               {ORIGINS.map(o=>{
                 const sel=origin===o.id;
                 return(
                   <button key={o.id} onClick={()=>setOrigin(o.id)}
-                    style={{textAlign:"left",padding:"14px",borderRadius:"12px",border:`1px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"rgba(245,166,35,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s"}}>
+                    style={{textAlign:"left",padding:"14px",borderRadius:"14px",border:`1.5px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"#FFF3DC":"#FFFFFF",cursor:"pointer",transition:"all 0.15s"}}>
                     <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"6px"}}>
                       <span style={{fontSize:"20px"}}>{o.emoji}</span>
                       <div>
-                        <div style={{fontSize:"13px",color:sel?"#F5A623":"#7A5840",fontWeight:600}}>{o.label}</div>
-                        <div style={{fontSize:"9px",color:"#B8907A"}}>{o.bonusLabel}</div>
+                        <div style={{fontSize:"14px",color:sel?"#F5A623":"#2C1A0E",fontWeight:700}}>{o.label}</div>
+                        <div style={{fontSize:"10px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>{o.bonusLabel}</div>
                       </div>
                     </div>
-                    <div style={{fontSize:"10px",color:sel?"#7A5840":"#BBA090",lineHeight:"1.5",fontStyle:"italic"}}>"{o.lore}"</div>
+                    <div style={{fontSize:"11px",color:sel?"#7A5840":"#B8907A",lineHeight:"1.5",fontStyle:"italic",fontFamily:"'Lora',serif"}}>"{o.lore}"</div>
                   </button>
                 );
               })}
@@ -2080,32 +2093,32 @@ function CreationScreen({onStart,onLoad}){
           </div>
         )}
 
-        {/* ── STEP 3: RASGOS ── */}
-        {step===3&&(
+        {/* ── STEP 2: RASGOS ── */}
+        {step===2&&(
           <div>
-            <div style={S.title}>Rasgos</div>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"16px"}}>
-              <div style={S.sub}>Elegí 3 rasgos que definen a tu Twin.</div>
-              <div style={{fontSize:"12px",color:traits.length===3?"#F5A623":"#B8907A",fontWeight:600,flexShrink:0}}>{traits.length}/3</div>
+            <div style={TITLE}>Rasgos</div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"14px"}}>
+              <div style={SUB}>Elegí 3 rasgos que definen a tu Twin.</div>
+              <div style={{fontSize:"13px",color:traits.length===3?"#F5A623":"#B8907A",fontWeight:600,flexShrink:0}}>{traits.length}/3</div>
             </div>
             {TRAIT_CATS.map(cat=>{
               const catTraits=TRAITS.filter(t=>t.cat===cat);
               if(!catTraits.length)return null;
               return(
                 <div key={cat} style={{marginBottom:"14px"}}>
-                  <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"7px"}}>{cat}</div>
-                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"5px"}}>
+                  <span style={LABEL}>{cat}</span>
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"6px"}}>
                     {catTraits.map(t=>{
                       const sel=traits.includes(t.id);
                       const disabled=!sel&&traits.length>=3;
                       return(
                         <button key={t.id} onClick={()=>!disabled&&toggleTrait(t.id)}
-                          style={{textAlign:"left",padding:"9px 10px",borderRadius:"9px",border:`1px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"rgba(245,166,35,0.08)":"transparent",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.35:1,transition:"all 0.12s"}}>
+                          style={{textAlign:"left",padding:"10px",borderRadius:"12px",border:`1.5px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"#FFF3DC":"#FFFFFF",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.4:1,transition:"all 0.12s"}}>
                           <div style={{display:"flex",gap:"6px",alignItems:"center",marginBottom:"2px"}}>
-                            <span style={{fontSize:"14px"}}>{t.emoji}</span>
-                            <span style={{fontSize:"11px",color:sel?"#F5A623":"#7A5840",fontWeight:600}}>{t.label}</span>
+                            <span style={{fontSize:"15px"}}>{t.emoji}</span>
+                            <span style={{fontSize:"12px",color:sel?"#F5A623":"#2C1A0E",fontWeight:700}}>{t.label}</span>
                           </div>
-                          <div style={{fontSize:"8px",color:sel?"#7A5840":"#BBA090",lineHeight:"1.3"}}>{t.effectLabel}</div>
+                          <div style={{fontSize:"9px",color:sel?"#B8907A":"#D4C4B0",fontFamily:"'Nunito',sans-serif"}}>{t.effectLabel}</div>
                         </button>
                       );
                     })}
@@ -2116,28 +2129,28 @@ function CreationScreen({onStart,onLoad}){
           </div>
         )}
 
-        {/* ── STEP 4: ASPIRACIÓN ── */}
-        {step===4&&(
+        {/* ── STEP 3: ASPIRACIÓN ── */}
+        {step===3&&(
           <div>
-            <div style={S.title}>Aspiración</div>
-            <div style={S.sub}>El objetivo de fondo de tu Twin en Veloria. Define los hitos de tu historia.</div>
+            <div style={TITLE}>Aspiración</div>
+            <div style={SUB}>El objetivo de fondo de tu Twin. Define los hitos de tu historia.</div>
             <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
               {ASPIRATIONS.map(a=>{
                 const sel=aspiration===a.id;
                 return(
                   <button key={a.id} onClick={()=>setAspiration(a.id)}
-                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"rgba(245,166,35,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s"}}>
+                    style={{textAlign:"left",padding:"13px 14px",borderRadius:"14px",border:`1.5px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"#FFF3DC":"#FFFFFF",cursor:"pointer",transition:"all 0.15s"}}>
                     <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"4px"}}>
                       <span style={{fontSize:"18px"}}>{a.emoji}</span>
-                      <div style={{fontSize:"13px",color:sel?"#F5A623":"#7A5840",fontWeight:600}}>{a.label}</div>
+                      <div style={{fontSize:"14px",color:sel?"#F5A623":"#2C1A0E",fontWeight:700}}>{a.label}</div>
                     </div>
-                    <div style={{fontSize:"10px",color:sel?"#7A5840":"#BBA090",marginBottom:sel?"8px":"0",lineHeight:"1.4"}}>{a.desc}</div>
+                    <div style={{fontSize:"11px",color:sel?"#7A5840":"#B8907A",lineHeight:"1.4",fontFamily:"'Nunito',sans-serif"}}>{a.desc}</div>
                     {sel&&(
-                      <div style={{display:"flex",flexDirection:"column",gap:"3px"}}>
+                      <div style={{marginTop:"8px",display:"flex",flexDirection:"column",gap:"3px"}}>
                         {a.milestones.map((m,i)=>(
                           <div key={m.id} style={{display:"flex",gap:"6px",alignItems:"center"}}>
-                            <span style={{fontSize:"8px",color:"#D4C4B0"}}>○</span>
-                            <span style={{fontSize:"9px",color:"#B8907A"}}>{m.label}</span>
+                            <span style={{fontSize:"9px",color:"#D4C4B0"}}>○</span>
+                            <span style={{fontSize:"10px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>{m.label}</span>
                           </div>
                         ))}
                       </div>
@@ -2149,21 +2162,21 @@ function CreationScreen({onStart,onLoad}){
           </div>
         )}
 
-        {/* ── STEP 5: CONEXIÓN ── */}
-        {step===5&&(
+        {/* ── STEP 4: CONEXIÓN ── */}
+        {step===4&&(
           <div>
-            <div style={S.title}>Primera conexión</div>
-            <div style={S.sub}>¿A quién ya conocés cuando llegás a Veloria? Empieza con 25 de amistad.</div>
+            <div style={TITLE}>Primera conexión</div>
+            <div style={SUB}>¿A quién ya conocés cuando llegás a Veloria?</div>
             <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
               {CONNECTIONS.map(c=>{
                 const sel=connection===c.npc;
                 return(
                   <button key={c.npc} onClick={()=>setConnection(c.npc)}
-                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"rgba(245,166,35,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s",display:"flex",gap:"12px",alignItems:"center"}}>
+                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"14px",border:`1.5px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"#FFF3DC":"#FFFFFF",cursor:"pointer",transition:"all 0.15s",display:"flex",gap:"12px",alignItems:"center"}}>
                     <span style={{fontSize:"22px",flexShrink:0}}>{c.emoji}</span>
                     <div>
-                      <div style={{fontSize:"12px",color:sel?"#F5A623":"#7A5840",fontWeight:600,marginBottom:"2px"}}>{c.npc}</div>
-                      <div style={{fontSize:"10px",color:sel?"#7A5840":"#BBA090",lineHeight:"1.4"}}>{c.desc}</div>
+                      <div style={{fontSize:"13px",color:sel?"#F5A623":"#2C1A0E",fontWeight:700,marginBottom:"2px"}}>{c.npc}</div>
+                      <div style={{fontSize:"11px",color:sel?"#7A5840":"#B8907A",lineHeight:"1.4",fontFamily:"'Nunito',sans-serif"}}>{c.desc}</div>
                     </div>
                   </button>
                 );
@@ -2172,51 +2185,45 @@ function CreationScreen({onStart,onLoad}){
           </div>
         )}
 
-        {/* ── STEP 6: RESUMEN ── */}
-        {step===6&&(()=>{
+        {/* ── STEP 5: RESUMEN ── */}
+        {step===5&&(()=>{
           const asp=ASPIRATIONS.find(a=>a.id===aspiration);
           const orig=ORIGINS.find(o=>o.id===origin);
           const selTraits=TRAITS.filter(t=>traits.includes(t.id));
           return(
             <div>
-              <div style={S.title}>Tu Twin está listo/a</div>
-              <div style={S.sub}>Así llega {name} a Veloria.</div>
-              <div style={{background:"rgba(245,166,35,0.04)",border:"1px solid #2C1F14",borderRadius:"12px",padding:"16px",display:"flex",flexDirection:"column",gap:"10px"}}>
-                <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#BBA090"}}>Nombre</span>
-                  <span style={{fontSize:"12px",color:"#7A5840",fontWeight:600}}>{name} ({pronouns})</span>
-                </div>
-                <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#BBA090"}}>Origen</span>
-                  <span style={{fontSize:"12px",color:"#7A5840"}}>{orig?.emoji} {orig?.label}</span>
-                </div>
+              <div style={TITLE}>Tu Twin está listo/a</div>
+              <div style={SUB}>Así llega {name} a Veloria.</div>
+              <div style={{background:"#FFFFFF",border:"1px solid #E0D4C8",borderRadius:"14px",padding:"16px",display:"flex",flexDirection:"column",gap:"10px"}}>
+                {[
+                  ["Nombre",`${name} (${pronouns})`],
+                  ["Origen",`${orig?.emoji} ${orig?.label}`],
+                  ["Aspiración",`${asp?.emoji} ${asp?.label}`],
+                  ["Primera conexión",connection],
+                ].map(([l,v])=>(
+                  <div key={l} style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                    <span style={{fontSize:"11px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>{l}</span>
+                    <span style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600}}>{v}</span>
+                  </div>
+                ))}
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px"}}>
-                  <span style={{fontSize:"11px",color:"#BBA090",flexShrink:0}}>Rasgos</span>
+                  <span style={{fontSize:"11px",color:"#B8907A",fontFamily:"'Nunito',sans-serif",flexShrink:0}}>Rasgos</span>
                   <div style={{display:"flex",gap:"5px",flexWrap:"wrap",justifyContent:"flex-end"}}>
-                    {selTraits.map(t=><span key={t.id} style={{fontSize:"10px",color:"#7A5840",background:"rgba(245,166,35,0.08)",border:"1px solid #2C1F14",borderRadius:"6px",padding:"2px 7px"}}>{t.emoji} {t.label}</span>)}
+                    {selTraits.map(t=><span key={t.id} style={{fontSize:"11px",color:"#7A5840",background:"#FFF3DC",border:"1px solid #F5A62344",borderRadius:"8px",padding:"2px 8px"}}>{t.emoji} {t.label}</span>)}
                   </div>
                 </div>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#BBA090"}}>Aspiración</span>
-                  <span style={{fontSize:"12px",color:"#7A5840"}}>{asp?.emoji} {asp?.label}</span>
-                </div>
-                <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#BBA090"}}>Primera conexión</span>
-                  <span style={{fontSize:"12px",color:"#7A5840"}}>{connection}</span>
-                </div>
-                <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#BBA090"}}>Empieza como</span>
-                  <span style={{fontSize:"12px",color:"#7A5840"}}>🌱 Joven Adulto/a (día 1/14)</span>
+                  <span style={{fontSize:"11px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>Empieza como</span>
+                  <span style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600}}>🌱 Joven Adulto/a (día 1/14)</span>
                 </div>
               </div>
             </div>
           );
         })()}
 
-        {/* Next / Start button */}
-        <button onClick={step===6?handleFinish:()=>setStep(s=>s+1)} disabled={!canNext}
-          style={{...S.nextBtn,opacity:canNext?1:0.35,cursor:canNext?"pointer":"not-allowed"}}>
-          {step===0?"Crear mi Twin →":step===6?"✨ Llegar a Veloria":"Continuar →"}
+        <button onClick={step===5?handleFinish:()=>setStep(s=>s+1)} disabled={!canNext}
+          style={NEXT(!canNext)}>
+          {step===5?"✦ Llegar a Veloria":"Continuar →"}
         </button>
       </div>
     </div>
@@ -2639,8 +2646,9 @@ export default function InbetweensGame(){
     if(item.type==="food"){tick(0,{hambre:40});setInventory(prev=>prev.map(i=>i.id===item.id?{...i,qty:i.qty-1}:i).filter(i=>i.qty>0));addEntry({text:`Comés ${item.name.toLowerCase()}. El hambre cede un poco.`,type:"story",place:loc.place});}
   }
 
-  if(phase==="splash")return<SplashScreen onEnter={()=>setPhase("creation")}/>;
-  if(phase==="creation")return<CreationScreen onStart={handleStart} onLoad={loadFromSlot}/>;
+  const [showLoadModal,setShowLoadModal]=useState(false);
+  if(phase==="splash")return<SplashScreen onEnter={(mode)=>{if(mode==="load")setShowLoadModal(true);else setPhase("creation");}}/>;
+  if(phase==="creation")return<CreationScreen onStart={handleStart} onLoad={loadFromSlot} defaultShowLoad={showLoadModal}/>;
 
   const hoodColor=(NEIGHBORHOODS[loc.hood]||{}).color||"#F5A623";
   const currentDaysLived=PLAYER_START_DAYS+(gt.day-1);
@@ -2652,7 +2660,8 @@ export default function InbetweensGame(){
   const skillUnlockActions=getSkillUnlockActions(skills,loc,placedFurniture,usedOnce);
 
   return(
-    <div style={{display:"flex",flexDirection:"column",height:"100vh",background:C.bg,fontFamily:"'Fredoka',sans-serif",color:C.text,overflow:"hidden"}}>
+    <div style={{display:"flex",justifyContent:"center",background:C.bg,minHeight:"100vh"}}>
+    <div style={{display:"flex",flexDirection:"column",height:"100vh",width:"100%",maxWidth:"520px",background:C.bg,fontFamily:"'Fredoka',sans-serif",color:C.text,overflow:"hidden",position:"relative"}}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');*{box-sizing:border-box}::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:#D4C4B0;border-radius:2px}button{font-family:'Fredoka',sans-serif}@keyframes fadeSlideIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
       {showPausa&&<PausaModal onClose={()=>setShowPausa(false)} onSave={saveToSlot} onLoad={loadFromSlot} onReset={resetGame} log={log} gt={gt} twin={twin}/>}
@@ -2720,7 +2729,8 @@ export default function InbetweensGame(){
           {npcsHere.length>0&&<div style={{display:"flex",gap:"4px",alignItems:"center"}}>{npcsHere.slice(0,3).map(n=><div key={n} style={{display:"flex",alignItems:"center",gap:"2px"}}><NPCAvatar name={n} size={14}/><span style={{fontSize:"9px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>{n.split(" ")[0]}</span></div>)}</div>}
         </div>
 
-        {/* Quick actions */}
+        {/* Quick actions — solo visibles cuando no estás en Acciones */}
+        {activeTab!=="acciones"&&(
         <div style={{display:"flex",gap:"5px",overflowX:"auto",flexShrink:0}}>
           {(PLACE_ACTIONS[loc.place]||[]).filter(a=>a.id!=="chat_npc").slice(0,3).map(a=>(
             <button key={a.id} onClick={()=>!loading&&handleAction(a)} disabled={loading}
@@ -2729,8 +2739,9 @@ export default function InbetweensGame(){
             </button>
           ))}
           {skillUnlockActions.length>0&&<button onClick={()=>!loading&&handleSkillUnlockAction(skillUnlockActions[0])} disabled={loading} style={{flexShrink:0,display:"flex",alignItems:"center",gap:"4px",padding:"5px 11px",borderRadius:"14px",border:"1.5px solid #F5A623",background:"#FFF3DC",color:"#F5A623",fontSize:"11px",cursor:loading?"not-allowed":"pointer",fontWeight:600,whiteSpace:"nowrap",fontFamily:"'Fredoka',sans-serif"}}>✦ {skillUnlockActions[0].emoji} {skillUnlockActions[0].label}</button>}
-          <button onClick={()=>setActiveTab("acciones")} style={{flexShrink:0,padding:"5px 11px",borderRadius:"14px",border:`1px solid ${activeTab==="acciones"?"#F5A623":"#E0D4C8"}`,background:activeTab==="acciones"?"#FFF3DC":"#FFFFFF",color:activeTab==="acciones"?"#F5A623":"#B8907A",fontSize:"11px",cursor:"pointer",marginLeft:"auto",fontFamily:"'Fredoka',sans-serif"}}>⋯</button>
+          <button onClick={()=>setActiveTab("acciones")} style={{flexShrink:0,padding:"5px 11px",borderRadius:"14px",border:"1px solid #E0D4C8",background:"#FFFFFF",color:"#B8907A",fontSize:"11px",cursor:"pointer",marginLeft:"auto",fontFamily:"'Fredoka',sans-serif"}}>⋯</button>
         </div>
+        )}
 
         {/* Tab content */}
         <div style={{height:"192px",borderRadius:"16px",background:"#FFFFFF",border:"1px solid #E0D4C8",boxShadow:"0 2px 10px rgba(0,0,0,0.06)",overflow:"hidden"}}>
@@ -2753,6 +2764,7 @@ export default function InbetweensGame(){
         </div>
 
       </div>
+    </div>
     </div>
   );
 }
