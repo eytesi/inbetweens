@@ -1,5 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 
+const C={bg:"#F0EAE0",white:"#FFFFFF",card:"#FFFFFF",cardWarm:"#FFF8F0",cardGreen:"#F0F8EA",cardOrange:"#FFF5E5",border:"#E0D4C8",border2:"#D4C4B0",orange:"#F5A623",orangeDark:"#D48B10",orangeLight:"#FFF3DC",green:"#7AB55C",text:"#2C1A0E",textMid:"#7A5840",textDim:"#B8907A",textGhost:"#D4C4B0"};
+const bento=(bg=C.white,border=C.border)=>({borderRadius:"16px",background:bg,border:`1px solid ${border}`,boxShadow:"0 2px 10px rgba(0,0,0,0.06)",overflow:"hidden"});
+
+function SplashScreen({onEnter}){
+  const [ready,setReady]=useState(false);
+  useEffect(()=>{const t=setTimeout(()=>setReady(true),600);return()=>clearTimeout(t);},[]);
+  return(
+    <div onClick={onEnter} style={{position:"fixed",inset:0,cursor:"pointer",backgroundImage:"url('/splash.jpg')",backgroundSize:"cover",backgroundPosition:"center bottom",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"flex-end",padding:"0 24px 60px",userSelect:"none"}}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');*{box-sizing:border-box}`}</style>
+      <img src="/logo.png" alt="Inbetweens" style={{height:76,marginBottom:16,filter:"drop-shadow(0 4px 16px rgba(0,0,0,0.4))",opacity:ready?1:0,transform:ready?"translateY(0)":"translateY(10px)",transition:"opacity 0.7s,transform 0.7s",transitionDelay:"0.1s"}}/>
+      <div style={{fontSize:11,color:"rgba(255,255,255,0.75)",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:28,fontFamily:"'Nunito',sans-serif",opacity:ready?1:0,transition:"opacity 0.7s",transitionDelay:"0.3s"}}>Otherwhen Studios</div>
+      <div style={{padding:"12px 32px",borderRadius:28,background:"rgba(255,255,255,0.22)",backdropFilter:"blur(8px)",border:"1.5px solid rgba(255,255,255,0.5)",color:"white",fontSize:14,fontWeight:600,fontFamily:"'Fredoka',sans-serif",opacity:ready?1:0,transition:"opacity 0.7s",transitionDelay:"0.5s"}}>✦ Tocá para comenzar</div>
+    </div>
+  );
+}
+
 // ═══════════════════ NARRATIVAS ═══════════════════
 const N = {
   "intro:familia":["El apartamento en La Vega huele a pintura fresca y posibilidades. Desde la ventana se ve el barrio despertando: jóvenes con mochilas, una vecina regando sus plantas, el olor a café flotando desde algún piso de abajo.\n\nA lo lejos, entre los techos, brilla el Lago Miren.\n\n*Velin*, pensás. Esto puede ser casa."],
@@ -411,7 +427,7 @@ const ORIGINS=[
    bonus:{skills:{naturaleza:80},friendship:{"Bren Orlen":25},
    item:{name:"Paquete de Té Miren",emoji:"🍵",type:"food",desc:"El té que tomaba tu familia. Hay quien dice que el Miren recuerda a quién lo toma.",useable:true,qty:3}}},
 ];
-const NEIGHBORHOODS={"La Vega":{emoji:"🏙",color:"#7BB8B9",places:["Tu apartamento","Café de Aria","Terraza","Tienda de La Vega","Jardín Comunitario","Panadería Velin","Estudio de Arte","Bar Lumaven","Mercadillo","Gimnasio Miren","Taller Cerámica","Cine Veloria","Taller de Música","La Bodega","Micro Parque","Azotea Norte","Feria Nocturna","Centro Cívico"]},"El Casco":{emoji:"🏛",color:"#D4A853",places:["Plaza del Veloer","Librería de Soren"]},"Ribera":{emoji:"⛵",color:"#4A8B8C",places:["Muelle","Restaurante de Nela","Lago Miren"]},"Veleta":{emoji:"🎭",color:"#A08060",places:["Biblioteca","Teatro de Cael"]},"Los Prados":{emoji:"🌳",color:"#6B9E5E",places:["Parque","Consultorio de Bren"]}};
+const NEIGHBORHOODS={"La Vega":{emoji:"🏙",color:"#7BB8B9",places:["Tu apartamento","Café de Aria","Terraza","Tienda de La Vega","Jardín Comunitario","Panadería Velin","Estudio de Arte","Bar Lumaven","Mercadillo","Gimnasio Miren","Taller Cerámica","Cine Veloria","Taller de Música","La Bodega","Micro Parque","Azotea Norte","Feria Nocturna","Centro Cívico"]},"El Casco":{emoji:"🏛",color:"#F5A623",places:["Plaza del Veloer","Librería de Soren"]},"Ribera":{emoji:"⛵",color:"#4A8B8C",places:["Muelle","Restaurante de Nela","Lago Miren"]},"Veleta":{emoji:"🎭",color:"#7A5840",places:["Biblioteca","Teatro de Cael"]},"Los Prados":{emoji:"🌳",color:"#6B9E5E",places:["Parque","Consultorio de Bren"]}};
 const PLACE_ACTIONS={"Tu apartamento":[{id:"sleep",label:"Dormir",emoji:"🌙",time:8},{id:"cook",label:"Cocinar",emoji:"🍳",time:1},{id:"shower",label:"Ducharse",emoji:"🚿",time:0.5},{id:"bathroom",label:"Baño",emoji:"🚽",time:0.1},{id:"hobby",label:"Practicar hobbie",emoji:"🎨",time:2},{id:"rest",label:"Descansar",emoji:"🛋",time:1}],"Café de Aria":[{id:"coffee",label:"Tomar café",emoji:"☕",time:1,cost:3},{id:"chat_npc",label:"Charlar con Aria",emoji:"💬",time:1,npc:"Aria Ven"},{id:"read_cafe",label:"Leer",emoji:"📖",time:2},{id:"observe",label:"Observar el barrio",emoji:"👁",time:1}],"Terraza":[{id:"terr_amanecer",label:"Ver el amanecer",emoji:"🌅",time:1},{id:"terr_escribir",label:"Escribir o dibujar",emoji:"✍️",time:2},{id:"terr_estrellas",label:"Mirar las estrellas",emoji:"⭐",time:1},{id:"terr_huerto",label:"Cuidar el huerto",emoji:"🌿",time:0.5}],"Tienda de La Vega":[{id:"tienda_basicos",label:"Comprar básicos",emoji:"🛒",time:0.5,cost:15},{id:"tienda_ropa",label:"Mirar ropa",emoji:"👗",time:1},{id:"tienda_charlar",label:"Charlar con el dueño",emoji:"💬",time:1}],"Jardín Comunitario":[{id:"jardin_plantar",label:"Plantar algo",emoji:"🌱",time:2},{id:"jardin_cosechar",label:"Cosechar",emoji:"🥬",time:1},{id:"jardin_pasear",label:"Pasear entre las plantas",emoji:"🌸",time:1},{id:"chat_npc",label:"Hablar con Elia",emoji:"💬",time:1,npc:"Elia Orlen"}],"Panadería Velin":[{id:"pan_comprar",label:"Comprar Pan Velin",emoji:"🥐",time:0.3,cost:5},{id:"pan_desayuno",label:"Desayunar acá",emoji:"☕",time:1,cost:8},{id:"pan_ver_hacer",label:"Ver cómo hacen el pan",emoji:"👀",time:1}],"Estudio de Arte":[{id:"estudio_pintar",label:"Pintar",emoji:"🎨",time:2,cost:5},{id:"estudio_ver",label:"Ver el trabajo de otros",emoji:"🖼",time:1},{id:"estudio_conocer",label:"Conocer artistas",emoji:"💬",time:1},{id:"estudio_tecnica",label:"Practicar técnica",emoji:"✏️",time:3},{id:"chat_npc",label:"Hablar con Vael",emoji:"🎨",time:1,npc:"Vael Lumaren"}],"Bar Lumaven":[{id:"bar_lumaven",label:"Tomar un Lumaven",emoji:"🥂",time:1,cost:8},{id:"bar_musica",label:"Escuchar música en vivo",emoji:"🎵",time:2},{id:"bar_conocer",label:"Conocer gente",emoji:"💬",time:1},{id:"bar_mirone",label:"Jugar al Mirone",emoji:"🃏",time:1.5},{id:"chat_npc",label:"Hablar con Luma",emoji:"🎸",time:1,npc:"Luma Sorvei"}],"Mercadillo":[{id:"merc_unico",label:"Buscar objetos únicos",emoji:"🛍",time:1},{id:"merc_frescos",label:"Comprar frescos",emoji:"🥬",time:0.5,cost:12},{id:"merc_charlar",label:"Charlar con vendedores",emoji:"💬",time:1}],"Gimnasio Miren":[{id:"gym_entrenar",label:"Entrenar",emoji:"💪",time:1.5},{id:"gym_natacion",label:"Clases de natación",emoji:"🏊",time:2,cost:10}],
 "Taller Cerámica":[{id:"cerc_moldear",label:"Moldear arcilla",emoji:"🏺",time:2},{id:"cerc_ver",label:"Ver el trabajo de otros",emoji:"👁",time:1},{id:"cerc_torno",label:"Intentar el torno",emoji:"⭕",time:1.5},{id:"chat_npc",label:"Hablar con Senia",emoji:"🤝",time:1,npc:"Senia Vel"}],
 "Cine Veloria":[{id:"cine_ver",label:"Ver una película",emoji:"🎬",time:2.5,cost:20},{id:"cine_charlar",label:"Charlar en el hall",emoji:"💬",time:1},{id:"cine_dormido",label:"Quedarse dormido/a",emoji:"😴",time:2}],
@@ -449,7 +465,7 @@ const CAREERS={arte:{label:"Arte",emoji:"🎨",places:["Teatro de Cael","Bibliot
 const ROMANCEABLE=new Set(["Aria Ven","Lior Veloer","Oren Mirende","Nela Mirende","Riven Lumaren","Vael Lumaren","Cael Sorvei","Niven Sorvei","Luma Sorvei","Soren Lume","Ciro Orlen","Elia Orlen","Iva Norven","Cela Miren","Tev Solan","Dael Miru","Mira Belven","Rael Nora","Leva Sorin"]);
 const CALENDAR_EVENTS={0:{name:"Día del Primer Brote",emoji:"🌱",desc:"Plantar algo hoy. La tradición lo dice."},1:{name:"El Mercado Miren",emoji:"⛵",desc:"El mercado flotante abre sobre el lago."},2:{name:"La Noche de los Nombres",emoji:"💌",desc:"Se revelan apodos cariñosos a personas queridas."},3:{name:"Las Aguas Abiertas",emoji:"🏊",desc:"Gran celebración en Ribera. Primer día de natación."},4:{name:"Velorfesta",emoji:"✨",desc:"La celebración más importante. Tres días de música."},5:{name:"La Noche Larga",emoji:"⭐",desc:"Los Twins hacen promesas bajo las estrellas."},6:{name:"La Cosecha",emoji:"🌾",desc:"Festival en Las Llanuras Doradas."},7:{name:"El Día del Recuerdo",emoji:"🌊",desc:"Flores en el lago para los Twins que ya no están."},8:{name:"La Feria de los Clubs",emoji:"🎪",desc:"Todos los clubs de Veloria abren sus puertas."},9:{name:"Los Nocturnos",emoji:"🕯",desc:"Reuniones íntimas en casa. El frío une."},10:{name:"El Hielo del Miren",emoji:"⛸",desc:"El lago se congela. Los Twins patinen."},11:{name:"La Víspera del Brote",emoji:"🔥",desc:"Quemar lo viejo, guardar lo nuevo."}};
 const NPC_TRAITS_MAP={"Aria Ven":["pragmática","acogedora","observadora"],"Lior Veloer":["rebelde","curioso","libre"],"Oren Mirende":["aventurero","romántico","libre"],"Nela Mirende":["cálido","fuerte","protector"],"Riven Lumaren":["encantador","generoso","soñador"],"Vael Lumaren":["creativo","impulsivo","apasionado"],"Cael Sorvei":["dramático","apasionado","perfeccionista"],"Niven Sorvei":["intenso","directo","artístico"],"Luma Sorvei":["libre","alegre","magnético"],"Soren Lume":["introvertido","brillante","leal"],"Ciro Orlen":["meticuloso","callado","curioso"],"Elia Orlen":["sociable","optimista","generosa"],"Iva Norven":["observadora","artístico","sensible"],"Cela Miren":["empático","trabajador","sensible"],"Tev Solan":["alegre","talentoso","impulsivo"],"Dael Miru":["perfeccionista","apasionado","orgulloso"],"Mira Belven":["energético","social","creativo"],"Rael Nora":["gentil","divertido","compasivo"],"Leva Sorin":["apasionado","exigente","curioso"]};
-const NPC_HOOD_COLOR={"Aria Ven":"#7BB8B9","Lior Veloer":"#7BB8B9","Elia Orlen":"#7BB8B9","Senia Vel":"#7BB8B9","Tev Solan":"#7BB8B9","Oren Mirende":"#4A8B8C","Nela Mirende":"#4A8B8C","Tomas Mirende":"#4A8B8C","Riven Lumaren":"#4A8B8C","Iva Norven":"#4A8B8C","Ciro Orlen":"#A08060","Elowen Sorvei":"#A08060","Cael Sorvei":"#A08060","Niven Sorvei":"#A08060","Luma Sorvei":"#A08060","Vael Lumaren":"#A08060","Leva Sorin":"#A08060","Aldric Veloer":"#D4A853","Soren Lume":"#D4A853","Dora Velin":"#D4A853","Dael Miru":"#D4A853","Mira Belven":"#D4A853","Bren Orlen":"#6B9E5E","Cela Miren":"#6B9E5E","Rael Nora":"#6B9E5E"};
+const NPC_HOOD_COLOR={"Aria Ven":"#7BB8B9","Lior Veloer":"#7BB8B9","Elia Orlen":"#7BB8B9","Senia Vel":"#7BB8B9","Tev Solan":"#7BB8B9","Oren Mirende":"#4A8B8C","Nela Mirende":"#4A8B8C","Tomas Mirende":"#4A8B8C","Riven Lumaren":"#4A8B8C","Iva Norven":"#4A8B8C","Ciro Orlen":"#7A5840","Elowen Sorvei":"#7A5840","Cael Sorvei":"#7A5840","Niven Sorvei":"#7A5840","Luma Sorvei":"#7A5840","Vael Lumaren":"#7A5840","Leva Sorin":"#7A5840","Aldric Veloer":"#F5A623","Soren Lume":"#F5A623","Dora Velin":"#F5A623","Dael Miru":"#F5A623","Mira Belven":"#F5A623","Bren Orlen":"#6B9E5E","Cela Miren":"#6B9E5E","Rael Nora":"#6B9E5E"};
 const NPC_DESC={"Aria Ven":"Dueña del café · La Vega","Lior Veloer":"Estudiante rebelde · La Vega","Oren Mirende":"Pescador y guía del lago · Ribera","Nela Mirende":"Restaurante del muelle · Ribera","Tomas Mirende":"Pescador mayor · Ribera","Riven Lumaren":"Gerente del banco · Ribera","Ciro Orlen":"Archivista · Veleta","Elowen Sorvei":"Escritora anciana · Veleta","Cael Sorvei":"Director del teatro · Veleta","Niven Sorvei":"Pintora y tatuadora · Veleta","Luma Sorvei":"Músico callejero · Veleta","Vael Lumaren":"Diseñadora · Veleta","Leva Sorin":"Profesora de historia · Veleta","Aldric Veloer":"Figura moral de Veloria · El Casco","Soren Lume":"Librero · El Casco","Dora Velin":"La Twin más anciana · El Casco","Dael Miru":"Chef · El Casco","Mira Belven":"Organizadora de eventos · El Casco","Bren Orlen":"Médico · Los Prados","Cela Miren":"Enfermera · Los Prados","Rael Nora":"Veterinario · Los Prados","Senia Vel":"Ceramicista veterana · La Vega","Elia Orlen":"Vecina del jardín · La Vega"};
 const NPC_SCHEDULES={
   "Aria Ven":      [{from:0,to:7,place:"La Vega (casa)",hood:"La Vega"},{from:7,to:20,place:"Café de Aria",hood:"La Vega"},{from:20,to:22,place:"Plaza del Veloer",hood:"El Casco"},{from:22,to:24,place:"La Vega (casa)",hood:"La Vega"}],
@@ -533,7 +549,7 @@ const CHILD_STAGES={
     interactions:[{id:"jugar_inf",label:"Jugar juntos",emoji:"🎪"},{id:"cuento",label:"Leer un cuento",emoji:"📖"},{id:"consolar",label:"Consolar",emoji:"🫂"},{id:"ensenyar",label:"Enseñar algo nuevo",emoji:"🌱"},{id:"abrazo_inf",label:"Dar un abrazo",emoji:"💛"}]},
   nino:{label:"Niño/a",emoji:"🧑",maxAge:12,color:"#7BB8B9",
     interactions:[{id:"tarea",label:"Hacer la tarea juntos",emoji:"✏️"},{id:"jugar_nino",label:"Jugar a algo",emoji:"🎲"},{id:"charlar_nino",label:"Charlar del día",emoji:"☀️"},{id:"consejo_nino",label:"Dar un consejo",emoji:"💡"},{id:"reganar",label:"Hablar de algo que estuvo mal",emoji:"⚠️"}]},
-  adolescente:{label:"Adolescente",emoji:"👦",maxAge:18,color:"#D4A853",
+  adolescente:{label:"Adolescente",emoji:"👦",maxAge:18,color:"#F5A623",
     interactions:[{id:"charlar_adol",label:"Charlar sobre la vida",emoji:"🌊"},{id:"consejo_adol",label:"Dar un consejo",emoji:"💡"},{id:"discutir",label:"Tener una discusión",emoji:"⚡"},{id:"apoyar",label:"Apoyar en algo difícil",emoji:"🫂"},{id:"espacio",label:"Darle espacio",emoji:"🌿"}]},
   adulto:{label:"Adulto/a",emoji:"🧑‍🦱",maxAge:999,color:"#6B9E5E",
     interactions:[{id:"cafe_hijo",label:"Tomar un café juntos",emoji:"☕"},{id:"pedir_consejo",label:"Pedir su consejo",emoji:"🤔"},{id:"charlar_adulto",label:"Charlar como adultos",emoji:"💬"},{id:"celebrar_hijo",label:"Celebrar un logro",emoji:"🎉"}]},
@@ -563,7 +579,7 @@ const SKILLS_CFG={
   arte:        {label:"Arte",        emoji:"🎨",color:"#A67BD6"},
   carisma:     {label:"Carisma",     emoji:"💬",color:"#E87B9E"},
   naturaleza:  {label:"Naturaleza",  emoji:"🌿",color:"#6B9E5E"},
-  conocimiento:{label:"Conocimiento",emoji:"📚",color:"#D4A853"},
+  conocimiento:{label:"Conocimiento",emoji:"📚",color:"#F5A623"},
 };
 const SKILL_LEVELS=[
   {label:"Novato",    roman:"I",   xp:0   },
@@ -670,9 +686,9 @@ const LIFE_STAGES=[
   {id:"nino",          label:"Niño/a",           emoji:"🌸",color:"#A8D5A2",days:4, cumStart:6, skillMult:0.6, decayMult:1.2},
   {id:"preadolescente",label:"Preadolescente",  emoji:"🌿",color:"#7BB8B9",days:4, cumStart:10,skillMult:0.7, decayMult:1.1},
   {id:"adolescente",   label:"Adolescente",     emoji:"🌊",color:"#5E97C7",days:7, cumStart:14,skillMult:0.9, decayMult:1.0},
-  {id:"joven",         label:"Joven Adulto/a",  emoji:"🌱",color:"#D4A853",days:14,cumStart:21,skillMult:1.2, decayMult:0.9},
-  {id:"adulto",        label:"Adulto/a",        emoji:"🌳",color:"#A08060",days:14,cumStart:35,skillMult:1.0, decayMult:1.0},
-  {id:"anciano",       label:"Anciano/a",       emoji:"✦", color:"#8B7355",days:10,cumStart:49,skillMult:0.4, decayMult:1.3},
+  {id:"joven",         label:"Joven Adulto/a",  emoji:"🌱",color:"#F5A623",days:14,cumStart:21,skillMult:1.2, decayMult:0.9},
+  {id:"adulto",        label:"Adulto/a",        emoji:"🌳",color:"#7A5840",days:14,cumStart:35,skillMult:1.0, decayMult:1.0},
+  {id:"anciano",       label:"Anciano/a",       emoji:"✦", color:"#7A5840",days:10,cumStart:49,skillMult:0.4, decayMult:1.3},
 ];
 const TOTAL_LIFESPAN=59;
 const PLAYER_START_DAYS=21; // player starts at Joven Adulto (cumStart=21)
@@ -843,7 +859,7 @@ function getMood(needs){
   if(needs.social<25)return["Solitario/a","#E87B9E"];
   if(needs.diversion<25)return["Aburrido/a","#A67BD6"];
   if(needs.higiene<25)return["Sucio/a","#4AB8C1"];
-  if(needs.sueno>75&&needs.diversion>65)return["Descansado/a","#D4A853"];
+  if(needs.sueno>75&&needs.diversion>65)return["Descansado/a","#F5A623"];
   if(needs.social>75)return["Sociable","#E87B9E"];
   if(needs.diversion>75)return["Inspirado/a","#A67BD6"];
   return["Bien","#6B9E5E"];
@@ -858,15 +874,15 @@ function NeedDots({needKey,value}){
       <span style={{fontSize:"11px",width:"14px",opacity:0.8}}>{cfg.emoji}</span>
       <div style={{display:"flex",gap:"3px"}}>
         {[0,1,2,3,4].map(i=>(
-          <div key={i} style={{width:"7px",height:"7px",borderRadius:"50%",background:i<filled?barColor:"transparent",border:`1.5px solid ${i<filled?barColor:"#3D2B1F"}`,transition:"all 0.4s ease"}}/>
+          <div key={i} style={{width:"7px",height:"7px",borderRadius:"50%",background:i<filled?barColor:"transparent",border:`1.5px solid ${i<filled?barColor:"#BBA090"}`,transition:"all 0.4s ease"}}/>
         ))}
       </div>
-      <span style={{fontSize:"9px",color:"#5C4030",width:"18px"}}>{Math.round(value)}</span>
+      <span style={{fontSize:"9px",color:"#B8907A",width:"18px"}}>{Math.round(value)}</span>
     </div>
   );
 }
 function NPCAvatar({name,size=28}){
-  const color=NPC_HOOD_COLOR[name]||"#8B7355";
+  const color=NPC_HOOD_COLOR[name]||"#7A5840";
   return(
     <div style={{width:size,height:size,borderRadius:"50%",background:`${color}22`,border:`1.5px solid ${color}66`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:size*0.38,color,fontWeight:700,flexShrink:0,letterSpacing:0}}>
       {name.charAt(0)}
@@ -878,55 +894,100 @@ function ActionBtn({action,onClick,disabled,accentColor}){
   return(
     <button onClick={onClick} disabled={disabled}
       onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}
-      style={{display:"flex",alignItems:"center",gap:"6px",padding:"7px 13px",borderRadius:"20px",fontSize:"12px",border:`1px solid ${hov?accentColor:"#3D2B1F"}`,background:hov?`${accentColor}18`:"transparent",color:hov?accentColor:"#8B7355",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.4:1,transition:"all 0.15s",whiteSpace:"nowrap"}}>
-      <span>{action.emoji}</span>{action.label}{action.cost&&<span style={{fontSize:"9px",color:"#5C4030"}}>L{action.cost}</span>}
+      style={{display:"flex",alignItems:"center",gap:"6px",padding:"7px 13px",borderRadius:"20px",fontSize:"12px",border:`1px solid ${hov?accentColor:"#BBA090"}`,background:hov?`${accentColor}18`:"transparent",color:hov?accentColor:"#7A5840",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.4:1,transition:"all 0.15s",whiteSpace:"nowrap"}}>
+      <span>{action.emoji}</span>{action.label}{action.cost&&<span style={{fontSize:"9px",color:"#B8907A"}}>L{action.cost}</span>}
+    </button>
+  );
+}
+
+function getActionSkillInfo(id){
+  const xp=ACTION_SKILL_XP[id];if(!xp)return null;
+  const [skill]=Object.entries(xp)[0]||[];
+  const cfg=SKILLS_CFG[skill];return cfg?`${cfg.emoji} ${cfg.label}`:null;
+}
+
+function ActionCard({action,onClick,disabled,hoodColor}){
+  const [hov,setHov]=useState(false);
+  const skill=getActionSkillInfo(action.id);
+  const isNPC=action.id==="chat_npc";
+  return(
+    <button onClick={onClick} disabled={disabled}
+      onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}
+      style={{textAlign:"left",padding:"10px",borderRadius:"10px",border:`1px solid ${hov?hoodColor:"#E0D4C8"}`,background:hov?`${hoodColor}0D`:"#FFFFFF",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.5:1,transition:"all 0.15s"}}>
+      <div style={{fontSize:"18px",marginBottom:"3px"}}>{action.emoji}</div>
+      <div style={{fontSize:"11px",color:hov?hoodColor:"#7A5840",fontWeight:500,lineHeight:1.2,marginBottom:2}}>{isNPC&&action.npc?action.npc.split(" ")[0]:action.label}</div>
+      <div style={{display:"flex",gap:"5px",flexWrap:"wrap"}}>
+        <span style={{fontSize:"9px",color:"#D4C4B0"}}>{action.time}h</span>
+        {action.cost&&<span style={{fontSize:"9px",color:"#F5A623"}}>L{action.cost}</span>}
+        {skill&&<span style={{fontSize:"9px",color:"#BBA090"}}>{skill}</span>}
+      </div>
     </button>
   );
 }
 
 // ═══════════════════ TAB COMPONENTS ═══════════════════
 function AccionesTab({loc,career,NEIGHBORHOODS,PLACE_ACTIONS,loading,dark,onGoTo,onAction,onWork,extraActions=[]}){
-  const hoodColor=(NEIGHBORHOODS[loc.hood]||{}).color||"#D4A853";
+  const [selHood,setSelHood]=useState(loc.hood);
+  const hoodColor=(NEIGHBORHOODS[loc.hood]||{}).color||"#F5A623";
+  const selColor=(NEIGHBORHOODS[selHood]||{}).color||"#F5A623";
   const isAtWorkplace=career&&CAREERS[career.track]?.places.includes(loc.place);
   const actions=PLACE_ACTIONS[loc.place]||[];
+  // Sync selHood when player navigates to different hood
+  useEffect(()=>{setSelHood(loc.hood);},[loc.hood]);
   return(
-    <div style={{display:"flex",flexDirection:"column",gap:"10px",padding:"10px 14px",overflowY:"auto",height:"100%"}}>
-      <div style={{overflowX:"auto",display:"flex",gap:"10px",paddingBottom:"4px",flexShrink:0}}>
+    <div style={{display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
+      {/* Neighborhood chips */}
+      <div style={{overflowX:"auto",display:"flex",gap:"5px",padding:"7px 12px 5px",flexShrink:0,borderBottom:"1px solid #1A1208"}}>
         {Object.entries(NEIGHBORHOODS).map(([hood,d])=>(
-          <div key={hood} style={{flexShrink:0}}>
-            <div style={{fontSize:"11px",color:loc.hood===hood?d.color:"#5C4030",textAlign:"center",marginBottom:"4px",letterSpacing:"0.04em"}}>{d.emoji} {hood}</div>
-            <div style={{display:"flex",gap:"4px"}}>
-              {d.places.map(p=>(
-                <button key={p} onClick={()=>onGoTo(hood,p)} disabled={loading}
-                  style={{padding:"4px 10px",fontSize:"11px",borderRadius:"12px",border:`1px solid ${loc.place===p?d.color:"#3D2B1F"}`,background:loc.place===p?`${d.color}22`:"transparent",color:loc.place===p?d.color:"#8B7355",cursor:loading?"not-allowed":"pointer",whiteSpace:"nowrap",transition:"all 0.12s"}}>
-                  {p.length>14?p.slice(0,13)+"…":p}
+          <button key={hood} onClick={()=>setSelHood(hood)}
+            style={{flexShrink:0,padding:"4px 10px",borderRadius:"12px",border:`1px solid ${selHood===hood?d.color:"#E0D4C8"}`,background:selHood===hood?`${d.color}18`:"transparent",color:selHood===hood?d.color:"#BBA090",fontSize:"10px",cursor:"pointer",whiteSpace:"nowrap",fontWeight:selHood===hood?600:400}}>
+            {d.emoji} {hood}
+          </button>
+        ))}
+      </div>
+      {/* Place chips for selected hood */}
+      <div style={{overflowX:"auto",display:"flex",gap:"4px",padding:"5px 12px 6px",flexShrink:0,borderBottom:"1px solid #1A1208"}}>
+        {(NEIGHBORHOODS[selHood]?.places||[]).map(p=>(
+          <button key={p} onClick={()=>!loading&&onGoTo(selHood,p)} disabled={loading}
+            style={{flexShrink:0,padding:"3px 8px",borderRadius:"8px",border:`1px solid ${loc.place===p&&loc.hood===selHood?selColor:"#E0D4C8"}`,background:loc.place===p&&loc.hood===selHood?`${selColor}18`:"transparent",color:loc.place===p&&loc.hood===selHood?selColor:"#BBA090",fontSize:"9px",cursor:loading?"not-allowed":"pointer",whiteSpace:"nowrap"}}>
+            {p.length>15?p.slice(0,14)+"…":p}
+          </button>
+        ))}
+      </div>
+      {/* Actions */}
+      <div style={{flex:1,overflowY:"auto",padding:"8px 10px 10px"}}>
+        {isAtWorkplace&&(
+          <button onClick={onWork} disabled={loading}
+            style={{width:"100%",padding:"9px",borderRadius:"10px",border:"1px solid #6B9E5E",background:"rgba(122,181,92,0.08)",color:"#6B9E5E",fontSize:"11px",cursor:loading?"not-allowed":"pointer",marginBottom:"8px",fontWeight:600}}>
+            💼 Trabajar ({CAREERS[career.track].shiftH}h) → +L{CAREERS[career.track].wages[career.level]}
+          </button>
+        )}
+        {actions.length>0&&(
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"6px",marginBottom:extraActions.length>0?"10px":0}}>
+            {actions.map(a=><ActionCard key={a.id+(a.npc||"")} action={a} onClick={()=>onAction(a)} disabled={loading} hoodColor={hoodColor}/>)}
+          </div>
+        )}
+        {extraActions.length>0&&(
+          <div style={{borderTop:"1px solid #1A1208",paddingTop:"8px"}}>
+            <div style={{fontSize:"9px",color:"#F5A623",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>✦ Habilidades desbloqueadas</div>
+            <div style={{display:"flex",flexDirection:"column",gap:"5px"}}>
+              {extraActions.map(a=>(
+                <button key={a.id} onClick={()=>onAction(a)} disabled={loading}
+                  style={{padding:"9px 12px",borderRadius:"9px",border:"1px solid rgba(245,166,35,0.22)",background:"rgba(245,166,35,0.04)",display:"flex",gap:"8px",alignItems:"center",cursor:loading?"not-allowed":"pointer",textAlign:"left",opacity:loading?0.4:1}}>
+                  <span style={{fontSize:"16px"}}>{a.emoji}</span>
+                  <div>
+                    <div style={{fontSize:"11px",color:"#F5A623",fontWeight:600}}>{a.label}</div>
+                    {getActionSkillInfo(a.id)&&<div style={{fontSize:"9px",color:"#BBA090"}}>{getActionSkillInfo(a.id)}</div>}
+                  </div>
                 </button>
               ))}
             </div>
           </div>
-        ))}
-      </div>
-      <div style={{display:"flex",flexWrap:"wrap",gap:"7px",flexShrink:0}}>
-        {isAtWorkplace&&(
-          <button onClick={onWork} disabled={loading}
-            style={{display:"flex",alignItems:"center",gap:"6px",padding:"8px 16px",borderRadius:"20px",fontSize:"13px",border:"1px solid #6B9E5E",background:"rgba(107,158,94,0.12)",color:"#6B9E5E",cursor:loading?"not-allowed":"pointer",fontWeight:600}}>
-            💼 Trabajar ({CAREERS[career.track].shiftH}h) → +L{CAREERS[career.track].wages[career.level]}
-          </button>
         )}
-        {actions.map(a=>(
-          <ActionBtn key={a.id} action={a} onClick={()=>onAction(a)} disabled={loading} accentColor={hoodColor}/>
-        ))}
-        {extraActions.map(a=>(
-          <button key={a.id} onClick={()=>onAction(a)} disabled={loading}
-            style={{display:"flex",alignItems:"center",gap:"6px",padding:"7px 13px",borderRadius:"20px",fontSize:"12px",border:"1px solid #D4A853",background:"rgba(212,168,83,0.08)",color:"#D4A853",cursor:loading?"not-allowed":"pointer",opacity:loading?0.4:1,transition:"all 0.15s",whiteSpace:"nowrap"}}>
-            <span>{a.emoji}</span>{a.label}
-          </button>
-        ))}
       </div>
     </div>
   );
 }
-
 function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onInteract,onChildInteract}){
   const [mode,setMode]=useState("twins");
   const [sel,setSel]=useState(null);
@@ -962,8 +1023,8 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
     if(!sel||!selRel)return[];
     const acts=[];
     if(!isPartner&&!family.partner&&ROMANCEABLE.has(sel)&&fr>40)acts.push({id:"ask_out",label:"💕 Invitar a salir",color:"#E87B9E"});
-    if(isPartner&&romStatus==="dating"&&fr>65)acts.push({id:"propose",label:"💍 Proponer matrimonio",color:"#D4A853"});
-    if(isPartner&&romStatus==="engaged")acts.push({id:"marry",label:"💒 Casarse",color:"#D4A853"});
+    if(isPartner&&romStatus==="dating"&&fr>65)acts.push({id:"propose",label:"💍 Proponer matrimonio",color:"#F5A623"});
+    if(isPartner&&romStatus==="engaged")acts.push({id:"marry",label:"💒 Casarse",color:"#F5A623"});
     if(isPartner&&romStatus==="married")acts.push({id:"have_child",label:"👶 Tener un hijo",color:"#7BB8B9"});
     if(isPartner&&(romStatus==="dating"||romStatus==="engaged"))acts.push({id:"breakup",label:"💔 Terminar",color:"#E05555"});
     if(isPartner&&romStatus==="married")acts.push({id:"divorce",label:"💔 Separarse",color:"#E05555"});
@@ -974,10 +1035,10 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
     <div style={{display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
       {/* Mode toggle */}
       <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0}}>
-        <button onClick={()=>{setMode("twins");setSel(null);}} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="twins"?"2px solid #7BB8B9":"2px solid transparent",background:"transparent",color:mode==="twins"?"#7BB8B9":"#3D2B1F",cursor:"pointer"}}>
+        <button onClick={()=>{setMode("twins");setSel(null);}} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="twins"?"2px solid #7BB8B9":"2px solid transparent",background:"transparent",color:mode==="twins"?"#7BB8B9":"#BBA090",cursor:"pointer"}}>
           👥 Twins ({sorted.length})
         </button>
-        <button onClick={()=>setMode("familia")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="familia"?"2px solid #E87B9E":"2px solid transparent",background:"transparent",color:mode==="familia"?"#E87B9E":"#3D2B1F",cursor:"pointer"}}>
+        <button onClick={()=>setMode("familia")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="familia"?"2px solid #E87B9E":"2px solid transparent",background:"transparent",color:mode==="familia"?"#E87B9E":"#BBA090",cursor:"pointer"}}>
           👨‍👩‍👧 Familia ({family.children.length}{family.partner?"+pareja":""})
         </button>
       </div>
@@ -987,14 +1048,14 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
         <div style={{display:"flex",flex:1,overflow:"hidden"}}>
           {/* NPC list */}
           <div style={{width:"150px",borderRight:"1px solid #1A1208",overflowY:"auto",padding:"6px"}}>
-            {sorted.length===0&&<div style={{fontSize:"9px",color:"#2C1F14",fontStyle:"italic",padding:"6px",lineHeight:"1.4"}}>Todavía no conocés a nadie. Salí a charlar con los Twins de Veloria.</div>}
+            {sorted.length===0&&<div style={{fontSize:"9px",color:"#D4C4B0",fontStyle:"italic",padding:"6px",lineHeight:"1.4"}}>Todavía no conocés a nadie. Salí a charlar con los Twins de Veloria.</div>}
             {sorted.map(([name,rel])=>(
               <button key={name} onClick={()=>{setSel(sel===name?null:name);setCat("hablar");}}
-                style={{width:"100%",display:"flex",alignItems:"center",gap:"6px",padding:"5px",borderRadius:"7px",border:sel===name?"1px solid #2C1F14":"1px solid transparent",background:sel===name?"#0F0A06":"transparent",cursor:"pointer",marginBottom:"2px",textAlign:"left"}}>
+                style={{width:"100%",display:"flex",alignItems:"center",gap:"6px",padding:"5px",borderRadius:"7px",border:sel===name?"1px solid #2C1F14":"1px solid transparent",background:sel===name?"#FFFAF5":"transparent",cursor:"pointer",marginBottom:"2px",textAlign:"left"}}>
                 <NPCAvatar name={name} size={22}/>
                 <div style={{flex:1,overflow:"hidden"}}>
-                  <div style={{fontSize:"10px",color:sel===name?"#D4A853":"#8B7355",fontWeight:500,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{family.partner===name?"💕 ":""}{name.split(" ")[0]}</div>
-                  <div style={{height:"2px",background:"#1A1208",borderRadius:"1px",overflow:"hidden",marginTop:"2px"}}>
+                  <div style={{fontSize:"10px",color:sel===name?"#F5A623":"#7A5840",fontWeight:500,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{family.partner===name?"💕 ":""}{name.split(" ")[0]}</div>
+                  <div style={{height:"2px",background:"#E0D4C8",borderRadius:"1px",overflow:"hidden",marginTop:"2px"}}>
                     <div style={{height:"100%",width:`${rel.friendship||0}%`,background:NPC_HOOD_COLOR[name]||"#7BB8B9"}}/>
                   </div>
                 </div>
@@ -1004,19 +1065,19 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
 
           {/* Interaction panel */}
           <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-            {!sel&&<div style={{color:"#2C1F14",fontSize:"10px",fontStyle:"italic",textAlign:"center",marginTop:"20px",padding:"0 12px"}}>Seleccioná un Twin para interactuar</div>}
+            {!sel&&<div style={{color:"#D4C4B0",fontSize:"10px",fontStyle:"italic",textAlign:"center",marginTop:"20px",padding:"0 12px"}}>Seleccioná un Twin para interactuar</div>}
             {sel&&selRel&&(
               <>
                 {/* NPC header */}
                 <div style={{padding:"8px 10px",borderBottom:"1px solid #1A1208",display:"flex",alignItems:"center",gap:"8px",flexShrink:0}}>
                   <NPCAvatar name={sel} size={32}/>
                   <div style={{flex:1,overflow:"hidden"}}>
-                    <div style={{fontSize:"11px",color:"#A08060",fontWeight:600,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{isPartner?sLabel[romStatus]+" · ":""}{sel}</div>
-                    <div style={{fontSize:"9px",color:"#3D2B1F",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{NPC_DESC[sel]||""}</div>
+                    <div style={{fontSize:"11px",color:"#7A5840",fontWeight:600,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{isPartner?sLabel[romStatus]+" · ":""}{sel}</div>
+                    <div style={{fontSize:"9px",color:"#BBA090",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{NPC_DESC[sel]||""}</div>
                   </div>
                   <div style={{textAlign:"right",flexShrink:0}}>
                     <div style={{fontSize:"9px",color:NPC_HOOD_COLOR[sel]||"#7BB8B9"}}>{relStatus(fr)}</div>
-                    <div style={{fontSize:"8px",color:"#2C1F14"}}>{fr}/100</div>
+                    <div style={{fontSize:"8px",color:"#D4C4B0"}}>{fr}/100</div>
                   </div>
                 </div>
 
@@ -1024,7 +1085,7 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
                 <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0}}>
                   {INTERACTION_CATS.map(c=>(
                     <button key={c.id} onClick={()=>setCat(c.id)}
-                      style={{flex:1,padding:"5px 2px",fontSize:"8px",border:"none",borderBottom:cat===c.id?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:cat===c.id?"#D4A853":"#3D2B1F",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:"1px"}}>
+                      style={{flex:1,padding:"5px 2px",fontSize:"8px",border:"none",borderBottom:cat===c.id?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:cat===c.id?"#F5A623":"#BBA090",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:"1px"}}>
                       <span style={{fontSize:"11px"}}>{c.emoji}</span>
                       <span style={{letterSpacing:"0.04em",textTransform:"uppercase"}}>{c.label}</span>
                     </button>
@@ -1034,7 +1095,7 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
                 {/* Interactions grid */}
                 <div style={{flex:1,overflowY:"auto",padding:"7px"}}>
                   {catInteractions.length===0&&(
-                    <div style={{fontSize:"9px",color:"#2C1F14",fontStyle:"italic",textAlign:"center",marginTop:"10px"}}>
+                    <div style={{fontSize:"9px",color:"#D4C4B0",fontStyle:"italic",textAlign:"center",marginTop:"10px"}}>
                       {cat==="romantico"&&!ROMANCEABLE.has(sel)?"Este Twin no está disponible para romance.":
                        cat==="romantico"&&fr<30?"Necesitás más amistad para opciones románticas.":
                        "No hay opciones disponibles todavía."}
@@ -1043,9 +1104,9 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
                   <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"4px"}}>
                     {catInteractions.map(intr=>(
                       <button key={intr.id} onClick={()=>onInteract(intr.id,sel)} disabled={loading}
-                        style={{display:"flex",alignItems:"center",gap:"5px",padding:"5px 7px",borderRadius:"7px",border:"1px solid #1A1208",background:"transparent",color:"#5C4030",cursor:loading?"not-allowed":"pointer",textAlign:"left",fontSize:"9px",transition:"all 0.12s"}}
-                        onMouseEnter={e=>{if(!loading){e.currentTarget.style.borderColor="#3D2B1F";e.currentTarget.style.color="#A08060";e.currentTarget.style.background="#0F0A06";}}}
-                        onMouseLeave={e=>{e.currentTarget.style.borderColor="#1A1208";e.currentTarget.style.color="#5C4030";e.currentTarget.style.background="transparent";}}>
+                        style={{display:"flex",alignItems:"center",gap:"5px",padding:"5px 7px",borderRadius:"7px",border:"1px solid #1A1208",background:"transparent",color:"#B8907A",cursor:loading?"not-allowed":"pointer",textAlign:"left",fontSize:"9px",transition:"all 0.12s"}}
+                        onMouseEnter={e=>{if(!loading){e.currentTarget.style.borderColor="#BBA090";e.currentTarget.style.color="#7A5840";e.currentTarget.style.background="#FFFAF5";}}}
+                        onMouseLeave={e=>{e.currentTarget.style.borderColor="#E0D4C8";e.currentTarget.style.color="#B8907A";e.currentTarget.style.background="transparent";}}>
                         <span style={{fontSize:"14px",flexShrink:0}}>{intr.emoji}</span>
                         <span style={{lineHeight:"1.2"}}>{intr.label}</span>
                       </button>
@@ -1067,9 +1128,9 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
                   {/* Interaction history */}
                   {selRel.history?.length>0&&(
                     <div style={{borderTop:"1px solid #1A1208",paddingTop:"7px",marginTop:"7px"}}>
-                      <div style={{fontSize:"8px",color:"#2C1F14",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>Historial reciente</div>
+                      <div style={{fontSize:"8px",color:"#D4C4B0",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>Historial reciente</div>
                       {selRel.history.slice(-3).map((h,i)=>(
-                        <div key={i} style={{fontSize:"9px",color:"#3D2B1F",marginBottom:"2px",paddingLeft:"6px",borderLeft:"1px solid #1A1208"}}>✦ {h}</div>
+                        <div key={i} style={{fontSize:"9px",color:"#BBA090",marginBottom:"2px",paddingLeft:"6px",borderLeft:"1px solid #1A1208"}}>✦ {h}</div>
                       ))}
                     </div>
                   )}
@@ -1089,14 +1150,14 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
               <NPCAvatar name={family.partner} size={30}/>
               <div>
                 <div style={{fontSize:"10px",color:"#E87B9E",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"1px"}}>{sLabel[family.romanticStatus]||"💕"}</div>
-                <div style={{fontSize:"12px",color:"#A08060",fontWeight:600}}>{family.partner}</div>
+                <div style={{fontSize:"12px",color:"#7A5840",fontWeight:600}}>{family.partner}</div>
               </div>
             </div>
           )}
 
           {/* No family yet */}
           {!family.partner&&family.children.length===0&&(
-            <div style={{fontSize:"10px",color:"#2C1F14",fontStyle:"italic",textAlign:"center",marginTop:"16px",lineHeight:"1.5"}}>
+            <div style={{fontSize:"10px",color:"#D4C4B0",fontStyle:"italic",textAlign:"center",marginTop:"16px",lineHeight:"1.5"}}>
               Tu historia familiar en Veloria todavía está por escribirse.<br/>Conocé Twins, construí relaciones.
             </div>
           )}
@@ -1111,14 +1172,14 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
             const hapDots=Math.round(hap/20);
             const relDots=Math.round(rel/20);
             return(
-              <div key={idx} style={{background:"#080503",border:`1px solid ${stage.color}33`,borderRadius:"10px",padding:"10px",marginBottom:"8px"}}>
+              <div key={idx} style={{background:"#F0EAE0",border:`1px solid ${stage.color}33`,borderRadius:"10px",padding:"10px",marginBottom:"8px"}}>
                 <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"8px"}}>
                   <div style={{width:"36px",height:"36px",borderRadius:"50%",background:`${stage.color}15`,border:`2px solid ${stage.color}44`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"18px",flexShrink:0}}>{stage.emoji}</div>
                   <div style={{flex:1}}>
-                    <div style={{fontSize:"12px",color:"#A08060",fontWeight:600}}>{child.name}</div>
+                    <div style={{fontSize:"12px",color:"#7A5840",fontWeight:600}}>{child.name}</div>
                     <div style={{display:"flex",alignItems:"center",gap:"6px"}}>
                       <span style={{fontSize:"9px",color:stage.color,background:`${stage.color}18`,padding:"1px 6px",borderRadius:"8px",border:`1px solid ${stage.color}44`}}>{stage.label}</span>
-                      <span style={{fontSize:"9px",color:"#3D2B1F"}}>{age} {age===1?"año":"años"}</span>
+                      <span style={{fontSize:"9px",color:"#BBA090"}}>{age} {age===1?"año":"años"}</span>
                     </div>
                   </div>
                 </div>
@@ -1126,21 +1187,21 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
                 {/* Stats */}
                 <div style={{display:"flex",gap:"12px",marginBottom:"8px"}}>
                   <div style={{flex:1}}>
-                    <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"2px"}}>Felicidad</div>
+                    <div style={{fontSize:"8px",color:"#BBA090",marginBottom:"2px"}}>Felicidad</div>
                     <div style={{display:"flex",gap:"2px"}}>
-                      {[0,1,2,3,4].map(i=><div key={i} style={{width:"7px",height:"7px",borderRadius:"50%",background:i<hapDots?"#E87B9E":"transparent",border:`1px solid ${i<hapDots?"#E87B9E":"#2C1F14"}`}}/>)}
+                      {[0,1,2,3,4].map(i=><div key={i} style={{width:"7px",height:"7px",borderRadius:"50%",background:i<hapDots?"#E87B9E":"transparent",border:`1px solid ${i<hapDots?"#E87B9E":"#D4C4B0"}`}}/>)}
                     </div>
                   </div>
                   <div style={{flex:1}}>
-                    <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"2px"}}>Relación</div>
+                    <div style={{fontSize:"8px",color:"#BBA090",marginBottom:"2px"}}>Relación</div>
                     <div style={{display:"flex",gap:"2px"}}>
-                      {[0,1,2,3,4].map(i=><div key={i} style={{width:"7px",height:"7px",borderRadius:"50%",background:i<relDots?stage.color:"transparent",border:`1px solid ${i<relDots?stage.color:"#2C1F14"}`}}/>)}
+                      {[0,1,2,3,4].map(i=><div key={i} style={{width:"7px",height:"7px",borderRadius:"50%",background:i<relDots?stage.color:"transparent",border:`1px solid ${i<relDots?stage.color:"#D4C4B0"}`}}/>)}
                     </div>
                   </div>
                   {child.traits?.length>0&&(
                     <div style={{flex:2}}>
-                      <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"2px"}}>Rasgos</div>
-                      <div style={{fontSize:"8px",color:"#5C4030"}}>{child.traits.slice(0,2).join(", ")}</div>
+                      <div style={{fontSize:"8px",color:"#BBA090",marginBottom:"2px"}}>Rasgos</div>
+                      <div style={{fontSize:"8px",color:"#B8907A"}}>{child.traits.slice(0,2).join(", ")}</div>
                     </div>
                   )}
                 </div>
@@ -1149,9 +1210,9 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
                 <div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>
                   {stage.interactions.map(intr=>(
                     <button key={intr.id} onClick={()=>onChildInteract(idx,intr.id)} disabled={loading}
-                      style={{display:"flex",alignItems:"center",gap:"4px",padding:"4px 8px",borderRadius:"14px",fontSize:"9px",border:`1px solid ${stage.color}44`,background:"transparent",color:"#5C4030",cursor:loading?"not-allowed":"pointer",transition:"all 0.12s"}}
+                      style={{display:"flex",alignItems:"center",gap:"4px",padding:"4px 8px",borderRadius:"14px",fontSize:"9px",border:`1px solid ${stage.color}44`,background:"transparent",color:"#B8907A",cursor:loading?"not-allowed":"pointer",transition:"all 0.12s"}}
                       onMouseEnter={e=>{if(!loading){e.currentTarget.style.background=`${stage.color}12`;e.currentTarget.style.color=stage.color;e.currentTarget.style.borderColor=`${stage.color}88`;}}}
-                      onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="#5C4030";e.currentTarget.style.borderColor=`${stage.color}44`;}}>
+                      onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="#B8907A";e.currentTarget.style.borderColor=`${stage.color}44`;}}>
                       <span>{intr.emoji}</span>{intr.label}
                     </button>
                   ))}
@@ -1168,17 +1229,17 @@ function TrabajoTabContent({career,loc,dark,loading,onApply,onWork}){
   if(!career){
     return(
       <div style={{padding:"10px 14px",overflowY:"auto",height:"100%"}}>
-        <div style={{fontSize:"10px",color:"#5C4030",marginBottom:"10px"}}>Elegí una carrera para empezar en Veloria.</div>
+        <div style={{fontSize:"10px",color:"#B8907A",marginBottom:"10px"}}>Elegí una carrera para empezar en Veloria.</div>
         <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
           {Object.entries(CAREERS).map(([id,c])=>(
             <button key={id} onClick={()=>onApply(id)} disabled={loading}
-              style={{display:"flex",alignItems:"center",gap:"8px",padding:"8px 12px",borderRadius:"10px",border:"1px solid #3D2B1F",background:"transparent",color:"#8B7355",cursor:loading?"not-allowed":"pointer",opacity:loading?0.4:1,transition:"all 0.12s"}}
+              style={{display:"flex",alignItems:"center",gap:"8px",padding:"8px 12px",borderRadius:"10px",border:"1px solid #3D2B1F",background:"transparent",color:"#7A5840",cursor:loading?"not-allowed":"pointer",opacity:loading?0.4:1,transition:"all 0.12s"}}
               onMouseEnter={e=>{e.currentTarget.style.borderColor="#6B9E5E";e.currentTarget.style.color="#6B9E5E";}}
-              onMouseLeave={e=>{e.currentTarget.style.borderColor="#3D2B1F";e.currentTarget.style.color="#8B7355";}}>
+              onMouseLeave={e=>{e.currentTarget.style.borderColor="#BBA090";e.currentTarget.style.color="#7A5840";}}>
               <span style={{fontSize:"18px"}}>{c.emoji}</span>
               <div>
                 <div style={{fontSize:"11px",fontWeight:500}}>{c.label}</div>
-                <div style={{fontSize:"9px",color:"#5C4030"}}>L{c.wages[0]}/turno</div>
+                <div style={{fontSize:"9px",color:"#B8907A"}}>L{c.wages[0]}/turno</div>
               </div>
             </button>
           ))}
@@ -1190,25 +1251,25 @@ function TrabajoTabContent({career,loc,dark,loading,onApply,onWork}){
   const prog=career.level>=3?100:Math.min(100,(career.shiftsWorked%PROMO_SHIFTS[career.level])/PROMO_SHIFTS[career.level]*100);
   return(
     <div style={{padding:"10px 14px",display:"flex",gap:"12px",alignItems:"flex-start",height:"100%",overflowY:"auto"}}>
-      <div style={{background:"#1A1208",border:"1px solid #3D2B1F",borderRadius:"10px",padding:"10px",minWidth:"160px"}}>
+      <div style={{background:"#E0D4C8",border:"1px solid #3D2B1F",borderRadius:"10px",padding:"10px",minWidth:"160px"}}>
         <div style={{fontSize:"20px",marginBottom:"4px"}}>{c.emoji}</div>
         <div style={{fontSize:"12px",fontWeight:600,color:"#6B9E5E",marginBottom:"2px"}}>{c.levels[career.level]}</div>
-        <div style={{fontSize:"10px",color:"#5C4030"}}>{c.label} · L{c.wages[career.level]}/turno</div>
-        <div style={{fontSize:"9px",color:"#5C4030",marginTop:"2px"}}>{career.shiftsWorked} turnos trabajados</div>
+        <div style={{fontSize:"10px",color:"#B8907A"}}>{c.label} · L{c.wages[career.level]}/turno</div>
+        <div style={{fontSize:"9px",color:"#B8907A",marginTop:"2px"}}>{career.shiftsWorked} turnos trabajados</div>
         {career.level<3&&<div style={{marginTop:"8px"}}>
-          <div style={{height:"3px",background:"#2C1F14",borderRadius:"2px",overflow:"hidden",marginBottom:"3px"}}>
+          <div style={{height:"3px",background:"#D4C4B0",borderRadius:"2px",overflow:"hidden",marginBottom:"3px"}}>
             <div style={{height:"100%",width:`${prog}%`,background:"#6B9E5E",transition:"width 0.5s"}}/>
           </div>
-          <div style={{fontSize:"9px",color:"#5C4030"}}>{Math.round(prog)}% hacia {c.levels[career.level+1]}</div>
+          <div style={{fontSize:"9px",color:"#B8907A"}}>{Math.round(prog)}% hacia {c.levels[career.level+1]}</div>
         </div>}
       </div>
       <div style={{display:"flex",flexDirection:"column",gap:"6px"}}>
         {isAt?(
-          <button onClick={onWork} disabled={loading} style={{padding:"8px 14px",borderRadius:"10px",border:"1px solid #6B9E5E",background:"rgba(107,158,94,0.1)",color:"#6B9E5E",fontSize:"11px",cursor:loading?"not-allowed":"pointer",fontWeight:600}}>
+          <button onClick={onWork} disabled={loading} style={{padding:"8px 14px",borderRadius:"10px",border:"1px solid #6B9E5E",background:"rgba(122,181,92,0.1)",color:"#6B9E5E",fontSize:"11px",cursor:loading?"not-allowed":"pointer",fontWeight:600}}>
             💼 Trabajar turno ({c.shiftH}h) → +L{c.wages[career.level]}
           </button>
         ):(
-          <div style={{fontSize:"10px",color:"#5C4030",fontStyle:"italic",maxWidth:"200px",lineHeight:"1.5"}}>Tu lugar de trabajo es {c.places.join(" o ")}. Andá para trabajar.</div>
+          <div style={{fontSize:"10px",color:"#B8907A",fontStyle:"italic",maxWidth:"200px",lineHeight:"1.5"}}>Tu lugar de trabajo es {c.places.join(" o ")}. Andá para trabajar.</div>
         )}
       </div>
     </div>
@@ -1223,28 +1284,28 @@ function InventarioTab({inventory,onUseItem}){
       <div style={{display:"flex",gap:"4px",padding:"8px 14px",borderBottom:"1px solid #2C1F14",overflowX:"auto",flexShrink:0}}>
         {INV_CATS.map(c=>(
           <button key={c.id} onClick={()=>setCat(c.id)}
-            style={{padding:"3px 9px",borderRadius:"12px",fontSize:"9px",border:`1px solid ${cat===c.id?"#D4A853":"#2C1F14"}`,background:cat===c.id?"rgba(212,168,83,0.12)":"transparent",color:cat===c.id?"#D4A853":"#5C4030",cursor:"pointer",whiteSpace:"nowrap"}}>
+            style={{padding:"3px 9px",borderRadius:"12px",fontSize:"9px",border:`1px solid ${cat===c.id?"#F5A623":"#D4C4B0"}`,background:cat===c.id?"rgba(245,166,35,0.12)":"transparent",color:cat===c.id?"#F5A623":"#B8907A",cursor:"pointer",whiteSpace:"nowrap"}}>
             {c.emoji} {c.label}
           </button>
         ))}
       </div>
       <div style={{flex:1,overflowY:"auto",padding:"8px 14px"}}>
-        {filtered.length===0&&<div style={{fontSize:"11px",color:"#5C4030",fontStyle:"italic",textAlign:"center",marginTop:"16px"}}>Nada en esta categoría todavía.</div>}
+        {filtered.length===0&&<div style={{fontSize:"11px",color:"#B8907A",fontStyle:"italic",textAlign:"center",marginTop:"16px"}}>Nada en esta categoría todavía.</div>}
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"6px"}}>
           {filtered.map(item=>(
-            <div key={item.id} style={{background:"#1A1208",border:"1px solid #2C1F14",borderRadius:"8px",padding:"8px",display:"flex",gap:"8px",alignItems:"flex-start"}}>
+            <div key={item.id} style={{background:"#E0D4C8",border:"1px solid #2C1F14",borderRadius:"8px",padding:"8px",display:"flex",gap:"8px",alignItems:"flex-start"}}>
               <span style={{fontSize:"20px",flexShrink:0}}>{item.emoji}</span>
               <div style={{flex:1,overflow:"hidden"}}>
-                <div style={{fontSize:"10px",color:"#A08060",fontWeight:600,marginBottom:"1px"}}>{item.name}</div>
-                <div style={{fontSize:"9px",color:"#5C4030",lineHeight:"1.3",marginBottom:"4px"}}>{item.desc}</div>
-                {item.qty>1&&<div style={{fontSize:"9px",color:"#3D2B1F"}}>x{item.qty}</div>}
-                {item.useable&&<button onClick={()=>onUseItem(item)} style={{fontSize:"9px",padding:"2px 7px",borderRadius:"8px",border:"1px solid #D4A853",background:"transparent",color:"#D4A853",cursor:"pointer",marginTop:"3px"}}>Usar</button>}
+                <div style={{fontSize:"10px",color:"#7A5840",fontWeight:600,marginBottom:"1px"}}>{item.name}</div>
+                <div style={{fontSize:"9px",color:"#B8907A",lineHeight:"1.3",marginBottom:"4px"}}>{item.desc}</div>
+                {item.qty>1&&<div style={{fontSize:"9px",color:"#BBA090"}}>x{item.qty}</div>}
+                {item.useable&&<button onClick={()=>onUseItem(item)} style={{fontSize:"9px",padding:"2px 7px",borderRadius:"8px",border:"1px solid #D4A853",background:"transparent",color:"#F5A623",cursor:"pointer",marginTop:"3px"}}>Usar</button>}
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div style={{padding:"6px 14px",borderTop:"1px solid #2C1F14",fontSize:"9px",color:"#5C4030",flexShrink:0}}>
+      <div style={{padding:"6px 14px",borderTop:"1px solid #2C1F14",fontSize:"9px",color:"#B8907A",flexShrink:0}}>
         {inventory.length} / 30 objetos
       </div>
     </div>
@@ -1261,16 +1322,16 @@ function CalendarioTab({gt}){
     <div style={{display:"flex",height:"100%",overflow:"hidden",gap:"0"}}>
       <div style={{flex:1,padding:"10px 14px",overflowY:"auto"}}>
         <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"10px"}}>
-          <button onClick={()=>setViewMonth(m=>Math.max(0,m-1))} style={{background:"transparent",border:"1px solid #2C1F14",color:"#5C4030",borderRadius:"6px",width:"22px",height:"22px",cursor:"pointer",fontSize:"12px"}}>‹</button>
-          <div style={{flex:1,textAlign:"center",fontSize:"11px",color:"#A08060",fontWeight:600}}>{MONTHS[viewMonth]} · {SEASONS[viewMonth]}</div>
-          <button onClick={()=>setViewMonth(m=>Math.min(11,m+1))} style={{background:"transparent",border:"1px solid #2C1F14",color:"#5C4030",borderRadius:"6px",width:"22px",height:"22px",cursor:"pointer",fontSize:"12px"}}>›</button>
+          <button onClick={()=>setViewMonth(m=>Math.max(0,m-1))} style={{background:"transparent",border:"1px solid #2C1F14",color:"#B8907A",borderRadius:"6px",width:"22px",height:"22px",cursor:"pointer",fontSize:"12px"}}>‹</button>
+          <div style={{flex:1,textAlign:"center",fontSize:"11px",color:"#7A5840",fontWeight:600}}>{MONTHS[viewMonth]} · {SEASONS[viewMonth]}</div>
+          <button onClick={()=>setViewMonth(m=>Math.min(11,m+1))} style={{background:"transparent",border:"1px solid #2C1F14",color:"#B8907A",borderRadius:"6px",width:"22px",height:"22px",cursor:"pointer",fontSize:"12px"}}>›</button>
         </div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(6,1fr)",gap:"3px"}}>
           {days.map(d=>{
             const isToday=currentInView&&d===eventDay;
             const hasEvent=CALENDAR_EVENTS[viewMonth]&&d===1;
             return(
-              <div key={d} style={{aspectRatio:"1",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",borderRadius:"6px",fontSize:"10px",background:isToday?"rgba(212,168,83,0.15)":"transparent",border:isToday?"1px solid #D4A853":"1px solid transparent",color:isToday?"#D4A853":"#5C4030",position:"relative"}}>
+              <div key={d} style={{aspectRatio:"1",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",borderRadius:"6px",fontSize:"10px",background:isToday?"rgba(245,166,35,0.15)":"transparent",border:isToday?"1px solid #D4A853":"1px solid transparent",color:isToday?"#F5A623":"#B8907A",position:"relative"}}>
                 {d}
                 {hasEvent&&<span style={{position:"absolute",bottom:"1px",fontSize:"6px"}}>{CALENDAR_EVENTS[viewMonth].emoji}</span>}
               </div>
@@ -1279,19 +1340,19 @@ function CalendarioTab({gt}){
         </div>
       </div>
       <div style={{width:"150px",borderLeft:"1px solid #2C1F14",padding:"10px",overflowY:"auto"}}>
-        <div style={{fontSize:"9px",color:"#5C4030",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"8px"}}>Evento del mes</div>
+        <div style={{fontSize:"9px",color:"#B8907A",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"8px"}}>Evento del mes</div>
         {event?(
-          <div style={{background:"rgba(212,168,83,0.06)",border:"1px solid #3D2B1F",borderRadius:"8px",padding:"8px"}}>
+          <div style={{background:"rgba(245,166,35,0.06)",border:"1px solid #3D2B1F",borderRadius:"8px",padding:"8px"}}>
             <div style={{fontSize:"18px",marginBottom:"3px"}}>{event.emoji}</div>
-            <div style={{fontSize:"10px",color:"#D4A853",fontWeight:600,marginBottom:"3px"}}>{event.name}</div>
-            <div style={{fontSize:"9px",color:"#5C4030",lineHeight:"1.4"}}>{event.desc}</div>
+            <div style={{fontSize:"10px",color:"#F5A623",fontWeight:600,marginBottom:"3px"}}>{event.name}</div>
+            <div style={{fontSize:"9px",color:"#B8907A",lineHeight:"1.4"}}>{event.desc}</div>
           </div>
-        ):<div style={{fontSize:"10px",color:"#5C4030",fontStyle:"italic"}}>Mes tranquilo.</div>}
-        <div style={{marginTop:"10px",fontSize:"9px",color:"#5C4030",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Próximos</div>
+        ):<div style={{fontSize:"10px",color:"#B8907A",fontStyle:"italic"}}>Mes tranquilo.</div>}
+        <div style={{marginTop:"10px",fontSize:"9px",color:"#B8907A",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Próximos</div>
         {Array.from({length:3},(_,i)=>{const mi=(viewMonth+i+1)%12;const ev=CALENDAR_EVENTS[mi];if(!ev)return null;return(
           <div key={mi} style={{marginBottom:"6px",display:"flex",gap:"5px",alignItems:"flex-start"}}>
             <span style={{fontSize:"12px"}}>{ev.emoji}</span>
-            <div><div style={{fontSize:"9px",color:"#8B7355"}}>{ev.name}</div><div style={{fontSize:"8px",color:"#5C4030"}}>{MONTHS[mi]}</div></div>
+            <div><div style={{fontSize:"9px",color:"#7A5840"}}>{ev.name}</div><div style={{fontSize:"8px",color:"#B8907A"}}>{MONTHS[mi]}</div></div>
           </div>
         );})}
       </div>
@@ -1310,16 +1371,16 @@ function DiarioTab({log,gt}){
   const typeLabel={intro:"Llegada",story:"Acción",travel:"Viaje",romance:"Romance",work:"Trabajo",event:"Evento",system:"Nota"};
   return(
     <div style={{height:"100%",overflowY:"auto",padding:"10px 14px"}}>
-      {days.length===0&&<div style={{color:"#5C4030",fontSize:"11px",fontStyle:"italic",textAlign:"center",marginTop:"16px"}}>El diario empieza a escribirse cuando jugás.</div>}
+      {days.length===0&&<div style={{color:"#B8907A",fontSize:"11px",fontStyle:"italic",textAlign:"center",marginTop:"16px"}}>El diario empieza a escribirse cuando jugás.</div>}
       {days.map(d=>(
         <div key={d} style={{marginBottom:"14px"}}>
-          <div style={{fontSize:"9px",color:"#5C4030",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px",borderBottom:"1px solid #2C1F14",paddingBottom:"4px"}}>
+          <div style={{fontSize:"9px",color:"#B8907A",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px",borderBottom:"1px solid #2C1F14",paddingBottom:"4px"}}>
             Día {d} · {MONTHS[Math.min(Math.floor((d-1)/30),11)]}
           </div>
           {byDay[d].map(e=>(
             <div key={e.id} style={{marginBottom:"6px",paddingLeft:"10px",borderLeft:"1px solid #2C1F14"}}>
-              <div style={{fontSize:"9px",color:"#5C4030",marginBottom:"2px"}}>{typeLabel[e.type]||"·"}{e.place?` · ${e.place}`:""}{e.time?` · ${e.time}`:""}</div>
-              <div style={{fontSize:"11px",color:"#8B7355",fontStyle:"italic",lineHeight:"1.4",fontFamily:"'Lora',serif"}}>{(e.text||"").slice(0,120)}{(e.text||"").length>120?"…":""}</div>
+              <div style={{fontSize:"9px",color:"#B8907A",marginBottom:"2px"}}>{typeLabel[e.type]||"·"}{e.place?` · ${e.place}`:""}{e.time?` · ${e.time}`:""}</div>
+              <div style={{fontSize:"11px",color:"#7A5840",fontStyle:"italic",lineHeight:"1.4",fontFamily:"'Lora',serif"}}>{(e.text||"").slice(0,120)}{(e.text||"").length>120?"…":""}</div>
             </div>
           ))}
         </div>
@@ -1328,118 +1389,86 @@ function DiarioTab({log,gt}){
   );
 }
 
-// ═══════════════════ CHARACTER CARD ═══════════════════
+// ═══════════════════ CHARACTER STRIP ═══════════════════
 function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,daysInStage,daysInStageTotal,lifeStage,aspirationProgress}){
   const [moodLabel,moodColor]=getMood(needs);
-  const ls=lifeStage||LIFE_STAGES[6]; // default Joven Adulto
+  const ls=lifeStage||LIFE_STAGES[6];
   const asp=twin?.aspiration?ASPIRATIONS.find(a=>a.id===twin.aspiration):null;
   const nextMilestone=asp?.milestones[(aspirationProgress||[]).length];
-  const topRels=Object.entries(rels).sort(([,a],[,b])=>(b.friendship||0)-(a.friendship||0)).slice(0,2);
+  const stageProgress=Math.min(100,((daysInStage||0)+1)/Math.max(1,daysInStageTotal||ls.days)*100);
   return(
-    <div style={{width:"176px",borderRight:"1px solid #2C1F14",display:"flex",flexDirection:"column",padding:"12px",gap:"0",overflowY:"auto",flexShrink:0}}>
-      {/* Avatar */}
-      <div style={{display:"flex",flexDirection:"column",alignItems:"center",marginBottom:"12px"}}>
-        <div style={{width:"52px",height:"52px",borderRadius:"50%",background:`${ls.color}18`,border:`2px solid ${ls.color}66`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"22px",color:ls.color,fontFamily:"'Lora',serif",fontWeight:700,marginBottom:"6px"}}>
+    <div style={{background:"#FFFFFF",borderBottom:"1px solid #1A1208",padding:"8px 14px",flexShrink:0}}>
+      {/* Main row */}
+      <div style={{display:"flex",gap:"10px",alignItems:"center",marginBottom:"5px"}}>
+        {/* Avatar */}
+        <div style={{width:"36px",height:"36px",borderRadius:"50%",background:`${ls.color}18`,border:`2px solid ${ls.color}55`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"14px",color:ls.color,fontFamily:"'Lora',serif",fontWeight:700,flexShrink:0}}>
           {twin?.name?.charAt(0)||"?"}
         </div>
-        <div style={{fontSize:"12px",color:"#EDE0CC",fontWeight:600,marginBottom:"2px"}}>{twin?.name}</div>
-        <div style={{display:"flex",gap:"4px",alignItems:"center",marginBottom:"3px",flexWrap:"wrap",justifyContent:"center"}}>
-          <span style={{fontSize:"9px",color:ls.color}}>{ls.emoji} {ls.label}</span>
-          <span style={{fontSize:"8px",color:"#2C1F14"}}>día {(daysInStage||0)+1}/{daysInStageTotal||ls.days}</span>
-        </div>
-        {asp&&(
-          <div style={{marginBottom:"4px"}}>
-            <div style={{display:"flex",gap:"2px",marginBottom:"2px"}}>
-              {asp.milestones.map((m,i)=>(
-                <div key={m.id} style={{flex:1,height:"2px",borderRadius:"1px",background:i<(aspirationProgress||[]).length?"#D4A853":"#1A1208"}}/>
-              ))}
-            </div>
-            {nextMilestone&&<div style={{fontSize:"8px",color:"#3D2B1F",fontStyle:"italic",lineHeight:"1.2"}}>◎ {nextMilestone.label}</div>}
+        {/* Name + stage */}
+        <div style={{flexShrink:0}}>
+          <div style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600,lineHeight:1.2}}>{twin?.name}</div>
+          <div style={{fontSize:"9px",color:ls.color,marginBottom:"2px"}}>{ls.emoji} {ls.label} · día {(daysInStage||0)+1}/{daysInStageTotal||ls.days}</div>
+          <div style={{width:"72px",height:"2px",background:"#E0D4C8",borderRadius:"1px",overflow:"hidden"}}>
+            <div style={{height:"100%",width:`${stageProgress}%`,background:ls.color,transition:"width 0.5s"}}/>
           </div>
-        )}
-        <div style={{fontSize:"9px",color:moodColor,background:`${moodColor}18`,padding:"2px 8px",borderRadius:"10px",border:`1px solid ${moodColor}44`}}>{moodLabel}</div>
-      </div>
-      {/* Needs */}
-      <div style={{marginBottom:"10px"}}>
-        {Object.keys(needs).map(k=><NeedDots key={k} needKey={k} value={needs[k]}/>)}
-      </div>
-      {/* Mini stats */}
-      <div style={{borderTop:"1px solid #2C1F14",paddingTop:"8px",marginBottom:"8px"}}>
-        <div style={{display:"flex",justifyContent:"space-between",marginBottom:"4px"}}>
-          <span style={{fontSize:"9px",color:"#5C4030"}}>Luces</span>
-          <span style={{fontSize:"10px",color:"#D4A853",fontWeight:600}}>L {money}</span>
         </div>
-        <div style={{display:"flex",justifyContent:"space-between",marginBottom:"4px"}}>
-          <span style={{fontSize:"9px",color:"#5C4030"}}>Día</span>
-          <span style={{fontSize:"10px",color:"#8B7355"}}>{gt.day}</span>
-        </div>
-        <div style={{display:"flex",justifyContent:"space-between"}}>
-          <span style={{fontSize:"9px",color:"#5C4030"}}>Mes</span>
-          <span style={{fontSize:"10px",color:"#8B7355"}}>{MONTHS[gt.monthIdx]}</span>
-        </div>
-      </div>
-      {Object.keys(skills).some(k=>skills[k]>0)&&(
-        <div style={{borderTop:"1px solid #2C1F14",paddingTop:"8px",marginBottom:"8px"}}>
-          <div style={{fontSize:"9px",color:"#5C4030",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Habilidades</div>
-          {Object.entries(SKILLS_CFG).map(([key,cfg])=>{
-            const xp=skills[key]||0;if(xp===0)return null;
-            const lv=getSkillLevel(xp),prog=getSkillProgress(xp);
-            return(
-              <div key={key} style={{display:"flex",alignItems:"center",gap:"5px",marginBottom:"5px"}}>
-                <span style={{fontSize:"11px",width:"14px",flexShrink:0}}>{cfg.emoji}</span>
-                <div style={{flex:1,height:"3px",background:"#2C1F14",borderRadius:"2px",overflow:"hidden"}}>
-                  <div style={{height:"100%",width:`${prog}%`,background:cfg.color,transition:"width 0.5s"}}/>
-                </div>
-                <span style={{fontSize:"9px",color:cfg.color,width:"16px",textAlign:"right",flexShrink:0}}>{SKILL_LEVELS[lv].roman}</span>
-              </div>
-            );
-          })}
-        </div>
-      )}
-      {/* Mini relations */}
-      {topRels.length>0&&(
-        <div style={{borderTop:"1px solid #2C1F14",paddingTop:"8px"}}>
-          <div style={{fontSize:"9px",color:"#5C4030",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Relaciones</div>
-          {topRels.map(([name,rel])=>(
-            <div key={name} style={{display:"flex",alignItems:"center",gap:"6px",marginBottom:"5px"}}>
-              <NPCAvatar name={name} size={20}/>
-              <div style={{flex:1,overflow:"hidden"}}>
-                <div style={{fontSize:"9px",color:"#8B7355",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{family.partner===name?"💕 ":""}{name.split(" ")[0]}</div>
-                <div style={{height:"2px",background:"#2C1F14",borderRadius:"1px",overflow:"hidden",marginTop:"2px"}}>
-                  <div style={{height:"100%",width:`${rel.friendship||0}%`,background:NPC_HOOD_COLOR[name]||"#7BB8B9"}}/>
-                </div>
+        {/* Needs grid 3×2 */}
+        <div style={{flex:1,display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"3px 8px",margin:"0 6px"}}>
+          {Object.entries(NEED_CFG).map(([key,cfg])=>(
+            <div key={key} style={{display:"flex",gap:"3px",alignItems:"center"}}>
+              <span style={{fontSize:"9px",lineHeight:1,flexShrink:0}}>{cfg.emoji}</span>
+              <div style={{flex:1,height:"3px",background:"#E0D4C8",borderRadius:"2px",overflow:"hidden"}}>
+                <div style={{height:"100%",width:`${needs[key]||0}%`,background:cfg.color,transition:"width 0.5s"}}/>
               </div>
             </div>
           ))}
+        </div>
+        {/* Mood + Money */}
+        <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:"3px",flexShrink:0}}>
+          <div style={{padding:"2px 7px",borderRadius:"7px",background:`${moodColor}15`,border:`1px solid ${moodColor}44`,fontSize:"9px",color:moodColor,whiteSpace:"nowrap"}}>{moodLabel}</div>
+          <div style={{fontSize:"10px",color:"#F5A623",fontWeight:600}}>L {money}</div>
+        </div>
+      </div>
+      {/* Aspiration row */}
+      {asp&&(
+        <div style={{display:"flex",alignItems:"center",gap:"6px"}}>
+          <span style={{fontSize:"9px",color:"#BBA090",flexShrink:0}}>{asp.emoji} {asp.label}</span>
+          <div style={{display:"flex",gap:"2px",flex:1,maxWidth:"80px"}}>
+            {asp.milestones.map((m,i)=>(
+              <div key={m.id} style={{flex:1,height:"2px",borderRadius:"1px",background:i<(aspirationProgress||[]).length?"#F5A623":"#E0D4C8"}}/>
+            ))}
+          </div>
+          {nextMilestone&&<span style={{fontSize:"8px",color:"#B8907A",fontStyle:"italic",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",flex:1}}>◎ {nextMilestone.label}</span>}
         </div>
       )}
     </div>
   );
 }
 
+
 // ═══════════════════ PAUSA MODAL ═══════════════════
 // ═══ DIALOGUE MODAL ═══
 function DialogueModal({event,onRespond}){
-  const c=NPC_HOOD_COLOR[event.npc]||"#D4A853";
+  const c=NPC_HOOD_COLOR[event.npc]||"#F5A623";
   return(
     <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.88)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:150,padding:"16px"}}>
-      <div style={{background:"#0A0603",border:`1px solid ${c}33`,borderRadius:"16px",width:"480px",maxWidth:"100%",padding:"24px"}}>
+      <div style={{background:"#F5EDE0",border:`1px solid ${c}33`,borderRadius:"16px",width:"480px",maxWidth:"100%",padding:"24px"}}>
         <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"16px"}}>
           <NPCAvatar name={event.npc} size={44}/>
           <div>
-            <div style={{fontSize:"13px",color:"#A08060",fontWeight:600}}>{event.npc}</div>
-            <div style={{fontSize:"9px",color:"#3D2B1F"}}>{NPC_DESC[event.npc]||""}</div>
+            <div style={{fontSize:"13px",color:"#7A5840",fontWeight:600}}>{event.npc}</div>
+            <div style={{fontSize:"9px",color:"#BBA090"}}>{NPC_DESC[event.npc]||""}</div>
           </div>
         </div>
-        <div style={{fontSize:"13px",color:"#8B7355",fontFamily:"'Lora',serif",lineHeight:"1.7",fontStyle:"italic",marginBottom:"20px",paddingLeft:"10px",borderLeft:`2px solid ${c}44`,whiteSpace:"pre-line"}}>
+        <div style={{fontSize:"13px",color:"#7A5840",fontFamily:"'Lora',serif",lineHeight:"1.7",fontStyle:"italic",marginBottom:"20px",paddingLeft:"10px",borderLeft:`2px solid ${c}44`,whiteSpace:"pre-line"}}>
           {event.message}
         </div>
         <div style={{display:"flex",flexDirection:"column",gap:"7px"}}>
           {event.options.map((opt,i)=>(
             <button key={i} onClick={()=>onRespond(opt)}
-              style={{padding:"10px 14px",borderRadius:"9px",border:"1px solid #2C1F14",background:"transparent",color:"#8B7355",cursor:"pointer",textAlign:"left",fontSize:"12px",transition:"all 0.15s",lineHeight:"1.4"}}
+              style={{padding:"10px 14px",borderRadius:"9px",border:"1px solid #2C1F14",background:"transparent",color:"#7A5840",cursor:"pointer",textAlign:"left",fontSize:"12px",transition:"all 0.15s",lineHeight:"1.4"}}
               onMouseEnter={e=>{e.currentTarget.style.borderColor=c;e.currentTarget.style.color=c;e.currentTarget.style.background=`${c}10`;}}
-              onMouseLeave={e=>{e.currentTarget.style.borderColor="#2C1F14";e.currentTarget.style.color="#8B7355";e.currentTarget.style.background="transparent";}}>
+              onMouseLeave={e=>{e.currentTarget.style.borderColor="#D4C4B0";e.currentTarget.style.color="#7A5840";e.currentTarget.style.background="transparent";}}>
               {opt.text}
             </button>
           ))}
@@ -1461,19 +1490,19 @@ function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture
   return(
     <div style={{display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
       <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0}}>
-        <button onClick={()=>setView("prop")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="prop"?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:view==="prop"?"#D4A853":"#3D2B1F",cursor:"pointer"}}>🏠 Propiedad</button>
-        <button onClick={()=>setView("muebles")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="muebles"?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:view==="muebles"?"#D4A853":"#3D2B1F",cursor:"pointer"}}>🛋 Muebles ({slotsUsed}/{tier.slots})</button>
+        <button onClick={()=>setView("prop")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="prop"?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:view==="prop"?"#F5A623":"#BBA090",cursor:"pointer"}}>🏠 Propiedad</button>
+        <button onClick={()=>setView("muebles")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="muebles"?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:view==="muebles"?"#F5A623":"#BBA090",cursor:"pointer"}}>🛋 Muebles ({slotsUsed}/{tier.slots})</button>
       </div>
 
       <div style={{flex:1,overflowY:"auto",padding:"10px 12px"}}>
         {view==="prop"&&(
           <div>
             {/* Current property */}
-            <div style={{background:"rgba(212,168,83,0.06)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px",marginBottom:"10px"}}>
+            <div style={{background:"rgba(245,166,35,0.06)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px",marginBottom:"10px"}}>
               <div style={{fontSize:"22px",marginBottom:"4px"}}>{tier.emoji}</div>
-              <div style={{fontSize:"12px",color:"#A08060",fontWeight:600,marginBottom:"2px"}}>{tier.label}</div>
-              <div style={{fontSize:"10px",color:"#5C4030",marginBottom:"8px"}}>{tier.desc}</div>
-              <div style={{fontSize:"9px",color:"#3D2B1F",marginBottom:"4px"}}>Ranuras de muebles: {slotsUsed}/{tier.slots}</div>
+              <div style={{fontSize:"12px",color:"#7A5840",fontWeight:600,marginBottom:"2px"}}>{tier.label}</div>
+              <div style={{fontSize:"10px",color:"#B8907A",marginBottom:"8px"}}>{tier.desc}</div>
+              <div style={{fontSize:"9px",color:"#BBA090",marginBottom:"4px"}}>Ranuras de muebles: {slotsUsed}/{tier.slots}</div>
               {Object.keys(eff.needBonus).length>0&&(
                 <div style={{fontSize:"9px",color:"#6B9E5E"}}>
                   Bonus: {Object.entries(eff.needBonus).map(([n,v])=>`+${v} ${NEED_CFG[n]?.emoji||n}`).join(" · ")}
@@ -1483,24 +1512,24 @@ function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture
             {/* Upgrade */}
             {nextTier&&(
               <div>
-                <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"7px"}}>Próxima propiedad</div>
-                <div style={{background:"#0A0603",border:"1px solid #1A1208",borderRadius:"9px",padding:"10px",display:"flex",gap:"10px",alignItems:"center"}}>
+                <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"7px"}}>Próxima propiedad</div>
+                <div style={{background:"#F5EDE0",border:"1px solid #1A1208",borderRadius:"9px",padding:"10px",display:"flex",gap:"10px",alignItems:"center"}}>
                   <span style={{fontSize:"20px"}}>{nextTier.emoji}</span>
                   <div style={{flex:1}}>
-                    <div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>{nextTier.label}</div>
-                    <div style={{fontSize:"9px",color:"#3D2B1F",marginBottom:"5px"}}>{nextTier.desc}</div>
-                    <div style={{fontSize:"10px",color:money>=nextTier.price?"#D4A853":"#5C4030"}}>
+                    <div style={{fontSize:"11px",color:"#7A5840",fontWeight:600}}>{nextTier.label}</div>
+                    <div style={{fontSize:"9px",color:"#BBA090",marginBottom:"5px"}}>{nextTier.desc}</div>
+                    <div style={{fontSize:"10px",color:money>=nextTier.price?"#F5A623":"#B8907A"}}>
                       L {nextTier.price.toLocaleString()} {money>=nextTier.price?"✓":"(Tenés L"+money+")"}
                     </div>
                   </div>
                   <button onClick={()=>onUpgrade(nextTier.id)} disabled={money<nextTier.price||loading}
-                    style={{padding:"6px 10px",borderRadius:"7px",border:"1px solid #D4A853",background:money>=nextTier.price?"rgba(212,168,83,0.1)":"transparent",color:money>=nextTier.price?"#D4A853":"#3D2B1F",fontSize:"10px",cursor:money>=nextTier.price?"pointer":"not-allowed",flexShrink:0}}>
+                    style={{padding:"6px 10px",borderRadius:"7px",border:"1px solid #D4A853",background:money>=nextTier.price?"rgba(245,166,35,0.1)":"transparent",color:money>=nextTier.price?"#F5A623":"#BBA090",fontSize:"10px",cursor:money>=nextTier.price?"pointer":"not-allowed",flexShrink:0}}>
                     Comprar
                   </button>
                 </div>
               </div>
             )}
-            {!nextTier&&<div style={{fontSize:"10px",color:"#3D2B1F",fontStyle:"italic",textAlign:"center",marginTop:"10px"}}>Tenés la mejor propiedad de Veloria.</div>}
+            {!nextTier&&<div style={{fontSize:"10px",color:"#BBA090",fontStyle:"italic",textAlign:"center",marginTop:"10px"}}>Tenés la mejor propiedad de Veloria.</div>}
           </div>
         )}
 
@@ -1509,14 +1538,14 @@ function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture
             {/* Installed */}
             {placedFurniture.length>0&&(
               <div style={{marginBottom:"10px"}}>
-                <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Instalados</div>
+                <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Instalados</div>
                 <div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>
                   {placedFurniture.map(fId=>{
                     const f=FURNITURE_ITEMS[fId];if(!f)return null;
                     return(
-                      <div key={fId} style={{background:"#0A0603",border:"1px solid #1A1208",borderRadius:"7px",padding:"5px 8px",display:"flex",alignItems:"center",gap:"5px"}}>
+                      <div key={fId} style={{background:"#F5EDE0",border:"1px solid #1A1208",borderRadius:"7px",padding:"5px 8px",display:"flex",alignItems:"center",gap:"5px"}}>
                         <span style={{fontSize:"14px"}}>{f.emoji}</span>
-                        <span style={{fontSize:"9px",color:"#8B7355"}}>{f.label}</span>
+                        <span style={{fontSize:"9px",color:"#7A5840"}}>{f.label}</span>
                       </div>
                     );
                   })}
@@ -1524,19 +1553,19 @@ function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture
               </div>
             )}
             {/* Shop */}
-            <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Disponibles</div>
+            <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Disponibles</div>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"5px"}}>
               {Object.entries(FURNITURE_ITEMS).filter(([id])=>!placedFurniture.includes(id)).map(([id,f])=>{
                 const canBuy=money>=f.price&&slotsUsed<tier.slots;
                 return(
-                  <div key={id} style={{background:"#0A0603",border:"1px solid #1A1208",borderRadius:"8px",padding:"8px"}}>
+                  <div key={id} style={{background:"#F5EDE0",border:"1px solid #1A1208",borderRadius:"8px",padding:"8px"}}>
                     <div style={{fontSize:"18px",marginBottom:"2px"}}>{f.emoji}</div>
-                    <div style={{fontSize:"10px",color:"#8B7355",fontWeight:500,marginBottom:"1px"}}>{f.label}</div>
-                    <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"5px",lineHeight:"1.3"}}>{f.desc}</div>
+                    <div style={{fontSize:"10px",color:"#7A5840",fontWeight:500,marginBottom:"1px"}}>{f.label}</div>
+                    <div style={{fontSize:"8px",color:"#BBA090",marginBottom:"5px",lineHeight:"1.3"}}>{f.desc}</div>
                     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                      <span style={{fontSize:"9px",color:canBuy?"#D4A853":"#3D2B1F"}}>L {f.price}</span>
+                      <span style={{fontSize:"9px",color:canBuy?"#F5A623":"#BBA090"}}>L {f.price}</span>
                       <button onClick={()=>onBuyFurniture(id)} disabled={!canBuy||loading}
-                        style={{padding:"2px 7px",borderRadius:"5px",border:`1px solid ${canBuy?"#D4A853":"#2C1F14"}`,background:"transparent",color:canBuy?"#D4A853":"#3D2B1F",fontSize:"8px",cursor:canBuy?"pointer":"not-allowed"}}>
+                        style={{padding:"2px 7px",borderRadius:"5px",border:`1px solid ${canBuy?"#F5A623":"#D4C4B0"}`,background:"transparent",color:canBuy?"#F5A623":"#BBA090",fontSize:"8px",cursor:canBuy?"pointer":"not-allowed"}}>
                         {!canBuy&&money<f.price?"L"+f.price:slotsUsed>=tier.slots?"Sin ranuras":"Comprar"}
                       </button>
                     </div>
@@ -1561,8 +1590,8 @@ function LegacyScreen({twin,gt,skills,rels,family,children,onContinueAsChild,onN
     <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.97)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:300,fontFamily:"'DM Sans',sans-serif"}}>
       <div style={{maxWidth:"520px",width:"95%",textAlign:"center",padding:"40px 32px"}}>
         <div style={{fontSize:"28px",marginBottom:"8px"}}>✦</div>
-        <div style={{fontFamily:"'Lora',serif",fontSize:"28px",color:"#D4A853",marginBottom:"4px"}}>El legado de {twin?.name}</div>
-        <div style={{fontSize:"11px",color:"#3D2B1F",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"32px"}}>Veloria · Otherwhen</div>
+        <div style={{fontFamily:"'Lora',serif",fontSize:"28px",color:"#F5A623",marginBottom:"4px"}}>El legado de {twin?.name}</div>
+        <div style={{fontSize:"11px",color:"#BBA090",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"32px"}}>Veloria · Otherwhen</div>
 
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginBottom:"28px"}}>
           {[
@@ -1570,17 +1599,17 @@ function LegacyScreen({twin,gt,skills,rels,family,children,onContinueAsChild,onN
             {label:"Días en Veloria",value:gt.day,emoji:"📅"},
             {label:"Twins conocidos",value:knownNPCs,emoji:"💬"},
           ].map(({label,value,emoji})=>(
-            <div key={label} style={{background:"rgba(212,168,83,0.05)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px 8px"}}>
+            <div key={label} style={{background:"rgba(245,166,35,0.05)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px 8px"}}>
               <div style={{fontSize:"20px",marginBottom:"4px"}}>{emoji}</div>
-              <div style={{fontFamily:"'Lora',serif",fontSize:"18px",color:"#D4A853",marginBottom:"2px"}}>{value}</div>
-              <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.08em"}}>{label}</div>
+              <div style={{fontFamily:"'Lora',serif",fontSize:"18px",color:"#F5A623",marginBottom:"2px"}}>{value}</div>
+              <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.08em"}}>{label}</div>
             </div>
           ))}
         </div>
 
         {masteredSkills.length>0&&(
-          <div style={{marginBottom:"20px",fontSize:"10px",color:"#5C4030"}}>
-            Habilidades dominadas: <span style={{color:"#D4A853"}}>{masteredSkills.join(" · ")}</span>
+          <div style={{marginBottom:"20px",fontSize:"10px",color:"#B8907A"}}>
+            Habilidades dominadas: <span style={{color:"#F5A623"}}>{masteredSkills.join(" · ")}</span>
           </div>
         )}
         {family?.partner&&(
@@ -1588,17 +1617,17 @@ function LegacyScreen({twin,gt,skills,rels,family,children,onContinueAsChild,onN
             Vida compartida con {family.partner}{family.children?.length>0?` · ${family.children.length} ${family.children.length===1?"hijo":"hijos"}`:""}</div>
         )}
 
-        <div style={{marginBottom:"20px",fontFamily:"'Lora',serif",fontSize:"13px",color:"#5C4030",fontStyle:"italic",lineHeight:"1.6"}}>
+        <div style={{marginBottom:"20px",fontFamily:"'Lora',serif",fontSize:"13px",color:"#B8907A",fontStyle:"italic",lineHeight:"1.6"}}>
           *{getNarrative("death")}*
         </div>
 
         <div style={{display:"flex",gap:"10px",justifyContent:"center"}}>
           {hasChild&&(
-            <button onClick={()=>onContinueAsChild(children[0])} style={{padding:"10px 20px",borderRadius:"10px",border:"1px solid #D4A853",background:"rgba(212,168,83,0.1)",color:"#D4A853",fontSize:"12px",cursor:"pointer",fontWeight:600}}>
+            <button onClick={()=>onContinueAsChild(children[0])} style={{padding:"10px 20px",borderRadius:"10px",border:"1px solid #D4A853",background:"rgba(245,166,35,0.1)",color:"#F5A623",fontSize:"12px",cursor:"pointer",fontWeight:600}}>
               Continuar como {children[0].name} →
             </button>
           )}
-          <button onClick={onNewGame} style={{padding:"10px 20px",borderRadius:"10px",border:"1px solid #3D2B1F",background:"transparent",color:"#5C4030",fontSize:"12px",cursor:"pointer"}}>
+          <button onClick={onNewGame} style={{padding:"10px 20px",borderRadius:"10px",border:"1px solid #3D2B1F",background:"transparent",color:"#B8907A",fontSize:"12px",cursor:"pointer"}}>
             Nueva partida
           </button>
         </div>
@@ -1639,12 +1668,12 @@ function MapaTab({gt,rels,loc,loading,onGoTo}){
     <div style={{display:"flex",height:"100%",overflow:"hidden"}}>
       {/* MAP */}
       <div style={{flex:1,padding:"8px",position:"relative",overflow:"hidden"}}>
-        <div style={{fontSize:"9px",color:"#2C1F14",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"6px"}}>
+        <div style={{fontSize:"9px",color:"#D4C4B0",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"6px"}}>
           {toTimeStr(gt.hour)} · Día {gt.day} · {MONTHS[gt.monthIdx]}
         </div>
         <div style={{position:"relative",width:"100%",height:"calc(100% - 22px)"}}>
           {Object.entries(HOOD_MAP).map(([hood,pos])=>{
-            const color=(NEIGHBORHOODS[hood]||{}).color||"#3D2B1F";
+            const color=(NEIGHBORHOODS[hood]||{}).color||"#BBA090";
             const npcsHere=byHood[hood]||[];
             const isHere=loc.hood===hood;
             return(
@@ -1668,9 +1697,9 @@ function MapaTab({gt,rels,loc,loading,onGoTo}){
                     return(
                       <button key={name} onClick={()=>setSelNPC(isSel?null:name)} title={name}
                         style={{width:"20px",height:"20px",borderRadius:"50%",padding:0,flexShrink:0,
-                          background:known?`${c}25`:"#0F0A06",
-                          border:`2px solid ${isSel?"#D4A853":known?c:"#2C1F14"}`,
-                          color:known?c:"#2C1F14",fontSize:"9px",fontWeight:700,
+                          background:known?`${c}25`:"#FFFAF5",
+                          border:`2px solid ${isSel?"#F5A623":known?c:"#D4C4B0"}`,
+                          color:known?c:"#D4C4B0",fontSize:"9px",fontWeight:700,
                           cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",
                           boxShadow:isSel?`0 0 6px ${c}60`:"none",
                           transition:"all 0.15s",
@@ -1689,7 +1718,7 @@ function MapaTab({gt,rels,loc,loading,onGoTo}){
       {/* DETAIL */}
       <div style={{width:"168px",borderLeft:"1px solid #1A1208",display:"flex",flexDirection:"column",overflow:"hidden"}}>
         {!selNPC&&(
-          <div style={{padding:"12px",color:"#2C1F14",fontSize:"10px",fontStyle:"italic",textAlign:"center",marginTop:"12px",lineHeight:"1.5"}}>
+          <div style={{padding:"12px",color:"#D4C4B0",fontSize:"10px",fontStyle:"italic",textAlign:"center",marginTop:"12px",lineHeight:"1.5"}}>
             Tocá un punto en el mapa para ver el horario de ese Twin
           </div>
         )}
@@ -1698,33 +1727,33 @@ function MapaTab({gt,rels,loc,loading,onGoTo}){
             <div style={{padding:"10px",borderBottom:"1px solid #1A1208",display:"flex",alignItems:"center",gap:"8px",flexShrink:0}}>
               <NPCAvatar name={selNPC} size={30}/>
               <div style={{flex:1,overflow:"hidden"}}>
-                <div style={{fontSize:"11px",color:"#A08060",fontWeight:600,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{selNPC}</div>
-                <div style={{fontSize:"9px",color:"#3D2B1F",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{NPC_DESC[selNPC]||""}</div>
+                <div style={{fontSize:"11px",color:"#7A5840",fontWeight:600,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{selNPC}</div>
+                <div style={{fontSize:"9px",color:"#BBA090",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{NPC_DESC[selNPC]||""}</div>
               </div>
             </div>
 
             <div style={{padding:"8px 10px",borderBottom:"1px solid #1A1208",flexShrink:0}}>
-              <div style={{fontSize:"8px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>Ahora</div>
-              <div style={{fontSize:"11px",color:"#D4A853",fontWeight:600}}>{selSlot.place}</div>
-              <div style={{fontSize:"9px",color:"#5C4030"}}>{selSlot.hood}</div>
+              <div style={{fontSize:"8px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>Ahora</div>
+              <div style={{fontSize:"11px",color:"#F5A623",fontWeight:600}}>{selSlot.place}</div>
+              <div style={{fontSize:"9px",color:"#B8907A"}}>{selSlot.hood}</div>
             </div>
 
             <div style={{flex:1,overflowY:"auto",padding:"8px 10px"}}>
-              <div style={{fontSize:"8px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Horario de hoy</div>
+              <div style={{fontSize:"8px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"6px"}}>Horario de hoy</div>
               {selSched?.map((slot,i)=>{
                 const isCur=hour>=slot.from&&hour<slot.to;
-                const color=(NEIGHBORHOODS[slot.hood]||{}).color||"#3D2B1F";
+                const color=(NEIGHBORHOODS[slot.hood]||{}).color||"#BBA090";
                 return(
                   <div key={i} style={{
                     display:"flex",alignItems:"flex-start",gap:"6px",
                     padding:"4px 6px",borderRadius:"5px",marginBottom:"2px",
-                    background:isCur?"rgba(212,168,83,0.07)":"transparent",
-                    border:`1px solid ${isCur?"rgba(212,168,83,0.2)":"transparent"}`,
+                    background:isCur?"rgba(245,166,35,0.07)":"transparent",
+                    border:`1px solid ${isCur?"rgba(245,166,35,0.2)":"transparent"}`,
                   }}>
-                    <div style={{width:"3px",height:"100%",minHeight:"28px",borderRadius:"2px",background:isCur?"#D4A853":color+"44",flexShrink:0,marginTop:"2px"}}/>
+                    <div style={{width:"3px",height:"100%",minHeight:"28px",borderRadius:"2px",background:isCur?"#F5A623":color+"44",flexShrink:0,marginTop:"2px"}}/>
                     <div style={{flex:1}}>
-                      <div style={{fontSize:"8px",color:isCur?"#D4A853":"#3D2B1F"}}>{timeLabel(slot.from)} — {timeLabel(slot.to===24?0:slot.to)}</div>
-                      <div style={{fontSize:"10px",color:isCur?"#A08060":"#5C4030",fontWeight:isCur?600:400,lineHeight:"1.2"}}>{slot.place}</div>
+                      <div style={{fontSize:"8px",color:isCur?"#F5A623":"#BBA090"}}>{timeLabel(slot.from)} — {timeLabel(slot.to===24?0:slot.to)}</div>
+                      <div style={{fontSize:"10px",color:isCur?"#7A5840":"#B8907A",fontWeight:isCur?600:400,lineHeight:"1.2"}}>{slot.place}</div>
                     </div>
                   </div>
                 );
@@ -1734,7 +1763,7 @@ function MapaTab({gt,rels,loc,loading,onGoTo}){
             {(()=>{const nav=resolveNavPlace(selSlot.place,selSlot.hood);return nav&&(
               <div style={{padding:"8px 10px",borderTop:"1px solid #1A1208",flexShrink:0}}>
                 <button onClick={()=>{if(!loading){onGoTo(nav.hood,nav.place);setSelNPC(null);}}} disabled={loading}
-                  style={{width:"100%",padding:"7px",borderRadius:"7px",border:"1px solid #3D2B1F",background:"transparent",color:"#D4A853",fontSize:"11px",cursor:loading?"not-allowed":"pointer",fontWeight:600}}>
+                  style={{width:"100%",padding:"7px",borderRadius:"7px",border:"1px solid #3D2B1F",background:"transparent",color:"#F5A623",fontSize:"11px",cursor:loading?"not-allowed":"pointer",fontWeight:600}}>
                   Ir a encontrarlo/a →
                 </button>
               </div>
@@ -1770,11 +1799,11 @@ function anySaveExists(){
 
 function MenuBtn({label,onClick,accent=false,danger=false}){
   const [h,setH]=useState(false);
-  const col=accent?"#D4A853":danger?"#E87B9E":"#5C4030";
-  const hCol=accent?"#F0C97A":danger?"#F09090":"#8B7355";
+  const col=accent?"#F5A623":danger?"#E87B9E":"#B8907A";
+  const hCol=accent?"#F0C97A":danger?"#F09090":"#7A5840";
   return(
     <button onClick={onClick} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
-      style={{width:"100%",padding:"8px 10px",marginBottom:"4px",borderRadius:"7px",border:`1px solid ${h?"#2C1F14":"#1A1208"}`,background:h?"rgba(255,255,255,0.02)":"transparent",color:h?hCol:col,cursor:"pointer",textAlign:"left",fontSize:"11px",transition:"all 0.12s"}}>
+      style={{width:"100%",padding:"8px 10px",marginBottom:"4px",borderRadius:"7px",border:`1px solid ${h?"#D4C4B0":"#E0D4C8"}`,background:h?"rgba(255,255,255,0.02)":"transparent",color:h?hCol:col,cursor:"pointer",textAlign:"left",fontSize:"11px",transition:"all 0.12s"}}>
       {label}
     </button>
   );
@@ -1783,29 +1812,29 @@ function MenuBtn({label,onClick,accent=false,danger=false}){
 function SaveSlot({slot,view,onSave,onLoad,savedFlash}){
   const meta=slotMeta(slot);
   return(
-    <div style={{background:"#080503",border:"1px solid #1A1208",borderRadius:"10px",padding:"11px 13px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
-      <div style={{width:"28px",height:"28px",borderRadius:"7px",background:"rgba(212,168,83,0.05)",border:"1px solid #1A1208",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",color:"#2C1F14",fontWeight:700,flexShrink:0}}>{slot+1}</div>
+    <div style={{background:"#F0EAE0",border:"1px solid #1A1208",borderRadius:"10px",padding:"11px 13px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
+      <div style={{width:"28px",height:"28px",borderRadius:"7px",background:"rgba(245,166,35,0.05)",border:"1px solid #1A1208",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",color:"#D4C4B0",fontWeight:700,flexShrink:0}}>{slot+1}</div>
       <div style={{flex:1,overflow:"hidden"}}>
         {meta?(
           <>
-            <div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>{meta.twinName}</div>
-            <div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {meta.day} · L {meta.money} · {MONTHS[meta.monthIdx]}</div>
-            <div style={{fontSize:"8px",color:"#2C1F14"}}>{fmtDate(meta.savedAt)}</div>
+            <div style={{fontSize:"11px",color:"#7A5840",fontWeight:600}}>{meta.twinName}</div>
+            <div style={{fontSize:"9px",color:"#BBA090"}}>Día {meta.day} · L {meta.money} · {MONTHS[meta.monthIdx]}</div>
+            <div style={{fontSize:"8px",color:"#D4C4B0"}}>{fmtDate(meta.savedAt)}</div>
           </>
         ):(
-          <div style={{fontSize:"10px",color:"#2C1F14",fontStyle:"italic"}}>Ranura vacía</div>
+          <div style={{fontSize:"10px",color:"#D4C4B0",fontStyle:"italic"}}>Ranura vacía</div>
         )}
       </div>
       <div style={{display:"flex",gap:"5px",flexShrink:0}}>
         {view==="save"&&(
-          <button onClick={()=>onSave(slot)} style={{padding:"4px 9px",borderRadius:"6px",border:`1px solid ${savedFlash===slot?"#6B9E5E":"#2C1F14"}`,background:savedFlash===slot?"rgba(107,158,94,0.1)":"transparent",color:savedFlash===slot?"#6B9E5E":"#5C4030",fontSize:"9px",cursor:"pointer",transition:"all 0.2s"}}>
+          <button onClick={()=>onSave(slot)} style={{padding:"4px 9px",borderRadius:"6px",border:`1px solid ${savedFlash===slot?"#6B9E5E":"#D4C4B0"}`,background:savedFlash===slot?"rgba(122,181,92,0.1)":"transparent",color:savedFlash===slot?"#6B9E5E":"#B8907A",fontSize:"9px",cursor:"pointer",transition:"all 0.2s"}}>
             {savedFlash===slot?"✓":"Guardar"}
           </button>
         )}
         {view==="load"&&meta&&(
-          <button onClick={()=>onLoad(slot)} style={{padding:"4px 9px",borderRadius:"6px",border:"1px solid #2C1F14",background:"transparent",color:"#D4A853",fontSize:"9px",cursor:"pointer"}}>Cargar</button>
+          <button onClick={()=>onLoad(slot)} style={{padding:"4px 9px",borderRadius:"6px",border:"1px solid #2C1F14",background:"transparent",color:"#F5A623",fontSize:"9px",cursor:"pointer"}}>Cargar</button>
         )}
-        {view==="load"&&!meta&&<div style={{fontSize:"9px",color:"#1A1208"}}>—</div>}
+        {view==="load"&&!meta&&<div style={{fontSize:"9px",color:"#E0D4C8"}}>—</div>}
       </div>
     </div>
   );
@@ -1828,18 +1857,18 @@ function PausaModal({onClose,onSave,onLoad,onReset,log,gt,twin}){
 
   return(
     <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.92)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:200}} onClick={e=>e.target===e.currentTarget&&onClose()}>
-      <div style={{background:"#0A0603",border:"1px solid #2C1F14",borderRadius:"16px",width:"600px",maxWidth:"96vw",overflow:"hidden",display:"flex",maxHeight:"88vh"}}>
+      <div style={{background:"#F5EDE0",border:"1px solid #2C1F14",borderRadius:"16px",width:"600px",maxWidth:"96vw",overflow:"hidden",display:"flex",maxHeight:"88vh"}}>
 
         {/* Left menu */}
-        <div style={{width:"205px",background:"#060402",borderRight:"1px solid #1A1208",padding:"22px 16px",display:"flex",flexDirection:"column",flexShrink:0}}>
-          <div style={{fontFamily:"'Lora',serif",fontSize:"19px",color:"#D4A853",letterSpacing:"0.15em",marginBottom:"2px"}}>inbetweens</div>
-          <div style={{fontSize:"7px",color:"#1A1208",letterSpacing:"0.25em",textTransform:"uppercase",marginBottom:"20px"}}>VELORIA · OTHERWHEN</div>
+        <div style={{width:"205px",background:"#EDE5D8",borderRight:"1px solid #1A1208",padding:"22px 16px",display:"flex",flexDirection:"column",flexShrink:0}}>
+          <div style={{fontFamily:"'Lora',serif",fontSize:"19px",color:"#F5A623",letterSpacing:"0.15em",marginBottom:"2px"}}>inbetweens</div>
+          <div style={{fontSize:"7px",color:"#E0D4C8",letterSpacing:"0.25em",textTransform:"uppercase",marginBottom:"20px"}}>VELORIA · OTHERWHEN</div>
 
           <MenuBtn label="Continuar" accent onClick={onClose}/>
           <MenuBtn label={view==="save"?"↩ Volver":"💾 Guardar partida"} onClick={()=>setView(v=>v==="save"?"menu":"save")}/>
           <MenuBtn label={view==="load"?"↩ Volver":"📂 Cargar partida"} onClick={()=>setView(v=>v==="load"?"menu":"load")}/>
 
-          <div style={{height:"1px",background:"#1A1208",margin:"8px 0"}}/>
+          <div style={{height:"1px",background:"#E0D4C8",margin:"8px 0"}}/>
 
           {confirmReset?(
             <div>
@@ -1854,38 +1883,38 @@ function PausaModal({onClose,onSave,onLoad,onReset,log,gt,twin}){
           <div style={{flex:1}}/>
 
           {auto&&(
-            <div style={{padding:"7px",background:"rgba(212,168,83,0.03)",border:"1px solid #1A1208",borderRadius:"7px",marginBottom:"6px"}}>
-              <div style={{fontSize:"8px",color:"#3D2B1F",marginBottom:"3px"}}>Autoguardado</div>
-              <div style={{fontSize:"9px",color:"#5C4030"}}>{auto.twin?.name} · Día {auto.gt?.day}</div>
-              <div style={{fontSize:"7px",color:"#2C1F14",marginBottom:"5px"}}>{fmtDate(auto.savedAt)}</div>
-              <button onClick={doLoadAuto} style={{fontSize:"8px",color:"#8B7355",background:"transparent",border:"1px solid #2C1F14",borderRadius:"5px",padding:"2px 6px",cursor:"pointer",width:"100%"}}>Cargar autoguardado</button>
+            <div style={{padding:"7px",background:"rgba(245,166,35,0.03)",border:"1px solid #1A1208",borderRadius:"7px",marginBottom:"6px"}}>
+              <div style={{fontSize:"8px",color:"#BBA090",marginBottom:"3px"}}>Autoguardado</div>
+              <div style={{fontSize:"9px",color:"#B8907A"}}>{auto.twin?.name} · Día {auto.gt?.day}</div>
+              <div style={{fontSize:"7px",color:"#D4C4B0",marginBottom:"5px"}}>{fmtDate(auto.savedAt)}</div>
+              <button onClick={doLoadAuto} style={{fontSize:"8px",color:"#7A5840",background:"transparent",border:"1px solid #2C1F14",borderRadius:"5px",padding:"2px 6px",cursor:"pointer",width:"100%"}}>Cargar autoguardado</button>
             </div>
           )}
-          <div style={{fontSize:"7px",color:"#1A1208"}}>{twin?.name} · Día {gt?.day}</div>
+          <div style={{fontSize:"7px",color:"#E0D4C8"}}>{twin?.name} · Día {gt?.day}</div>
         </div>
 
         {/* Right panel */}
         <div style={{flex:1,overflowY:"auto"}}>
           {(view==="save"||view==="load")&&(
             <div style={{padding:"20px"}}>
-              <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"12px"}}>
+              <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"12px"}}>
                 {view==="save"?"Elegí una ranura para guardar":"Elegí una partida para cargar"}
               </div>
               {[0,1,2].map(s=>(
                 <SaveSlot key={s} slot={s} view={view} onSave={doSave} onLoad={doLoad} savedFlash={savedFlash}/>
               ))}
-              {view==="save"&&<div style={{fontSize:"8px",color:"#2C1F14",marginTop:"6px",fontStyle:"italic"}}>El autoguardado ocurre automáticamente cada 5 acciones.</div>}
+              {view==="save"&&<div style={{fontSize:"8px",color:"#D4C4B0",marginTop:"6px",fontStyle:"italic"}}>El autoguardado ocurre automáticamente cada 5 acciones.</div>}
             </div>
           )}
 
           {view==="menu"&&(
             <div style={{padding:"20px"}}>
-              <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"12px"}}>Memoria del día</div>
-              {lastEntries.length===0&&<div style={{color:"#2C1F14",fontSize:"11px",fontStyle:"italic"}}>El diario empieza a llenarse mientras jugás.</div>}
+              <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"12px"}}>Memoria del día</div>
+              {lastEntries.length===0&&<div style={{color:"#D4C4B0",fontSize:"11px",fontStyle:"italic"}}>El diario empieza a llenarse mientras jugás.</div>}
               {lastEntries.map(e=>(
                 <div key={e.id} style={{marginBottom:"14px",paddingLeft:"10px",borderLeft:"2px solid #1A1208"}}>
-                  {e.place&&<div style={{fontSize:"8px",color:"#2C1F14",marginBottom:"3px"}}>{e.place}{e.time?` · ${e.time}`:""}</div>}
-                  <div style={{fontSize:"12px",color:"#5C4030",fontStyle:"italic",fontFamily:"'Lora',serif",lineHeight:"1.6"}}>{(e.text||"").slice(0,240)}{(e.text||"").length>240?"…":""}</div>
+                  {e.place&&<div style={{fontSize:"8px",color:"#D4C4B0",marginBottom:"3px"}}>{e.place}{e.time?` · ${e.time}`:""}</div>}
+                  <div style={{fontSize:"12px",color:"#B8907A",fontStyle:"italic",fontFamily:"'Lora',serif",lineHeight:"1.6"}}>{(e.text||"").slice(0,240)}{(e.text||"").length>240?"…":""}</div>
                 </div>
               ))}
             </div>
@@ -1933,11 +1962,9 @@ function CreationScreen({onStart,onLoad}){
   }
 
   function handleFinish(){
-    const asp=ASPIRATIONS.find(a=>a.id===aspiration);
     const orig=ORIGINS.find(o=>o.id===origin);
     onStart({
       name:name.trim(),pronouns,origin,traits,aspiration,
-      startAge:START_AGE[aspiration]||22,
       _origin:orig,_connection:connection,
     });
   }
@@ -1945,28 +1972,28 @@ function CreationScreen({onStart,onLoad}){
   const S={
     wrap:{minHeight:"100vh",background:"linear-gradient(155deg,#060402 0%,#120B06 60%,#0A0603 100%)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"24px 16px",fontFamily:"'DM Sans',sans-serif"},
     card:{width:"100%",maxWidth:"420px",display:"flex",flexDirection:"column",gap:0},
-    title:{fontFamily:"'Lora',serif",fontSize:"24px",color:"#D4A853",marginBottom:"6px",letterSpacing:"0.02em"},
-    sub:{fontSize:"11px",color:"#5C4030",marginBottom:"20px",lineHeight:"1.5"},
-    label:{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.14em",marginBottom:"8px"},
-    btn:(active,color="#D4A853")=>({padding:"10px 24px",borderRadius:"24px",border:`1px solid ${active?color:"#2C1F14"}`,background:active?`${color}18`:"transparent",color:active?color:"#3D2B1F",cursor:"pointer",fontSize:"12px",fontWeight:active?600:400,transition:"all 0.15s"}),
-    nextBtn:{padding:"11px 32px",borderRadius:"24px",border:"1px solid #D4A853",background:"rgba(212,168,83,0.1)",color:"#D4A853",cursor:"pointer",fontSize:"13px",fontWeight:600,marginTop:"20px",width:"100%"},
-    backBtn:{padding:"8px",border:"none",background:"transparent",color:"#3D2B1F",cursor:"pointer",fontSize:"11px",marginBottom:"16px",alignSelf:"flex-start"},
+    title:{fontFamily:"'Lora',serif",fontSize:"24px",color:"#F5A623",marginBottom:"6px",letterSpacing:"0.02em"},
+    sub:{fontSize:"11px",color:"#B8907A",marginBottom:"20px",lineHeight:"1.5"},
+    label:{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.14em",marginBottom:"8px"},
+    btn:(active,color="#F5A623")=>({padding:"10px 24px",borderRadius:"24px",border:`1px solid ${active?color:"#D4C4B0"}`,background:active?`${color}18`:"transparent",color:active?color:"#BBA090",cursor:"pointer",fontSize:"12px",fontWeight:active?600:400,transition:"all 0.15s"}),
+    nextBtn:{padding:"11px 32px",borderRadius:"24px",border:"1px solid #D4A853",background:"rgba(245,166,35,0.1)",color:"#F5A623",cursor:"pointer",fontSize:"13px",fontWeight:600,marginTop:"20px",width:"100%"},
+    backBtn:{padding:"8px",border:"none",background:"transparent",color:"#BBA090",cursor:"pointer",fontSize:"11px",marginBottom:"16px",alignSelf:"flex-start"},
   };
 
   if(showLoad)return(
     <div style={S.wrap}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}`}</style>
       <div style={{...S.card}}>
-        <div style={{fontFamily:"'Lora',serif",fontSize:"36px",color:"#D4A853",letterSpacing:"0.2em",marginBottom:"28px",textAlign:"center"}}>inbetweens</div>
+        <div style={{fontFamily:"'Lora',serif",fontSize:"36px",color:"#F5A623",letterSpacing:"0.2em",marginBottom:"28px",textAlign:"center"}}>inbetweens</div>
         <div style={S.label}>Partidas guardadas</div>
         {[0,1,2].map(s=>{const m=slotMeta(s);return(
-          <div key={s} style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
-            <div style={{width:"24px",height:"24px",borderRadius:"5px",border:"1px solid #2C1F14",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",color:"#2C1F14",flexShrink:0}}>{s+1}</div>
-            <div style={{flex:1}}>{m?<><div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>{m.twinName}</div><div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {m.day} · L {m.money} · {fmtDate(m.savedAt)}</div></>:<div style={{fontSize:"10px",color:"#2C1F14",fontStyle:"italic"}}>Vacío</div>}</div>
+          <div key={s} style={{background:"rgba(245,166,35,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}>
+            <div style={{width:"24px",height:"24px",borderRadius:"5px",border:"1px solid #2C1F14",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",color:"#D4C4B0",flexShrink:0}}>{s+1}</div>
+            <div style={{flex:1}}>{m?<><div style={{fontSize:"11px",color:"#7A5840",fontWeight:600}}>{m.twinName}</div><div style={{fontSize:"9px",color:"#BBA090"}}>Día {m.day} · L {m.money} · {fmtDate(m.savedAt)}</div></>:<div style={{fontSize:"10px",color:"#D4C4B0",fontStyle:"italic"}}>Vacío</div>}</div>
             {m&&<button onClick={()=>onLoad(s)} style={S.btn(true)}>Cargar</button>}
           </div>
         );})}
-        {(()=>{try{const r=localStorage.getItem(AUTO_KEY);const auto=r?JSON.parse(r):null;if(!auto)return null;return(<div style={{background:"rgba(212,168,83,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}><div style={{fontSize:"14px",flexShrink:0}}>⚡</div><div style={{flex:1}}><div style={{fontSize:"11px",color:"#8B7355",fontWeight:600}}>Autosave · {auto.twin?.name}</div><div style={{fontSize:"9px",color:"#3D2B1F"}}>Día {auto.gt?.day} · {fmtDate(auto.savedAt)}</div></div><button onClick={()=>onLoad("auto")} style={S.btn(true)}>Cargar</button></div>);}catch{return null;}})()}
+        {(()=>{try{const r=localStorage.getItem(AUTO_KEY);const auto=r?JSON.parse(r):null;if(!auto)return null;return(<div style={{background:"rgba(245,166,35,0.03)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"11px 14px",marginBottom:"7px",display:"flex",alignItems:"center",gap:"10px"}}><div style={{fontSize:"14px",flexShrink:0}}>⚡</div><div style={{flex:1}}><div style={{fontSize:"11px",color:"#7A5840",fontWeight:600}}>Autosave · {auto.twin?.name}</div><div style={{fontSize:"9px",color:"#BBA090"}}>Día {auto.gt?.day} · {fmtDate(auto.savedAt)}</div></div><button onClick={()=>onLoad("auto")} style={S.btn(true)}>Cargar</button></div>);}catch{return null;}})()}
         <button onClick={()=>setShowLoad(false)} style={{...S.btn(false),marginTop:"8px"}}>← Nueva partida</button>
       </div>
     </div>
@@ -1980,13 +2007,13 @@ function CreationScreen({onStart,onLoad}){
 
       <div style={S.card}>
         {/* Logo */}
-        <div style={{fontFamily:"'Lora',serif",fontSize:"32px",color:"#D4A853",letterSpacing:"0.22em",marginBottom:"24px",textAlign:"center"}}>inbetweens</div>
+        <div style={{fontFamily:"'Lora',serif",fontSize:"32px",color:"#F5A623",letterSpacing:"0.22em",marginBottom:"24px",textAlign:"center"}}>inbetweens</div>
 
         {/* Progress */}
         {step>0&&(
           <div style={{display:"flex",gap:"4px",marginBottom:"20px",justifyContent:"center"}}>
             {STEPS.slice(1).map((s,i)=>(
-              <div key={i} style={{height:"3px",flex:1,borderRadius:"2px",background:i<step-0?"rgba(212,168,83,0.8)":"#1A1208",transition:"background 0.3s"}}/>
+              <div key={i} style={{height:"3px",flex:1,borderRadius:"2px",background:i<step-0?"rgba(245,166,35,0.8)":"#E0D4C8",transition:"background 0.3s"}}/>
             ))}
           </div>
         )}
@@ -1997,11 +2024,11 @@ function CreationScreen({onStart,onLoad}){
         {/* ── STEP 0: BIENVENIDA ── */}
         {step===0&&(
           <div style={{textAlign:"center"}}>
-            <div style={{fontSize:"11px",color:"#3D2B1F",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"16px"}}>Otherwhen · Veloria</div>
-            <div style={{fontFamily:"'Lora',serif",fontSize:"18px",color:"#A08060",lineHeight:"1.7",marginBottom:"24px",fontStyle:"italic"}}>
+            <div style={{fontSize:"11px",color:"#BBA090",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"16px"}}>Otherwhen · Veloria</div>
+            <div style={{fontFamily:"'Lora',serif",fontSize:"18px",color:"#7A5840",lineHeight:"1.7",marginBottom:"24px",fontStyle:"italic"}}>
               "Hay lugares que existen porque alguien decidió que existieran.<br/>Veloria es uno de esos lugares."
             </div>
-            <div style={{fontSize:"11px",color:"#5C4030",lineHeight:"1.7",marginBottom:"28px"}}>
+            <div style={{fontSize:"11px",color:"#B8907A",lineHeight:"1.7",marginBottom:"28px"}}>
               Un mundo de simulación de vida en el mundo de Otherwhen.<br/>
               Cada Twin que llega a Veloria trae su historia.<br/>
               Esta es la tuya.
@@ -2016,14 +2043,14 @@ function CreationScreen({onStart,onLoad}){
             <div style={S.title}>Tu Twin</div>
             <div style={S.sub}>¿Cómo se va a llamar tu Twin en Veloria?</div>
             <input value={name} onChange={e=>setName(e.target.value)} placeholder="Nombre de tu Twin"
-              style={{width:"100%",background:"transparent",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px 16px",color:"#EDE0CC",fontSize:"14px",fontFamily:"'Lora',serif",marginBottom:"20px"}}/>
+              style={{width:"100%",background:"transparent",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px 16px",color:"#2C1A0E",fontSize:"14px",fontFamily:"'Lora',serif",marginBottom:"20px"}}/>
             <div style={S.label}>Pronombres</div>
             <div style={{display:"flex",gap:"8px",marginBottom:"8px"}}>
               {PRONOUN_OPTS.map(p=>(
                 <button key={p.id} onClick={()=>setPronouns(p.id)} style={{...S.btn(pronouns===p.id),flex:1}}>{p.label}</button>
               ))}
             </div>
-            <div style={{fontSize:"9px",color:"#2C1F14",marginTop:"6px"}}>Esto afecta la narrativa del juego.</div>
+            <div style={{fontSize:"9px",color:"#D4C4B0",marginTop:"6px"}}>Esto afecta la narrativa del juego.</div>
           </div>
         )}
 
@@ -2037,15 +2064,15 @@ function CreationScreen({onStart,onLoad}){
                 const sel=origin===o.id;
                 return(
                   <button key={o.id} onClick={()=>setOrigin(o.id)}
-                    style={{textAlign:"left",padding:"14px",borderRadius:"12px",border:`1px solid ${sel?"#D4A853":"#1A1208"}`,background:sel?"rgba(212,168,83,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s"}}>
+                    style={{textAlign:"left",padding:"14px",borderRadius:"12px",border:`1px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"rgba(245,166,35,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s"}}>
                     <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"6px"}}>
                       <span style={{fontSize:"20px"}}>{o.emoji}</span>
                       <div>
-                        <div style={{fontSize:"13px",color:sel?"#D4A853":"#8B7355",fontWeight:600}}>{o.label}</div>
-                        <div style={{fontSize:"9px",color:"#5C4030"}}>{o.bonusLabel}</div>
+                        <div style={{fontSize:"13px",color:sel?"#F5A623":"#7A5840",fontWeight:600}}>{o.label}</div>
+                        <div style={{fontSize:"9px",color:"#B8907A"}}>{o.bonusLabel}</div>
                       </div>
                     </div>
-                    <div style={{fontSize:"10px",color:sel?"#A08060":"#3D2B1F",lineHeight:"1.5",fontStyle:"italic"}}>"{o.lore}"</div>
+                    <div style={{fontSize:"10px",color:sel?"#7A5840":"#BBA090",lineHeight:"1.5",fontStyle:"italic"}}>"{o.lore}"</div>
                   </button>
                 );
               })}
@@ -2059,26 +2086,26 @@ function CreationScreen({onStart,onLoad}){
             <div style={S.title}>Rasgos</div>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"16px"}}>
               <div style={S.sub}>Elegí 3 rasgos que definen a tu Twin.</div>
-              <div style={{fontSize:"12px",color:traits.length===3?"#D4A853":"#5C4030",fontWeight:600,flexShrink:0}}>{traits.length}/3</div>
+              <div style={{fontSize:"12px",color:traits.length===3?"#F5A623":"#B8907A",fontWeight:600,flexShrink:0}}>{traits.length}/3</div>
             </div>
             {TRAIT_CATS.map(cat=>{
               const catTraits=TRAITS.filter(t=>t.cat===cat);
               if(!catTraits.length)return null;
               return(
                 <div key={cat} style={{marginBottom:"14px"}}>
-                  <div style={{fontSize:"9px",color:"#3D2B1F",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"7px"}}>{cat}</div>
+                  <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"7px"}}>{cat}</div>
                   <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"5px"}}>
                     {catTraits.map(t=>{
                       const sel=traits.includes(t.id);
                       const disabled=!sel&&traits.length>=3;
                       return(
                         <button key={t.id} onClick={()=>!disabled&&toggleTrait(t.id)}
-                          style={{textAlign:"left",padding:"9px 10px",borderRadius:"9px",border:`1px solid ${sel?"#D4A853":"#1A1208"}`,background:sel?"rgba(212,168,83,0.08)":"transparent",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.35:1,transition:"all 0.12s"}}>
+                          style={{textAlign:"left",padding:"9px 10px",borderRadius:"9px",border:`1px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"rgba(245,166,35,0.08)":"transparent",cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.35:1,transition:"all 0.12s"}}>
                           <div style={{display:"flex",gap:"6px",alignItems:"center",marginBottom:"2px"}}>
                             <span style={{fontSize:"14px"}}>{t.emoji}</span>
-                            <span style={{fontSize:"11px",color:sel?"#D4A853":"#8B7355",fontWeight:600}}>{t.label}</span>
+                            <span style={{fontSize:"11px",color:sel?"#F5A623":"#7A5840",fontWeight:600}}>{t.label}</span>
                           </div>
-                          <div style={{fontSize:"8px",color:sel?"#A08060":"#3D2B1F",lineHeight:"1.3"}}>{t.effectLabel}</div>
+                          <div style={{fontSize:"8px",color:sel?"#7A5840":"#BBA090",lineHeight:"1.3"}}>{t.effectLabel}</div>
                         </button>
                       );
                     })}
@@ -2099,18 +2126,18 @@ function CreationScreen({onStart,onLoad}){
                 const sel=aspiration===a.id;
                 return(
                   <button key={a.id} onClick={()=>setAspiration(a.id)}
-                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1px solid ${sel?"#D4A853":"#1A1208"}`,background:sel?"rgba(212,168,83,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s"}}>
+                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"rgba(245,166,35,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s"}}>
                     <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"4px"}}>
                       <span style={{fontSize:"18px"}}>{a.emoji}</span>
-                      <div style={{fontSize:"13px",color:sel?"#D4A853":"#8B7355",fontWeight:600}}>{a.label}</div>
+                      <div style={{fontSize:"13px",color:sel?"#F5A623":"#7A5840",fontWeight:600}}>{a.label}</div>
                     </div>
-                    <div style={{fontSize:"10px",color:sel?"#A08060":"#3D2B1F",marginBottom:sel?"8px":"0",lineHeight:"1.4"}}>{a.desc}</div>
+                    <div style={{fontSize:"10px",color:sel?"#7A5840":"#BBA090",marginBottom:sel?"8px":"0",lineHeight:"1.4"}}>{a.desc}</div>
                     {sel&&(
                       <div style={{display:"flex",flexDirection:"column",gap:"3px"}}>
                         {a.milestones.map((m,i)=>(
                           <div key={m.id} style={{display:"flex",gap:"6px",alignItems:"center"}}>
-                            <span style={{fontSize:"8px",color:"#2C1F14"}}>○</span>
-                            <span style={{fontSize:"9px",color:"#5C4030"}}>{m.label}</span>
+                            <span style={{fontSize:"8px",color:"#D4C4B0"}}>○</span>
+                            <span style={{fontSize:"9px",color:"#B8907A"}}>{m.label}</span>
                           </div>
                         ))}
                       </div>
@@ -2132,11 +2159,11 @@ function CreationScreen({onStart,onLoad}){
                 const sel=connection===c.npc;
                 return(
                   <button key={c.npc} onClick={()=>setConnection(c.npc)}
-                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1px solid ${sel?"#D4A853":"#1A1208"}`,background:sel?"rgba(212,168,83,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s",display:"flex",gap:"12px",alignItems:"center"}}>
+                    style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"rgba(245,166,35,0.06)":"transparent",cursor:"pointer",transition:"all 0.15s",display:"flex",gap:"12px",alignItems:"center"}}>
                     <span style={{fontSize:"22px",flexShrink:0}}>{c.emoji}</span>
                     <div>
-                      <div style={{fontSize:"12px",color:sel?"#D4A853":"#8B7355",fontWeight:600,marginBottom:"2px"}}>{c.npc}</div>
-                      <div style={{fontSize:"10px",color:sel?"#A08060":"#3D2B1F",lineHeight:"1.4"}}>{c.desc}</div>
+                      <div style={{fontSize:"12px",color:sel?"#F5A623":"#7A5840",fontWeight:600,marginBottom:"2px"}}>{c.npc}</div>
+                      <div style={{fontSize:"10px",color:sel?"#7A5840":"#BBA090",lineHeight:"1.4"}}>{c.desc}</div>
                     </div>
                   </button>
                 );
@@ -2154,32 +2181,32 @@ function CreationScreen({onStart,onLoad}){
             <div>
               <div style={S.title}>Tu Twin está listo/a</div>
               <div style={S.sub}>Así llega {name} a Veloria.</div>
-              <div style={{background:"rgba(212,168,83,0.04)",border:"1px solid #2C1F14",borderRadius:"12px",padding:"16px",display:"flex",flexDirection:"column",gap:"10px"}}>
+              <div style={{background:"rgba(245,166,35,0.04)",border:"1px solid #2C1F14",borderRadius:"12px",padding:"16px",display:"flex",flexDirection:"column",gap:"10px"}}>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Nombre</span>
-                  <span style={{fontSize:"12px",color:"#A08060",fontWeight:600}}>{name} ({pronouns})</span>
+                  <span style={{fontSize:"11px",color:"#BBA090"}}>Nombre</span>
+                  <span style={{fontSize:"12px",color:"#7A5840",fontWeight:600}}>{name} ({pronouns})</span>
                 </div>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Origen</span>
-                  <span style={{fontSize:"12px",color:"#A08060"}}>{orig?.emoji} {orig?.label}</span>
+                  <span style={{fontSize:"11px",color:"#BBA090"}}>Origen</span>
+                  <span style={{fontSize:"12px",color:"#7A5840"}}>{orig?.emoji} {orig?.label}</span>
                 </div>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px"}}>
-                  <span style={{fontSize:"11px",color:"#3D2B1F",flexShrink:0}}>Rasgos</span>
+                  <span style={{fontSize:"11px",color:"#BBA090",flexShrink:0}}>Rasgos</span>
                   <div style={{display:"flex",gap:"5px",flexWrap:"wrap",justifyContent:"flex-end"}}>
-                    {selTraits.map(t=><span key={t.id} style={{fontSize:"10px",color:"#8B7355",background:"rgba(212,168,83,0.08)",border:"1px solid #2C1F14",borderRadius:"6px",padding:"2px 7px"}}>{t.emoji} {t.label}</span>)}
+                    {selTraits.map(t=><span key={t.id} style={{fontSize:"10px",color:"#7A5840",background:"rgba(245,166,35,0.08)",border:"1px solid #2C1F14",borderRadius:"6px",padding:"2px 7px"}}>{t.emoji} {t.label}</span>)}
                   </div>
                 </div>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Aspiración</span>
-                  <span style={{fontSize:"12px",color:"#A08060"}}>{asp?.emoji} {asp?.label}</span>
+                  <span style={{fontSize:"11px",color:"#BBA090"}}>Aspiración</span>
+                  <span style={{fontSize:"12px",color:"#7A5840"}}>{asp?.emoji} {asp?.label}</span>
                 </div>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Primera conexión</span>
-                  <span style={{fontSize:"12px",color:"#A08060"}}>{connection}</span>
+                  <span style={{fontSize:"11px",color:"#BBA090"}}>Primera conexión</span>
+                  <span style={{fontSize:"12px",color:"#7A5840"}}>{connection}</span>
                 </div>
                 <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#3D2B1F"}}>Empieza como</span>
-                  <span style={{fontSize:"12px",color:"#A08060"}}>🌱 Joven Adulto/a (día 1/14)</span>
+                  <span style={{fontSize:"11px",color:"#BBA090"}}>Empieza como</span>
+                  <span style={{fontSize:"12px",color:"#7A5840"}}>🌱 Joven Adulto/a (día 1/14)</span>
                 </div>
               </div>
             </div>
@@ -2199,7 +2226,7 @@ function CreationScreen({onStart,onLoad}){
 
 // ═══════════════════ MAIN GAME ═══════════════════
 export default function InbetweensGame(){
-  const [phase,setPhase]=useState("creation"),[twin,setTwin]=useState(null);
+  const [phase,setPhase]=useState("splash"),[twin,setTwin]=useState(null);
   const [needs,setNeeds]=useState({hambre:75,sueno:80,higiene:80,social:50,diversion:55,vejiga:70});
   const [money,setMoney]=useState(250),[gt,setGt]=useState({hour:8,day:1,monthIdx:0});
   const [loc,setLoc]=useState({hood:"La Vega",place:"Tu apartamento"});
@@ -2612,9 +2639,10 @@ export default function InbetweensGame(){
     if(item.type==="food"){tick(0,{hambre:40});setInventory(prev=>prev.map(i=>i.id===item.id?{...i,qty:i.qty-1}:i).filter(i=>i.qty>0));addEntry({text:`Comés ${item.name.toLowerCase()}. El hambre cede un poco.`,type:"story",place:loc.place});}
   }
 
+  if(phase==="splash")return<SplashScreen onEnter={()=>setPhase("creation")}/>;
   if(phase==="creation")return<CreationScreen onStart={handleStart} onLoad={loadFromSlot}/>;
 
-  const hoodColor=(NEIGHBORHOODS[loc.hood]||{}).color||"#D4A853";
+  const hoodColor=(NEIGHBORHOODS[loc.hood]||{}).color||"#F5A623";
   const currentDaysLived=PLAYER_START_DAYS+(gt.day-1);
   const lifeStage=getLifeStage(currentDaysLived);
   const {inStage:daysInCurrentStage,ofStage:daysInStageTotal}=getDaysInStage(currentDaysLived);
@@ -2624,85 +2652,106 @@ export default function InbetweensGame(){
   const skillUnlockActions=getSkillUnlockActions(skills,loc,placedFurniture,usedOnce);
 
   return(
-    <div style={{display:"flex",flexDirection:"column",height:"100vh",background:"#0F0A06",fontFamily:"'DM Sans',sans-serif",color:"#EDE0CC",overflow:"hidden"}}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');*{box-sizing:border-box}::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:#2C1F14;border-radius:2px}button{font-family:inherit}@keyframes fadeSlideIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}`}</style>
+    <div style={{display:"flex",flexDirection:"column",height:"100vh",background:C.bg,fontFamily:"'Fredoka',sans-serif",color:C.text,overflow:"hidden"}}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');*{box-sizing:border-box}::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:#D4C4B0;border-radius:2px}button{font-family:'Fredoka',sans-serif}@keyframes fadeSlideIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
       {showPausa&&<PausaModal onClose={()=>setShowPausa(false)} onSave={saveToSlot} onLoad={loadFromSlot} onReset={resetGame} log={log} gt={gt} twin={twin}/>}
       {showLegacy&&<LegacyScreen twin={twin} gt={gt} skills={skills} rels={rels} family={family} children={family.children} onContinueAsChild={handleContinueAsChild} onNewGame={resetGame}/>}
       {pendingNPCDialogue&&<DialogueModal event={pendingNPCDialogue} onRespond={handleDialogueResponse}/>}
       {namingChild&&(
-        <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.8)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100}}>
-          <div style={{background:"#1A1208",border:"1px solid #3D2B1F",borderRadius:"16px",padding:"28px",width:"300px",textAlign:"center"}}>
+        <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.6)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100}}>
+          <div style={{...bento(C.white),padding:"28px",width:"300px",textAlign:"center"}}>
             <div style={{fontSize:"32px",marginBottom:"12px"}}>👶</div>
-            <div style={{fontFamily:"'Lora',serif",fontSize:"17px",color:"#D4A853",marginBottom:"6px"}}>¿Cómo se llama?</div>
-            <div style={{fontSize:"10px",color:"#5C4030",marginBottom:"18px"}}>El nombre de tu hijo/a en Veloria.</div>
-            <input value={childNameInput} onChange={e=>setChildNameInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&childNameInput.trim()&&handleHaveChild()} placeholder="Nombre..." style={{width:"100%",padding:"9px 13px",background:"transparent",border:"1px solid #2C1F14",borderRadius:"8px",color:"#EDE0CC",fontSize:"15px",fontFamily:"'Lora',serif",outline:"none",marginBottom:"12px"}}/>
+            <div style={{fontSize:"17px",color:C.orange,fontWeight:700,marginBottom:"6px"}}>¿Cómo se llama?</div>
+            <div style={{fontSize:"11px",color:C.textDim,marginBottom:"18px",fontFamily:"'Nunito',sans-serif"}}>El nombre de tu hijo/a en Veloria.</div>
+            <input value={childNameInput} onChange={e=>setChildNameInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&childNameInput.trim()&&handleHaveChild()} placeholder="Nombre..." style={{width:"100%",padding:"9px 13px",background:C.cardWarm,border:`1px solid ${C.border}`,borderRadius:"10px",color:C.text,fontSize:"15px",fontFamily:"'Lora',serif",outline:"none",marginBottom:"12px"}}/>
             <div style={{display:"flex",gap:"8px"}}>
-              <button onClick={()=>setNamingChild(false)} style={{flex:1,padding:"7px",borderRadius:"8px",border:"1px solid #2C1F14",background:"transparent",color:"#5C4030",cursor:"pointer"}}>Cancelar</button>
-              <button onClick={handleHaveChild} disabled={!childNameInput.trim()} style={{flex:1,padding:"7px",borderRadius:"8px",border:"none",background:"#D4A853",color:"#0F0A06",cursor:"pointer",fontWeight:600}}>✦ Confirmar</button>
+              <button onClick={()=>setNamingChild(false)} style={{flex:1,padding:"8px",borderRadius:"10px",border:`1px solid ${C.border}`,background:"transparent",color:C.textDim,cursor:"pointer"}}>Cancelar</button>
+              <button onClick={handleHaveChild} disabled={!childNameInput.trim()} style={{flex:1,padding:"8px",borderRadius:"10px",border:"none",background:C.orange,color:C.white,cursor:"pointer",fontWeight:700}}>✦ Confirmar</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* HEADER */}
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"8px 16px",borderBottom:"1px solid #1A1208",background:"#0F0A06",flexShrink:0,height:"48px"}}>
-        <div style={{fontFamily:"'Lora',serif",fontSize:"16px",color:"#D4A853",letterSpacing:"0.1em"}}>inbetweens</div>
-        <div style={{textAlign:"center"}}>
-          <div style={{fontFamily:"'Lora',serif",fontSize:"18px",color:gt.hour>=21||gt.hour<6?"#7BB8B9":"#D4A853",lineHeight:1}}>{toTimeStr(gt.hour)}</div>
-          <div style={{fontSize:"8px",color:"#3D2B1F",letterSpacing:"0.05em"}}>{loc.hood} · {loc.place.length>16?loc.place.slice(0,15)+"…":loc.place}</div>
+      {/* HEADER BENTO */}
+      <div style={{background:C.white,borderBottom:`1px solid ${C.border}`,padding:"0 14px",height:"46px",display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
+        <div style={{display:"flex",alignItems:"center",gap:"7px"}}>
+          <img src="/icon.png" alt="" style={{height:"26px",width:"26px",borderRadius:"7px",objectFit:"cover"}}/>
+          <span style={{fontSize:"17px",fontWeight:700,color:C.orange}}>inbetweens</span>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
-          {currentEvent&&<button onClick={handleEventAttend} disabled={loading} style={{fontSize:"14px",background:"transparent",border:"none",cursor:"pointer",opacity:loading?0.4:1}} title={currentEvent.name}>{currentEvent.emoji}</button>}
-          <button onClick={()=>setShowPausa(true)} style={{background:"transparent",border:"1px solid #2C1F14",color:"#5C4030",borderRadius:"6px",width:"28px",height:"28px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center"}}>⏸</button>
+        <div style={{padding:"4px 12px",borderRadius:"14px",background:C.cardOrange,border:`1px solid ${C.border}`,fontSize:"11px",color:C.textMid,fontWeight:500,fontFamily:"'Nunito',sans-serif"}}>
+          {gt.hour>=21||gt.hour<6?"🌙":"☀️"} {toTimeStr(gt.hour)} · Día {gt.day} · {MONTHS[gt.monthIdx]}
+        </div>
+        <div style={{display:"flex",gap:"6px",alignItems:"center"}}>
+          <div style={{padding:"4px 10px",borderRadius:"12px",background:C.orangeLight,border:`1px solid ${C.border}`,fontSize:"12px",color:C.orange,fontWeight:700}}>L {money}</div>
+          {currentEvent&&<button onClick={handleEventAttend} disabled={loading} style={{fontSize:"16px",background:"transparent",border:"none",cursor:"pointer"}} title={currentEvent.name}>{currentEvent.emoji}</button>}
+          <button onClick={()=>setShowPausa(true)} style={{background:C.cardWarm,border:`1px solid ${C.border}`,color:C.textDim,borderRadius:"8px",width:"28px",height:"28px",cursor:"pointer",fontSize:"13px",display:"flex",alignItems:"center",justifyContent:"center"}}>⏸</button>
         </div>
       </div>
 
-      {/* MAIN: character card + narrative */}
-      <div style={{display:"flex",flex:1,overflow:"hidden"}}>
+      {/* CHARACTER STRIP — bento card */}
+      <div style={{margin:"6px 8px 0",flexShrink:0,borderRadius:"16px",background:"#FFFFFF",border:"1px solid #E0D4C8",boxShadow:"0 2px 10px rgba(0,0,0,0.06)",overflow:"hidden"}}>
         <CharacterCard twin={twin} needs={needs} money={money} gt={gt} rels={rels} family={family} skills={skills} currentDaysLived={currentDaysLived} daysInStage={daysInCurrentStage} daysInStageTotal={daysInStageTotal} lifeStage={lifeStage} aspirationProgress={aspirationProgress}/>
-        <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-          {/* NPCs present indicator */}
-          {npcsHere.length>0&&(
-            <div style={{padding:"4px 14px",display:"flex",gap:"6px",alignItems:"center",borderBottom:"1px solid #1A1208",flexShrink:0}}>
-              <span style={{fontSize:"9px",color:"#3D2B1F",letterSpacing:"0.06em"}}>AQUÍ</span>
-              {npcsHere.map(n=><div key={n} style={{display:"flex",alignItems:"center",gap:"3px"}}><NPCAvatar name={n} size={16}/><span style={{fontSize:"9px",color:"#5C4030"}}>{n.split(" ")[0]}</span></div>)}
-            </div>
-          )}
-          {/* Narrative */}
-          <div style={{flex:1,overflowY:"auto",padding:"16px 20px"}}>
-            {log.map(e=>(
-              <div key={e.id} style={{marginBottom:"20px",paddingLeft:"12px",borderLeft:`2px solid ${{intro:"#D4A853",story:"#3D2B1F",travel:"#2C1F14",system:"#1A1208",romance:"#E87B9E",work:"#6B9E5E",event:"#D4A853",world_event:"#D4A853",skill_up:"#6B9E5E"}[e.type]||"#2C1F14"}`,animation:"fadeSlideIn 0.4s ease"}}>
-                {e.place&&<div style={{fontSize:"9px",color:"#3D2B1F",marginBottom:"4px",letterSpacing:"0.06em",textTransform:"uppercase"}}>{e.place}{e.time?` · ${e.time}`:""}</div>}
-                <div style={{fontSize:"13px",lineHeight:"1.8",color:"#A08060",fontFamily:"'Lora',Georgia,serif",whiteSpace:"pre-line"}}>{e.text}</div>
-              </div>
-            ))}
-            {loading&&<div style={{color:"#3D2B1F",fontSize:"12px",fontStyle:"italic",fontFamily:"'Lora',serif",animation:"fadeSlideIn 0.3s ease"}}>✦ ...</div>}
-            <div ref={logEnd}/>
-          </div>
-        </div>
       </div>
 
-      {/* BOTTOM: tabs + content */}
-      <div style={{borderTop:"1px solid #1A1208",background:"#0D0905",flexShrink:0,height:"320px",display:"flex",flexDirection:"column"}}>
-        {/* Tab bar */}
-        <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0,height:"52px"}}>
-          {TABS.map(t=>(
-            <button key={t.id} onClick={()=>setActiveTab(t.id)} style={{flex:1,border:"none",borderBottom:activeTab===t.id?`2px solid ${hoodColor}`:"2px solid transparent",background:"transparent",color:activeTab===t.id?hoodColor:"#3D2B1F",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"2px",padding:"4px 2px",transition:"color 0.15s"}}>
-              <span style={{fontSize:"16px"}}>{t.emoji}</span>
-              <span style={{fontSize:"10px",letterSpacing:"0.04em",textTransform:"uppercase"}}>{t.label}</span>
+      {/* NARRATIVE — bento card */}
+      <div style={{flex:1,margin:"6px 8px 0",overflowY:"auto",borderRadius:"16px",background:"#FFFFFF",border:"1px solid #E0D4C8",boxShadow:"0 2px 10px rgba(0,0,0,0.06)",padding:"14px 16px",minHeight:0}}>
+        {log.map(e=>(
+          <div key={e.id} style={{marginBottom:"18px",paddingLeft:"12px",borderLeft:`3px solid ${{intro:"#F5A623",story:"#E0D4C8",travel:"#D4C4B0",system:"#E0D4C8",romance:"#E87B9E",work:"#7AB55C",event:"#F5A623",world_event:"#F5A623",skill_up:"#7AB55C"}[e.type]||"#E0D4C8"}`,animation:"fadeSlideIn 0.4s ease"}}>
+            {e.place&&<div style={{fontSize:"9px",color:"#D4C4B0",marginBottom:"3px",letterSpacing:"0.06em",textTransform:"uppercase",fontFamily:"'Nunito',sans-serif"}}>{e.place}{e.time?` · ${e.time}`:""}</div>}
+            <div style={{fontSize:"13px",lineHeight:"1.8",color:"#7A5840",fontFamily:"'Lora',Georgia,serif",whiteSpace:"pre-line"}}>{e.text}</div>
+          </div>
+        ))}
+        {loading&&<div style={{color:"#D4C4B0",fontSize:"12px",fontStyle:"italic",fontFamily:"'Lora',serif",animation:"fadeSlideIn 0.3s ease"}}>✦ ...</div>}
+        <div ref={logEnd}/>
+      </div>
+
+      {/* BOTTOM — bento sections */}
+      <div style={{flexShrink:0,display:"flex",flexDirection:"column",gap:"5px",padding:"6px 8px 8px"}}>
+
+        {/* Location pill */}
+        <div style={{borderRadius:"12px",background:"#FFF5E5",border:"1px solid #E0D4C8",padding:"0 14px",height:"30px",display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
+          <div style={{display:"flex",gap:"5px",alignItems:"center"}}>
+            <span style={{fontSize:"12px"}}>📍</span>
+            <span style={{fontSize:"11px",color:hoodColor,fontWeight:700,fontFamily:"'Nunito',sans-serif"}}>{loc.hood}</span>
+            <span style={{fontSize:"11px",color:"#D4C4B0"}}>·</span>
+            <span style={{fontSize:"11px",color:"#B8907A",maxWidth:"130px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",fontFamily:"'Nunito',sans-serif"}}>{loc.place}</span>
+          </div>
+          {npcsHere.length>0&&<div style={{display:"flex",gap:"4px",alignItems:"center"}}>{npcsHere.slice(0,3).map(n=><div key={n} style={{display:"flex",alignItems:"center",gap:"2px"}}><NPCAvatar name={n} size={14}/><span style={{fontSize:"9px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>{n.split(" ")[0]}</span></div>)}</div>}
+        </div>
+
+        {/* Quick actions */}
+        <div style={{display:"flex",gap:"5px",overflowX:"auto",flexShrink:0}}>
+          {(PLACE_ACTIONS[loc.place]||[]).filter(a=>a.id!=="chat_npc").slice(0,3).map(a=>(
+            <button key={a.id} onClick={()=>!loading&&handleAction(a)} disabled={loading}
+              style={{flexShrink:0,display:"flex",alignItems:"center",gap:"4px",padding:"5px 11px",borderRadius:"14px",border:"1px solid #E0D4C8",background:"#FFFFFF",color:"#7A5840",fontSize:"11px",cursor:loading?"not-allowed":"pointer",fontWeight:500,boxShadow:"0 1px 3px rgba(0,0,0,0.06)",whiteSpace:"nowrap",fontFamily:"'Fredoka',sans-serif"}}>
+              <span>{a.emoji}</span>{a.label}
             </button>
           ))}
+          {skillUnlockActions.length>0&&<button onClick={()=>!loading&&handleSkillUnlockAction(skillUnlockActions[0])} disabled={loading} style={{flexShrink:0,display:"flex",alignItems:"center",gap:"4px",padding:"5px 11px",borderRadius:"14px",border:"1.5px solid #F5A623",background:"#FFF3DC",color:"#F5A623",fontSize:"11px",cursor:loading?"not-allowed":"pointer",fontWeight:600,whiteSpace:"nowrap",fontFamily:"'Fredoka',sans-serif"}}>✦ {skillUnlockActions[0].emoji} {skillUnlockActions[0].label}</button>}
+          <button onClick={()=>setActiveTab("acciones")} style={{flexShrink:0,padding:"5px 11px",borderRadius:"14px",border:`1px solid ${activeTab==="acciones"?"#F5A623":"#E0D4C8"}`,background:activeTab==="acciones"?"#FFF3DC":"#FFFFFF",color:activeTab==="acciones"?"#F5A623":"#B8907A",fontSize:"11px",cursor:"pointer",marginLeft:"auto",fontFamily:"'Fredoka',sans-serif"}}>⋯</button>
         </div>
+
         {/* Tab content */}
-        <div style={{flex:1,overflow:"hidden"}}>
-          {activeTab==="acciones"&&<AccionesTab loc={loc} career={career} NEIGHBORHOODS={NEIGHBORHOODS} PLACE_ACTIONS={PLACE_ACTIONS} loading={loading} dark={true} onGoTo={handleGoTo} onAction={a=>a.isSkillUnlock?handleSkillUnlockAction(a):handleAction(a)} onWork={handleWork} extraActions={skillUnlockActions}/>}
-          {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={true} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract}/>}
-          {activeTab==="trabajo"&&<TrabajoTabContent career={career} loc={loc} dark={true} loading={loading} onApply={handleApplyJob} onWork={handleWork}/>}
-          {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={true} loading={loading}/>}
+        <div style={{height:"192px",borderRadius:"16px",background:"#FFFFFF",border:"1px solid #E0D4C8",boxShadow:"0 2px 10px rgba(0,0,0,0.06)",overflow:"hidden"}}>
+          {activeTab==="acciones"&&<AccionesTab loc={loc} career={career} NEIGHBORHOODS={NEIGHBORHOODS} PLACE_ACTIONS={PLACE_ACTIONS} loading={loading} dark={false} onGoTo={handleGoTo} onAction={a=>a.isSkillUnlock?handleSkillUnlockAction(a):handleAction(a)} onWork={handleWork} extraActions={skillUnlockActions}/>}
+          {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={false} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract}/>}
+          {activeTab==="trabajo"&&<TrabajoTabContent career={career} loc={loc} dark={false} loading={loading} onApply={handleApplyJob} onWork={handleWork}/>}
+          {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading}/>}
           {activeTab==="mapa"&&<MapaTab gt={gt} rels={rels} loc={loc} loading={loading} onGoTo={handleGoTo}/>}
           {activeTab==="diario"&&<DiarioTab log={log} gt={gt}/>}
         </div>
+
+        {/* Tab bar pills */}
+        <div style={{borderRadius:"14px",background:"#FFFFFF",border:"1px solid #E0D4C8",height:"46px",display:"flex",padding:"4px 6px",gap:"3px",boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
+          {TABS.map(t=>(
+            <button key={t.id} onClick={()=>setActiveTab(t.id)}
+              style={{flex:1,border:"none",borderRadius:"10px",background:activeTab===t.id?"#F5A623":"transparent",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s",padding:0}}>
+              <span style={{fontSize:activeTab===t.id?"19px":"17px",transition:"font-size 0.15s"}}>{t.emoji}</span>
+            </button>
+          ))}
+        </div>
+
       </div>
     </div>
   );
