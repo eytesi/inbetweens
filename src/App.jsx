@@ -398,6 +398,10 @@ const N = {
   "elowen:secret":["Elowen te mira largo antes de responder. 'Veloria no es lo que dicen los libros. Es lo que pasa entre las líneas'. No dice más."],
   "elowen:silence":["Se puede estar en silencio con Elowen sin que sea incómodo. Eso, en Veloria o en cualquier lugar, es un regalo."],
 
+  "intro:llegada_trabajo": ["Llegaste a La Vega con la dirección de una oficina que ya no existe. El primer día en Veloria no fue como lo planeaste. Eso no significa que fuera malo."],
+  "intro:llegada_sueno":   ["No había plan. Había una imagen vaga: un lago, una ciudad pequeña, algo que hacer con las manos o la cabeza. Veloria apareció y se sintió como la respuesta a una pregunta que no habías terminado de formular."],
+  "intro:llegada_escapar": ["De lo que venías corriendo no importa acá. Veloria no pregunta. La Vega recibe. Eso es suficiente por ahora."],
+  "intro:llegada_buscando":["Hay alguien en Veloria. O hubo. O va a haber. No sabés exactamente qué buscás, pero el lago te parece el lugar correcto para empezar."],
   // ── SHOPS ──
   "shop:buy":    ["Lo ponés en la bolsa. La Vega sigue igual. Vos, con algo nuevo en las manos."],
   "shop:book":   ["Salís de la librería con el libro bajo el brazo. Soren te vio irse. Saber que alguien lee lo que recomendás debe ser una satisfacción rara."],
@@ -606,6 +610,15 @@ merc_unico:{diversion:15},merc_frescos:{hambre:15},merc_charlar:{social:12},
 const NEED_CFG={hambre:{label:"Hambre",emoji:"🍽",color:"#E8943A"},sueno:{label:"Sueño",emoji:"😴",color:"#7B8CDE"},higiene:{label:"Higiene",emoji:"🧼",color:"#4AB8C1"},social:{label:"Social",emoji:"💬",color:"#E87B9E"},diversion:{label:"Diversión",emoji:"🎮",color:"#A67BD6"},vejiga:{label:"Vejiga",emoji:"💧",color:"#6BC47E"}};
 const MONTHS=["Nevelin","Mirenal","Nomeven","Mirenable","Velorfesta","Solein","Velcora","Memoveli","Clubven","Noctuvel","Mireneis","Nevelin II"];
 const SEASONS=["🌸 Primavera","🌸 Primavera","🌸 Primavera","☀️ Verano","☀️ Verano","☀️ Verano","🍂 Otoño","🍂 Otoño","🍂 Otoño","❄️ Invierno","❄️ Invierno","❄️ Invierno"];
+
+const TWIN_COLORS=["#F5A623","#E85D75","#00BCD4","#7B5CF5","#3BA55C","#E86D3A","#5B8AF5","#E8B45C"];
+
+const LLEGADA_OPTIONS=[
+  {id:"trabajo",  emoji:"💼",label:"Una oportunidad de trabajo",  hint:"Veloria ofrecía lo que necesitabas hacer.", bonusSkill:"carisma", bonusVal:60},
+  {id:"sueno",    emoji:"🌙",label:"Un sueño que seguir",          hint:"No sabías bien qué. Pero sabías que acá estaba.", bonusSkill:"arte", bonusVal:60},
+  {id:"escapar",  emoji:"🚪",label:"Algo de lo que alejarte",      hint:"Veloria era lejos suficiente.", bonusSkill:"conocimiento", bonusVal:50},
+  {id:"buscando", emoji:"🔍",label:"Alguien a quien encontrar",    hint:"Una promesa vieja. O nueva. Todavía no sabés.", bonusSkill:"carisma", bonusVal:40},
+];
 
 // ── NPC ECONOMY & WORLD ──────────────────────────────────
 const NPC_JOBS={
@@ -1093,6 +1106,75 @@ const REPUTATION_LEVELS=[
   {min:88, label:"Leyenda de Veloria", color:"#E87B9E", desc:"Tu historia ya es parte de la ciudad."},
 ];
 function getRepLevel(rep){return [...REPUTATION_LEVELS].reverse().find(l=>rep>=l.min)||REPUTATION_LEVELS[0];}
+
+// ── SEASONS ──────────────────────────────────────────────
+const SEASON_DATA=[
+  // Primavera (months 0-2)
+  {id:"primavera", emoji:"🌸", label:"Primavera",
+   skillBonus:{naturaleza:1.3,arte:1.15,pesca:1.1},
+   needDecayMod:{social:0.9,diversion:0.9},
+   blockedActions:[],
+   arrival:"La primavera llegó a Veloria. Los jardines del Veleta florecen primero. El Lago Miren parece más claro.",
+   flavor:"Veloria en primavera huele a flores que no existen en otro lugar.",
+   specialEvent:"velorfesta"},
+  // Verano (months 3-5)
+  {id:"verano", emoji:"☀️", label:"Verano",
+   skillBonus:{pesca:1.3,naturaleza:1.2,carisma:1.1},
+   needDecayMod:{sueno:1.15,social:0.85},
+   blockedActions:[],
+   arrival:"El verano se instaló en Veloria. El calor hace que todo tarde más. El lago invita.",
+   flavor:"Las noches de verano en Veloria duran más de lo que el reloj indica.",
+   specialEvent:null},
+  // Otoño (months 6-8)
+  {id:"otono", emoji:"🍂", label:"Otoño",
+   skillBonus:{conocimiento:1.25,cocina:1.2,arte:1.1},
+   needDecayMod:{diversion:1.1,hambre:1.1},
+   blockedActions:[],
+   arrival:"El otoño empezó. El Veloer de otoño dura más. Los Twins vuelven a las bibliotecas y a las cocinas.",
+   flavor:"El otoño en Veloria tiene un olor que no tiene nombre en Twinés.",
+   specialEvent:"cosecha"},
+  // Invierno (months 9-11)
+  {id:"invierno", emoji:"❄️", label:"Invierno",
+   skillBonus:{conocimiento:1.3,arte:1.2},
+   needDecayMod:{social:1.2,sueno:0.9},
+   blockedActions:["azotea2_lago","walk_shore"],
+   arrival:"El invierno llegó a Veloria. Los Nocturnos empiezan. Las calles más tranquilas. El lago, quieto.",
+   flavor:"En invierno, Veloria se encoge. Todo queda más cerca.",
+   specialEvent:"nocturnos"},
+];
+function getSeasonData(monthIdx){return SEASON_DATA[Math.floor(monthIdx/3)]||SEASON_DATA[0];}
+
+// ── MOOD ────────────────────────────────────────────────
+const MOOD_LEVELS=[
+  {min:0,  label:"Muy bajo",   emoji:"😞", color:"#7B8FBF", mod:"verylow"},
+  {min:20, label:"Bajo",       emoji:"😔", color:"#9B7FB0", mod:"low"},
+  {min:40, label:"Neutro",     emoji:"😐", color:"#B8907A", mod:"normal"},
+  {min:60, label:"Bien",       emoji:"😊", color:"#7AB55C", mod:"good"},
+  {min:80, label:"Muy bien",   emoji:"✨", color:"#F5A623", mod:"great"},
+];
+function getMoodLevel(mood){return [...MOOD_LEVELS].reverse().find(l=>mood>=l.min)||MOOD_LEVELS[0];}
+
+const N_MOOD_SUFFIX={
+  verylow:[
+    "Pero hay un peso que no terminás de sacarte.",
+    "El cansancio de adentro es diferente al de afuera.",
+    "Veloria no pregunta. Eso a veces ayuda.",
+    "Igual. Hay que seguir.",
+  ],
+  low:[
+    "No es el mejor día. Pero tampoco el peor.",
+    "Hay algo que cargás que todavía no tiene nombre.",
+  ],
+  good:[
+    "Hoy todo parece un poco más manejable.",
+    "Hay algo ligero en el aire.",
+  ],
+  great:[
+    "Una de esas tardes que recordás sin saber por qué.",
+    "Veloria se siente exactamente como tiene que sentirse.",
+    "Algo en vos está en su lugar hoy.",
+  ],
+};
 
 // ── TEXTOS CON ESTADO ────────────────────────────────────
 const N_STATE={
@@ -2336,7 +2418,7 @@ function DiarioTab({log,gt}){
 }
 
 // ═══════════════════ CHARACTER STRIP ═══════════════════
-function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,daysInStage,daysInStageTotal,lifeStage,aspirationProgress,reputation}){
+function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,daysInStage,daysInStageTotal,lifeStage,aspirationProgress,reputation,mood}){
   const [moodLabel,moodColor]=getMood(needs);
   const ls=lifeStage||LIFE_STAGES[6];
   const asp=twin?.aspiration?ASPIRATIONS.find(a=>a.id===twin.aspiration):null;
@@ -2346,21 +2428,26 @@ function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,
     <div style={{background:"#FFFFFF",borderBottom:"1px solid #1A1208",padding:"8px 14px",flexShrink:0}}>
       {/* Main row */}
       <div style={{display:"flex",gap:"10px",alignItems:"center",marginBottom:"5px"}}>
-        {/* Avatar */}
-        <div style={{width:"36px",height:"36px",borderRadius:"50%",background:`${ls.color}18`,border:`2px solid ${ls.color}55`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"14px",color:ls.color,fontFamily:"'Lora',serif",fontWeight:700,flexShrink:0}}>
-          {twin?.name?.charAt(0)||"?"}
+        {/* Avatar — uses twin's chosen color */}
+        <div style={{width:"38px",height:"38px",borderRadius:"50%",background:twin?.color||ls.color,border:"2px solid #2C1A0E",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"15px",color:"#fff",fontFamily:"'Fredoka',sans-serif",fontWeight:700,flexShrink:0,boxShadow:"1px 1px 0 #2C1A0E"}}>
+          {twin?.name?.charAt(0)?.toUpperCase()||"?"}
         </div>
-        {/* Name + stage + reputation */}
-        <div style={{flexShrink:0}}>
-          <div style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600,lineHeight:1.2}}>{twin?.name}</div>
-          <div style={{fontSize:"9px",color:ls.color,marginBottom:"2px"}}>{ls.emoji} {ls.label} · día {(daysInStage||0)+1}/{daysInStageTotal||ls.days}</div>
-          <div style={{width:"72px",height:"2px",background:"#E0D4C8",borderRadius:"1px",overflow:"hidden",marginBottom:"3px"}}>
-            <div style={{height:"100%",width:`${stageProgress}%`,background:ls.color,transition:"width 0.5s"}}/>
+          {/* Name + stage + rep + mood */}
+          <div style={{flexShrink:0}}>
+            <div style={{display:"flex",alignItems:"center",gap:"5px",lineHeight:1.2,marginBottom:"1px"}}>
+              <div style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600}}>{twin?.name}</div>
+              {mood!=null&&(()=>{const ml=getMoodLevel(mood);return(
+                <div title={ml.label} style={{fontSize:"11px",lineHeight:1}}>{ml.emoji}</div>
+              );})()}
+            </div>
+            <div style={{fontSize:"9px",color:ls.color,marginBottom:"2px"}}>{ls.emoji} {ls.label} · día {(daysInStage||0)+1}/{daysInStageTotal||ls.days}</div>
+            <div style={{width:"72px",height:"2px",background:"#E0D4C8",borderRadius:"1px",overflow:"hidden",marginBottom:"3px"}}>
+              <div style={{height:"100%",width:`${stageProgress}%`,background:ls.color,transition:"width 0.5s"}}/>
+            </div>
+            {(()=>{const rl=getRepLevel(reputation||0);return reputation>0?(
+              <div style={{fontSize:"8px",color:rl.color,fontFamily:"'Fredoka',sans-serif",fontWeight:600}}>✦ {rl.label}</div>
+            ):null;})()}
           </div>
-          {(()=>{const rl=getRepLevel(reputation||0);return reputation>0?(
-            <div style={{fontSize:"8px",color:rl.color,fontFamily:"'Fredoka',sans-serif",fontWeight:600}}>✦ {rl.label}</div>
-          ):null;})()}
-        </div>
         {/* Needs grid 3×2 */}
         <div style={{flex:1,display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"3px 8px",margin:"0 6px"}}>
           {Object.entries(NEED_CFG).map(([key,cfg])=>(
@@ -2502,7 +2589,116 @@ function ShopModal({shop,money,onBuy,onClose}){
 }
 
 
-// ── GIFT MODAL ──────────────────────────────────────────
+// ── FAMILY TREE ──────────────────────────────────────────
+function FamilyNode({name,subtitle,color,rel,isSelf,small,gender}){
+  const GENDER_COLOR={varón:"#5B8AF5",mujer:"#E85D75",elle:"#7B5CF5"};
+  const nodeColor=gender?GENDER_COLOR[gender]||(color||C.orange):(color||C.orange);
+  const sz=small?38:48;
+  return(
+    <div style={{textAlign:"center",width:small?66:86,flexShrink:0}}>
+      <div style={{width:sz,height:sz,borderRadius:"50%",background:`linear-gradient(135deg,${nodeColor},${nodeColor}BB)`,
+        border:`${isSelf?3:2}px solid #2C1A0E`,boxShadow:isSelf?"2px 2px 0 #2C1A0E":"1px 1px 0 #ccc",
+        margin:"0 auto 5px",display:"flex",alignItems:"center",justifyContent:"center",
+        fontSize:small?13:17,color:"#fff",fontWeight:700,fontFamily:"'Fredoka',sans-serif"}}>
+        {name?.[0]?.toUpperCase()||"?"}
+      </div>
+      <div style={{fontSize:small?10:11,fontWeight:700,color:C.text,fontFamily:"'Fredoka',sans-serif",lineHeight:1.2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+        {name?.length>10?name.slice(0,9)+"…":name}
+      </div>
+      <div style={{fontSize:8,color:nodeColor,fontFamily:"'Nunito',sans-serif",fontWeight:600,marginTop:1}}>{rel}</div>
+      {subtitle&&<div style={{fontSize:8,color:C.textGhost,fontFamily:"'Nunito',sans-serif"}}>{subtitle}</div>}
+    </div>
+  );
+}
+
+function FamilyTree({family,twin,npcWorld,gt}){
+  const twinColor=twin?.color||C.orange;
+  const partnerData=family?.partner&&npcWorld?.[family?.partner];
+  const children=family?.children||[];
+  const GENDER_EMOJI={varón:"👦",mujer:"👧",elle:"🧒"};
+
+  return(
+    <div style={{flex:1,overflowY:"auto",padding:"16px 12px"}}>
+      <div style={{fontSize:"12px",fontWeight:700,color:C.orange,marginBottom:"16px",fontFamily:"'Fredoka',sans-serif"}}>🌳 Árbol genealógico</div>
+
+      {/* Parents row (if known from legacy) */}
+      {twin?.parents&&(
+        <div>
+          <div style={{display:"flex",justifyContent:"center",gap:"16px",marginBottom:"4px"}}>
+            {twin.parents.map((p,i)=>(
+              <FamilyNode key={i} name={p.name} subtitle={p.subtitle||""} color={p.color||"#B8907A"} rel={i===0?"Madre":"Padre"}/>
+            ))}
+          </div>
+          <div style={{display:"flex",justifyContent:"center",marginBottom:"4px"}}>
+            <div style={{width:2,height:20,background:C.border2}}/>
+          </div>
+        </div>
+      )}
+
+      {/* Twin + Partner row */}
+      <div style={{display:"flex",justifyContent:"center",alignItems:"flex-end",gap:family?.partner?24:0,marginBottom:children.length>0?4:16}}>
+        {family?.partner&&(
+          <>
+            <FamilyNode name={family.partner} subtitle={partnerData?`${Math.floor(partnerData.age)} años`:""}
+              color="#E87B9E" rel={family.romanticStatus==="married"?"💒 Pareja":family.romanticStatus==="engaged"?"💍 Prometido/a":"💕 En pareja"}/>
+            <div style={{width:32,height:2,background:C.border2,marginBottom:22,flexShrink:0}}/>
+          </>
+        )}
+        <FamilyNode name={twin?.name||"Tu Twin"} subtitle={`Día ${gt?.day||1}`}
+          color={twinColor} rel="Vos" isSelf/>
+      </div>
+
+      {/* Connection line to children */}
+      {children.length>0&&(
+        <div style={{display:"flex",justifyContent:"center",marginBottom:"4px"}}>
+          <div style={{width:2,height:18,background:C.border2}}/>
+        </div>
+      )}
+
+      {/* Children horizontal line */}
+      {children.length>1&&(
+        <div style={{display:"flex",justifyContent:"center",marginBottom:"4px"}}>
+          <div style={{height:2,width:`${Math.min(children.length*72,280)}px`,background:C.border2}}/>
+        </div>
+      )}
+
+      {/* Children row */}
+      {children.length>0&&(
+        <div style={{display:"flex",justifyContent:"center",gap:"10px",flexWrap:"wrap"}}>
+          {children.map((child,i)=>{
+            const c=typeof child==="string"?{name:child,gender:null,birthDay:0}:child;
+            const age=gt?.day-(c.birthDay||0);
+            const ageLabel=age<=0?"recién nacido/a":`${age} ${age===1?"día":"días"}`;
+            return(
+              <FamilyNode key={i} name={c.name||child} subtitle={ageLabel}
+                color={c.gender==="varón"?"#5B8AF5":c.gender==="mujer"?"#E85D75":"#7B5CF5"}
+                rel={`${c.gender?GENDER_EMOJI[c.gender]||"👶":"👶"} ${c.gender||"Hijo/a"}`}
+                gender={c.gender} small/>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Empty state */}
+      {!family?.partner&&children.length===0&&(
+        <div style={{textAlign:"center",color:C.textGhost,fontSize:"11px",fontStyle:"italic",fontFamily:"'Nunito',sans-serif",lineHeight:1.6,marginTop:"20px"}}>
+          Tu árbol familiar en Veloria está empezando.<br/>
+          Cada relación deja una rama.
+        </div>
+      )}
+
+      {/* Legacy note */}
+      {twin?.parentName&&(
+        <div style={{marginTop:"16px",padding:"10px 12px",background:C.cardWarm,border:`1px solid ${C.border}`,borderRadius:"10px"}}>
+          <div style={{fontSize:"10px",color:C.textDim,fontFamily:"'Nunito',sans-serif",lineHeight:1.5}}>
+            📜 Sos hijo/a de <strong>{twin.parentName}</strong> · La familia continúa en Veloria.
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function GiftModal({item,knownNPCs,onGift,onClose}){
   return(
     <div style={{position:"fixed",inset:0,background:"rgba(44,26,14,0.45)",display:"flex",alignItems:"flex-end",justifyContent:"center",zIndex:60,backdropFilter:"blur(2px)"}}>
@@ -2532,8 +2728,8 @@ function GiftModal({item,knownNPCs,onGift,onClose}){
   );
 }
 
-function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture,dark,loading,family,gt,npcWorld,inventory,onUseItem,onGiftItem}){
-  const [view,setView]=useState("prop"); // "prop" | "muebles" | "hogar" | "inv"
+function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture,dark,loading,family,gt,npcWorld,inventory,onUseItem,onGiftItem,twin}){
+  const [view,setView]=useState("prop"); // "prop" | "muebles" | "hogar" | "inv" | "arbol"
   const tier=HOUSING_TIERS.find(h=>h.id===housing)||HOUSING_TIERS[0];
   const tierIdx=HOUSING_TIERS.indexOf(tier);
   const nextTier=HOUSING_TIERS[tierIdx+1]||null;
@@ -2548,7 +2744,8 @@ function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture
         <button onClick={()=>setView("prop")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="prop"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="prop"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>🏠 Propiedad</button>
         <button onClick={()=>setView("muebles")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="muebles"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="muebles"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>🛋 Muebles ({slotsUsed}/{tier.slots})</button>
         <button onClick={()=>setView("hogar")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="hogar"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="hogar"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>👨‍👩‍👧 Hogar</button>
-        <button onClick={()=>setView("inv")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="inv"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="inv"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>🎒 Objetos ({(inventory||[]).length})</button>
+        <button onClick={()=>setView("inv")} style={{flex:1,padding:"5px 2px",fontSize:"9px",border:"none",borderBottom:view==="inv"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="inv"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>🎒 Objetos ({(inventory||[]).length})</button>
+        <button onClick={()=>setView("arbol")} style={{flex:1,padding:"5px 2px",fontSize:"9px",border:"none",borderBottom:view==="arbol"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="arbol"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>🌳 Árbol</button>
       </div>
 
       {/* HOGAR VIEW — household composition + income */}
@@ -2662,6 +2859,11 @@ function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture
         </div>
       )}
 
+      {/* ÁRBOL GENEALÓGICO VIEW */}
+      {view==="arbol"&&(
+        <FamilyTree family={family} twin={twin||{name:"Tu Twin"}} npcWorld={npcWorld} gt={gt}/>
+      )}
+
       <div style={{flex:1,overflowY:"auto",padding:"10px 12px"}}>
         {view==="prop"&&(
           <div>
@@ -2749,53 +2951,99 @@ function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture
 }
 
 // ═══ LEGACY SCREEN ═══
-function LegacyScreen({twin,gt,skills,rels,family,children,onContinueAsChild,onNewGame}){
+function LegacyScreen({twin,gt,skills,rels,family,children,onContinueAsChild,onNewGame,lifeChapters,reputation}){
   const daysLived=PLAYER_START_DAYS+(gt.day-1);
   const masteredSkills=Object.entries(skills).filter(([,xp])=>getSkillLevel(xp)>=4).map(([k])=>SKILLS_CFG[k]?.label||k);
-  const knownNPCs=Object.keys(rels).length;
+  const closeFriends=Object.entries(rels).filter(([,r])=>r.friendship>=65).sort(([,a],[,b])=>b.friendship-a.friendship);
   const hasChild=children&&children.length>0;
-  return(
-    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.97)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:300,fontFamily:"'DM Sans',sans-serif"}}>
-      <div style={{maxWidth:"520px",width:"95%",textAlign:"center",padding:"40px 32px"}}>
-        <div style={{fontSize:"28px",marginBottom:"8px"}}>✦</div>
-        <div style={{fontFamily:"'Lora',serif",fontSize:"28px",color:"#F5A623",marginBottom:"4px"}}>El legado de {twin?.name}</div>
-        <div style={{fontSize:"11px",color:"#BBA090",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"32px"}}>Veloria · Otherwhen</div>
+  const llegada=twin?.llegada?LLEGADA_OPTIONS.find(l=>l.id===twin.llegada):null;
+  const repLevel=getRepLevel(reputation||0);
+  const notable=(lifeChapters||[]).filter(c=>c.type!=="season"&&c.type!=="daily").slice(-8);
+  const aspiration=twin?.aspiration?ASPIRATIONS.find(a=>a.id===twin.aspiration):null;
 
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginBottom:"28px"}}>
+  // Auto-generate life sections
+  const sections=[];
+  if(llegada)sections.push({title:"La llegada",text:`${twin?.name} llegó a Veloria ${llegada.label.toLowerCase()}. Eso ya dice algo.`});
+  else sections.push({title:"La llegada",text:`${twin?.name} llegó a Veloria en el Día 1 con lo que tenía.`});
+  if(closeFriends.length>0)sections.push({title:"Las personas",text:`En Veloria encontró personas que importaron: ${closeFriends.slice(0,4).map(([n])=>n.split(" ")[0]).join(", ")}.`});
+  if(masteredSkills.length>0)sections.push({title:"Lo que dominó",text:`Llegó a dominar: ${masteredSkills.join(", ")}. Eso no se pierde.`});
+  if(family?.partner)sections.push({title:"La familia",text:`Compartió su vida con ${family.partner.split(" ")[0]}${hasChild?`. Tuvieron ${children.length===1?"un hijo/a":`${children.length} hijos/as`}: ${children.map(c=>typeof c==="string"?c:c.name).join(", ")}`:""}.`});
+  if(aspiration)sections.push({title:"La aspiración",text:`Su aspiración era ${aspiration.label.toLowerCase()}. ${aspiration.desc}`});
+
+  return(
+    <div style={{position:"fixed",inset:0,background:"rgba(12,8,20,0.97)",display:"flex",alignItems:"flex-start",justifyContent:"center",zIndex:300,fontFamily:"'Fredoka',sans-serif",overflowY:"auto",padding:"32px 16px"}}>
+      <div style={{maxWidth:"520px",width:"100%"}}>
+
+        {/* Header */}
+        <div style={{textAlign:"center",marginBottom:"32px"}}>
+          <div style={{fontSize:"32px",marginBottom:"8px"}}>✦</div>
+          <div style={{fontFamily:"'Lora',serif",fontSize:"26px",color:"#F5A623",marginBottom:"4px"}}>El legado de {twin?.name}</div>
+          <div style={{fontSize:"11px",color:"#888",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"12px"}}>Veloria · Otherwhen · {gt.day} días</div>
+          <div style={{display:"inline-block",padding:"4px 16px",borderRadius:"20px",background:`${repLevel.color}22`,border:`1px solid ${repLevel.color}55`,fontSize:"12px",color:repLevel.color,fontWeight:600}}>
+            ✦ {repLevel.label}
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"8px",marginBottom:"24px"}}>
           {[
-            {label:"Días vividos",value:daysLived,emoji:"🕰"},
-            {label:"Días en Veloria",value:gt.day,emoji:"📅"},
-            {label:"Twins conocidos",value:knownNPCs,emoji:"💬"},
-          ].map(({label,value,emoji})=>(
-            <div key={label} style={{background:"rgba(245,166,35,0.05)",border:"1px solid #2C1F14",borderRadius:"10px",padding:"12px 8px"}}>
-              <div style={{fontSize:"20px",marginBottom:"4px"}}>{emoji}</div>
-              <div style={{fontFamily:"'Lora',serif",fontSize:"18px",color:"#F5A623",marginBottom:"2px"}}>{value}</div>
-              <div style={{fontSize:"9px",color:"#BBA090",textTransform:"uppercase",letterSpacing:"0.08em"}}>{label}</div>
+            {e:"🕰",v:daysLived,l:"Días vividos"},
+            {e:"💬",v:closeFriends.length,l:"Amistades"},
+            {e:"⭐",v:masteredSkills.length,l:"Skills IV+"},
+            {e:"👶",v:children?.length||0,l:"Hijos/as"},
+          ].map(({e,v,l})=>(
+            <div key={l} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:"12px",padding:"10px 6px",textAlign:"center"}}>
+              <div style={{fontSize:"18px",marginBottom:"3px"}}>{e}</div>
+              <div style={{fontFamily:"'Lora',serif",fontSize:"20px",color:"#F5A623",marginBottom:"1px"}}>{v}</div>
+              <div style={{fontSize:"8px",color:"#666",textTransform:"uppercase",letterSpacing:"0.08em"}}>{l}</div>
             </div>
           ))}
         </div>
 
-        {masteredSkills.length>0&&(
-          <div style={{marginBottom:"20px",fontSize:"10px",color:"#B8907A"}}>
-            Habilidades dominadas: <span style={{color:"#F5A623"}}>{masteredSkills.join(" · ")}</span>
+        {/* Life sections */}
+        {sections.length>0&&(
+          <div style={{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:"16px",padding:"20px",marginBottom:"20px"}}>
+            <div style={{fontSize:"10px",color:"#F5A623",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"16px",fontFamily:"'Nunito',sans-serif"}}>El Acta de {twin?.name} en Veloria</div>
+            {sections.map((s,i)=>(
+              <div key={i} style={{marginBottom:"14px",paddingLeft:"12px",borderLeft:"2px solid rgba(245,166,35,0.3)"}}>
+                <div style={{fontSize:"9px",color:"#888",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"3px",fontFamily:"'Nunito',sans-serif"}}>{s.title}</div>
+                <div style={{fontSize:"13px",color:"#D0C0A8",fontFamily:"'Lora',serif",lineHeight:1.7,fontStyle:"italic"}}>{s.text}</div>
+              </div>
+            ))}
           </div>
         )}
-        {family?.partner&&(
-          <div style={{marginBottom:"10px",fontSize:"10px",color:"#E87B9E"}}>
-            Vida compartida con {family.partner}{family.children?.length>0?` · ${family.children.length} ${family.children.length===1?"hijo":"hijos"}`:""}</div>
+
+        {/* Life chapters timeline */}
+        {notable.length>0&&(
+          <div style={{marginBottom:"24px"}}>
+            <div style={{fontSize:"10px",color:"#666",letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:"12px",fontFamily:"'Nunito',sans-serif"}}>Momentos</div>
+            {notable.map((ch,i)=>(
+              <div key={i} style={{display:"flex",gap:"10px",marginBottom:"10px",alignItems:"flex-start"}}>
+                <div style={{fontSize:"9px",color:"#555",fontFamily:"'Nunito',sans-serif",whiteSpace:"nowrap",marginTop:"3px",flexShrink:0}}>Día {ch.day}</div>
+                <div style={{fontSize:"12px",color:"#A09080",fontFamily:"'Lora',serif",lineHeight:1.5}}>{ch.text}</div>
+              </div>
+            ))}
+          </div>
         )}
 
-        <div style={{marginBottom:"20px",fontFamily:"'Lora',serif",fontSize:"13px",color:"#B8907A",fontStyle:"italic",lineHeight:"1.6"}}>
-          *{getNarrative("death")}*
+        {/* Death quote */}
+        <div style={{textAlign:"center",marginBottom:"28px",fontFamily:"'Lora',serif",fontSize:"13px",color:"#666",fontStyle:"italic",lineHeight:1.7,padding:"0 16px"}}>
+          *{getNarrative("death")||"Veloria recuerda a los que la habitaron con honestidad."}*
         </div>
 
-        <div style={{display:"flex",gap:"10px",justifyContent:"center"}}>
-          {hasChild&&(
-            <button onClick={()=>onContinueAsChild(children[0])} style={{padding:"10px 20px",borderRadius:"10px",border:"1px solid #D4A853",background:"rgba(245,166,35,0.1)",color:"#F5A623",fontSize:"12px",cursor:"pointer",fontWeight:600}}>
-              Continuar como {children[0].name} →
-            </button>
-          )}
-          <button onClick={onNewGame} style={{padding:"10px 20px",borderRadius:"10px",border:"1px solid #3D2B1F",background:"transparent",color:"#B8907A",fontSize:"12px",cursor:"pointer"}}>
+        {/* Actions */}
+        <div style={{display:"flex",gap:"10px",justifyContent:"center",flexWrap:"wrap"}}>
+          {hasChild&&children.slice(0,3).map((child,i)=>{
+            const childName=typeof child==="string"?child:child.name;
+            const childData=typeof child==="object"?child:{};
+            return(
+              <button key={i} onClick={()=>onContinueAsChild({...childData,name:childName,parentName:twin?.name,parentColor:twin?.color,parentRep:reputation,parentRels:rels})}
+                style={{padding:"12px 20px",borderRadius:"12px",border:"1.5px solid #F5A623",background:"rgba(245,166,35,0.08)",color:"#F5A623",fontSize:"13px",cursor:"pointer",fontWeight:700,fontFamily:"'Fredoka',sans-serif"}}>
+                Continuar como {childName} →
+              </button>
+            );
+          })}
+          <button onClick={onNewGame} style={{padding:"12px 20px",borderRadius:"12px",border:"1px solid rgba(255,255,255,0.12)",background:"transparent",color:"#888",fontSize:"13px",cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>
             Nueva partida
           </button>
         </div>
@@ -3098,13 +3346,15 @@ function CreationScreen({onStart,onLoad,defaultShowLoad}){
   const [step,setStep]=useState(0);
   const [name,setName]=useState("");
   const [pronouns,setPronouns]=useState("elle");
+  const [twinColor,setTwinColor]=useState("#F5A623");
   const [origin,setOrigin]=useState(null);
   const [traits,setTraits]=useState([]);
   const [aspiration,setAspiration]=useState(null);
   const [connection,setConnection]=useState(null);
+  const [llegada,setLlegada]=useState(null);
   const [showLoad,setShowLoad]=useState(!!defaultShowLoad);
 
-  const STEPS=["Identidad","Origen","Rasgos","Aspiración","Conexión","Resumen"];
+  const STEPS=["Identidad","Origen","Rasgos","Aspiración","Conexión","Llegada","Resumen"];
   const PRONOUN_OPTS=[{id:"el",label:"Él"},{id:"ella",label:"Ella"},{id:"elle",label:"Elle"}];
   const CONNECTIONS=[
     {npc:"Aria Ven",    emoji:"☕",desc:"La dueña del café de La Vega. Ya sabe tu nombre.",fr:25},
@@ -3119,6 +3369,7 @@ function CreationScreen({onStart,onLoad,defaultShowLoad}){
     traits.length===3,
     !!aspiration,
     !!connection,
+    !!llegada,
     true,
   ][step]??false;
 
@@ -3129,7 +3380,8 @@ function CreationScreen({onStart,onLoad,defaultShowLoad}){
 
   function handleFinish(){
     const orig=ORIGINS.find(o=>o.id===origin);
-    onStart({name:name.trim(),pronouns,origin,traits,aspiration,_origin:orig,_connection:connection});
+    const ll=LLEGADA_OPTIONS.find(l=>l.id===llegada);
+    onStart({name:name.trim(),pronouns,origin,traits,aspiration,_origin:orig,_connection:connection,color:twinColor,llegada,_llegada:ll});
   }
 
   // ── Light theme styles ──
@@ -3199,12 +3451,21 @@ function CreationScreen({onStart,onLoad,defaultShowLoad}){
             <input value={name} onChange={e=>setName(e.target.value)} placeholder="Nombre de tu Twin"
               style={INPUT}/>
             <span style={LABEL}>Pronombres</span>
-            <div style={{display:"flex",gap:"8px"}}>
+            <div style={{display:"flex",gap:"8px",marginBottom:"20px"}}>
               {PRONOUN_OPTS.map(p=>(
                 <button key={p.id} onClick={()=>setPronouns(p.id)} style={{...btn(pronouns===p.id),flex:1}}>{p.label}</button>
               ))}
             </div>
-            <div style={{fontSize:"10px",color:"#D4C4B0",marginTop:"8px",fontFamily:"'Nunito',sans-serif"}}>Esto afecta la narrativa del juego.</div>
+            <span style={LABEL}>Color del Twin</span>
+            <div style={{display:"flex",gap:"10px",flexWrap:"wrap",marginBottom:"8px"}}>
+              {TWIN_COLORS.map(c=>(
+                <button key={c} onClick={()=>setTwinColor(c)}
+                  style={{width:"38px",height:"38px",borderRadius:"50%",background:c,border:`${twinColor===c?"3.5px":"2px"} solid ${twinColor===c?"#2C1A0E":"#E0D4C8"}`,cursor:"pointer",boxShadow:twinColor===c?"0 2px 8px rgba(0,0,0,0.2)":"none",transition:"all 0.15s",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  {twinColor===c&&<span style={{color:"#fff",fontSize:"14px",fontWeight:900}}>✓</span>}
+                </button>
+              ))}
+            </div>
+            <div style={{fontSize:"10px",color:"#D4C4B0",fontFamily:"'Nunito',sans-serif"}}>Pronombres y color afectan la narrativa del juego.</div>
           </div>
         )}
 
@@ -3326,22 +3587,55 @@ function CreationScreen({onStart,onLoad,defaultShowLoad}){
           </div>
         )}
 
-        {/* ── STEP 5: RESUMEN ── */}
-        {step===5&&(()=>{
+        {/* ── STEP 5: LLEGADA ── */}
+        {step===5&&(
+          <div>
+            <div style={TITLE}>La llegada</div>
+            <div style={SUB}>¿Por qué llegaste a Veloria? Esta decisión da forma a tu historia de fondo.</div>
+            <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
+              {LLEGADA_OPTIONS.map(l=>{
+                const sel=llegada===l.id;
+                return(
+                  <button key={l.id} onClick={()=>setLlegada(l.id)}
+                    style={{textAlign:"left",padding:"14px",borderRadius:"14px",border:`1.5px solid ${sel?"#F5A623":"#E0D4C8"}`,background:sel?"#FFF3DC":"#FFFFFF",cursor:"pointer",transition:"all 0.15s",display:"flex",gap:"14px",alignItems:"center"}}>
+                    <span style={{fontSize:"26px",flexShrink:0}}>{l.emoji}</span>
+                    <div>
+                      <div style={{fontSize:"14px",color:sel?"#F5A623":"#2C1A0E",fontWeight:700,marginBottom:"4px"}}>{l.label}</div>
+                      <div style={{fontSize:"11px",color:sel?"#7A5840":"#B8907A",fontFamily:"'Lora',serif",fontStyle:"italic"}}>{l.hint}</div>
+                      <div style={{fontSize:"10px",color:C.green||"#7AB55C",marginTop:"4px",fontFamily:"'Nunito',sans-serif"}}>+{l.bonusVal} XP {l.bonusSkill}</div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── STEP 6: RESUMEN ── */}
+        {step===6&&(()=>{
           const asp=ASPIRATIONS.find(a=>a.id===aspiration);
           const orig=ORIGINS.find(o=>o.id===origin);
+          const ll=LLEGADA_OPTIONS.find(l=>l.id===llegada);
           const selTraits=TRAITS.filter(t=>traits.includes(t.id));
           return(
             <div>
               <div style={TITLE}>Tu Twin está listo/a</div>
               <div style={SUB}>Así llega {name} a Veloria.</div>
               <div style={{background:"#FFFFFF",border:"1px solid #E0D4C8",borderRadius:"14px",padding:"16px",display:"flex",flexDirection:"column",gap:"10px"}}>
+                {/* Avatar preview */}
+                <div style={{display:"flex",justifyContent:"center",marginBottom:"4px"}}>
+                  <div style={{width:52,height:52,borderRadius:"50%",background:twinColor,border:"2.5px solid #2C1A0E",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,color:"#fff",fontWeight:700,boxShadow:"2px 2px 0 #2C1A0E"}}>
+                    {name[0]?.toUpperCase()||"?"}
+                  </div>
+                </div>
                 {[
                   ["Nombre",`${name} (${pronouns})`],
+                  ["Color",""],
                   ["Origen",`${orig?.emoji} ${orig?.label}`],
                   ["Aspiración",`${asp?.emoji} ${asp?.label}`],
                   ["Primera conexión",connection],
-                ].map(([l,v])=>(
+                  ["Llegada a Veloria",ll?`${ll.emoji} ${ll.label}`:"—"],
+                ].filter(([,v])=>v).map(([l,v])=>(
                   <div key={l} style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                     <span style={{fontSize:"11px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>{l}</span>
                     <span style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600}}>{v}</span>
@@ -3353,18 +3647,14 @@ function CreationScreen({onStart,onLoad,defaultShowLoad}){
                     {selTraits.map(t=><span key={t.id} style={{fontSize:"11px",color:"#7A5840",background:"#FFF3DC",border:"1px solid #F5A62344",borderRadius:"8px",padding:"2px 8px"}}>{t.emoji} {t.label}</span>)}
                   </div>
                 </div>
-                <div style={{display:"flex",justifyContent:"space-between"}}>
-                  <span style={{fontSize:"11px",color:"#B8907A",fontFamily:"'Nunito',sans-serif"}}>Empieza como</span>
-                  <span style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600}}>🌱 Joven Adulto/a (día 1/14)</span>
-                </div>
               </div>
             </div>
           );
         })()}
 
-        <button onClick={step===5?handleFinish:()=>setStep(s=>s+1)} disabled={!canNext}
+        <button onClick={step===6?handleFinish:()=>setStep(s=>s+1)} disabled={!canNext}
           style={NEXT(!canNext)}>
-          {step===5?"✦ Llegar a Veloria":"Continuar →"}
+          {step===6?"✦ Llegar a Veloria":"Continuar →"}
         </button>
       </div>
     </div>
@@ -3386,7 +3676,13 @@ export default function InbetweensGame(){
   ]);
   const [log,setLog]=useState([]),[loading,setLoading]=useState(false);
   const [activeTab,setActiveTab]=useState("acciones"),[showPausa,setShowPausa]=useState(false);
-  const [namingChild,setNamingChild]=useState(false),[childNameInput,setChildNameInput]=useState("");
+  const [namingChild,setNamingChild]=useState(null); // null | {count,genders,names:["",...]}
+  function initChildBirth(){
+    const r=Math.random();
+    const count=r<0.03?3:r<0.15?2:1;
+    const genders=Array.from({length:count},()=>{const g=Math.random();return g<0.46?"varón":g<0.92?"mujer":"elle";});
+    setNamingChild({count,genders,names:Array(count).fill("")});
+  }
   const [skills,setSkills]=useState({pesca:0,cocina:0,arte:0,carisma:0,naturaleza:0,conocimiento:0});
   const [housing,setHousing]=useState("apto_basico");
   const [placedFurniture,setPlacedFurniture]=useState([]);
@@ -3400,7 +3696,9 @@ export default function InbetweensGame(){
   const [shownEventDays,setShownEventDays]=useState([]);
   const [npcWorld,setNpcWorld]=useState(()=>JSON.parse(JSON.stringify(NPC_STARTING_DATA)));
   const [reputation,setReputation]=useState(0);
-  const [activeGift,setActiveGift]=useState(null); // item being gifted
+  const [activeGift,setActiveGift]=useState(null);
+  const [mood,setMood]=useState(65);
+  const [lifeChapters,setLifeChapters]=useState([]); // item being gifted
   const [aspirationProgress,setAspirationProgress]=useState([]);
   const [visitedPlaces,setVisitedPlaces]=useState(new Set(["Tu apartamento"]));
   const logEnd=useRef(null);
@@ -3593,6 +3891,27 @@ export default function InbetweensGame(){
     }
   },[gt.day]);
 
+  // ── Season change detection ──────────────────────────
+  const prevSeasonRef=useRef(-1);
+  useEffect(()=>{
+    if(phase!=="playing")return;
+    const seasonIdx=Math.floor(gt.monthIdx/3);
+    if(seasonIdx===prevSeasonRef.current)return;
+    prevSeasonRef.current=seasonIdx;
+    const s=SEASON_DATA[seasonIdx];if(!s)return;
+    setTimeout(()=>{
+      addEntry({text:s.arrival,type:"world_event",place:"Veloria",time:"08:00"});
+      if(s.specialEvent==="velorfesta"){
+        setTimeout(()=>{
+          addEntry({text:"✦ La Velorfesta empieza en tres días. La Plaza del Veloer se llena de luces.",type:"world_event",place:"Plaza del Veloer",time:"10:00"});
+          setChainActions(prev=>[...prev,{id:"velorfesta",emoji:"🎉",label:"Ir a la Velorfesta",hint:"La celebración más grande de Veloria. Solo estos días.",requiredPlace:null,expiresDay:gt.day+3,action:{id:"velorfesta",label:"Celebrar la Velorfesta",emoji:"🎉",time:3}}]);
+        },600);
+      }
+      if(s.specialEvent==="nocturnos")setTimeout(()=>addEntry({text:"Los Nocturnos empezaron. En invierno, Veloria se reúne adentro. Las casas se abren más.",type:"world_event",place:"Veloria",time:"19:00"}),600);
+      if(s.specialEvent==="cosecha")setTimeout(()=>addEntry({text:"La Cosecha Veleta llegó. El Mercado del Casco se llena de frutas que no existen el resto del año.",type:"world_event",place:"Los Prados",time:"09:00"}),600);
+      addChapter(`${s.emoji} ${s.label} llegó a Veloria. ${s.flavor}`,"season");
+    },300);
+  },[gt.monthIdx]);
 
   function handleChoiceSelect(option,choiceCtx){
     const npc=choiceCtx?.npc;
@@ -3696,10 +4015,13 @@ export default function InbetweensGame(){
     const housingEff=getHousingEffects(housing,placedFurniture);
     const hour=((gt.hour%24)+24)%24;
     const isNight=hour>=21||hour<6;
+    const season=getSeasonData(gt.monthIdx);
+    const moodMult=mood>=80?1.1:mood<25?0.9:1.0;
     const adjusted={};
     for(const[skill,xp]of Object.entries(gains)){
-      let mult=stage.skillMult;
+      let mult=stage.skillMult*moodMult;
       if(housingEff.skillBonus[skill])mult*=housingEff.skillBonus[skill];
+      if(season.skillBonus?.[skill])mult*=season.skillBonus[skill];
       for(const tid of(twin?.traits||[])){
         const t=TRAITS.find(x=>x.id===tid);
         if(t?.bonus?.skillMult?.[skill])mult*=t.bonus.skillMult[skill];
@@ -3713,6 +4035,7 @@ export default function InbetweensGame(){
       setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,
         text:`✦ ¡Habilidad mejorada! Tu ${SKILLS_CFG[skill].label} llegó a ${SKILL_LEVELS[level].label} (${SKILL_LEVELS[level].roman}).`,
         type:"skill_up"}]);
+      if(level>=3)addChapter(`${SKILLS_CFG[skill]?.emoji||"⭐"} Nivel ${SKILL_LEVELS[level].label} en ${SKILLS_CFG[skill].label}.`,"milestone");
     });
   }
   useEffect(()=>{
@@ -3723,7 +4046,7 @@ export default function InbetweensGame(){
   },[log.length]);
 
   function saveToSlot(slot){
-    try{const data={...buildSave(twin,needs,money,gt,loc,rels,career,family,inventory,log,skills,housing,placedFurniture),npcWorld,visitLog,shownEventDays,chainActions,reputation};localStorage.setItem(SAVE_KEY+slot,JSON.stringify(data));}catch{}
+    try{const data={...buildSave(twin,needs,money,gt,loc,rels,career,family,inventory,log,skills,housing,placedFurniture),npcWorld,visitLog,shownEventDays,chainActions,reputation,mood,lifeChapters};localStorage.setItem(SAVE_KEY+slot,JSON.stringify(data));}catch{}
   }
   function loadFromSlot(slot){
     const data=slot==="auto"?(()=>{try{const r=localStorage.getItem(AUTO_KEY);return r?JSON.parse(r):null;}catch{return null;}})():readSlot(slot);
@@ -3746,6 +4069,8 @@ export default function InbetweensGame(){
     if(data.shownEventDays)setShownEventDays(data.shownEventDays);
     if(data.chainActions)setChainActions(data.chainActions);
     if(data.reputation!=null)setReputation(data.reputation);
+    if(data.mood!=null)setMood(data.mood);
+    if(data.lifeChapters)setLifeChapters(data.lifeChapters);
     setPhase("playing");setShowPausa(false);
   }
   function resetGame(){
@@ -3765,6 +4090,8 @@ export default function InbetweensGame(){
 
   const addEntry=e=>setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,...e}]);
   const addRep=(delta)=>setReputation(r=>Math.min(100,r+delta));
+  const addMood=(delta)=>setMood(m=>Math.min(100,Math.max(0,m+delta)));
+  const addChapter=(text,type="milestone")=>setLifeChapters(prev=>[...prev,{day:gt.day,text,type,monthIdx:gt.monthIdx}]);
   const prevRepTier=useRef(0);
   useEffect(()=>{
     const tier=REPUTATION_LEVELS.filter(l=>reputation>=l.min).length;
@@ -3778,15 +4105,25 @@ export default function InbetweensGame(){
     const daysLived=PLAYER_START_DAYS+(gt.day-1);
     const dm=getLifeStage(daysLived).decayMult;
     const hb=getHousingEffects(housing,placedFurniture).needBonus;
+    const season=getSeasonData(gt.monthIdx);
+    const sdm=season.needDecayMod||{};
     const b=(need,ch)=>clamp((ch||0)+(ch>0?hb[need]||0:0));
     setNeeds(prev=>({
-      hambre:   clamp(prev.hambre   -hours*4*dm  +b("hambre",   changes.hambre)),
-      sueno:    clamp(prev.sueno    -hours*3*dm  +b("sueno",    changes.sueno)),
-      higiene:  clamp(prev.higiene  -hours*1.5*dm+b("higiene",  changes.higiene)),
-      social:   clamp(prev.social   -hours*2*dm  +b("social",   changes.social)),
-      diversion:clamp(prev.diversion-hours*2.5*dm+b("diversion",changes.diversion)),
-      vejiga:   clamp(prev.vejiga   -hours*8*dm  +(changes.vejiga||0)),
+      hambre:   clamp(prev.hambre   -hours*4*dm*(sdm.hambre||1)  +b("hambre",   changes.hambre)),
+      sueno:    clamp(prev.sueno    -hours*3*dm*(sdm.sueno||1)   +b("sueno",    changes.sueno)),
+      higiene:  clamp(prev.higiene  -hours*1.5*dm                +b("higiene",  changes.higiene)),
+      social:   clamp(prev.social   -hours*2*dm*(sdm.social||1)  +b("social",   changes.social)),
+      diversion:clamp(prev.diversion-hours*2.5*dm*(sdm.diversion||1)+b("diversion",changes.diversion)),
+      vejiga:   clamp(prev.vejiga   -hours*8*dm                  +(changes.vejiga||0)),
     }));
+    // Mood drifts toward need average
+    setMood(m=>{
+      const needAvg=Object.values({...changes}).filter(v=>typeof v==="number"&&v>0).length>0?
+        (needs.hambre+needs.sueno+needs.social+needs.diversion)/4:
+        (needs.hambre+needs.sueno+needs.social+needs.diversion)/4;
+      const target=Math.max(10,Math.min(90,needAvg));
+      return Math.max(0,Math.min(100,m+(target-m)*0.05*hours));
+    });
     setGt(prev=>{const total=prev.hour+hours,daysG=Math.floor(total/24),newDay=prev.day+daysG;return{hour:total%24,day:newDay,monthIdx:clamp(prev.monthIdx+Math.floor(newDay/30)-Math.floor(prev.day/30),0,11)};});
   };
   const addInvItem=(item)=>setInventory(prev=>{const ex=prev.find(i=>i.name===item.name);if(ex)return prev.map(i=>i.name===item.name?{...i,qty:i.qty+1}:i);return[...prev,{id:Date.now(),...item,qty:1}];});
@@ -3819,28 +4156,52 @@ export default function InbetweensGame(){
   function handleContinueAsChild(child){
     setShowLegacy(false);
     const childTraits=child.traits||["curioso","libre","empático"];
-    setTwin({name:child.name,traits:childTraits,aspiration:"familia"});
+    const parentName=child.parentName||twin?.name;
+    const parentColor=child.parentColor||"#F5A623";
+    const parentRep=child.parentRep||reputation||0;
+    const parentRels=child.parentRels||rels;
+    // Child inherits twin's color + parent info
+    setTwin({name:child.name,traits:childTraits,aspiration:"familia",
+      color:parentColor,parentName,
+      llegada:"buscando", // child comes to Veloria looking for their parent's world
+    });
     setNeeds({hambre:80,sueno:80,higiene:80,social:60,diversion:60,vejiga:80});
     setMoney(Math.floor(money*0.3));
+    setMood(65);
+    setLifeChapters([]);
+    // Inherit some reputation from parent
+    setReputation(Math.floor(parentRep*0.3));
     setGt({hour:8,day:1,monthIdx:0});
     setLoc({hood:"La Vega",place:"Tu apartamento"});
     setCareer(null);setFamily({partner:null,romanticStatus:null,children:[]});
+    // Inherit friendships from parent (at 30% of original)
+    const inheritedRels={};
+    Object.entries(parentRels).forEach(([npc,data])=>{
+      if((data.friendship||0)>=50){
+        inheritedRels[npc]={friendship:Math.floor((data.friendship||0)*0.3),history:[`${parentName} y ${npc.split(" ")[0]} se conocían bien.`]};
+      }
+    });
+    setRels(inheritedRels);
     setSkills({pesca:0,cocina:0,arte:0,carisma:0,naturaleza:0,conocimiento:0});
-    setLog([{id:Date.now(),day:1,text:`La historia continúa.\n\n${child.name} abre los ojos en el apartamento de La Vega — el mismo de siempre, pero visto por primera vez. Veloria afuera es exactamente lo que era. Y también, completamente, otra cosa.`,type:"intro",place:"Tu apartamento",time:"08:00"}]);
+    const parentLine=parentName?`\n\nAlgunos en Veloria conocen ese apellido. Conocían a ${parentName}.`:"";
+    setLog([{id:Date.now(),day:1,text:`La historia continúa.\n\n${child.name} abre los ojos en el apartamento de La Vega — el mismo de siempre, pero visto por primera vez.${parentLine}`,type:"intro",place:"Tu apartamento",time:"08:00"}]);
     lastAgeMilestone.current=0;lastEventDay.current=0;
   }
 
   async function handleStart(twinData){
     const orig=twinData._origin;
     const conn=twinData._connection;
+    const ll=twinData._llegada;
     // Apply origin skill bonuses
     const initSkills={pesca:0,cocina:0,arte:0,carisma:0,naturaleza:0,conocimiento:0};
     if(orig?.bonus?.skills){for(const[sk,xp]of Object.entries(orig.bonus.skills))initSkills[sk]=(initSkills[sk]||0)+xp;}
+    // Apply llegada bonus skill
+    if(ll?.bonusSkill&&ll?.bonusVal)initSkills[ll.bonusSkill]=(initSkills[ll.bonusSkill]||0)+ll.bonusVal;
     setSkills(initSkills);
     // Apply origin + first connection friendship
     const initRels={};
     if(orig?.bonus?.friendship){for(const[npc,fr]of Object.entries(orig.bonus.friendship))initRels[npc]={friendship:fr,history:["Se conocen del barrio de origen"]};}
-    if(conn){const c=twinData._connectionData;initRels[conn]={...(initRels[conn]||{}),friendship:Math.max(initRels[conn]?.friendship||0,25),history:["Primera conexión en Veloria"]};}
+    if(conn){initRels[conn]={...(initRels[conn]||{}),friendship:Math.max(initRels[conn]?.friendship||0,25),history:["Primera conexión en Veloria"]};}
     setRels(initRels);
     // Starting inventory
     const startInv=[{id:1,name:"Té Miren",type:"food",emoji:"🍵",qty:2,desc:"Una taza.",useable:true},{id:2,name:"Pan Velin",type:"food",emoji:"🥐",qty:1,desc:"Pan de Veloria.",useable:true}];
@@ -3849,9 +4210,10 @@ export default function InbetweensGame(){
     setTwin({...twinData});
     setPhase("playing");setLoading(true);
     await sleep(500);
-    const aspLabel=ASPIRATIONS.find(a=>a.id===twinData.aspiration)?.label||"";
     const connLine=conn?`\n\nEn el café de abajo, ${conn.split(" ")[0]} ya sabe tu nombre.`:"";
-    const txt=getNarrative(`intro:${twinData.aspiration}`)||`El apartamento en La Vega es exactamente lo que esperabas y también algo más.`;
+    // Use llegada narrative if available, else aspiration
+    const llegadaKey=ll?`intro:llegada_${ll.id}`:null;
+    const txt=(llegadaKey&&getNarrative(llegadaKey))||getNarrative(`intro:${twinData.aspiration}`)||`El apartamento en La Vega es exactamente lo que esperabas y también algo más.`;
     addEntry({text:txt+connLine,type:"intro",place:"Tu apartamento",time:"08:00"});
     setLoading(false);
   }
@@ -4004,7 +4366,17 @@ export default function InbetweensGame(){
         gym_entrenar:"gym:entrenar",gym_natacion:"gym:natacion"};
       const nKey=NK_MAP[action.id]||action.id;
       const stateText=getStateNarrative(action.id,{skills,needs,gt});
-      addEntry({text:stateText||getNarrative(nKey)||getNarrative("default"),type:"story",place:loc.place,time:toTimeStr(gt.hour+(action.time||0.5))});
+      let entryText=stateText||getNarrative(nKey)||getNarrative("default");
+      // Mood suffix — only on creative/nature/social actions and when mood is extreme
+      const moodMod=getMoodLevel(mood).mod;
+      if((moodMod==="great"||moodMod==="verylow")&&Math.random()<0.35){
+        const suffixArr=N_MOOD_SUFFIX[moodMod]||[];
+        if(suffixArr.length)entryText+="\n\n"+pick(suffixArr);
+      }
+      addEntry({text:entryText,type:"story",place:loc.place,time:toTimeStr(gt.hour+(action.time||0.5))});
+      // Mood changes per action type
+      const moodDeltas={fish:5,cook:4,walk_park:4,sit_lake:6,musica_tocar:6,estudio_ver:4,azotea2_estrellas:5,dormir:-2,ducharse:3,research:3};
+      const md=moodDeltas[action.id];if(md)addMood(md);
 
       // ── Choice trigger: fire post-action choice ──
       const choiceFn=ACTION_CHOICE_TRIGGERS[action.id];
@@ -4077,25 +4449,31 @@ export default function InbetweensGame(){
 
   async function handleRomanceAction(type,npcName){
     if(loading)return;
-    if(type==="have_child"){setNamingChild(true);setChildNameInput("");return;}
+    if(type==="have_child"){initChildBirth();return;}
     setLoading(true);await sleep(400);
     const positive=type==="ask_out"||type==="propose"||type==="marry";
     tick(1,positive?{social:20,diversion:25}:{social:-25,diversion:-20});
     if(type==="ask_out")setFamily(f=>({...f,partner:npcName,romanticStatus:"dating"}));
     else if(type==="propose")setFamily(f=>({...f,romanticStatus:"engaged"}));
-    else if(type==="marry")setFamily(f=>({...f,romanticStatus:"married"}));
+    else if(type==="marry"){setFamily(f=>({...f,romanticStatus:"married"}));addChapter(`💒 ${twin?.name} y ${npcName?.split(" ")[0]||"su pareja"} se casaron en Veloria.`,"love");addMood(20);}
     else if(type==="breakup"||type==="divorce"){setFamily(f=>({...f,partner:null,romanticStatus:null}));setRels(prev=>({...prev,[npcName]:{...prev[npcName],friendship:clamp((prev[npcName]?.friendship||0)-20)}}));}
     addEntry({text:getNarrative(`romance:${type}`,{NPC:npcName}),type:"romance",place:loc.place,time:toTimeStr(gt.hour+1)});
     setLoading(false);
   }
   async function handleHaveChild(){
-    const name=childNameInput.trim();if(!name)return;
-    setNamingChild(false);setLoading(true);await sleep(500);
-    const pT=NPC_TRAITS_MAP[family.partner]||["curioso","alegre","cálido"];
-    const pool=[...new Set([...(twin?.traits||[]),...pT])].sort(()=>0.5-Math.random());
-    setFamily(f=>({...f,children:[...f.children,{name,birthDay:gt.day,traits:pool.slice(0,3),otherParent:family.partner,happiness:70,relationship:60}]}));
-    tick(0,{social:30,diversion:20});
-    addEntry({text:getNarrative("birth",{CHILD:name,PARTNER:family.partner||"tu pareja"}),type:"intro",place:"Tu apartamento",time:toTimeStr(gt.hour)});
+    if(!namingChild)return;
+    const {count,genders,names}=namingChild;
+    if(names.some(n=>!n.trim()))return;
+    setNamingChild(null);setLoading(true);await sleep(500);
+    const GENDER_EMOJI={varón:"👦",mujer:"👧",elle:"🧒"};
+    const newChildren=names.map((n,i)=>({name:n.trim(),gender:genders[i],birthDay:gt.day,emoji:GENDER_EMOJI[genders[i]]||"👶"}));
+    setFamily(prev=>({...prev,children:[...(prev.children||[]),...newChildren]}));
+    addRep(8);addMood(20);
+    newChildren.forEach(c=>addChapter(`👶 Nació ${c.name} (${c.gender}). Día ${gt.day} en Veloria.`,"family"));
+    const plural=count>1?(count===2?"Mellizos/as":"Trillizos/as"):"";
+    const childList=newChildren.map(c=>`${GENDER_EMOJI[c.gender]} ${c.name} (${c.gender})`).join(", ");
+    const txt=count>1?`${plural}. Nacieron ${childList}. Veloria recibió ${count} vidas nuevas al mismo tiempo.`:`${newChildren[0].name} llegó a Veloria. Un ${genders[0]}. Una vida nueva que empieza.`;
+    addEntry({text:txt,type:"romance",place:"Tu apartamento",time:toTimeStr(gt.hour)});
     setLoading(false);
   }
   async function handleGoTo(hood,place){
@@ -4183,7 +4561,7 @@ export default function InbetweensGame(){
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');*{box-sizing:border-box}::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:#D4C4B0;border-radius:2px}button{font-family:'Fredoka',sans-serif}@keyframes fadeSlideIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
       {showPausa&&<PausaModal onClose={()=>setShowPausa(false)} onSave={saveToSlot} onLoad={loadFromSlot} onReset={resetGame} log={log} gt={gt} twin={twin}/>}
-      {showLegacy&&<LegacyScreen twin={twin} gt={gt} skills={skills} rels={rels} family={family} children={family.children} onContinueAsChild={handleContinueAsChild} onNewGame={resetGame}/>}
+      {showLegacy&&<LegacyScreen twin={twin} gt={gt} skills={skills} rels={rels} family={family} children={family.children} onContinueAsChild={handleContinueAsChild} onNewGame={resetGame} lifeChapters={lifeChapters} reputation={reputation}/>}
       {pendingNPCDialogue&&<DialogueModal event={pendingNPCDialogue} onRespond={handleDialogueResponse}/>}
       {pendingChoice&&<ChoiceModal choice={pendingChoice} onSelect={(opt)=>handleChoiceSelect(opt,pendingChoice)} onDismiss={()=>setPendingChoice(null)}/>}
       {activeShop&&<ShopModal shop={activeShop} money={money} onBuy={handleShopBuy} onClose={()=>setActiveShop(null)}/>}
@@ -4192,14 +4570,31 @@ export default function InbetweensGame(){
       {activeShop&&<ShopModal shop={activeShop} money={money} onBuy={handleShopBuy} onClose={()=>setActiveShop(null)}/>}
       {namingChild&&(
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.6)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100}}>
-          <div style={{...bento(C.white),padding:"28px",width:"300px",textAlign:"center"}}>
-            <div style={{fontSize:"32px",marginBottom:"12px"}}>👶</div>
-            <div style={{fontSize:"17px",color:C.orange,fontWeight:700,marginBottom:"6px"}}>¿Cómo se llama?</div>
-            <div style={{fontSize:"11px",color:C.textDim,marginBottom:"18px",fontFamily:"'Nunito',sans-serif"}}>El nombre de tu hijo/a en Veloria.</div>
-            <input value={childNameInput} onChange={e=>setChildNameInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&childNameInput.trim()&&handleHaveChild()} placeholder="Nombre..." style={{width:"100%",padding:"9px 13px",background:C.cardWarm,border:`1px solid ${C.border}`,borderRadius:"10px",color:C.text,fontSize:"15px",fontFamily:"'Lora',serif",outline:"none",marginBottom:"12px"}}/>
-            <div style={{display:"flex",gap:"8px"}}>
-              <button onClick={()=>setNamingChild(false)} style={{flex:1,padding:"8px",borderRadius:"10px",border:`1px solid ${C.border}`,background:"transparent",color:C.textDim,cursor:"pointer"}}>Cancelar</button>
-              <button onClick={handleHaveChild} disabled={!childNameInput.trim()} style={{flex:1,padding:"8px",borderRadius:"10px",border:"none",background:C.orange,color:C.white,cursor:"pointer",fontWeight:700}}>✦ Confirmar</button>
+          <div style={{...bento(C.white),padding:"28px",width:"320px",textAlign:"center"}}>
+            <div style={{fontSize:40,marginBottom:"8px"}}>
+              {namingChild.genders.map(g=>g==="varón"?"👦":g==="mujer"?"👧":"🧒").join("")}
+            </div>
+            <div style={{fontSize:"17px",color:C.orange,fontWeight:700,marginBottom:"4px",fontFamily:"'Fredoka',sans-serif"}}>
+              {namingChild.count===1?"¡Un bebé llega a Veloria!":namingChild.count===2?"¡Mellizos/as!":"¡Trillizos/as!"}
+            </div>
+            <div style={{fontSize:"12px",color:C.textDim,marginBottom:"18px",fontFamily:"'Nunito',sans-serif"}}>
+              {namingChild.genders.map((g,i)=>`Bebé ${i+1}: ${g}`).join(" · ")}
+            </div>
+            {namingChild.names.map((n,i)=>(
+              <div key={i} style={{marginBottom:"10px",textAlign:"left"}}>
+                <div style={{fontSize:"10px",color:C.textDim,fontFamily:"'Nunito',sans-serif",marginBottom:"4px"}}>
+                  {namingChild.count>1?`${namingChild.genders[i]==="varón"?"👦":namingChild.genders[i]==="mujer"?"👧":"🧒"} Bebé ${i+1}`:""} Nombre
+                </div>
+                <input value={n}
+                  onChange={e=>{const nn=[...namingChild.names];nn[i]=e.target.value;setNamingChild({...namingChild,names:nn});}}
+                  placeholder="Nombre en Veloria..."
+                  style={{width:"100%",padding:"9px 13px",background:C.cardWarm,border:`1px solid ${C.border}`,borderRadius:"10px",color:C.text,fontSize:"15px",fontFamily:"'Lora',serif",outline:"none"}}
+                />
+              </div>
+            ))}
+            <div style={{display:"flex",gap:"8px",marginTop:"8px"}}>
+              <button onClick={()=>setNamingChild(null)} style={{flex:1,padding:"8px",borderRadius:"10px",border:`1px solid ${C.border}`,background:"transparent",color:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>Cancelar</button>
+              <button onClick={handleHaveChild} disabled={namingChild.names.some(n=>!n.trim())} style={{flex:1,padding:"8px",borderRadius:"10px",border:"none",background:C.orange,color:C.white,cursor:"pointer",fontWeight:700,fontFamily:"'Fredoka',sans-serif"}}>✦ Confirmar</button>
             </div>
           </div>
         </div>
@@ -4223,20 +4618,14 @@ export default function InbetweensGame(){
 
       {/* CHARACTER STRIP — bento card */}
       <div style={{margin:"6px 8px 0",flexShrink:0,borderRadius:"16px",background:"#FFFFFF",border:"1px solid #E0D4C8",boxShadow:"0 2px 10px rgba(0,0,0,0.06)",overflow:"hidden"}}>
-        <CharacterCard twin={twin} needs={needs} money={money} gt={gt} rels={rels} family={family} skills={skills} currentDaysLived={currentDaysLived} daysInStage={daysInCurrentStage} daysInStageTotal={daysInStageTotal} lifeStage={lifeStage} aspirationProgress={aspirationProgress} reputation={reputation}/>
+        <CharacterCard twin={twin} needs={needs} money={money} gt={gt} rels={rels} family={family} skills={skills} currentDaysLived={currentDaysLived} daysInStage={daysInCurrentStage} daysInStageTotal={daysInStageTotal} lifeStage={lifeStage} aspirationProgress={aspirationProgress} reputation={reputation} mood={mood}/>
       </div>
 
-      {/* STATS CARD — only on wide screens */}
-      {isWide&&(
-        <div style={{margin:"6px 8px 0",flexShrink:0,borderRadius:"14px",background:C.cardWarm,border:`1px solid ${C.border}`,padding:"8px 20px",display:"flex",gap:"24px",alignItems:"center",justifyContent:"center"}}>
-          <span style={{fontSize:"13px",color:C.textMid,fontFamily:"'Nunito',sans-serif",fontWeight:600}}>{gt.hour>=21||gt.hour<6?"🌙":"☀️"} {toTimeStr(gt.hour)}</span>
-          <span style={{color:C.border2}}>·</span>
-          <span style={{fontSize:"13px",color:C.textMid,fontFamily:"'Nunito',sans-serif"}}>📅 Día {gt.day}</span>
-          <span style={{color:C.border2}}>·</span>
-          <span style={{fontSize:"13px",color:C.textMid,fontFamily:"'Nunito',sans-serif"}}>🌿 {SEASONS[gt.monthIdx]} · {MONTHS[gt.monthIdx]}</span>
-          {currentEvent&&<><span style={{color:C.border2}}>·</span><span style={{fontSize:"13px",color:C.orange,fontFamily:"'Nunito',sans-serif"}}>{currentEvent.emoji} {currentEvent.name}</span></>}
-          <span style={{color:C.border2}}>·</span>
-          <span style={{fontSize:"13px",color:C.orange,fontWeight:700,fontFamily:"'Fredoka',sans-serif"}}>L {money}</span>
+      {/* STATS CARD — solo en desktop, solo info que no está en el header */}
+      {isWide&&(currentEvent||true)&&(
+        <div style={{margin:"6px 8px 0",flexShrink:0,borderRadius:"14px",background:C.cardWarm,border:`1px solid ${C.border}`,padding:"6px 20px",display:"flex",gap:"20px",alignItems:"center",justifyContent:"center"}}>
+          <span style={{fontSize:"12px",color:C.textMid,fontFamily:"'Nunito',sans-serif"}}>{SEASONS[gt.monthIdx]} · {MONTHS[gt.monthIdx]}</span>
+          {currentEvent&&<><span style={{color:C.border2}}>·</span><span style={{fontSize:"12px",color:C.orange,fontFamily:"'Nunito',sans-serif",fontWeight:600}}>{currentEvent.emoji} {currentEvent.name}</span></>}
         </div>
       )}
 
@@ -4271,7 +4660,7 @@ export default function InbetweensGame(){
               {activeTab==="acciones"&&<AccionesTab loc={loc} career={career} NEIGHBORHOODS={NEIGHBORHOODS} PLACE_ACTIONS={PLACE_ACTIONS} loading={loading} dark={false} onGoTo={handleGoTo} onAction={a=>a.isSkillUnlock?handleSkillUnlockAction(a):handleAction(a)} onWork={handleWork} extraActions={skillUnlockActions} chainActions={chainActions} onChainAction={handleChainAction}/>}
               {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={false} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract} npcWorld={npcWorld}/>}
               {activeTab==="trabajo"&&<TrabajoTabContent career={career} loc={loc} dark={false} loading={loading} onApply={handleApplyJob} onWork={handleWork}/>}
-              {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading} family={family} gt={gt} npcWorld={npcWorld} inventory={inventory} onUseItem={handleUseItem} onGiftItem={(item)=>setActiveGift(item)}/>}
+              {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading} family={family} gt={gt} npcWorld={npcWorld} twin={twin} inventory={inventory} onUseItem={handleUseItem} onGiftItem={(item)=>setActiveGift(item)}/>}
               {activeTab==="mapa"&&<MapaTab gt={gt} rels={rels} loc={loc} loading={loading} onGoTo={handleGoTo}/>}
               {activeTab==="diario"&&<DiarioTab log={log} gt={gt}/>}
             </div>
@@ -4325,7 +4714,7 @@ export default function InbetweensGame(){
             {activeTab==="acciones"&&<AccionesTab loc={loc} career={career} NEIGHBORHOODS={NEIGHBORHOODS} PLACE_ACTIONS={PLACE_ACTIONS} loading={loading} dark={false} onGoTo={handleGoTo} onAction={a=>a.isSkillUnlock?handleSkillUnlockAction(a):handleAction(a)} onWork={handleWork} extraActions={skillUnlockActions} chainActions={chainActions} onChainAction={handleChainAction}/>}
             {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={false} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract} npcWorld={npcWorld}/>}
             {activeTab==="trabajo"&&<TrabajoTabContent career={career} loc={loc} dark={false} loading={loading} onApply={handleApplyJob} onWork={handleWork}/>}
-            {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading} family={family} gt={gt} npcWorld={npcWorld} inventory={inventory} onUseItem={handleUseItem} onGiftItem={(item)=>setActiveGift(item)}/>}
+            {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading} family={family} gt={gt} npcWorld={npcWorld} twin={twin} inventory={inventory} onUseItem={handleUseItem} onGiftItem={(item)=>setActiveGift(item)}/>}
             {activeTab==="mapa"&&<MapaTab gt={gt} rels={rels} loc={loc} loading={loading} onGoTo={handleGoTo}/>}
             {activeTab==="diario"&&<DiarioTab log={log} gt={gt}/>}
           </div>
