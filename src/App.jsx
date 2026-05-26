@@ -607,6 +607,45 @@ const NEED_CFG={hambre:{label:"Hambre",emoji:"🍽",color:"#E8943A"},sueno:{labe
 const MONTHS=["Nevelin","Mirenal","Nomeven","Mirenable","Velorfesta","Solein","Velcora","Memoveli","Clubven","Noctuvel","Mireneis","Nevelin II"];
 const SEASONS=["🌸 Primavera","🌸 Primavera","🌸 Primavera","☀️ Verano","☀️ Verano","☀️ Verano","🍂 Otoño","🍂 Otoño","🍂 Otoño","❄️ Invierno","❄️ Invierno","❄️ Invierno"];
 
+// ── NPC ECONOMY & WORLD ──────────────────────────────────
+const NPC_JOBS={
+  "Aria Ven":      {job:"Dueña del Café de Aria",      dailySalary:85},
+  "Oren Mirende":  {job:"Pescador",                     dailySalary:62},
+  "Soren Lume":    {job:"Librero",                      dailySalary:70},
+  "Bren Orlen":    {job:"Médico",                       dailySalary:125},
+  "Ciro Orlen":    {job:"Bibliotecario",                dailySalary:72},
+  "Elowen Sorvei": {job:"Escritora",                    dailySalary:55},
+  "Aldric Veloer": {job:"Historiador de Veloria",       dailySalary:95},
+  "Nela Mirende":  {job:"Chef y restaurantera",         dailySalary:100},
+  "Vael Lumaren":  {job:"Músico y profesor",            dailySalary:65},
+  "Tomas Mirende": {job:"Pescador del Puerto Viejo",    dailySalary:58},
+  "Lior Veloer":   {job:"Comerciante",                  dailySalary:78},
+  "Siv Norven":    {job:"Artesana",                     dailySalary:60},
+  "Riven Lumaren": {job:"Barman en Lumaven",            dailySalary:55},
+};
+
+const NPC_STARTING_DATA={
+  "Aria Ven":      {age:26, luces:340,  partner:null, children:[], isAlive:true},
+  "Oren Mirende":  {age:44, luces:820,  partner:null, children:[], isAlive:true},
+  "Soren Lume":    {age:29, luces:520,  partner:null, children:[], isAlive:true},
+  "Bren Orlen":    {age:38, luces:1240, partner:null, children:[], isAlive:true},
+  "Ciro Orlen":    {age:55, luces:1800, partner:null, children:[], isAlive:true},
+  "Elowen Sorvei": {age:33, luces:480,  partner:null, children:[], isAlive:true},
+  "Aldric Veloer": {age:62, luces:2200, partner:null, children:[], isAlive:true},
+  "Nela Mirende":  {age:40, luces:950,  partner:null, children:[], isAlive:true},
+  "Vael Lumaren":  {age:25, luces:280,  partner:null, children:[], isAlive:true},
+  "Tomas Mirende": {age:50, luces:680,  partner:null, children:[], isAlive:true},
+  "Lior Veloer":   {age:31, luces:560,  partner:null, children:[], isAlive:true},
+  "Siv Norven":    {age:28, luces:320,  partner:null, children:[], isAlive:true},
+  "Riven Lumaren": {age:27, luces:290,  partner:null, children:[], isAlive:true},
+};
+
+const VELORIA_CHILD_NAMES=[
+  "Liren","Vela","Sael","Lorin","Tiven","Kaen","Ruen","Alven","Sorel",
+  "Niven","Caela","Voren","Lumen","Thaen","Risel","Naeven","Coral","Iver","Sela",
+  "Orel","Tira","Varen","Lumis","Cairen","Sovin","Naele","Imara","Sehr","Veli","Auren",
+];
+
 // ── SHOPS ──────────────────────────────────────────────
 const SHOPS={
   "panaderia":{name:"Panadería Velin",emoji:"🥐",items:[
@@ -631,15 +670,15 @@ const SHOPS={
     {id:"semillas",      name:"Semillas Veloria",   emoji:"🌱",price:18,desc:"Tres variedades. Plantar antes del Mirenal.",effectLabel:"+Naturaleza XP ✦ Cadena",effects:{skill:"naturaleza",xp:20,chainUnlock:"chain_plant"}},
   ]},
   "restaurante":{name:"Restaurante de Nela",emoji:"🍽",items:[
-    {id:"mirenpez_veloer",name:"Mirenpez al Veloer",emoji:"🐟",price:35,desc:"La especialidad. El lago en un plato.",effectLabel:"+Hambre 60 +Diversión 20",effects:{need:"hambre",val:60,need2:"diversion",val2:20}},
+    {id:"mirenpez_veloer",type:"meal",name:"Mirenpez al Veloer",emoji:"🐟",price:35,desc:"La especialidad. El lago en un plato.",effectLabel:"+Hambre 60 +Diversión 20",effects:{need:"hambre",val:60,need2:"diversion",val2:20}},
     {id:"sopa_miren",    name:"Sopa del lago",     emoji:"🥣",price:22,desc:"Simple, honesta. Lo que necesita ser.",effectLabel:"+Hambre 45",effects:{need:"hambre",val:45}},
     {id:"cena_completa", name:"Cena completa",     emoji:"🍷",price:55,desc:"Entrada, plato y postre. Una hora lenta.",effectLabel:"+Hambre 70 +Social 15 +Diversión 25",effects:{need:"hambre",val:70,need2:"social",val2:15,need3:"diversion",val3:25}},
-    {id:"postre_veloria",name:"Postre Veloria",    emoji:"🍮",price:18,desc:"Solo para terminar bien.",effectLabel:"+Diversión 25 +Hambre 15",effects:{need:"diversion",val:25,need2:"hambre",val2:15}},
+    {id:"postre_veloria",type:"meal",name:"Postre Veloria",    emoji:"🍮",price:18,desc:"Solo para terminar bien.",effectLabel:"+Diversión 25 +Hambre 15",effects:{need:"diversion",val:25,need2:"hambre",val2:15}},
   ]},
   "cine":{name:"Cine Veloria",emoji:"🎬",items:[
     {id:"pelicula_drama",   name:"La Otra Orilla",     emoji:"🎭",price:25,desc:"Drama. Alguien vuelve a Veloria después de años. No reconoce nada. Reconoce todo.",effectLabel:"+Diversión 40 +Conocimiento 20",effects:{need:"diversion",val:40,skill:"conocimiento",xp:20}},
     {id:"pelicula_comedia", name:"Verano en el Casco", emoji:"😄",price:25,desc:"Comedia. Todo el mundo se conoce con todo el mundo.",effectLabel:"+Diversión 35 +Social 20",effects:{need:"diversion",val:35,need2:"social",val2:20}},
-    {id:"pelicula_misterio",name:"El Decimotercero",   emoji:"🔍",price:25,desc:"Documental. Sobre la firma tachada del Acta de la Llegada. La sala queda en silencio.",effectLabel:"+Diversión 30 +Conocimiento 40 ✦ Cadena",effects:{need:"diversion",val:30,skill:"conocimiento",xp:40,chainUnlock:"chain_ciro_13th"}},
+    {id:"pelicula_misterio",type:"experience",name:"El Decimotercero",   emoji:"🔍",price:25,desc:"Documental. Sobre la firma tachada del Acta de la Llegada. La sala queda en silencio.",effectLabel:"+Diversión 30 +Conocimiento 40 ✦ Cadena",effects:{need:"diversion",val:30,skill:"conocimiento",xp:40,chainUnlock:"chain_ciro_13th"}},
   ]},
   "bar":{name:"Bar Lumaven",emoji:"🍺",items:[
     {id:"cerveza_miren",name:"Cerveza del lago",emoji:"🍺",price:15,desc:"Elaborada con agua del Miren. Tiene un gusto sin nombre.",effectLabel:"+Social 20 +Diversión 10",effects:{need:"social",val:20,need2:"diversion",val2:10}},
@@ -654,8 +693,8 @@ const SHOP_TRIGGERS={
   "buy_book":"libreria","browse_books":"libreria",
   "merc_frescos":"mercado","merc_unico":"mercado",
   "eat_dish":"restaurante","cena":"restaurante",
-  "watch_show":"cine","cine_ver":"cine",
-  "bodega_contar":"bar","bodega_historia":"bar",
+  "cine_ver":"cine",
+  "bodega_historia":"bar",
 };
 
 // ── CHOICE EVENTS: qué acción genera elección ──────────
@@ -725,9 +764,199 @@ const CHOICE_EVENTS={
       {id:"lake_secret",     emoji:"🌿",label:"Recoger piedras del fondo",hint:"+Naturaleza XP",         effects:{skill:"naturaleza",xp:25,need2:"diversion",val2:15,narrative:"choice:lake_secret"}},
     ]
   }),
+  "watch_show":()=>({
+    title:"La función termina.",
+    subtitle:"Las luces vuelven lentamente. Algo quedó en el aire.",
+    options:[
+      {id:"theater_moved",   emoji:"🎭",label:"Te quedás en silencio",               hint:"Algo se movió adentro. +Arte XP",         effects:{need:"diversion",val:30,skill:"arte",xp:35,narrative:"choice:theater_moved"}},
+      {id:"theater_discuss", emoji:"💬",label:"Hablás con alguien del público",      hint:"+Social +Carisma",                        effects:{need:"social",val:30,skill:"carisma",xp:25,need2:"diversion",val2:15,narrative:"choice:theater_discuss"}},
+      {id:"theater_write",   emoji:"✏️",label:"Escribís algo en el camino de vuelta",hint:"Necesitabas sacarlo. +Arte XP",          effects:{skill:"arte",xp:50,need2:"diversion",val2:20,narrative:"choice:theater_write"}},
+    ]
+  }),
+  "bodega_contar":()=>({
+    title:"Esta noche contás tu historia.",
+    subtitle:"El bar tiene ese silencio que invita a hablar.",
+    options:[
+      {id:"tell_veloria",  emoji:"🏙",label:"Cómo llegaste a Veloria",              hint:"+Social. El bar escucha.",                 effects:{need:"social",val:35,skill:"carisma",xp:20,narrative:"choice:park_stranger"}},
+      {id:"tell_secret",   emoji:"🤫",label:"Algo que nunca le contaste a nadie",   hint:"El Lumaven lo sella.",                    effects:{need:"social",val:40,need2:"diversion",val2:15,narrative:"choice:lake_secret"}},
+      {id:"tell_nothing",  emoji:"🍺",label:"Al final no decís nada, solo escuchás",hint:"A veces escuchar es suficiente.",          effects:{need:"social",val:20,need2:"diversion",val2:20,narrative:"choice:park_sit"}},
+    ]
+  }),
 };
 
-// ── CHAIN ACTIONS: acciones que se desbloquean ──────────
+// ── NPC DIALOGUES: lo que le dicen al jugador y cómo responder ──
+const NPC_DIALOGUES={
+  "Aria Ven":[
+    {id:"aria_1",minFr:0,
+      npcSays:"El café está solo hoy. ¿Cómo te va adaptando a la Vega?",
+      options:[
+        {id:"honest",  emoji:"😌",label:"Con honestidad — todavía me estoy acomodando",  hint:"La verdad siempre cae bien.",  effects:{fr:10,need:"social",val:20,narrative:"npc:aria_honest"}},
+        {id:"positive",emoji:"☀️",label:"Bien — Veloria es más linda de lo que esperaba", hint:"+Amistad +Social",             effects:{fr:14,need:"social",val:25,narrative:"npc:aria_positive"}},
+        {id:"curious", emoji:"🔍",label:"Bien, aunque tengo preguntas sobre el barrio",   hint:"Aria conoce cada rincón.",     effects:{fr:12,need:"social",val:20,narrative:"npc:aria_curious"}},
+      ]},
+    {id:"aria_2",minFr:30,
+      npcSays:"Sé que venís seguido. No todos lo hacen. ¿Qué es lo que buscás cuando venís acá?",
+      options:[
+        {id:"coffee",  emoji:"☕",label:"El café. Está muy bueno, la verdad.",             hint:"Aria sonríe.",                effects:{fr:10,need:"social",val:15}},
+        {id:"company", emoji:"💬",label:"La compañía. El café es solo la excusa.",          hint:"Eso la toca de verdad.",      effects:{fr:22,need:"social",val:30,narrative:"npc:aria_company"}},
+        {id:"routine", emoji:"🔄",label:"Rutina. Necesito un lugar que sea siempre igual.", hint:"Lo entiende perfectamente.",  effects:{fr:16,need:"social",val:20,narrative:"npc:aria_routine"}},
+      ]},
+    {id:"aria_3",minFr:60,
+      npcSays:"Te voy a decir algo que no le digo a mucha gente. Yo no soy de acá tampoco. Vine hace seis años y nunca me fui.",
+      options:[
+        {id:"stay",    emoji:"🤔",label:"¿Por qué te quedaste?",                           hint:"+Amistad. Lore de Veloria.",   effects:{fr:22,skill:"conocimiento",xp:20,narrative:"npc:aria_stay"}},
+        {id:"similar", emoji:"🤝",label:"Yo también vine sin saber si me iba a quedar.",    hint:"Un momento de conexión real.", effects:{fr:28,need:"social",val:35,narrative:"npc:aria_similar"}},
+        {id:"veloria", emoji:"✨",label:"Veloria hace eso. No sé cómo, pero lo hace.",      hint:"Las dos miran el lago un segundo.",effects:{fr:18,need:"social",val:25}},
+      ]},
+  ],
+  "Soren Lume":[
+    {id:"soren_1",minFr:0,
+      npcSays:"¿Buscás algo específico o solo mirás?",
+      options:[
+        {id:"history",   emoji:"📜",label:"Algo sobre la historia de Veloria.",            hint:"+Conocimiento XP.",            effects:{fr:14,skill:"conocimiento",xp:25,narrative:"npc:soren_history"}},
+        {id:"browse",    emoji:"📚",label:"Solo mirar. A veces el libro correcto te encuentra.", hint:"Asiente como si fuera la respuesta correcta.",effects:{fr:10,need:"social",val:12,narrative:"npc:soren_browse"}},
+        {id:"recommend", emoji:"🤝",label:"¿Qué me recomendás vos?",                       hint:"La pregunta que más le gusta.", effects:{fr:18,need:"social",val:18,narrative:"npc:soren_recommend"}},
+      ]},
+    {id:"soren_2",minFr:35,
+      npcSays:"Notaste que hay un libro en la estantería de atrás sin precio. ¿Lo viste?",
+      options:[
+        {id:"ask",   emoji:"🔍",label:"Sí. ¿Por qué no tiene precio?",                    hint:"Lore. Soren se detiene antes de responder.",effects:{fr:20,skill:"conocimiento",xp:30,narrative:"npc:soren_book"}},
+        {id:"offer", emoji:"💰",label:"¿Cuánto querés por él?",                            hint:"La respuesta lo decepciona un poco.",       effects:{fr:6,need:"social",val:5,narrative:"npc:soren_nosell"}},
+        {id:"wait",  emoji:"✋",label:"Lo vi, pero asumí que era personal.",               hint:"Lo aprecia. Paciencia.",                    effects:{fr:14,need:"social",val:12}},
+      ]},
+    {id:"soren_3",minFr:62,
+      npcSays:"Hay algo sobre el decimotercero fundador que no sale en ningún libro publicado. Lo encontré en una nota que vino dentro de un libro de segunda mano.",
+      options:[
+        {id:"listen",   emoji:"👂",label:"Contame.",                                       hint:"Lore mayor. +Conocimiento XP.", effects:{fr:32,skill:"conocimiento",xp:65,chainUnlock:"chain_ciro_13th",narrative:"npc:soren_13th"}},
+        {id:"careful",  emoji:"🤫",label:"¿Estás seguro de que querés contármelo?",        hint:"Soren aprecia la discreción.",  effects:{fr:22,skill:"conocimiento",xp:30,narrative:"npc:soren_careful"}},
+        {id:"compare",  emoji:"🔍",label:"Sé un poco del tema. ¿Qué encontraste vos?",    hint:"+Conocimiento. Requiere haber investigado antes.",effects:{fr:26,skill:"conocimiento",xp:50,narrative:"npc:soren_compare"}},
+      ]},
+  ],
+  "Bren Orlen":[
+    {id:"bren_1",minFr:0,
+      npcSays:"No es frecuente que alguien venga a charlar sin un motivo médico. ¿Cómo estás durmiendo?",
+      options:[
+        {id:"dreams",emoji:"😴",label:"Bien, aunque con sueños raros desde que llegué.",   hint:"Bren anota algo.",             effects:{fr:12,need:"sueno",val:8,narrative:"npc:bren_dreams"}},
+        {id:"fine",  emoji:"🙂",label:"Bien. ¿Por qué lo preguntás?",                      hint:"Respuesta directa.",           effects:{fr:8,need:"social",val:10}},
+        {id:"bad",   emoji:"😓",label:"No muy bien. Mucho en la cabeza.",                  hint:"La honestidad siempre lo alcanza.",effects:{fr:18,need:"sueno",val:12,narrative:"npc:bren_honest"}},
+      ]},
+    {id:"bren_2",minFr:42,
+      npcSays:"Hay un objeto en mi escritorio que no sé qué es. Lo encontré entre las cosas de mi bisabuelo. Te lo muestro si prometés no preguntar de dónde viene.",
+      options:[
+        {id:"promise",emoji:"🤞",label:"Prometido. Mostrámelo.",                            hint:"Lore mayor. La llave del Otreven.",effects:{fr:28,skill:"conocimiento",xp:50,chainUnlock:"chain_ciro_13th",narrative:"npc:bren_key"}},
+        {id:"ask",   emoji:"🔍",label:"¿Por qué no sabés qué es?",                         hint:"+Conocimiento. Bren piensa.",  effects:{fr:16,skill:"conocimiento",xp:22,narrative:"npc:bren_why"}},
+        {id:"wait",  emoji:"✋",label:"Si preferís guardarlo, lo entiendo.",                hint:"Lo aprecia. La confianza crece lento.", effects:{fr:14,need:"social",val:10}},
+      ]},
+  ],
+  "Ciro Orlen":[
+    {id:"ciro_1",minFr:0,
+      npcSays:"La mayoría de las personas que vienen a preguntar sobre los fundadores hacen las mismas preguntas. Usted ya parece tener preguntas distintas.",
+      options:[
+        {id:"13th",   emoji:"🔍",label:"¿Qué sabe sobre el decimotercero?",                hint:"Lore. Ciro se pone serio.",    effects:{fr:18,skill:"conocimiento",xp:35,narrative:"npc:ciro_13th"}},
+        {id:"modest", emoji:"📚",label:"Solo soy curioso. ¿Qué suele preguntar la gente?", hint:"+Conocimiento general.",      effects:{fr:12,skill:"conocimiento",xp:18,narrative:"npc:ciro_common"}},
+        {id:"direct", emoji:"📜",label:"La firma del Acta de la Llegada. La tachada.",      hint:"Directo al punto.",           effects:{fr:22,skill:"conocimiento",xp:50,narrative:"npc:ciro_signature"}},
+      ]},
+    {id:"ciro_2",minFr:32,
+      npcSays:"Tengo tres documentos con las iniciales V.O., todos tachados con la misma tinta. Esa tinta no puede ser datada. Eso no debería ser posible.",
+      options:[
+        {id:"ink",   emoji:"🔬",label:"¿Por qué no puede ser datada?",                     hint:"+Conocimiento. Ciro nunca tuvo audiencia.",effects:{fr:22,skill:"conocimiento",xp:38,narrative:"npc:ciro_ink"}},
+        {id:"vo",    emoji:"🔍",label:"¿Quién era V.O.?",                                  hint:"La pregunta que Ciro no puede responder.",  effects:{fr:22,skill:"conocimiento",xp:42,narrative:"npc:ciro_vo"}},
+        {id:"theory",emoji:"💡",label:"Tal vez alguien no quiere que se sepa cuándo fue escrito.", hint:"Ciro deja de moverse.",effects:{fr:28,skill:"conocimiento",xp:55,narrative:"npc:ciro_theory"}},
+      ]},
+  ],
+  "Oren Mirende":[
+    {id:"oren_1",minFr:0,
+      npcSays:"Llevás unos días en Veloria. ¿Ya fuiste al lago?",
+      options:[
+        {id:"yes",  emoji:"🌊",label:"Sí. Es diferente a lo que esperaba.",               hint:"Oren asiente como si lo supiera.",effects:{fr:14,need:"social",val:18,narrative:"npc:oren_yes"}},
+        {id:"no",   emoji:"🤔",label:"Todavía no. ¿Vale la pena?",                        hint:"La respuesta tarda.",            effects:{fr:10,need:"social",val:12,narrative:"npc:oren_no"}},
+        {id:"night",emoji:"🌙",label:"De noche sí. Vi algo en el agua.",                  hint:"Lore. Oren te mira diferente.",  effects:{fr:28,skill:"naturaleza",xp:25,narrative:"npc:oren_night"}},
+      ]},
+    {id:"oren_2",minFr:35,
+      npcSays:"Mi viejo me dijo algo antes de morir: 'El lago sabe quién sos. No quién pretendés ser.' Nunca entendí bien qué quiso decir.",
+      options:[
+        {id:"think",  emoji:"💭",label:"Quizás el lago te ve sin defensas.",               hint:"+Social. Charla larga.",         effects:{fr:22,need:"social",val:25,narrative:"npc:oren_lake"}},
+        {id:"father", emoji:"🔍",label:"¿Y tu viejo cruzó el lago alguna vez?",            hint:"Lore. Oren tarda en responder.", effects:{fr:28,skill:"conocimiento",xp:35,narrative:"npc:oren_father"}},
+        {id:"accept", emoji:"🌊",label:"A veces las cosas no necesitan explicación.",       hint:"Lo entendés.",                  effects:{fr:16,need:"social",val:18}},
+      ]},
+  ],
+  "Elowen Sorvei":[
+    {id:"elowen_1",minFr:0,
+      npcSays:"Estoy escribiendo algo. Todavía no sé si es una novela o un documento histórico. Probablemente las dos cosas.",
+      options:[
+        {id:"ask",    emoji:"📖",label:"¿Sobre qué?",                                      hint:"+Conocimiento. Ella espera la pregunta.",effects:{fr:14,skill:"conocimiento",xp:18,narrative:"npc:elowen_topic"}},
+        {id:"relate", emoji:"💭",label:"A veces las dos cosas son lo mismo.",               hint:"Una idea que no tuvo antes.",   effects:{fr:18,need:"social",val:18,narrative:"npc:elowen_both"}},
+        {id:"offer",  emoji:"👁",label:"¿Necesitás que alguien lo lea?",                   hint:"La oferta más valiosa.",         effects:{fr:20,skill:"conocimiento",xp:22,narrative:"npc:elowen_offer"}},
+      ]},
+    {id:"elowen_2",minFr:50,
+      npcSays:"El capítulo que más me cuesta es el del cruce. Cómo describir algo que nadie vio y del que todos hablan.",
+      options:[
+        {id:"what",   emoji:"🔍",label:"¿Qué cruce?",                                      hint:"Lore mayor.",                   effects:{fr:22,skill:"conocimiento",xp:40,narrative:"npc:elowen_crossing"}},
+        {id:"craft",  emoji:"✏️",label:"Quizás describís lo que quedó, no lo que fue.",    hint:"+Arte XP. Ella anota eso.",     effects:{fr:28,skill:"arte",xp:35,narrative:"npc:elowen_craft"}},
+        {id:"confirm",emoji:"📜",label:"¿Estás escribiendo sobre el decimotercero?",        hint:"Lore. Activa cadena.",           effects:{fr:32,skill:"conocimiento",xp:55,chainUnlock:"chain_ciro_13th",narrative:"npc:elowen_confirm"}},
+      ]},
+  ],
+  "Nela Mirende":[
+    {id:"nela_1",minFr:0,
+      npcSays:"Hoy cocinamos Mirenpez. ¿Sabés de dónde vienen los que uso?",
+      options:[
+        {id:"oren",   emoji:"⛵",label:"¿Del lago? ¿Los trae Oren?",                       hint:"Conexión de NPCs.",             effects:{fr:12,need:"social",val:14,narrative:"npc:nela_oren"}},
+        {id:"guess",  emoji:"🌊",label:"Del Lago Miren, supongo.",                          hint:"Correcto, pero simple.",        effects:{fr:9,need:"social",val:10}},
+        {id:"curious",emoji:"👂",label:"No sé. Contame.",                                  hint:"La respuesta que más le gusta.",effects:{fr:16,need:"social",val:18,narrative:"npc:nela_story"}},
+      ]},
+    {id:"nela_2",minFr:40,
+      npcSays:"Hay una receta que no está en el menú. Solo la hago cuando veo que alguien la necesita. ¿Querés probarla?",
+      options:[
+        {id:"yes",    emoji:"🍽",label:"Sí, sin dudarlo.",                                  hint:"+Hambre máximo. Experiencia única.",effects:{fr:28,need:"hambre",val:75,need2:"diversion",val2:35,narrative:"npc:nela_secret"}},
+        {id:"ask",    emoji:"🤔",label:"¿Cómo sabés cuándo alguien la necesita?",           hint:"+Social. Respuesta inesperada.", effects:{fr:22,need:"social",val:25,narrative:"npc:nela_how"}},
+        {id:"menu",   emoji:"📜",label:"Prefiero la carta de hoy.",                         hint:"Nela sonríe y no insiste.",      effects:{fr:8,need:"social",val:8}},
+      ]},
+  ],
+};
+
+// Narrativas para respuestas de NPC
+const N_NPC={
+  "npc:aria_honest":   ["Aria asiente despacio. 'La Vega tarda. No es un barrio que se entrega rápido.' Hay algo en cómo lo dice que suena a experiencia propia."],
+  "npc:aria_positive": ["Le gusta escucharlo. 'Eso le digo a todos los que vienen: dale dos semanas. Después no te vas.'"],
+  "npc:aria_curious":  ["'Preguntá lo que quieras', dice. 'Si no lo sé yo, lo sabe alguien en este café.'"],
+  "npc:aria_company":  ["Aria deja la taza en la barra. No dice nada. Pero cuando te vas, el café está en la cuenta de la casa."],
+  "npc:aria_routine":  ["'Eso entiendo perfectamente', dice. 'Por eso abrí un café y no una librería.'"],
+  "npc:aria_stay":     ["'Me quedé porque el lago me miró una vez y supe que ya no había apuro.' Hace una pausa. 'Sonará raro.' No suena raro."],
+  "npc:aria_similar":  ["'¿Y?' pregunta. 'Ya sabés si te quedás.' No es una pregunta."],
+  "npc:soren_history": ["Soren desaparece detrás de una estantería. Vuelve con tres libros. 'Por dónde querés empezar.'"],
+  "npc:soren_browse":  ["'La mayoría dice eso', responde. 'Pero los que dicen eso terminan comprando el libro que más necesitaban y no sabían.'"],
+  "npc:soren_recommend":["Soren se detiene. Nadie le pregunta eso. Tarda un momento. Después saca un libro fino sin título en el lomo."],
+  "npc:soren_book":    ["'Porque si le pongo precio, alguien lo compra. Y ese libro no es para cualquiera.' Pausa. 'Todavía no sé si es para vos.'"],
+  "npc:soren_nosell":  ["'No está en venta.' No hay más explicación."],
+  "npc:soren_13th":    ["Soren cierra la puerta de la librería. Saca una hoja doblada de un libro sin título. Dice: 'V. Orlen firmó voluntariamente. Y también se fue voluntariamente. La diferencia es importante.'"],
+  "npc:soren_careful": ["'Sí.' No duda. 'Porque si no lo cuento, desaparece conmigo.'"],
+  "npc:soren_compare": ["'¿Sabés algo del tema?' Soren te mira diferente a partir de ese momento. La conversación que sigue dura una hora."],
+  "npc:bren_dreams":   ["'Todos sueñan raro al principio. Veloria tiene algo.' No da más detalles. Escribe algo en su cuaderno."],
+  "npc:bren_honest":   ["'Bien.' Bren sirve dos tazas de té sin preguntar. 'El Té Miren ayuda. No sé por qué, pero ayuda.'"],
+  "npc:bren_key":      ["Bren abre un cajón. Saca algo pequeño, metálico, de forma imposible de describir con precisión. 'Era de mi bisabuelo. No sé qué abre.'"],
+  "npc:bren_why":      ["'Porque no se parece a nada que hayamos fabricado en Veloria. Ni en Otherwhen, diría.' Lo deja sobre el escritorio entre los dos."],
+  "npc:ciro_13th":     ["Ciro baja la voz aunque están solos. 'Sé que su firma fue tachada la misma noche de la Llegada. Lo que no sé es quién lo hizo ni por qué la tinta no envejece.'"],
+  "npc:ciro_common":   ["'Preguntan cuántos fundadores hubo. Doce, les digo. Y después espero que me pregunten por qué en el Acta hay trece líneas.'"],
+  "npc:ciro_signature":["Ciro deja de respirar un segundo. 'Muy poca gente llega a esa pregunta sola.'"],
+  "npc:ciro_ink":      ["'Eso es lo que me quita el sueño', dice. 'La tinta existe. Se puede analizar. Pero todos los análisis dicen que no tiene edad. Como si no hubiera pasado el tiempo sobre ella.'"],
+  "npc:ciro_vo":       ["'No lo sé. Y llevo doce años buscándolo.' Se para. 'Lo que sé es que su familia sigue en Veloria. Y que algunos de ellos tampoco lo saben.'"],
+  "npc:ciro_theory":   ["Ciro se queda quieto. 'Eso es exactamente lo que creo. Pero decirlo en voz alta asusta.'"],
+  "npc:oren_yes":      ["'¿Y bien?' No pregunta qué viste. Solo eso. Como si el resto ya lo supiera."],
+  "npc:oren_no":       ["Oren tarda. 'Andá de noche. La primera vez que fui de noche tenía diecisiete años. No lo olvidé más.' No dice qué vio."],
+  "npc:oren_night":    ["Oren te mira de otra manera. 'Pocos lo ven la primera vez.' Pausa larga. 'Menos aún la segunda.'"],
+  "npc:oren_lake":     ["'Puede ser eso', dice Oren. 'O puede ser que el lago simplemente sabe más que nosotros.'"],
+  "npc:oren_father":   ["'Cruzó una vez.' Larga pausa. 'Volvió. Pero no me dijo nunca qué había del otro lado. Solo dijo que había algo.'"],
+  "npc:elowen_topic":  ["'El Otreven. Lo que está del otro lado del lago. Y lo que hubo aquí antes de que nadie lo llamara Veloria.'"],
+  "npc:elowen_both":   ["Se detiene. Saca su libreta. 'Eso lo pongo en la introducción.'"],
+  "npc:elowen_offer":  ["Elowen cierra la libreta despacio. 'Sí. Pero solo si después me decís qué sentiste al leerlo, no qué pensaste.'"],
+  "npc:elowen_crossing":["'El cruce del decimotercero fundador. El que se fue voluntariamente. Lo que no sé es adónde.'"],
+  "npc:elowen_craft":  ["Elowen escribe eso exactamente en su libreta. 'Gracias. Llevaba semanas sin saber cómo empezarlo.'"],
+  "npc:elowen_confirm": ["Un silencio largo. 'Sí. Y cuando termine, no sé si voy a poder publicarlo.'"],
+  "npc:nela_oren":     ["'Exacto. Oren los trae cada mañana. Nunca le pregunté cómo los elige. Creo que los elige el lago.'"],
+  "npc:nela_story":    ["'Del lago, sí. Pero no de cualquier parte del lago. Del sector que nadie pesca. Oren lo llama el fondo del olvido. No sé por qué.'"],
+  "npc:nela_secret":   ["Nela cocina en silencio durante veinte minutos. El resultado no tiene nombre en el menú. Al comerlo, algo en el pecho se afloja."],
+  "npc:nela_how":      ["'No sé cómo saberlo', dice Nela. 'Simplemente... se nota. Como cuando el lago está quieto de más.'"],
+};
 const CHAIN_ACTIONS={
   "chain_cook_mirenpez":{
     emoji:"🍳",label:"Cocinar el Mirenpez",
@@ -754,7 +983,278 @@ const CHAIN_ACTIONS={
     effects:{skill:"conocimiento",xp:80,narrative:"choice:research_13th"},
     npc:"Ciro Orlen",
   },
+  "chain_objeto_misterioso":{
+    emoji:"🧿",label:"Investigar el objeto sin nombre",
+    hint:"El objeto tiene algo que no tiene ningún otro",
+    requiredPlace:null,
+    action:{id:"chain_objeto_misterioso",label:"Investigar el objeto",emoji:"🧿",time:1.5},
+    narrative:"choice:research_13th",
+    effects:{skill:"conocimiento",xp:50,chainUnlock:"chain_ciro_13th"},
+  },
+  "chain_tela":{
+    emoji:"🧵",label:"Crear algo con la tela",
+    hint:"La tela del lago espera en el Estudio de Arte",
+    requiredPlace:"Estudio de Arte",
+    action:{id:"chain_tela",label:"Crear algo con la tela",emoji:"🎨",time:2},
+    narrative:"choice:theater_write",
+    effects:{skill:"arte",xp:85,need:"diversion",val:25},
+  },
+  "chain_nela_recipe":{
+    emoji:"🍳",label:"Aprender la receta de Nela",
+    hint:"Nela ofreció enseñarte su receta secreta",
+    requiredPlace:"Restaurante de Nela",
+    action:{id:"chain_nela_recipe",label:"Aprender la receta",emoji:"🍳",time:2},
+    narrative:"npc:nela_secret",
+    effects:{skill:"cocina",xp:100,need:"hambre",val:60,need2:"diversion",val2:40},
+  },
 };
+
+// ── ITEM USE EFFECTS: qué hace cada item del inventario ──
+const ITEM_USE_EFFECTS={
+  "libro_veloria":  {skill:"conocimiento",xp:80, consume:true, narrative:"read:libro_veloria"},
+  "libro_pesca":    {skill:"pesca",       xp:60, consume:true, narrative:"read:libro_pesca"},
+  "libro_botanica": {skill:"naturaleza",  xp:70, consume:true, narrative:"read:libro_botanica"},
+  "libro_recetas":  {skill:"cocina",      xp:60, consume:true, narrative:"read:libro_recetas"},
+  "novela_miren":   {skill:"conocimiento",xp:20, need:"diversion",val:30, consume:true, narrative:"read:novela_miren"},
+  "compendio_13":   {skill:"conocimiento",xp:120,consume:true, chainUnlock:"chain_ciro_13th", narrative:"read:compendio_13"},
+  "pan_comun":      {need:"hambre",val:25, consume:true},
+  "pan_miren":      {need:"hambre",val:35, skill:"naturaleza",xp:10, consume:true},
+  "facturas":       {need:"hambre",val:30, need2:"diversion",val2:5, consume:true},
+  "torta_velin":    {need:"hambre",val:50, need2:"diversion",val2:15, consume:true},
+  "mirenpez_fresco":{chainUnlock:"chain_cook_mirenpez", consume:true, narrative:"item:mirenpez_fresco"},
+  "cerveza_miren":  {need:"social",val:20, need2:"diversion",val2:10, consume:true},
+  "vino_veloer":    {need:"social",val:15, need2:"diversion",val2:20, consume:true},
+  "te_miren":       {need:"diversion",val:15, need2:"sueno",val2:10, consume:true},
+  "objeto_unico":   {chainUnlock:"chain_objeto_misterioso", consume:true, narrative:"use:objeto_unico"},
+  "tela_miren":     {chainUnlock:"chain_tela", consume:false, narrative:"use:tela_miren"},
+  "especias":       {skill:"cocina",xp:25, consume:true},
+  "ingredientes":   {skill:"cocina",xp:10, consume:true},
+  "semillas":       {chainUnlock:"chain_plant", consume:true, narrative:"choice:chain_plant"},
+};
+
+// ── NPC GIFT PREFERENCES ────────────────────────────────
+const NPC_GIFT_PREFS={
+  "Aria Ven":      {loved:["torta_velin","flores","pan_miren"],       liked:["facturas","te_miren","cerveza_miren"],  neutral:["pan_comun"]},
+  "Soren Lume":    {loved:["compendio_13","novela_miren"],            liked:["libro_veloria","libro_botanica","libro_recetas","libro_pesca"], neutral:["tela_miren"]},
+  "Oren Mirende":  {loved:["libro_pesca"],                            liked:["cerveza_miren","te_miren"],             neutral:["pan_comun"]},
+  "Bren Orlen":    {loved:["semillas","libro_botanica"],              liked:["te_miren","libro_veloria"],             neutral:["pan_comun"]},
+  "Nela Mirende":  {loved:["libro_recetas","especias"],               liked:["ingredientes","tela_miren"],            neutral:["semillas"]},
+  "Elowen Sorvei": {loved:["novela_miren","compendio_13"],            liked:["libro_veloria","tela_miren"],           neutral:["te_miren"]},
+  "Ciro Orlen":    {loved:["compendio_13","libro_veloria"],           liked:["objeto_unico"],                         neutral:["te_miren"]},
+  "Vael Lumaren":  {loved:["vino_veloer","cerveza_miren"],            liked:["tela_miren","libro_recetas"],           neutral:["te_miren"]},
+  "Tomas Mirende": {loved:["libro_pesca","cerveza_miren"],            liked:["te_miren"],                            neutral:["pan_comun"]},
+  "Aldric Veloer": {loved:["libro_veloria","compendio_13"],           liked:["vino_veloer"],                         neutral:["te_miren"]},
+};
+
+// Combos especiales: NPC + item → efectos extra
+const SPECIAL_GIFT_EFFECTS={
+  "Soren Lume:compendio_13":  {chainUnlock:"chain_ciro_13th", repBonus:5},
+  "Ciro Orlen:compendio_13":  {chainUnlock:"chain_ciro_13th", repBonus:5},
+  "Nela Mirende:libro_recetas":{chainUnlock:"chain_nela_recipe", repBonus:4},
+  "Oren Mirende:libro_pesca": {repBonus:5},
+};
+
+// Narrativas de regalos
+const N_GIFTS={
+  "gift:neutral":  ["Lo recibe con una sonrisa educada. 'Gracias', dice. Y lo guarda."],
+  "gift:liked":    ["Sus ojos se iluminan antes de que diga nada. 'No tenías que hacerlo.' Pero claramente está contento/a.","Lo recibe con ambas manos. Pequeño gesto. Importa."],
+  "gift:loved":    ["Por un momento no dice nada. Solo mira el regalo. Después te mira a vos. 'Esto... gracias. De verdad.'","Hay un silencio antes de la respuesta. El tipo de silencio que vale más que las palabras."],
+  "gift:disliked": ["Hace el mejor esfuerzo del mundo. 'Qué detalle', dice. Pero la incomodidad no se puede esconder del todo."],
+  "gift:aria_torta_velin": ["Aria mira la torta. Después te mira a vos. 'Velin solo hace estas para alguien que le importa al que las encarga.' Pausa larga. 'Gracias.'"],
+  "gift:soren_compendio_13": ["Soren lo abre de inmediato. Lee tres páginas en silencio. Cierra el libro. 'Hay algo en la página 31 que no había visto antes. Necesito releer todo.'"],
+  "gift:soren_novela_miren": ["'La leí tres veces', dice Soren. 'Cada vez entiendo algo distinto.' Pausa. 'Que me la des vos tiene algo que me parece importante.'"],
+  "gift:oren_libro_pesca": ["Oren lo mira. Lo da vuelta. Lo mira de nuevo. 'Este libro lo escribí yo.' Silencio largo. '¿Dónde lo conseguiste?'"],
+  "gift:nela_libro_recetas": ["Nela lo hojea despacio. Se detiene en una página. 'Esta receta... mi abuela la hacía así.' Cierra el libro con cuidado. 'Gracias. No tenés idea de cuánto.'"],
+  "gift:nela_especias": ["'¿Del sur?' pregunta, oliendo las especias. 'Estas son las del puesto especial del Casco.' Te mira. 'Ya sabés más de Veloria de lo que creés.'"],
+  "gift:bren_semillas": ["Bren las examina una por una. 'Veloria original', dice. 'Estas no se consiguen fácil.' Las guarda con más cuidado del habitual."],
+  "gift:ciro_compendio_13": ["Ciro lo abre y toca la última página — la en blanco — con la punta del dedo. 'Alguien escribió acá y arrancó la hoja.' Pausa. 'O se la arrancaron.'"],
+  "gift:elowen_novela_miren": ["Elowen la sostiene con las dos manos. 'Esta novela es la razón por la que empecé a escribir', dice. 'No me preguntés por qué no la tenía.'"],
+  "gift:vael_cerveza_miren": ["Vael destapa la cerveza, toma un sorbo, y dice: 'Si alguna vez necesitás que toque en algún lado, avisame.' Lo dice en serio."],
+  "gift:ciro_libro_veloria": ["Ciro lo abre en la página del índice. 'Hay una línea acá que siempre me pareció rara', dice. Te la señala: *Completo en trece volúmenes.*"],
+  // Book readings
+  "read:libro_veloria":  ["El libro empieza con los doce fundadores. En la última página del tomo I, una nota a mano: 'El que falta sigue contando.' Sin firma.","Los registros van muy atrás. En el índice: *Completo en trece volúmenes.* En ningún lado se menciona un tomo XIII."],
+  "read:libro_pesca":    ["Lo escribió Oren. En el margen de la última página, una nota: 'Solo pesca de noche quien ya no tiene miedo.'","Un tratado que lee como poesía. El dibujo del lago en la página 23 no se parece al lago real, pero sí a lo que sentís cuando estás en él."],
+  "read:libro_botanica": ["Las plantas de Otherwhen tienen nombres en Twinés. Capítulo sobre el Lago Miren: 'La flora del fondo, cuando existe, no ha sido catalogada.'"],
+  "read:libro_recetas":  ["La receta de la sopa del lago tiene una variante marcada con asterisco: '*Solo funciona si el Mirenpez fue devuelto antes.*'","Recetas de otra época. Algunas usan ingredientes que ya no se consiguen — salvo en el puesto especial del Casco."],
+  "read:novela_miren":   ["En el penúltimo capítulo: 'El lago no me reconoció. Yo sí lo reconocí a él. Creo que eso es lo importante.'"],
+  "read:compendio_13":   ["47 páginas. La última arrancada. La página 46, última frase completa: 'V.O. no cruzó por accidente. Cruzó sabiendo que no había vuelta para todos.'"],
+  "use:objeto_unico":    ["El objeto no tiene nombre porque no corresponde a nada que se haya fabricado en Veloria. Ni probablemente en Otherwhen. Sostenerlo hace que el tiempo se sienta un poco distinto."],
+  "use:tela_miren":      ["La tela entre tus manos tiene una textura que no se parece a nada. Tejida con fibra de Mirenpez. Solo existe dentro del lago — y ahora también acá."],
+  "item:mirenpez_fresco":["El Mirenpez te mira desde tus manos. Está vivo todavía. Hay dos opciones obvias."],
+};
+
+// ── REPUTACIÓN ───────────────────────────────────────────
+const REPUTATION_LEVELS=[
+  {min:0,  label:"Recién llegado/a",   color:"#B8907A", desc:"Veloria todavía no sabe quién sos."},
+  {min:12, label:"Cara conocida",      color:"#7AB55C", desc:"En La Vega ya te reconocen."},
+  {min:28, label:"Vecino/a de Veloria",color:"#F5A623", desc:"Los Twins te saludan por la calle."},
+  {min:48, label:"Figura del barrio",  color:"#4AB5B5", desc:"Tu nombre circula entre los Twins."},
+  {min:68, label:"Alma de Veloria",    color:"#A67BD6", desc:"Veloria te considera uno de los suyos."},
+  {min:88, label:"Leyenda de Veloria", color:"#E87B9E", desc:"Tu historia ya es parte de la ciudad."},
+];
+function getRepLevel(rep){return [...REPUTATION_LEVELS].reverse().find(l=>rep>=l.min)||REPUTATION_LEVELS[0];}
+
+// ── TEXTOS CON ESTADO ────────────────────────────────────
+const N_STATE={
+  "fish:dawn":["El lago a esta hora tiene una quietud diferente. La niebla baja sobre el agua. El anzuelo cae sin ruido.","Pescar al amanecer en el Miren es otra cosa. La ciudad no despertó todavía. El lago tampoco."],
+  "fish:night":["Pescar de noche en el Miren tiene sus reglas no escritas. No se habla. No se usa linterna. Se escucha.","A esta hora el lago brilla desde adentro. No es el reflejo de nada. Oren dice que es el lago pensando."],
+  "fish:expert":["El anzuelo cae exactamente donde querés. Ya no tenés que pensar en eso. Tu cuerpo sabe lo que el lago necesita escuchar.","Oren te miraría diferente si te viera hoy. Probablemente con aprobación."],
+  "fish:tired":["El cansancio en los brazos hace que todo tarde más. El lago no perdona la distracción. Pero tampoco apura."],
+  "fish:hungry":["El estómago ruge mientras esperás. El Mirenpez tarda. Ya estás pensando en cómo lo vas a cocinar antes de sacarlo."],
+  "cook:expert":["La cocina tiene sus ritmos y vos ya los conocés. Los tiempos, los olores, cuándo agregar qué. Sale bien porque tiene que salir bien.","Es casi meditativo. Cada acción en su lugar."],
+  "cook:tired":["Cocinás con los ojos medio cerrados. Sale suficientemente bien. A veces suficiente es todo lo que podés dar."],
+  "cook:night":["Cocinar a esta hora tiene algo de ritual nocturno. La cocina en silencio. El barrio dormido. El olor a comida casera en un apartamento solo."],
+  "cook:hungry":["Cocinás con demasiada hambre. Todo huele demasiado bien. Tardás menos de lo que deberías y comés directamente de la sartén."],
+  "sit_lake:night":["De noche el Lago Miren no refleja la luna. Tiene su propia luz, más profunda. Un sonido muy suave, sin origen claro. Como si algo respirara debajo.","A esta hora, el lago hace algo que no hace de día. Oren nunca lo explica del todo bien."],
+  "sit_lake:dawn":["El lago al amanecer. La luz que toca el agua primero es distinta a la que llega después. Los velistas lo llaman el Veloer del lago.","A esta hora el lago está solo. No hay pescadores todavía."],
+  "sit_lake:expert":["Tu nivel de Naturaleza hace que notes cosas que antes no. Los patrones en el agua. Los colores que cambian."],
+  "walk_park:morning":["El parque de mañana. Gente con mate, alguien corriendo. Veloria funcionando.","Mañana en Los Prados. El pasto tiene rocío. Hay algo agradable en pisar algo que nadie pisó antes."],
+  "walk_park:night":["El parque de noche es completamente otro lugar. Los bancos libres. Las luces hacen sombras largas que no existían de día."],
+  "walk_park:expert":["Tu nivel de Naturaleza hace que notes lo que otros no ven: las especies de pájaros, qué flor está en qué estado."],
+  "dormir:exhausted":["Te dormís antes de que la cabeza toque la almohada. Cuando abrís los ojos, parece que pasaron años.","El cuerpo no pidió permiso. Se apagó. Lo siguiente que sabés es la mañana."],
+  "dormir:dawn":["Dormirse cuando empieza a entrar la luz es una forma rara de rendirse."],
+  "dormir:night":["A esta hora corresponde dormir. Lo sabés. El cuerpo lo sabe."],
+  "research:expert":["Tu nivel de Conocimiento hace que los textos conecten de maneras que antes no veías. Lo que se dice al margen.","Llevás tiempo en la biblioteca. Ya sabés dónde está todo. Incluso lo que Ciro no catalogó."],
+  "research:night":["La biblioteca de noche. Ciro ya se fue. Las luces de emergencia no iluminan las estanterías del fondo. Vas igual."],
+  "musica_tocar:expert":["Las notas salen donde querés. Eso no siempre pasa.","Practicar cuando el instrumento ya responde tiene una calidad distinta. No es entrenamiento. Es otra cosa."],
+  "musica_tocar:night":["Tocar de noche cambia algo en cómo suena. O en cómo lo escuchás."],
+  "azotea2_estrellas:expert":["Tu nivel de Conocimiento hace que el cielo tenga sentido. Los patrones. Los ciclos. Otherwhen tiene un cielo que no coincide con nada conocido."],
+  "azotea2_estrellas:night":["El Observatorio de noche es lo que tiene que ser. Desde acá, en noches claras, el Lago Miren brilla desde abajo."],
+};
+
+// ── EVENTOS DIARIOS ──────────────────────────────────────
+const DAILY_EVENTS=[
+  {id:"bread_smell",   w:4, text:"Esta mañana el olor a pan de la Panadería Velin sube hasta el tercer piso. Velin debe haber empezado antes que de costumbre."},
+  {id:"plaza_music",   w:3, text:"Hay un músico en la Plaza del Veloer. Nadie lo contrató. Nadie sabe quién es. Toca algo que no existe en ningún repertorio conocido."},
+  {id:"lake_fog",      w:2, text:"Hay niebla sobre el Lago Miren. Oren canceló la salida. Dice que cuando hay niebla, el lago prefiere estar solo.",
+    unlock:{id:"sit_lake",emoji:"🌫",label:"Ir al lago con niebla",place:"Lago Miren"}},
+  {id:"rain_veloria",  w:3, text:"Llueve en Veloria. La ciudad huele diferente. Los adoquines de El Casco brillan. La gente camina más rápido pero parece más tranquila."},
+  {id:"note_door",     w:1, text:"Hay una nota doblada bajo la puerta. Sin firma. Solo dice: 'El lago recuerda lo que olvidaste.'",
+    choice:{title:"Una nota sin firma.",subtitle:"Apareció bajo la puerta. No hay letra que reconozcas.",options:[
+      {id:"note_keep",   emoji:"🔍",label:"Guardarla y buscar quién la mandó",   hint:"+Conocimiento",   effects:{skill:"conocimiento",xp:20,narrative:"choice:research_13th"}},
+      {id:"note_ignore", emoji:"🗑",label:"Tirarla. Probablemente nada.",         hint:"-Diversión",      effects:{need:"diversion",val:-5}},
+      {id:"note_accept", emoji:"📝",label:"Leerla tres veces y seguir el día.",  hint:"+Diversión",      effects:{need:"diversion",val:12}},
+    ]}},
+  {id:"quiet_morning", w:3, text:"Esta mañana Veloria está inusualmente silenciosa. Como si el barrio entero decidió dormir hasta tarde."},
+  {id:"neighbor_cook", w:3, text:"El vecino de arriba está cocinando algo que huele muy bien. No sabés su nombre todavía. La vida en La Vega es así."},
+  {id:"soren_window",  w:2, text:"Al pasar por la Librería, viste a Soren leyendo de pie en la vidriera. Te vio. No saludó. Pero dobló la esquina de la página. Algo que nunca hace."},
+  {id:"lake_glow",     w:1, text:"Alguien jura que vio una luz en el fondo del Lago Miren a las 3 de la mañana. No es la primera vez que alguien lo dice.",
+    unlock:{id:"sit_lake",emoji:"🌊",label:"Ir al lago a ver",place:"Lago Miren"}},
+  {id:"graffiti_new",  w:1, text:"Hay graffiti nuevo en el callejón detrás de la Librería. Dice: 'Doce no alcanzaba.' Nadie lo vio aparecer.",chainUnlock:"chain_ciro_13th"},
+  {id:"dream_lake",    w:2, text:"Soñaste con el lago. En el sueño el agua era completamente transparente. Había una puerta en el fondo. Estaba abierta.", effects:{skill:"conocimiento",xp:10}},
+  {id:"aria_wave",     w:2, text:"Aria te saludó desde la ventana del café antes de que pudieras entrar. Tiene memoria para las caras. Para todo, parece."},
+  {id:"festival_hint", w:1, text:"Empezaron a colgar luces en la Plaza del Veloer. La Velorfesta se acerca. Todo Veloria cambia cuando hay fiesta."},
+  {id:"vael_street",   w:2, text:"Vael estaba tocando en la calle esta tarde. Sin micrófono, sin caso. 'A veces la música prefiere el aire libre', dijo."},
+  {id:"oren_missing",  w:1, text:"El muelle está vacío. Oren no salió hoy. La barca está atada. Nunca falta sin avisar.",
+    unlock:{id:"chat_npc",emoji:"⛵",label:"Ir a buscar a Oren",place:"Puerto Viejo",npc:"Oren Mirende"}},
+  {id:"cine_cartel",   w:1, text:"El Cine Veloria tiene cartel nuevo: 'Función especial — esta noche únicamente'. No dice qué película.",
+    unlock:{id:"cine_ver",emoji:"🎬",label:"Ir a la función especial",place:"Cine Veloria"}},
+  {id:"wind_change",   w:1, text:"El viento cambió hoy. Bren una vez dijo que eso significa algo en Veloria. No te explicó qué."},
+  {id:"new_bird",      w:2, text:"Un pájaro que no reconocés se posó en la ventana. Te miró tres segundos antes de irse. No sos de los que buscan señales. Pero igual lo recordás todo el día."},
+  {id:"market_rare",   w:1, text:"En el Mercado del Casco apareció un puesto que nunca viste. El vendedor tiene objetos sin nombre. Aparece cada tanto.",
+    unlock:{id:"merc_unico",emoji:"🧿",label:"Ver el puesto especial",place:"El Mercado del Casco"}},
+  {id:"bren_closed",   w:1, text:"Bren dejó una nota en el consultorio: 'Hoy no. Fui al lago.' Primera vez en diez años que cierra sin avisar."},
+];
+
+function pickDailyEvent(shownIds=[]){
+  const pool=DAILY_EVENTS.filter(e=>!shownIds.includes(e.id));
+  if(!pool.length)return null;
+  const total=pool.reduce((s,e)=>s+e.w,0);
+  let r=Math.random()*total;
+  for(const e of pool){r-=e.w;if(r<=0)return e;}
+  return pool[pool.length-1];
+}
+
+// ── MEMORIA DE NPCs ──────────────────────────────────────
+const NPC_MEMORY={
+  "Aria Ven":{
+    visit:[
+      {count:3,  says:"Ya sos un habitual. El tercer día se nota."},
+      {count:7,  says:"Tengo una mesa que ya pienso como tuya."},
+      {count:15, says:"Llevás más semanas viniendo que mucha gente del barrio."},
+    ],
+    absence:[
+      {days:3, says:"Hace días que no aparecías. ¿Todo bien?"},
+      {days:7, says:"Me empezaba a preocupar, no te voy a mentir."},
+    ]},
+  "Soren Lume":{
+    visit:[
+      {count:3,  says:"Empezás a conocer la librería mejor que yo."},
+      {count:8,  says:"Ya sé lo que buscás antes de que lo pidas."},
+      {count:14, says:"Sos el cliente con más horas en la librería en años."},
+    ],
+    absence:[
+      {days:5, says:"La librería se sintió rara sin que nadie hiciera preguntas complicadas."},
+    ]},
+  "Oren Mirende":{
+    visit:[
+      {count:4, says:"Pocas personas vuelven tantas veces. Eso me gusta."},
+      {count:9, says:"Ya sos pescador de Veloria. El lago ya sabe tu nombre."},
+    ],
+    absence:[
+      {days:4, says:"Pensé que el lago te había espantado."},
+      {days:8, says:"El muelle estuvo tranquilo. No siempre es algo bueno."},
+    ]},
+  "Bren Orlen":{
+    visit:[
+      {count:3, says:"No muchos vienen a charlar sin motivo médico. Lo aprecio."},
+      {count:6, says:"Ya me pregunto qué pasa cuando no venís."},
+    ],
+    absence:[
+      {days:6, says:"Hace un tiempo que no pasabas. El consultorio tiene memoria."},
+    ]},
+  "Ciro Orlen":{
+    visit:[
+      {count:4, says:"Cada vez que venís, encontramos algo que la vez anterior no."},
+      {count:8, says:"Creo que sabés casi tanto como yo sobre ciertos temas."},
+    ],
+    absence:[
+      {days:5, says:"Los archivos esperaron. Igual que yo."},
+    ]},
+  "Nela Mirende":{
+    visit:[
+      {count:3, says:"Ya sé lo que vas a pedir antes de que te sientes."},
+      {count:7, says:"Si venís tan seguido, ya sos parte del menú no escrito."},
+    ],
+    absence:[
+      {days:5, says:"El Mirenpez al Veloer estuvo esperando."},
+    ]},
+  "Elowen Sorvei":{
+    visit:[
+      {count:3, says:"Cada conversación tuya termina en mi libreta. Lo sabés, ¿no?"},
+      {count:6, says:"Ya aparecés en el libro. Sin nombre, pero sos vos."},
+    ],
+    absence:[
+      {days:4, says:"Estuve escribiendo cosas que quería preguntarte."},
+    ]},
+};
+
+// ── HELPER: narrativa según estado del Twin ──────────────
+function getStateNarrative(actionId,{skills,needs,gt:g}){
+  const h=g?.hour??8;
+  const isNight=h>=21||h<5;
+  const isDawn=h>=5&&h<8;
+  const skillMap={fish:"pesca",cook:"cocina",musica_tocar:"arte",research:"conocimiento",sit_lake:"naturaleza",walk_park:"naturaleza",azotea2_estrellas:"conocimiento",dormir:"sueno"};
+  const sk=skillMap[actionId];
+  const skXP=sk?(skills[sk]||0):0;
+  const skLvl=SKILL_LEVELS.filter(l=>l.xp<=skXP).length;
+  const isExpert=skLvl>=4;
+  const isHungry=(needs?.hambre??100)<25;
+  const isTired=(needs?.sueno??100)<20;
+  const isExhausted=(needs?.sueno??100)<8;
+  const keys=[];
+  if(actionId==="dormir"&&isExhausted)keys.push("dormir:exhausted");
+  if(isNight)keys.push(`${actionId}:night`);
+  if(isDawn)keys.push(`${actionId}:dawn`);
+  if(actionId==="walk_park"&&!isNight&&!isDawn)keys.push("walk_park:morning");
+  if(isExpert)keys.push(`${actionId}:expert`);
+  if(isTired&&N_STATE[`${actionId}:tired`])keys.push(`${actionId}:tired`);
+  if(isHungry&&N_STATE[`${actionId}:hungry`])keys.push(`${actionId}:hungry`);
+  for(const k of keys){if(N_STATE[k])return pick(N_STATE[k]);}
+  return null;
+}
+
+
 // ═══ SHOPS ═══
 
 // ─ Shop triggers: actionId → shopId ─
@@ -1389,7 +1889,7 @@ function AccionesTab({loc,career,NEIGHBORHOODS,PLACE_ACTIONS,loading,dark,onGoTo
     </div>
   );
 }
-function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onInteract,onChildInteract}){
+function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onInteract,onChildInteract,npcWorld}){
   const [mode,setMode]=useState("twins");
   const [sel,setSel]=useState(null);
   const [cat,setCat]=useState("hablar");
@@ -1435,12 +1935,15 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
   return(
     <div style={{display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
       {/* Mode toggle */}
-      <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0}}>
-        <button onClick={()=>{setMode("twins");setSel(null);}} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="twins"?"2px solid #7BB8B9":"2px solid transparent",background:"transparent",color:mode==="twins"?"#7BB8B9":"#BBA090",cursor:"pointer"}}>
+      <div style={{display:"flex",borderBottom:`1px solid ${C.border}`,flexShrink:0}}>
+        <button onClick={()=>{setMode("twins");setSel(null);}} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="twins"?`2px solid ${C.teal}`:"2px solid transparent",background:"transparent",color:mode==="twins"?C.teal:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>
           👥 Twins ({sorted.length})
         </button>
-        <button onClick={()=>setMode("familia")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="familia"?"2px solid #E87B9E":"2px solid transparent",background:"transparent",color:mode==="familia"?"#E87B9E":"#BBA090",cursor:"pointer"}}>
-          👨‍👩‍👧 Familia ({family.children.length}{family.partner?"+pareja":""})
+        <button onClick={()=>setMode("familia")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="familia"?"2px solid #E87B9E":"2px solid transparent",background:"transparent",color:mode==="familia"?"#E87B9E":C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>
+          👨‍👩‍👧 Familia
+        </button>
+        <button onClick={()=>setMode("veloria")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:mode==="veloria"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:mode==="veloria"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>
+          🏙 Veloria
         </button>
       </div>
 
@@ -1623,6 +2126,48 @@ function SocialTab({rels,family,currentDay,dark,loading,onRomanceAction,onIntera
           })}
         </div>
       )}
+
+      {/* VELORIA mode — world state */}
+      {mode==="veloria"&&(
+        <div style={{flex:1,overflowY:"auto",padding:"8px 10px"}}>
+          <div style={{fontSize:"10px",color:C.textDim,fontFamily:"'Nunito',sans-serif",marginBottom:"10px",lineHeight:1.4}}>
+            El mundo de Veloria sigue su curso aunque no estés mirando. Los Twins trabajan, envejecen, se conocen.
+          </div>
+          {Object.entries(npcWorld||{}).map(([name,data])=>{
+            if(!data.isAlive)return null;
+            const job=NPC_JOBS[name];
+            const fr=rels?.[name]?.friendship||0;
+            const ageDisplay=Math.floor(data.age);
+            const partnerAge=data.partner&&npcWorld[data.partner]?Math.floor(npcWorld[data.partner].age):null;
+            return(
+              <div key={name} style={{...{borderRadius:"12px",background:C.white,border:`1px solid ${C.border}`,padding:"10px 12px",marginBottom:"6px",display:"flex",gap:"10px",alignItems:"flex-start"}}}>
+                <NPCAvatar name={name} size={28}/>
+                <div style={{flex:1}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"3px"}}>
+                    <div>
+                      <span style={{fontSize:"12px",fontWeight:700,color:C.text,fontFamily:"'Fredoka',sans-serif"}}>{name}</span>
+                      <span style={{fontSize:"10px",color:C.textDim,marginLeft:"6px",fontFamily:"'Nunito',sans-serif"}}>{ageDisplay} años</span>
+                    </div>
+                    {fr>0&&<div style={{fontSize:"10px",color:C.orange,fontFamily:"'Fredoka',sans-serif"}}>L {data.luces.toLocaleString()}</div>}
+                  </div>
+                  {job&&<div style={{fontSize:"10px",color:C.textMid,fontFamily:"'Nunito',sans-serif",marginBottom:"3px"}}>{job.job} · +L{job.dailySalary}/día</div>}
+                  {data.partner&&(
+                    <div style={{fontSize:"10px",color:"#E87B9E",fontFamily:"'Nunito',sans-serif",marginBottom:"2px"}}>
+                      💕 {data.partner.split(" ")[0]}{partnerAge?` (${partnerAge}a)`:""}
+                    </div>
+                  )}
+                  {data.children.length>0&&(
+                    <div style={{fontSize:"10px",color:C.textDim,fontFamily:"'Nunito',sans-serif"}}>
+                      👶 {data.children.map(c=>typeof c==="string"?c:c.name).join(", ")}
+                    </div>
+                  )}
+                  {fr===0&&<div style={{fontSize:"9px",color:C.textGhost,fontStyle:"italic",fontFamily:"'Nunito',sans-serif"}}>Todavía no lo conocés</div>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
@@ -1791,7 +2336,7 @@ function DiarioTab({log,gt}){
 }
 
 // ═══════════════════ CHARACTER STRIP ═══════════════════
-function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,daysInStage,daysInStageTotal,lifeStage,aspirationProgress}){
+function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,daysInStage,daysInStageTotal,lifeStage,aspirationProgress,reputation}){
   const [moodLabel,moodColor]=getMood(needs);
   const ls=lifeStage||LIFE_STAGES[6];
   const asp=twin?.aspiration?ASPIRATIONS.find(a=>a.id===twin.aspiration):null;
@@ -1805,13 +2350,16 @@ function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,
         <div style={{width:"36px",height:"36px",borderRadius:"50%",background:`${ls.color}18`,border:`2px solid ${ls.color}55`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"14px",color:ls.color,fontFamily:"'Lora',serif",fontWeight:700,flexShrink:0}}>
           {twin?.name?.charAt(0)||"?"}
         </div>
-        {/* Name + stage */}
+        {/* Name + stage + reputation */}
         <div style={{flexShrink:0}}>
           <div style={{fontSize:"12px",color:"#2C1A0E",fontWeight:600,lineHeight:1.2}}>{twin?.name}</div>
           <div style={{fontSize:"9px",color:ls.color,marginBottom:"2px"}}>{ls.emoji} {ls.label} · día {(daysInStage||0)+1}/{daysInStageTotal||ls.days}</div>
-          <div style={{width:"72px",height:"2px",background:"#E0D4C8",borderRadius:"1px",overflow:"hidden"}}>
+          <div style={{width:"72px",height:"2px",background:"#E0D4C8",borderRadius:"1px",overflow:"hidden",marginBottom:"3px"}}>
             <div style={{height:"100%",width:`${stageProgress}%`,background:ls.color,transition:"width 0.5s"}}/>
           </div>
+          {(()=>{const rl=getRepLevel(reputation||0);return reputation>0?(
+            <div style={{fontSize:"8px",color:rl.color,fontFamily:"'Fredoka',sans-serif",fontWeight:600}}>✦ {rl.label}</div>
+          ):null;})()}
         </div>
         {/* Needs grid 3×2 */}
         <div style={{flex:1,display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"3px 8px",margin:"0 6px"}}>
@@ -1851,28 +2399,50 @@ function CharacterCard({twin,needs,money,gt,rels,family,skills,currentDaysLived,
 // ═══ DIALOGUE MODAL ═══
 // ═══ CHOICE MODAL ═══
 function ChoiceModal({choice,onSelect,onDismiss}){
+  const hasSpeaker=!!choice.speaker;
   return(
     <div style={{position:"fixed",inset:0,background:"rgba(44,26,14,0.45)",display:"flex",alignItems:"flex-end",justifyContent:"center",zIndex:60,backdropFilter:"blur(2px)"}}>
       <div style={{width:"100%",maxWidth:"520px",background:C.white,borderRadius:"22px 22px 0 0",padding:"12px 16px 32px",boxShadow:"0 -8px 32px rgba(0,0,0,0.12)",animation:"fadeSlideIn 0.25s ease"}}>
         <div style={{width:36,height:4,background:C.border,borderRadius:2,margin:"0 auto 16px"}}/>
-        <div style={{fontSize:"17px",fontWeight:700,color:C.text,marginBottom:"4px",fontFamily:"'Fredoka',sans-serif"}}>{choice.title}</div>
-        <div style={{fontSize:"12px",color:C.textDim,marginBottom:"16px",fontFamily:"'Lora',serif",fontStyle:"italic"}}>{choice.subtitle}</div>
+
+        {/* NPC speaker mode */}
+        {hasSpeaker&&(
+          <div style={{marginBottom:"16px"}}>
+            <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"10px"}}>
+              <NPCAvatar name={choice.speaker.name} size={36}/>
+              <span style={{fontSize:"14px",fontWeight:700,color:C.text,fontFamily:"'Fredoka',sans-serif"}}>{choice.speaker.name}</span>
+            </div>
+            <div style={{background:C.cardWarm,border:`1px solid ${C.border}`,borderRadius:"14px",padding:"12px 14px"}}>
+              <div style={{fontSize:"13px",color:C.textMid,fontFamily:"'Lora',serif",fontStyle:"italic",lineHeight:1.7}}>{`"${choice.speaker.says}"`}</div>
+            </div>
+            <div style={{fontSize:"10px",color:C.textGhost,marginTop:"8px",marginLeft:"4px",fontFamily:"'Nunito',sans-serif"}}>¿Cómo respondés?</div>
+          </div>
+        )}
+
+        {/* Regular choice mode */}
+        {!hasSpeaker&&(
+          <div style={{marginBottom:"16px"}}>
+            <div style={{fontSize:"17px",fontWeight:700,color:C.text,marginBottom:"4px",fontFamily:"'Fredoka',sans-serif"}}>{choice.title}</div>
+            <div style={{fontSize:"12px",color:C.textDim,fontFamily:"'Lora',serif",fontStyle:"italic"}}>{choice.subtitle}</div>
+          </div>
+        )}
+
+        {/* Options */}
         <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
           {choice.options.map(opt=>(
             <button key={opt.id} onClick={()=>onSelect(opt)}
-              style={{textAlign:"left",padding:"12px 14px",borderRadius:"14px",border:`1.5px solid ${C.border}`,background:C.white,cursor:"pointer",transition:"all 0.12s",display:"flex",gap:"12px",alignItems:"flex-start"}}>
-              <span style={{fontSize:"22px",flexShrink:0,marginTop:"2px"}}>{opt.emoji}</span>
+              style={{textAlign:"left",padding:"11px 14px",borderRadius:"14px",border:`1.5px solid ${C.border}`,background:C.white,cursor:"pointer",transition:"border-color 0.12s",display:"flex",gap:"12px",alignItems:"flex-start"}}>
+              <span style={{fontSize:"20px",flexShrink:0,marginTop:"2px"}}>{opt.emoji}</span>
               <div style={{flex:1}}>
-                <div style={{fontSize:"14px",color:C.text,fontWeight:700,fontFamily:"'Fredoka',sans-serif",marginBottom:"3px"}}>{opt.label}</div>
+                <div style={{fontSize:"13px",color:C.text,fontWeight:700,fontFamily:"'Fredoka',sans-serif",marginBottom:"3px"}}>{opt.label}</div>
                 <div style={{fontSize:"11px",color:C.textDim,fontFamily:"'Nunito',sans-serif"}}>{opt.hint}</div>
-                {opt.effects?.effectLabel&&<div style={{fontSize:"10px",color:C.green,marginTop:"3px",fontFamily:"'Nunito',sans-serif"}}>✓ {opt.effects.effectLabel}</div>}
               </div>
-              <span style={{color:C.border2,fontSize:"16px",alignSelf:"center"}}>›</span>
+              <span style={{color:C.border2,fontSize:"16px",alignSelf:"center",flexShrink:0}}>›</span>
             </button>
           ))}
         </div>
         <button onClick={onDismiss} style={{marginTop:"12px",width:"100%",padding:"9px",border:"none",background:"transparent",color:C.textDim,fontSize:"12px",cursor:"pointer",fontFamily:"'Nunito',sans-serif"}}>
-          Mejor lo pienso después
+          {hasSpeaker?"Ahora no":"Mejor lo pienso después"}
         </button>
       </div>
     </div>
@@ -1917,7 +2487,7 @@ function ShopModal({shop,money,onBuy,onClose}){
                     background:wasBought?"#E0F0E0":canAfford?C.orange:"#E0D4C8",
                     color:wasBought?C.green:canAfford?C.white:C.textDim,
                     cursor:canAfford&&!wasBought?"pointer":"not-allowed",fontSize:"13px",fontWeight:700,fontFamily:"'Fredoka',sans-serif",minWidth:"64px"}}>
-                  {wasBought?"Listo":`L ${item.price}`}
+                  {wasBought?"✓ Listo":item.type==="experience"?`Ver`:item.type==="ticket"?`Entrada`:item.type==="meal"?`Pedir`:`L ${item.price}`}
                 </button>
               </div>
             );
@@ -1932,20 +2502,165 @@ function ShopModal({shop,money,onBuy,onClose}){
 }
 
 
-function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture,dark,loading}){
-  const [view,setView]=useState("prop"); // "prop" | "muebles"
+// ── GIFT MODAL ──────────────────────────────────────────
+function GiftModal({item,knownNPCs,onGift,onClose}){
+  return(
+    <div style={{position:"fixed",inset:0,background:"rgba(44,26,14,0.45)",display:"flex",alignItems:"flex-end",justifyContent:"center",zIndex:60,backdropFilter:"blur(2px)"}}>
+      <div style={{width:"100%",maxWidth:"520px",background:C.white,borderRadius:"22px 22px 0 0",padding:"12px 16px 32px",boxShadow:"0 -8px 32px rgba(0,0,0,0.12)",animation:"fadeSlideIn 0.25s ease"}}>
+        <div style={{width:36,height:4,background:C.border,borderRadius:2,margin:"0 auto 14px"}}/>
+        <div style={{fontSize:"16px",fontWeight:700,color:C.text,marginBottom:"4px",fontFamily:"'Fredoka',sans-serif"}}>
+          🎁 ¿A quién le regalás {item.emoji} {item.name}?
+        </div>
+        <div style={{fontSize:"11px",color:C.textDim,fontFamily:"'Lora',serif",fontStyle:"italic",marginBottom:"14px"}}>
+          El regalo dice algo sobre quién sos.
+        </div>
+        <div style={{display:"flex",flexDirection:"column",gap:"6px",maxHeight:"300px",overflowY:"auto"}}>
+          {knownNPCs.map(npcName=>(
+            <button key={npcName} onClick={()=>onGift(item,npcName)}
+              style={{display:"flex",alignItems:"center",gap:"10px",padding:"10px 12px",borderRadius:"12px",border:`1px solid ${C.border}`,background:C.white,cursor:"pointer",textAlign:"left",transition:"border-color 0.12s"}}>
+              <NPCAvatar name={npcName} size={28}/>
+              <span style={{fontSize:"13px",color:C.text,fontWeight:600,fontFamily:"'Fredoka',sans-serif"}}>{npcName}</span>
+              <span style={{color:C.border2,fontSize:"16px",marginLeft:"auto"}}>›</span>
+            </button>
+          ))}
+        </div>
+        <button onClick={onClose} style={{marginTop:"12px",width:"100%",padding:"9px",border:"none",background:"transparent",color:C.textDim,fontSize:"12px",cursor:"pointer",fontFamily:"'Nunito',sans-serif"}}>
+          Cancelar
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function HogarTab({housing,placedFurniture,money,skills,onUpgrade,onBuyFurniture,dark,loading,family,gt,npcWorld,inventory,onUseItem,onGiftItem}){
+  const [view,setView]=useState("prop"); // "prop" | "muebles" | "hogar" | "inv"
   const tier=HOUSING_TIERS.find(h=>h.id===housing)||HOUSING_TIERS[0];
   const tierIdx=HOUSING_TIERS.indexOf(tier);
   const nextTier=HOUSING_TIERS[tierIdx+1]||null;
   const slotsUsed=placedFurniture.length;
   const eff=getHousingEffects(housing,placedFurniture);
+  const spouseJob=family?.partner&&NPC_JOBS[family.partner];
+  const spouseData=family?.partner&&npcWorld?.[family.partner];
 
   return(
     <div style={{display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
-      <div style={{display:"flex",borderBottom:"1px solid #1A1208",flexShrink:0}}>
-        <button onClick={()=>setView("prop")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="prop"?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:view==="prop"?"#F5A623":"#BBA090",cursor:"pointer"}}>🏠 Propiedad</button>
-        <button onClick={()=>setView("muebles")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="muebles"?"2px solid #D4A853":"2px solid transparent",background:"transparent",color:view==="muebles"?"#F5A623":"#BBA090",cursor:"pointer"}}>🛋 Muebles ({slotsUsed}/{tier.slots})</button>
+      <div style={{display:"flex",borderBottom:`1px solid ${C.border}`,flexShrink:0}}>
+        <button onClick={()=>setView("prop")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="prop"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="prop"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>🏠 Propiedad</button>
+        <button onClick={()=>setView("muebles")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="muebles"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="muebles"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>🛋 Muebles ({slotsUsed}/{tier.slots})</button>
+        <button onClick={()=>setView("hogar")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="hogar"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="hogar"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>👨‍👩‍👧 Hogar</button>
+        <button onClick={()=>setView("inv")} style={{flex:1,padding:"6px",fontSize:"10px",border:"none",borderBottom:view==="inv"?`2px solid ${C.orange}`:"2px solid transparent",background:"transparent",color:view==="inv"?C.orange:C.textDim,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>🎒 Objetos ({(inventory||[]).length})</button>
       </div>
+
+      {/* HOGAR VIEW — household composition + income */}
+      {view==="hogar"&&(
+        <div style={{flex:1,overflowY:"auto",padding:"10px 12px"}}>
+          {/* Income breakdown */}
+          <div style={{...{borderRadius:"12px",background:C.cardWarm,border:`1px solid ${C.border}`,padding:"12px",marginBottom:"10px"}}}>
+            <div style={{fontSize:"11px",color:C.orange,fontWeight:700,marginBottom:"10px",fontFamily:"'Fredoka',sans-serif"}}>💰 Ingresos del hogar</div>
+            <div style={{display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
+              <span style={{fontSize:"11px",color:C.textMid,fontFamily:"'Nunito',sans-serif"}}>Tu trabajo</span>
+              <span style={{fontSize:"11px",color:C.text,fontWeight:600,fontFamily:"'Fredoka',sans-serif"}}>Variable / turno</span>
+            </div>
+            {spouseJob&&(
+              <div style={{display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
+                <span style={{fontSize:"11px",color:C.textMid,fontFamily:"'Nunito',sans-serif"}}>{family.partner.split(" ")[0]} · {spouseJob.job}</span>
+                <span style={{fontSize:"11px",color:"#E87B9E",fontWeight:600,fontFamily:"'Fredoka',sans-serif"}}>+L{spouseJob.dailySalary}/día</span>
+              </div>
+            )}
+            <div style={{borderTop:`1px solid ${C.border}`,marginTop:"8px",paddingTop:"8px",display:"flex",justifyContent:"space-between"}}>
+              <span style={{fontSize:"11px",color:C.textMid,fontFamily:"'Nunito',sans-serif"}}>Ahorros actuales</span>
+              <span style={{fontSize:"13px",color:C.orange,fontWeight:700,fontFamily:"'Fredoka',sans-serif"}}>L {money}</span>
+            </div>
+          </div>
+
+          {/* Household members */}
+          <div style={{fontSize:"11px",color:C.orange,fontWeight:700,marginBottom:"8px",fontFamily:"'Fredoka',sans-serif"}}>👤 Miembros del hogar</div>
+          {family?.partner?(
+            <div style={{...{borderRadius:"10px",background:C.white,border:"1.5px solid #E87B9E44",padding:"10px 12px",marginBottom:"6px",display:"flex",gap:"10px",alignItems:"center"}}}>
+              <NPCAvatar name={family.partner} size={28}/>
+              <div style={{flex:1}}>
+                <div style={{fontSize:"12px",fontWeight:700,color:C.text,fontFamily:"'Fredoka',sans-serif"}}>{family.partner}</div>
+                <div style={{fontSize:"10px",color:C.textDim,fontFamily:"'Nunito',sans-serif"}}>
+                  {spouseData?`${Math.floor(spouseData.age)} años · `:""}{spouseJob?.job||""}
+                </div>
+              </div>
+              <div style={{fontSize:"10px",color:"#E87B9E",fontFamily:"'Fredoka',sans-serif"}}>{family.romanticStatus==="married"?"💒":family.romanticStatus==="engaged"?"💍":"💕"}</div>
+            </div>
+          ):<div style={{fontSize:"10px",color:C.textGhost,fontStyle:"italic",fontFamily:"'Nunito',sans-serif",marginBottom:"8px"}}>Vivís solo/a por ahora.</div>}
+
+          {/* Children */}
+          {family?.children?.length>0&&(
+            <>
+              <div style={{fontSize:"11px",color:C.orange,fontWeight:700,marginBottom:"6px",marginTop:"8px",fontFamily:"'Fredoka',sans-serif"}}>👶 Hijos</div>
+              {family.children.map((child,i)=>{
+                const age=gt?.day-(child.birthDay||0);
+                const ageYrs=age<=0?"recién nacido/a":`${age} ${age===1?"día":"días"}`;
+                return(
+                  <div key={i} style={{...{borderRadius:"10px",background:C.white,border:`1px solid ${C.border}`,padding:"8px 12px",marginBottom:"4px",display:"flex",alignItems:"center",gap:"10px"}}}>
+                    <span style={{fontSize:"20px"}}>👶</span>
+                    <div>
+                      <div style={{fontSize:"12px",fontWeight:700,color:C.text,fontFamily:"'Fredoka',sans-serif"}}>{child.name||child}</div>
+                      <div style={{fontSize:"10px",color:C.textDim,fontFamily:"'Nunito',sans-serif"}}>{ageYrs} en Veloria</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
+
+          {!family?.partner&&(!family?.children||family.children.length===0)&&(
+            <div style={{fontSize:"10px",color:C.textGhost,fontStyle:"italic",textAlign:"center",marginTop:"20px",fontFamily:"'Nunito',sans-serif",lineHeight:1.6}}>
+              Tu historia familiar en Veloria todavía está por escribirse.<br/>
+              Conocé Twins, construí relaciones.
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* INVENTARIO VIEW */}
+      {view==="inv"&&(
+        <div style={{flex:1,overflowY:"auto",padding:"8px 10px"}}>
+          {(!inventory||inventory.length===0)&&(
+            <div style={{fontSize:"10px",color:C.textGhost,fontStyle:"italic",textAlign:"center",marginTop:"20px",fontFamily:"'Nunito',sans-serif"}}>
+              Tu mochila está vacía. Comprá cosas en las tiendas de Veloria.
+            </div>
+          )}
+          {(inventory||[]).map((item,i)=>{
+            const fx=ITEM_USE_EFFECTS[item.id];
+            const isGiftable=!!(item.id&&Object.values(NPC_GIFT_PREFS).some(p=>p.loved?.includes(item.id)||p.liked?.includes(item.id)));
+            const isUseable=!!fx;
+            return(
+              <div key={item.id||i} style={{...{borderRadius:"12px",background:C.white,border:`1px solid ${C.border}`,padding:"10px 12px",marginBottom:"6px",display:"flex",gap:"10px",alignItems:"center"}}}>
+                <span style={{fontSize:"22px",flexShrink:0}}>{item.emoji}</span>
+                <div style={{flex:1}}>
+                  <div style={{display:"flex",alignItems:"center",gap:"6px",marginBottom:"2px"}}>
+                    <span style={{fontSize:"12px",fontWeight:700,color:C.text,fontFamily:"'Fredoka',sans-serif"}}>{item.name}</span>
+                    {item.qty>1&&<span style={{fontSize:"10px",color:C.textDim,fontFamily:"'Nunito',sans-serif"}}>×{item.qty}</span>}
+                  </div>
+                  {item.desc&&<div style={{fontSize:"10px",color:C.textDim,fontFamily:"'Lora',serif",fontStyle:"italic",marginBottom:"3px"}}>{item.desc}</div>}
+                  {fx&&(
+                    <div style={{fontSize:"9px",color:C.green,fontFamily:"'Nunito',sans-serif"}}>
+                      {fx.skill?`+${fx.xp} ${fx.skill} XP`:""}{fx.need?` +${fx.val} ${fx.need}`:""}
+                    </div>
+                  )}
+                </div>
+                <div style={{display:"flex",gap:"5px",flexShrink:0,flexDirection:"column"}}>
+                  {isUseable&&(
+                    <button onClick={()=>onUseItem&&onUseItem(item)} style={{padding:"5px 10px",borderRadius:"8px",border:`1px solid ${C.orange}`,background:C.orangeLight,color:C.orange,fontSize:"10px",fontWeight:700,cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>
+                      Usar
+                    </button>
+                  )}
+                  {isGiftable&&(
+                    <button onClick={()=>onGiftItem&&onGiftItem(item)} style={{padding:"5px 10px",borderRadius:"8px",border:`1px solid ${C.border}`,background:C.white,color:C.textMid,fontSize:"10px",cursor:"pointer",fontFamily:"'Fredoka',sans-serif"}}>
+                      🎁 Regalar
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       <div style={{flex:1,overflowY:"auto",padding:"10px 12px"}}>
         {view==="prop"&&(
@@ -2681,6 +3396,11 @@ export default function InbetweensGame(){
   const [pendingChoice,setPendingChoice]=useState(null);
   const [activeShop,setActiveShop]=useState(null);
   const [chainActions,setChainActions]=useState([]);
+  const [visitLog,setVisitLog]=useState({});
+  const [shownEventDays,setShownEventDays]=useState([]);
+  const [npcWorld,setNpcWorld]=useState(()=>JSON.parse(JSON.stringify(NPC_STARTING_DATA)));
+  const [reputation,setReputation]=useState(0);
+  const [activeGift,setActiveGift]=useState(null); // item being gifted
   const [aspirationProgress,setAspirationProgress]=useState([]);
   const [visitedPlaces,setVisitedPlaces]=useState(new Set(["Tu apartamento"]));
   const logEnd=useRef(null);
@@ -2755,13 +3475,131 @@ export default function InbetweensGame(){
     setPendingNPCDialogue(ev);
   },[gt.day]);
 
-  // ── Dialogue response ──
-  // ── CHOICE SELECT ──────────────────────────────────
-  function handleChoiceSelect(option){
+  // ── Daily events: cada mañana algo pasa ──
+  useEffect(()=>{
+    if(phase!=="playing"||gt.day<=1||shownEventDays.includes(gt.day))return;
+    if(Math.random()>0.65)return; // 65% de chance por día
+    const ev=pickDailyEvent(shownEventDays.map(String));
+    if(!ev)return;
+    setShownEventDays(prev=>[...prev,gt.day]);
+    // Add narrative entry
+    setTimeout(()=>{
+      addEntry({text:ev.text,type:"world_event",place:"Veloria · mañana",time:"08:00"});
+      // Unlock chain action if event has one
+      if(ev.unlock){
+        setChainActions(prev=>[...prev,{
+          id:`daily_${ev.id}`,emoji:ev.unlock.emoji,label:ev.unlock.label,
+          hint:"Solo disponible hoy",action:ev.unlock,requiredPlace:null,
+          expiresDay:gt.day+1,
+        }]);
+      }
+      // Chain unlock
+      if(ev.chainUnlock&&CHAIN_ACTIONS[ev.chainUnlock]){
+        setChainActions(prev=>prev.find(c=>c.id===ev.chainUnlock)?prev:[...prev,{...CHAIN_ACTIONS[ev.chainUnlock],id:ev.chainUnlock,expiresDay:gt.day+3}]);
+      }
+      // Skill effects
+      if(ev.effects?.skill)setSkills(s=>({...s,[ev.effects.skill]:(s[ev.effects.skill]||0)+(ev.effects.xp||0)}));
+      // Triggered choice (after brief delay)
+      if(ev.choice)setTimeout(()=>setPendingChoice(ev.choice),1200);
+    },400);
+  },[gt.day]);
+
+  // ── NPC world simulation: NPCs envejecen, cobran, se casan, tienen hijos ──
+  useEffect(()=>{
+    if(phase!=="playing"||gt.day<=1)return;
+
+    // ── Compute events from current snapshot (antes de actualizar estado) ──
+    let marriageEvent=null;
+    let childEvent=null;
+
+    // Marriage check cada 7 días
+    if(gt.day%7===0){
+      const eligible=Object.entries(npcWorld).filter(([name,d])=>
+        !d.partner&&d.isAlive&&d.age>=22&&d.age<=54&&name!==family.partner
+      ).map(([name])=>name);
+      if(eligible.length>=2&&Math.random()<0.2){
+        const shuffled=[...eligible].sort(()=>Math.random()-0.5);
+        marriageEvent=[shuffled[0],shuffled[1]];
+      }
+    }
+
+    // Child check cada 10 días (NPC couples)
+    if(gt.day%10===0){
+      const couples=Object.entries(npcWorld).filter(([name,d])=>
+        d.partner&&d.isAlive&&d.age>=24&&d.age<=42&&
+        npcWorld[d.partner]?.isAlive&&npcWorld[d.partner]?.age<=46&&
+        // No más de 2 hijos por pareja
+        d.children.length<2
+      );
+      for(const [name,data] of couples){
+        if(Math.random()<0.12){
+          const cName=VELORIA_CHILD_NAMES[Math.floor(Math.random()*VELORIA_CHILD_NAMES.length)];
+          childEvent={childName:cName,parent1:name,parent2:data.partner};
+          break;
+        }
+      }
+    }
+
+    // ── Spouse household income ──
+    if(family.romanticStatus==="married"&&family.partner&&NPC_JOBS[family.partner]){
+      setMoney(m=>m+NPC_JOBS[family.partner].dailySalary);
+    }
+    // ── Daily reputation gain ──
+    addRep(0.5);
+
+    // ── Apply NPC world updates ──
+    setNpcWorld(prev=>{
+      const next={};
+      for(const [name,data] of Object.entries(prev)){
+        next[name]={
+          ...data,
+          // Envejecer: 0.5 años por día de juego
+          age:data.isAlive?+(data.age+0.5).toFixed(1):data.age,
+          // Cobrar sueldo
+          luces:data.isAlive?data.luces+(NPC_JOBS[name]?.dailySalary||0):data.luces,
+          // Muerte natural (edad > 80)
+          isAlive:data.age<82?data.isAlive:Math.random()>0.15,
+        };
+      }
+      if(marriageEvent){
+        const[n1,n2]=marriageEvent;
+        if(next[n1]&&next[n2]){
+          next[n1]={...next[n1],partner:n2};
+          next[n2]={...next[n2],partner:n1};
+        }
+      }
+      if(childEvent){
+        const{childName:cn,parent1:p1,parent2:p2}=childEvent;
+        if(next[p1])next[p1]={...next[p1],children:[...next[p1].children,{name:cn,birthDay:gt.day}]};
+        if(next[p2])next[p2]={...next[p2],children:[...next[p2].children,{name:cn,birthDay:gt.day}]};
+      }
+      return next;
+    });
+
+    // ── Narrativa de eventos del mundo ──
+    if(marriageEvent){
+      const[n1,n2]=marriageEvent;
+      setTimeout(()=>addEntry({
+        text:`${n1} y ${n2.split(" ")[0]} se casaron hoy en Veloria. La noticia se corrió antes del mediodía.`,
+        type:"world_event",place:"Veloria",time:"12:00"
+      }),200);
+    }
+    if(childEvent){
+      const{childName:cn,parent1:p1,parent2:p2}=childEvent;
+      setTimeout(()=>addEntry({
+        text:`${p1.split(" ")[0]} y ${p2.split(" ")[0]} tuvieron un hijo/a. Le pusieron ${cn}.`,
+        type:"world_event",place:"Veloria",time:"09:00"
+      }),500);
+    }
+  },[gt.day]);
+
+
+  function handleChoiceSelect(option,choiceCtx){
+    const npc=choiceCtx?.npc;
     setPendingChoice(null);
     const fx=option.effects||{};
     const nKey=fx.narrative||`choice:${option.id}`;
-    const texts=N[nKey];
+    const texts=N_NPC[nKey]||N[nKey];
     if(texts){
       const text=texts[Math.floor(Math.random()*texts.length)];
       setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,text,type:"story",place:loc.place,time:toTimeStr(gt.hour)}]);
@@ -2769,11 +3607,12 @@ export default function InbetweensGame(){
     if(fx.need)setNeeds(n=>({...n,[fx.need]:Math.min(100,n[fx.need]+(fx.val||0))}));
     if(fx.need2)setNeeds(n=>({...n,[fx.need2]:Math.min(100,n[fx.need2]+(fx.val2||0))}));
     if(fx.need3)setNeeds(n=>({...n,[fx.need3]:Math.min(100,n[fx.need3]+(fx.val3||0))}));
-    if(fx.skill&&fx.xp){
-      setSkills(s=>{const ns={...s,[fx.skill]:(s[fx.skill]||0)+fx.xp};return ns;});
-    }
+    if(fx.skill&&fx.xp)setSkills(s=>({...s,[fx.skill]:(s[fx.skill]||0)+fx.xp}));
     if(fx.skill2&&fx.xp2)setSkills(s=>({...s,[fx.skill2]:(s[fx.skill2]||0)+fx.xp2}));
     if(typeof fx.money==="number")setMoney(m=>m+fx.money);
+    if(fx.fr&&npc){
+      setRels(prev=>({...prev,[npc]:{...prev[npc],friendship:Math.min(100,(prev[npc]?.friendship||0)+fx.fr),history:[...(prev[npc]?.history||[]).slice(-4),`Respondiste a su pregunta`]}}));
+    }
     if(fx.chainUnlock&&CHAIN_ACTIONS[fx.chainUnlock]){
       setChainActions(prev=>prev.find(c=>c.id===fx.chainUnlock)?prev:[...prev,{...CHAIN_ACTIONS[fx.chainUnlock],id:fx.chainUnlock,expiresDay:gt.day+3}]);
     }
@@ -2795,7 +3634,7 @@ export default function InbetweensGame(){
     const texts=N[nKey]||N["shop:buy"];
     const text=texts[Math.floor(Math.random()*texts.length)];
     setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,text,type:"story",place:loc.place,time:toTimeStr(gt.hour)}]);
-    advanceTime(0.5);
+    tick(0.5);
   }
 
   // ── CHAIN ACTION ──────────────────────────────────
@@ -2810,7 +3649,7 @@ export default function InbetweensGame(){
     const texts=N[ca.narrative]||["Lo hacés. Algo cambia, un poco."];
     const text=texts[Math.floor(Math.random()*texts.length)];
     setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,text,type:"story",place:loc.place,time:toTimeStr(gt.hour)}]);
-    advanceTime(ca.action?.time||1);
+    tick(ca.action?.time||1);
   }
 
   function handleDialogueResponse(opt){
@@ -2884,7 +3723,7 @@ export default function InbetweensGame(){
   },[log.length]);
 
   function saveToSlot(slot){
-    try{localStorage.setItem(SAVE_KEY+slot,JSON.stringify(buildSave(twin,needs,money,gt,loc,rels,career,family,inventory,log,skills,housing,placedFurniture)));}catch{}
+    try{const data={...buildSave(twin,needs,money,gt,loc,rels,career,family,inventory,log,skills,housing,placedFurniture),npcWorld,visitLog,shownEventDays,chainActions,reputation};localStorage.setItem(SAVE_KEY+slot,JSON.stringify(data));}catch{}
   }
   function loadFromSlot(slot){
     const data=slot==="auto"?(()=>{try{const r=localStorage.getItem(AUTO_KEY);return r?JSON.parse(r):null;}catch{return null;}})():readSlot(slot);
@@ -2902,6 +3741,11 @@ export default function InbetweensGame(){
     if(data.skills)setSkills(data.skills);else setSkills({pesca:0,cocina:0,arte:0,carisma:0,naturaleza:0,conocimiento:0});
     if(data.housing)setHousing(data.housing);
     if(data.placedFurniture)setPlacedFurniture(data.placedFurniture);
+    if(data.npcWorld)setNpcWorld(data.npcWorld);
+    if(data.visitLog)setVisitLog(data.visitLog);
+    if(data.shownEventDays)setShownEventDays(data.shownEventDays);
+    if(data.chainActions)setChainActions(data.chainActions);
+    if(data.reputation!=null)setReputation(data.reputation);
     setPhase("playing");setShowPausa(false);
   }
   function resetGame(){
@@ -2913,11 +3757,23 @@ export default function InbetweensGame(){
     setSkills({pesca:0,cocina:0,arte:0,carisma:0,naturaleza:0,conocimiento:0});
     setHousing("apto_basico");setPlacedFurniture([]);setUsedOnce(new Set());
     setFamily({partner:null,romanticStatus:null,children:[]});
+    setNpcWorld(JSON.parse(JSON.stringify(NPC_STARTING_DATA)));
+    setVisitLog({});setShownEventDays([]);setChainActions([]);
     setInventory([{id:1,name:"Té Miren",type:"food",emoji:"🍵",qty:2,desc:"Una taza.",useable:true},{id:2,name:"Pan Velin",type:"food",emoji:"🥐",qty:1,desc:"Pan de Veloria.",useable:true}]);
     setLog([]);setShowPausa(false);lastAgeMilestone.current=0;lastEventDay.current=0;
   }
 
   const addEntry=e=>setLog(prev=>[...prev,{id:Date.now()+Math.random(),day:gt.day,...e}]);
+  const addRep=(delta)=>setReputation(r=>Math.min(100,r+delta));
+  const prevRepTier=useRef(0);
+  useEffect(()=>{
+    const tier=REPUTATION_LEVELS.filter(l=>reputation>=l.min).length;
+    if(tier>prevRepTier.current&&reputation>0){
+      prevRepTier.current=tier;
+      const lv=REPUTATION_LEVELS[tier-1];
+      if(lv)setTimeout(()=>addEntry({text:`✦ ${lv.label} — ${lv.desc}`,type:"world_event",place:"Veloria",time:toTimeStr(gt.hour)}),300);
+    }
+  },[reputation]);
   const tick=(hours,changes={})=>{
     const daysLived=PLAYER_START_DAYS+(gt.day-1);
     const dm=getLifeStage(daysLived).decayMult;
@@ -3061,14 +3917,57 @@ export default function InbetweensGame(){
     const choiceFn=CHOICE_EVENTS[action.id];
     if(choiceFn){
       const h=action.id==="watch_show"?Math.floor(gt.hour+2.5):gt.hour;
-      advanceTime(action.time||1);
+      tick(action.time||1);
       setLoading(false);
       setPendingChoice(choiceFn({skills,needs,twin,gt,rels,family}));
       return;
     }
 
-    // ── NPC chat: show choice modal for known NPCs ──
+    // ── NPC chat: check for dialogue first ──
     if(action.id==="chat_npc"&&action.npc){
+      // Track visit
+      const npcKey=action.npc;
+      const prevVisits=visitLog[npcKey]||[];
+      const visitCount=prevVisits.length+1;
+      const daysSinceLast=prevVisits.length>0?gt.day-prevVisits[prevVisits.length-1]:null;
+      setVisitLog(prev=>({...prev,[npcKey]:[...prevVisits,gt.day]}));
+
+      // Check NPC memory
+      const mem=NPC_MEMORY[npcKey];
+      let memoryLine=null;
+      if(mem){
+        // Absence comment (only if they've visited before)
+        if(daysSinceLast!==null&&daysSinceLast>=3){
+          const absEntry=mem.absence?.slice().reverse().find(a=>daysSinceLast>=a.days);
+          if(absEntry)memoryLine=absEntry.says;
+        }
+        // Visit milestone (exact match)
+        if(!memoryLine){
+          const visitEntry=mem.visit?.find(v=>v.count===visitCount);
+          if(visitEntry)memoryLine=visitEntry.says;
+        }
+      }
+
+      const dialogues=NPC_DIALOGUES[action.npc];
+      if(dialogues){
+        const fr=rels[action.npc]?.friendship||0;
+        const eligible=dialogues.filter(d=>fr>=(d.minFr||0));
+        if(eligible.length>0){
+          const dlg=eligible[Math.floor(Math.random()*eligible.length)];
+          const npcSays=memoryLine?`${memoryLine} — ${dlg.npcSays}`:dlg.npcSays;
+          tick(action.time||0.5,{social:5});
+          setLoading(false);
+          setPendingChoice({speaker:{name:action.npc,says:npcSays},npc:action.npc,options:dlg.options});
+          return;
+        }
+      }
+      // If NPC has memory but no dialogue, show memory as standalone
+      if(memoryLine){
+        tick(action.time||0.5,{social:8});
+        addEntry({text:`${action.npc.split(" ")[0]} dice: "${memoryLine}"`,type:"story",place:loc.place,time:toTimeStr(gt.hour)});
+        setLoading(false);
+        return;
+      }
       const npcChoice=NPC_CHAT_CHOICES[action.npc];
       if(npcChoice){
         tick(action.time||0.5,{social:8});
@@ -3104,7 +4003,8 @@ export default function InbetweensGame(){
         merc_unico:"merc:unico",merc_frescos:"merc:frescos",merc_charlar:"merc:charlar",
         gym_entrenar:"gym:entrenar",gym_natacion:"gym:natacion"};
       const nKey=NK_MAP[action.id]||action.id;
-      addEntry({text:getNarrative(nKey)||getNarrative("default"),type:"story",place:loc.place,time:toTimeStr(gt.hour+(action.time||0.5))});
+      const stateText=getStateNarrative(action.id,{skills,needs,gt});
+      addEntry({text:stateText||getNarrative(nKey)||getNarrative("default"),type:"story",place:loc.place,time:toTimeStr(gt.hour+(action.time||0.5))});
 
       // ── Choice trigger: fire post-action choice ──
       const choiceFn=ACTION_CHOICE_TRIGGERS[action.id];
@@ -3201,14 +4101,66 @@ export default function InbetweensGame(){
   async function handleGoTo(hood,place){
     if(loading||(loc.hood===hood&&loc.place===place))return;
     setLoc({hood,place});
-    setVisitedPlaces(prev=>new Set([...prev,place]));
+    setVisitedPlaces(prev=>{
+      if(!prev.has(place))addRep(2); // rep por visitar lugar nuevo
+      return new Set([...prev,place]);
+    });
+    setVisitLog(prev=>({...prev,[place]:[...(prev[place]||[]),gt.day]}));
     setLoading(true);await sleep(300);
     tick(loc.hood!==hood?0.5:0.2,{});
     addEntry({text:getNarrative(`travel:${place}`)||`Llegás a ${place}.`,type:"travel",place,time:toTimeStr(gt.hour+(loc.hood!==hood?0.5:0.2))});
     setLoading(false);
   }
   function handleUseItem(item){
-    if(item.type==="food"){tick(0,{hambre:40});setInventory(prev=>prev.map(i=>i.id===item.id?{...i,qty:i.qty-1}:i).filter(i=>i.qty>0));addEntry({text:`Comés ${item.name.toLowerCase()}. El hambre cede un poco.`,type:"story",place:loc.place});}
+    const fx=ITEM_USE_EFFECTS[item.id];
+    if(!fx){
+      // Fallback for food type
+      if(item.type==="food"){tick(0,{hambre:35});setInventory(prev=>prev.map(i=>i.id===item.id?{...i,qty:i.qty-1}:i).filter(i=>i.qty>0));addEntry({text:`Comés ${item.name.toLowerCase()}. El hambre cede un poco.`,type:"story",place:loc.place});}
+      return;
+    }
+    // Apply effects
+    if(fx.need) setNeeds(n=>({...n,[fx.need]:Math.min(100,n[fx.need]+(fx.val||0))}));
+    if(fx.need2)setNeeds(n=>({...n,[fx.need2]:Math.min(100,n[fx.need2]+(fx.val2||0))}));
+    if(fx.skill&&fx.xp)setSkills(s=>({...s,[fx.skill]:(s[fx.skill]||0)+fx.xp}));
+    if(fx.chainUnlock&&CHAIN_ACTIONS[fx.chainUnlock]){
+      setChainActions(prev=>prev.find(c=>c.id===fx.chainUnlock)?prev:[...prev,{...CHAIN_ACTIONS[fx.chainUnlock],id:fx.chainUnlock,expiresDay:gt.day+3}]);
+    }
+    // Narrative
+    const nKey=fx.narrative;
+    const texts=nKey?(N_GIFTS[nKey]||N[nKey]):null;
+    if(texts)addEntry({text:pick(texts),type:"story",place:loc.place,time:toTimeStr(gt.hour)});
+    // Consume
+    if(fx.consume)setInventory(prev=>prev.map(i=>i.id===item.id?{...i,qty:i.qty-1}:i).filter(i=>i.qty>0));
+    addRep(1);
+  }
+
+  function handleGiftItem(item,npcName){
+    setActiveGift(null);
+    // Remove item
+    setInventory(prev=>prev.map(i=>i.id===item.id?{...i,qty:i.qty-1}:i).filter(i=>i.qty>0));
+    // Determine quality
+    const prefs=NPC_GIFT_PREFS[npcName];
+    let frDelta=5, repDelta=1, nKey="gift:neutral";
+    if(prefs){
+      if(prefs.loved?.includes(item.id)){frDelta=28;repDelta=4;nKey="gift:loved";}
+      else if(prefs.liked?.includes(item.id)){frDelta=16;repDelta=2;nKey="gift:liked";}
+    }
+    // Check special combo
+    const special=SPECIAL_GIFT_EFFECTS[`${npcName}:${item.id}`];
+    if(special?.chainUnlock&&CHAIN_ACTIONS[special.chainUnlock]){
+      setChainActions(prev=>prev.find(c=>c.id===special.chainUnlock)?prev:[...prev,{...CHAIN_ACTIONS[special.chainUnlock],id:special.chainUnlock,expiresDay:gt.day+3}]);
+    }
+    if(special?.repBonus)repDelta+=special.repBonus;
+    // Update friendship
+    setRels(prev=>({...prev,[npcName]:{...prev[npcName],friendship:Math.min(100,(prev[npcName]?.friendship||0)+frDelta)}}));
+    addRep(repDelta);
+    // Narrative — check specific combo key first
+    const comboKey=`gift:${npcName.split(" ")[0].toLowerCase()}_${item.id}`;
+    const texts=N_GIFTS[comboKey]||N_GIFTS[nKey];
+    if(texts){
+      const npcFirst=npcName.split(" ")[0];
+      addEntry({text:`[Para ${npcFirst}] ${pick(texts)}`,type:"story",place:loc.place,time:toTimeStr(gt.hour)});
+    }
   }
 
   const [showLoadModal,setShowLoadModal]=useState(false);
@@ -3233,8 +4185,9 @@ export default function InbetweensGame(){
       {showPausa&&<PausaModal onClose={()=>setShowPausa(false)} onSave={saveToSlot} onLoad={loadFromSlot} onReset={resetGame} log={log} gt={gt} twin={twin}/>}
       {showLegacy&&<LegacyScreen twin={twin} gt={gt} skills={skills} rels={rels} family={family} children={family.children} onContinueAsChild={handleContinueAsChild} onNewGame={resetGame}/>}
       {pendingNPCDialogue&&<DialogueModal event={pendingNPCDialogue} onRespond={handleDialogueResponse}/>}
-      {pendingChoice&&<ChoiceModal choice={pendingChoice} onSelect={handleChoiceSelect} onDismiss={()=>setPendingChoice(null)}/>}
+      {pendingChoice&&<ChoiceModal choice={pendingChoice} onSelect={(opt)=>handleChoiceSelect(opt,pendingChoice)} onDismiss={()=>setPendingChoice(null)}/>}
       {activeShop&&<ShopModal shop={activeShop} money={money} onBuy={handleShopBuy} onClose={()=>setActiveShop(null)}/>}
+      {activeGift&&<GiftModal item={activeGift} knownNPCs={Object.keys(rels).filter(n=>(rels[n]?.friendship||0)>0)} onGift={handleGiftItem} onClose={()=>setActiveGift(null)}/>}
       {pendingChoice&&<ChoiceModal event={pendingChoice} onChoose={handleChoiceSelect}/>}
       {activeShop&&<ShopModal shop={activeShop} money={money} onBuy={handleShopBuy} onClose={()=>setActiveShop(null)}/>}
       {namingChild&&(
@@ -3270,7 +4223,7 @@ export default function InbetweensGame(){
 
       {/* CHARACTER STRIP — bento card */}
       <div style={{margin:"6px 8px 0",flexShrink:0,borderRadius:"16px",background:"#FFFFFF",border:"1px solid #E0D4C8",boxShadow:"0 2px 10px rgba(0,0,0,0.06)",overflow:"hidden"}}>
-        <CharacterCard twin={twin} needs={needs} money={money} gt={gt} rels={rels} family={family} skills={skills} currentDaysLived={currentDaysLived} daysInStage={daysInCurrentStage} daysInStageTotal={daysInStageTotal} lifeStage={lifeStage} aspirationProgress={aspirationProgress}/>
+        <CharacterCard twin={twin} needs={needs} money={money} gt={gt} rels={rels} family={family} skills={skills} currentDaysLived={currentDaysLived} daysInStage={daysInCurrentStage} daysInStageTotal={daysInStageTotal} lifeStage={lifeStage} aspirationProgress={aspirationProgress} reputation={reputation}/>
       </div>
 
       {/* STATS CARD — only on wide screens */}
@@ -3316,9 +4269,9 @@ export default function InbetweensGame(){
             </div>
             <div style={{flex:1,overflow:"hidden"}}>
               {activeTab==="acciones"&&<AccionesTab loc={loc} career={career} NEIGHBORHOODS={NEIGHBORHOODS} PLACE_ACTIONS={PLACE_ACTIONS} loading={loading} dark={false} onGoTo={handleGoTo} onAction={a=>a.isSkillUnlock?handleSkillUnlockAction(a):handleAction(a)} onWork={handleWork} extraActions={skillUnlockActions} chainActions={chainActions} onChainAction={handleChainAction}/>}
-              {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={false} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract}/>}
+              {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={false} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract} npcWorld={npcWorld}/>}
               {activeTab==="trabajo"&&<TrabajoTabContent career={career} loc={loc} dark={false} loading={loading} onApply={handleApplyJob} onWork={handleWork}/>}
-              {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading}/>}
+              {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading} family={family} gt={gt} npcWorld={npcWorld} inventory={inventory} onUseItem={handleUseItem} onGiftItem={(item)=>setActiveGift(item)}/>}
               {activeTab==="mapa"&&<MapaTab gt={gt} rels={rels} loc={loc} loading={loading} onGoTo={handleGoTo}/>}
               {activeTab==="diario"&&<DiarioTab log={log} gt={gt}/>}
             </div>
@@ -3370,9 +4323,9 @@ export default function InbetweensGame(){
         {!isWide&&(
           <div style={{height:"192px",...bento(C.white)}}>
             {activeTab==="acciones"&&<AccionesTab loc={loc} career={career} NEIGHBORHOODS={NEIGHBORHOODS} PLACE_ACTIONS={PLACE_ACTIONS} loading={loading} dark={false} onGoTo={handleGoTo} onAction={a=>a.isSkillUnlock?handleSkillUnlockAction(a):handleAction(a)} onWork={handleWork} extraActions={skillUnlockActions} chainActions={chainActions} onChainAction={handleChainAction}/>}
-            {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={false} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract}/>}
+            {activeTab==="social"&&<SocialTab rels={rels} family={family} currentDay={gt.day} dark={false} loading={loading} onRomanceAction={handleRomanceAction} onInteract={handleInteraction} onChildInteract={handleChildInteract} npcWorld={npcWorld}/>}
             {activeTab==="trabajo"&&<TrabajoTabContent career={career} loc={loc} dark={false} loading={loading} onApply={handleApplyJob} onWork={handleWork}/>}
-            {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading}/>}
+            {activeTab==="hogar"&&<HogarTab housing={housing} placedFurniture={placedFurniture} money={money} skills={skills} onUpgrade={handleUpgradeHousing} onBuyFurniture={handleBuyFurniture} dark={false} loading={loading} family={family} gt={gt} npcWorld={npcWorld} inventory={inventory} onUseItem={handleUseItem} onGiftItem={(item)=>setActiveGift(item)}/>}
             {activeTab==="mapa"&&<MapaTab gt={gt} rels={rels} loc={loc} loading={loading} onGoTo={handleGoTo}/>}
             {activeTab==="diario"&&<DiarioTab log={log} gt={gt}/>}
           </div>
